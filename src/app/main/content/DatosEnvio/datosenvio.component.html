@@ -11,44 +11,64 @@
 
     <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form" [formGroup]="form">
 
-
       <mat-form-field fxFlex="100">
-        <mat-select placeholder="Despachar A:" formControlName="DespacharA" [(ngModel)]="DespacharA" required>
-          <mat-option *ngFor="let Item of ListDespachar" [value]="Item.IdGenero">
+        <mat-select placeholder="Despachar A:" formControlName="DespacharA" [(ngModel)]="DespacharASeleccionado"
+          (change)="SelectedDespacharA($event)" required>
+          <mat-option *ngFor="let Item of ListDespachar" [value]="Item.IdTipoEnvio">
             {{ Item.Nombre }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="formErrors.DespacharA.required">
+          Despachar A es requerido
+        </mat-error>
       </mat-form-field>
+
+      <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion" >
+        <mat-select placeholder="Provincia" formControlName="Provincia" [(ngModel)]="ProvinciaSeleccionado"
+          (change)="SelectedProvincia($event)" required>
+          <mat-option *ngFor="let Item of ListProvincia" [value]="Item.CodEstado">
+            {{ Item.NombreEstado }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formErrors.Provincia.required">
+          Provincia es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion">
+        <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="CantonSeleccionado"
+          (change)="SelectedCanton($event)" required>
+          <mat-option *ngFor="let Item of ListCanton" [value]="Item.CodCiudad">
+            {{ Item.NombreCiudad }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formErrors.Canton.required">
+          Canton es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion">
+        <mat-select placeholder="Parroquia" formControlName="Parroquia" [(ngModel)]="ParroquiaSeleccionado"
+          (change)="SelectedParroquia($event)" required>
+          <mat-option *ngFor="let Item of ListParroquia" [value]="Item.Codigo">
+            {{ Item.NombreParroquia }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formErrors.Parroquia.required">
+          Parroquia es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="color: green">
+        <br>
+        <b>Costo de Envío:</b><br> $12.78<br>
+        <br>
+      </div>
 
       <mat-form-field fxFlex="100">
         <input matInput placeholder="Telefono" formControlName="Telefono" required [ngModel]="TelefonoSeleccionado"
           maxlength="11" inputmode="numeric" pattern="[0-9]*" digitOnly>
 
-      </mat-form-field>
-
-      <mat-form-field fxFlex="100">
-        <mat-select placeholder="Provincia" formControlName="Provincia" [(ngModel)]="Provincia" required>
-          <mat-option *ngFor="let Item of ListProvincia" [value]="Item.IdGenero">
-            {{ Item.Nombre }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field fxFlex="100">
-        <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="Canton" required>
-          <mat-option *ngFor="let Item of ListCanton" [value]="Item.IdGenero">
-            {{ Item.Nombre }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-
-      <mat-form-field fxFlex="100">
-        <mat-select placeholder="Parroquia" formControlName="Parroquia" [(ngModel)]="Parroquia" required>
-          <mat-option *ngFor="let Item of ListParroquia" [value]="Item.IdGenero">
-            {{ Item.Nombre }}
-          </mat-option>
-        </mat-select>
       </mat-form-field>
 
       <mat-form-field fxFlex="100">
@@ -59,19 +79,11 @@
 
       </mat-form-field>
 
-
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="color: green">
-        <br>
-        <b>Costo de Envío:</b> $12.78<br>
-      </div>
-
     </form>
-
-
   </div>
 
   <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-button (click)="onClose()"   class="mat-accent" aria-label="Close">
+    <button mat-button (click)="onClose()" class="mat-accent" aria-label="Close">
       OK
     </button>
   </div>

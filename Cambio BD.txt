@@ -1,0 +1,119 @@
+usuario y pass pruebas: 0912006103
+
+http://181.188.213.187/GLOD/Login.aspx  
+
+
+
+geo: 0914530928 - Zona: 35
+gerente de zona para opcion cedula: 0906374426
+ger:1088009775 - IdVendedor: 7002  - IdZona: 50201 
+
+fsevents@
+
+- revisar creacion de usuario y clave
+- revisar creacion cuando hay error 
+- falta validar unineg en sesion
+- cuando se elige direccion de entrega despacho hay que guarfar un departamento
+
+
+COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod -aot=false
+
+PAGINA DE ICONOS Y SVG: https://www.flaticon.com/free-icons/puzzle/7
+
+
+recuperar correo: geovanny.bastidas@niviglobal.com
+
+https://azure.microsoft.com/es-es/account/
+User: geobas_22@hotmail.com
+Clave: Geoyana1301
+
+13.68.118.81:3389
+AZURE:
+13.68.112.132
+RDP: 13.68.118.81 --> dinamico cada que se apaga y se prende
+
+MSTSC
+52.177.217.51
+52.184.231.33  --> statica
+User: Administrador
+Clave: L1n34d1r3ct4
+
+URL PRODUCCION:  http://52.184.231.33/saved
+PRUEBA CON POSTMAN o CHROME PRODUCCION: http://52.184.231.33/Application.Enterprise.Services/api/AutenticationUser/Prueba
+
+TABLAS
+
+CLIENTE:
+Whatsapp	varchar(50)	Checked
+TipoCliente	varchar(50)	Checked
+TallaPrendaSuperior	varchar(50)	Checked
+TallaPrendaInferior	varchar(50)	Checked
+TallaCalzado	varchar(50)	Checked
+TarjetaCD	varchar(50)	Checked
+
+Create table SVDN_EXCEPTIONERROR
+-->02-04-2019
+
+
+PROCEDIMIENTOS
+
+ALTER PROCEDURE [dbo].PRC_SVDN_SUSUARIOS 
+ALTER PROCEDURE [dbo].[PRC_SVDN_CLIENTE] opcion I-A, opcion S-N
+CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTIONERROR
+-->02-04-2019
+
+
+
+
+
+npm install @angular/core@5.2.8 --save
+ng update @angular/cli @angular/core --force
+
+https://www.magneto365.com/es/postulation/5162javascript:void(0);
+
+http://localhost/Application.Enterprise.Services/api/Cliente/ListClienteSVDNxNit
+
+http://localhost/Application.Enterprise.Services/api/Parroquia/ListarParroquia
+
+ListClienteSVDNxNit
+ListClienteSVDNxNit
+
+
+https://material.angular.io/components/dialog/overview
+https://www.onlineinterviewquestions.com/blog/angular-5-modal-dialog-example/
+
+CORS:
+https://enable-cors.org/
+https://dzone.com/articles/access-control-allow-origin-header-and-the-aspnet
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api
+https://stackoverflow.com/questions/53298478/has-been-blocked-by-cors-policy-response-to-preflight-request-doesn-t-pass-acce
+
+https://github.com/expressjs/cors
+https://www.youtube.com/watch?v=z357fcsblnc
+https://stackoverflow.com/questions/52801753/issue-with-cors-when-sending-a-get-request-to-external-api-in-nodejs-heroku
+https://www.npmjs.com/package/cors
+
+http://restlet.com/company/blog/2016/09/27/how-to-fix-cors-problems/
+https://codeday.me/es/qa/20181231/53719.html
+
+
+https://github.com/angular/angular/issues/19044
+https://es.stackoverflow.com/questions/201330/implementar-http-headers-en-proyecto-ionic-angular-habilitar-cors-en-api-rest
+https://flaviocopes.com/express-cors/
+https://blog.jscrambler.com/setting-up-5-useful-middlewares-for-an-express-api/
+https://www.keycdn.com/support/cors
+https://stackoverflow.com/questions/47345282/how-to-add-cors-request-in-header-in-angular-5
+https://www.npmjs.com/package/cors
+https://github.com/expressjs/cors#readme
+https://github.com/expressjs/cors#readme
+https://www.concretepage.com/angular-2/angular-4-crud-example
+https://github.com/imdurgeshpal/Angular-4-CRUD-Operations
+https://stackabuse.com/how-to-start-a-node-server-examples-with-the-most-popular-frameworks/
+
+https://github.com/cyrilletuzi/nguniversal-expressengine-httpinterceptor/
+
+https://stackoverflow.com/questions/48840417/cloud-functions-cors-error-response-to-preflight-request-doesnt-pass-access-co
+
+-- textbox numericos
+https://github.com/changhuixu/ngx-digit-only -- npm i -S @uiowa/digit-only
+https://material.angular.io/components/form-field/overview textbox material
