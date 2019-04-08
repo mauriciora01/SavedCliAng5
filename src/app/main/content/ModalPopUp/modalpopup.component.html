@@ -1,0 +1,17 @@
+<h1 mat-dialog-title [ngStyle]="{'color': TextColor}">{{data.Titulo}}</h1>
+
+<span layout="row">
+  <hr flex />
+  <div mat-dialog-content>
+    <p [ngStyle]="{'color': TextColor}">{{data.Mensaje}}</p>
+    <!--<mat-form-field>
+      <input matInput [(ngModel)]="data.Mensaje">
+    </mat-form-field>-->
+  </div>
+
+  
+</span>
+<div mat-dialog-actions>
+  <!--<button mat-button (click)="onNoClick()">No Thanks</button> -->
+  <button mat-button [mat-dialog-close]="data.Mensaje" cdkFocusInitial>Ok</button>
+</div>

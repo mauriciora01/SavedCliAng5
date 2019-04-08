@@ -1,0 +1,59 @@
+<div class="dialog-content">
+
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <mat-toolbar-row>
+      <span class="title dialog-title">Resumen Pedido</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <br>
+
+
+  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+    <form name="form" [formGroup]="form">
+      <mat-card class="example-card">
+
+
+
+        <mat-card-content>
+          <div>
+            <p align="center" style="color: red;"><b>RESUMEN</b></p>
+            <!--<p style="text-align: justify;">Elaborado en poliéster, algodón, elastano. SILUETA AJUSTADA.</p>-->
+          </div>
+
+          <div>
+            <p><b>Cantidad Articulos:</b> 40</p>
+            <p><b>Total Pedido:</b> $3.900.000</p>
+            <p><b>Precio Puntos:</b> 600 pts</p>
+            <p><b>Valor Flete:</b> $29.000</p>
+            <p><b>Puntos Disponibles:</b> 1000</p>
+            <p><b>Utilizar Puntos:</b> 300</p>
+            <p><b>Dirección Envío:</b> Cra 12 # 45 - 30 Frente a la casa amarilla, volteando por la 33.</p>
+
+
+
+          </div>
+
+        </mat-card-content>
+
+
+      </mat-card>
+    </form>
+
+    <!--<div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="color: green">
+      <br>
+      <b>Costo de Envío:</b> $12.78<br>
+    </div>-->
+
+  </div>
+
+
+
+
+  <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button (click)="onClose()" color="accent" aria-label="Close">
+      PROCESAR PEDIDO
+    </button>
+  </div>
+
+</div>

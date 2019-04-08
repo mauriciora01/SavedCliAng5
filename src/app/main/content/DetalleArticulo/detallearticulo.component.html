@@ -1,0 +1,71 @@
+<div class="dialog-content">
+
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <mat-toolbar-row>
+      <span class="title dialog-title">Detalle Articulo: BL98765</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+<br>
+
+  <p align="center"><b>A. VESTIDO EULAY, C: AZUL, T: M</b></p>
+  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+    <form name="form" [formGroup]="form">
+      <mat-card class="example-card">
+
+        
+        <img class="CenterImageArticulo" src="../../../../assets/imagesNivi/blusanivi.PNG" alt="Articulo">
+        <mat-card-content>
+          <div>
+            <p align="center" style="color: red;"><b>AGOTADO</b></p>
+            <!--<p style="text-align: justify;">Elaborado en poliéster, algodón, elastano. SILUETA AJUSTADA.</p>-->
+          </div>
+          <div>
+            <div fxFlex="45" align="right">
+              <button (click)="CalacularResta()" mat-icon-button color="accent" >
+                <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">remove</mat-icon>
+              </button>
+            </div>
+            <mat-form-field fxFlex="10">
+              <input matInput placeholder="" formControlName="Cantidad" required [ngModel]="Cantidad" maxlength="2"
+                inputmode="numeric" pattern="[0-9]*" digitOnly (focusout)="CalcularTotales()">
+            </mat-form-field>
+
+            <div fxFlex="40" align="left">
+              <button (click)="CalcularSuma()" mat-icon-button color="accent">
+                <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <p><b>Precio:</b> $59.000</p>
+            <p><b>Precio * Cantidad:</b> $498.000</p>
+            <p><b>Precio Puntos:</b> 100 pts</p>
+            <p><b>Total Pedido:</b> $1.900.000</p>
+
+          </div>
+
+        </mat-card-content>
+
+
+      </mat-card>
+    </form>
+
+    <!--<div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="color: green">
+      <br>
+      <b>Costo de Envío:</b> $12.78<br>
+    </div>-->
+
+  </div>
+
+
+
+
+  <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button (click)="onClose()" color="accent" aria-label="Close">
+      ADICIONAR A PEDIDO
+    </button>
+  </div>
+
+</div>

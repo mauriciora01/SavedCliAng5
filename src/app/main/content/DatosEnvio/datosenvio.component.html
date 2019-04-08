@@ -1,0 +1,79 @@
+<div class="dialog-content">
+
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <mat-toolbar-row>
+      <span class="title dialog-title">Información Envío:</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+
+    <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form" [formGroup]="form">
+
+
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Despachar A:" formControlName="DespacharA" [(ngModel)]="DespacharA" required>
+          <mat-option *ngFor="let Item of ListDespachar" [value]="Item.IdGenero">
+            {{ Item.Nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100">
+        <input matInput placeholder="Telefono" formControlName="Telefono" required [ngModel]="TelefonoSeleccionado"
+          maxlength="11" inputmode="numeric" pattern="[0-9]*" digitOnly>
+
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Provincia" formControlName="Provincia" [(ngModel)]="Provincia" required>
+          <mat-option *ngFor="let Item of ListProvincia" [value]="Item.IdGenero">
+            {{ Item.Nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="Canton" required>
+          <mat-option *ngFor="let Item of ListCanton" [value]="Item.IdGenero">
+            {{ Item.Nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Parroquia" formControlName="Parroquia" [(ngModel)]="Parroquia" required>
+          <mat-option *ngFor="let Item of ListParroquia" [value]="Item.IdGenero">
+            {{ Item.Nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+          <textarea rows="3" matInput placeholder="Dirección" [(ngModel)]="DireccionSeleccionado"
+            formControlName="Direccion"></textarea>
+        </div>
+
+      </mat-form-field>
+
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="color: green">
+        <br>
+        <b>Costo de Envío:</b> $12.78<br>
+      </div>
+
+    </form>
+
+
+  </div>
+
+  <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button (click)="onClose()"   class="mat-accent" aria-label="Close">
+      OK
+    </button>
+  </div>
+
+</div>

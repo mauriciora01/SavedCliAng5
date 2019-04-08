@@ -1,0 +1,35 @@
+<div class="dialog-content">
+
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+    <mat-toolbar-row>
+      <span class="title dialog-title">Detalle Empresaria:</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+        
+      <b>Documento:</b> {{data.Nit}} <br>
+      <b>Nombre:</b> {{data.NombreEmpresariaCompleto.toLowerCase()}}<br>
+      <b>Nacimiento:</b> {{data.FechaNacimiento}}<br>
+      <b>Dirección Residencia:</b> {{data.DireccionResidencia.toLowerCase()}}<br>
+      <b>Departamento:</b> {{data.Departamento.toLowerCase()}}<br>
+      <b>Ciudad:</b> {{data.Ciudad.toLowerCase()}}<br>
+      <b>Barrio:</b> {{data.Barrio.toLowerCase()}}<br>
+      <b>DireccionPedidos:</b> {{data.DireccionPedidos.toLowerCase()}}<br>
+      <b>Tel1:</b> {{data.Telefono1}}, <b>Tel2:</b> {{data.Telefono2}}<br>
+      <b>WhatsApp:</b> {{data.Whatsapp}}<br>
+      <b>Email:</b> {{data.Email}}<br>
+      <b>Talla Prenda Superior:</b> {{data.TallaPrendaSuperior}}<br>
+      <b>Talla Prenda Inferior:</b> {{data.TallaPrendaInferior}}<br>
+      <b>Talla Calzado:</b> {{data.TallaCalzado}}<br>
+      <b>Creación:</b> {{data.FechaIngreso}}<br>
+   
+  </div>
+
+  <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button (click)="dialogRef.close()" class="mat-accent" aria-label="Close">
+      CERRAR
+    </button>
+  </div>
+
+</div>
