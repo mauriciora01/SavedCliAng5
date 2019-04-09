@@ -64,6 +64,16 @@ CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTIONERROR
 
 
 
+GIT: https://git-scm.com/book/es/v1/Fundamentos-de-Git-Trabajando-con-repositorios-remotos
+Desde git bash here en la carpeta nueva creada
+git init
+git remote add origin https://github.com/mauriciora01/SavedServicesNet.git
+git remote
+git remote add pb https://github.com/mauriciora01/SavedServicesNet.git
+git remote -v
+git fetch pb
+git pull origin master
+git config --global user.email "ramosgimauricio@gmail.com"
 
 
 npm install @angular/core@5.2.8 --save
