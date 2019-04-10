@@ -632,7 +632,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
-            //Mesaje de Error.  
+            //Mensaje de Error.  
             const dialogRef = this.dialog.open(ModalPopUpComponent, {
                 width: '450px',
                 data: { TipoMensaje: "Error", Titulo: "Registro Empresaria", Mensaje: "No se pudo guardar la empresaria." }
@@ -692,7 +692,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
-            //Mesaje de Error.  
+            //Mensaje de Error.  
             throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidarInfoEmpresaria()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
             //---------------------------------------------------------------------------------------------------------------
         }
@@ -729,7 +729,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
-            //Mesaje de Error.             
+            //Mensaje de Error.             
             throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidaExisteEmpresariaNombre()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
             //---------------------------------------------------------------------------------------------------------------
         }
@@ -776,7 +776,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
-            //Mesaje de Error.             
+            //Mensaje de Error.             
             throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidarInfoReferidor()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
             //---------------------------------------------------------------------------------------------------------------
         }
@@ -793,7 +793,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                     objClienteResponse = x
 
                     if (x.Error == undefined) {
-                         //Mesanje de OK
+                         //Mensaje de OK
                          const dialogRef = this.dialog.open(ModalPopUpComponent, {
                             width: '450px',
                             data: { TipoMensaje: "Ok", Titulo: "Registro Empresaria", Mensaje: "Se registro la empresaria exitosamente!" }
@@ -803,7 +803,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                     }
                     else {
                         //---------------------------------------------------------------------------------------------------------------
-                        //Mesaje de Error. 
+                        //Mensaje de Error. 
                         const dialogRef = this.dialog.open(ModalPopUpComponent, {
                             width: '450px',
                             data: { TipoMensaje: "Error", Titulo: "Registro Empresaria", Mensaje: "No se pudo crear usuario y clave de la empresaria." }
@@ -817,7 +817,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
-            //Mesaje de Error.   
+            //Mensaje de Error.   
             throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "CrearUsuarioyClave()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
             //---------------------------------------------------------------------------------------------------------------
         }
@@ -835,7 +835,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                     }
                     else {
                         //---------------------------------------------------------------------------------------------------------------
-                        //Mesaje de Error. 
+                        //Mensaje de Error. 
                         const dialogRef = this.dialog.open(ModalPopUpComponent, {
                             width: '450px',
                             data: { TipoMensaje: "Error", Titulo: "Registro Empresaria", Mensaje: "No se pudo guardar la empresaria. Por favor verifique si ya existe o comuniquese con la empresa." }
@@ -850,7 +850,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
-            //Mesaje de Error.  
+            //Mensaje de Error.  
             const dialogRef = this.dialog.open(ModalPopUpComponent, {
                 width: '450px',
                 data: { TipoMensaje: "Error", Titulo: "Registro Empresaria", Mensaje: "No se pudo guardar la empresaria." }

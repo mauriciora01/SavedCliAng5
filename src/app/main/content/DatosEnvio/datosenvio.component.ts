@@ -10,12 +10,19 @@ import { E_Parroquia } from 'app/Models/E_Parroquia';
 import { ParameterService } from 'app/ApiServices/ParametersServices';
 import { UserService } from 'app/ApiServices/UserService';
 import { E_SessionUser } from 'app/Models/E_SessionUser';
+import { ClienteService } from 'app/ApiServices/ClienteService';
+import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
+import { ExceptionErrorService } from 'app/ApiServices/ExceptionErrorService';
 
 
 export interface DialogData {
   Titulo: string;
   Mensaje: string;
   TipoMensaje: string;
+  Nit: string;
+  Zona: string;
+  EmpresariaLider: string;
+  ValorFlete: number;
 }
 
 @Component({
@@ -39,8 +46,12 @@ export class DatosEnvioComponent implements OnInit {
   ];
 
 
-  public TelefonoSeleccionado: string = "098387748823";
-  public DireccionSeleccionado: string = "Cra 12 # 45 - 30 Frente a la casa amarilla, volteando por la 33.";
+  public TelefonoSeleccionado: string = "";
+  public DireccionSeleccionado: string = "";
+
+  
+  public TelefonoComparar: string = "";
+  public DireccionComparar: string = "";
 
   public visibleLocalizacion: boolean = false;
 
@@ -57,10 +68,12 @@ export class DatosEnvioComponent implements OnInit {
   public ListParroquia: Array<E_Parroquia> = new Array<E_Parroquia>()
 
   public DespacharASeleccionado: string = "";
-
+  
   constructor(private formBuilder: FormBuilder,
     private ParameterService: ParameterService,
     private UserService: UserService,
+    private ClienteService: ClienteService,
+    private ExceptionErrorService: ExceptionErrorService,
     public dialogRef: MatDialogRef<DatosEnvioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
@@ -93,6 +106,33 @@ export class DatosEnvioComponent implements OnInit {
         //Para que ponga por defecto el que trae sin poderlo modificar.
         //this.ProvinciaSeleccionado = x[0].CodEstado;
       })
+
+
+    var objCliente: E_Cliente = new E_Cliente()
+    var objClienteResp: E_Cliente = new E_Cliente()
+    objCliente.Nit = this.data.Nit;
+    this.ClienteService.CargarDireccionTelefono(objCliente)
+      .subscribe((x: E_Cliente) => {
+        objClienteResp = x
+
+        if (x.Error == undefined) {
+          //Mensaje de OK
+          this.TelefonoSeleccionado = x.Telefono1;
+          this.DireccionSeleccionado = x.DireccionPedidos.trim();
+
+          this.TelefonoComparar=this.TelefonoSeleccionado;
+          this.DireccionComparar= this.DireccionSeleccionado;
+        }
+        else {
+          //---------------------------------------------------------------------------------------------------------------
+          //Mensaje de Error. 
+
+          throw new ErrorLogExcepcion("DatosEnvioComponent", "ngOnInit()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
+          //---------------------------------------------------------------------------------------------------------------
+        }
+
+      })
+
 
 
     this.form = this.formBuilder.group({
@@ -163,10 +203,35 @@ export class DatosEnvioComponent implements OnInit {
     else if (y.value == "4") {
       this.visibleLocalizacion = false;
     }
-    else
-    {
+    else {
       this.visibleLocalizacion = true;
     }
+
+
+    var objCliente: E_Cliente = new E_Cliente()
+    var objClienteResp: E_Cliente = new E_Cliente()
+    objCliente.Nit = this.data.Nit;
+    objCliente.TipoEnvio = Number(this.DespacharASeleccionado)
+    objCliente.Zona = this.data.Zona;
+    objCliente.EmpresariaLider = Number(this.data.EmpresariaLider);
+    this.DespacharASeleccionado
+    this.ClienteService.ValidarTipoEnvioPedido(objCliente)
+      .subscribe((x: E_Cliente) => {
+        objClienteResp = x
+
+        if (x.Error == undefined) {
+          //Mensaje de OK
+          this.data.ValorFlete = x.ValorFlete;        
+        }
+        else {
+          //---------------------------------------------------------------------------------------------------------------
+          //Mensaje de Error. 
+
+          throw new ErrorLogExcepcion("DatosEnvioComponent", "SelectedDespacharA()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
+          //---------------------------------------------------------------------------------------------------------------
+        }
+
+      })
 
     var depObj = this.ListParroquia.find(x => x.CodigoParroquia == y.value)
     //*this.ListMunicipiosGroup = this.ListMunicipiosBase.filter(x => x.Id_Departamento == Number(depObj.Codigo))

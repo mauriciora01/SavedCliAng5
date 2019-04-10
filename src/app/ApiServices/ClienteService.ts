@@ -84,6 +84,29 @@ export class ClienteService {
              , request, httpOptions).map(this.ExtractDataSessionEmpresariaValid)
             
      }
+
+
+     CargarDireccionTelefono(obj: E_Cliente): Observable<E_Cliente> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "Cliente/CargarDireccionTelefono"
+            , request, httpOptions).map(this.ExtractCliente)
+    }
+
+    ValidarTipoEnvioPedido(obj: E_Cliente): Observable<E_Cliente> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "Cliente/ValidarTipoEnvioPedido"
+            , request, httpOptions).map(this.ExtractCliente)
+    }
  
 
     ExtractCliente(res: Response): E_Cliente {

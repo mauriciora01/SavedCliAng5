@@ -136,6 +136,11 @@ export class E_Cliente {
   public TallaCalzado: string
   public TarjetaCD: string
   public NombreEmpresariaCompleto: string
+
+  public PorcentajeIvaFlete: number  
+  public ValorFleteSinIva: number  
+  public ValorFlete: number  
+  public EmpresariaLider: number  
   
   public Error: E_Error
   

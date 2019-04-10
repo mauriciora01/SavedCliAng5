@@ -31,8 +31,8 @@ export class PedidosPrincipalComponent implements OnInit {
     public BodegaSeleccionado: string = "";
     public DatosEnvioSeleccionado: string = "";
     public CodigoRapidoSeleccionado: string = "BL98765";
-    
-    
+
+
     public ListCatalogo: Array<E_Catalogo> = new Array<E_Catalogo>();
     //*public ListBodega: Array<E_Catalogo> = new Array<E_Catalogo>();
     formErrors: any;
@@ -78,10 +78,10 @@ export class PedidosPrincipalComponent implements OnInit {
         });
         this.secondFormGroup = this._formBuilder.group({
             CodigoRapido: ['', Validators.required]
-            
+
         });
         this.thirtyFormGroup = this._formBuilder.group({
-                        
+
         });
 
         this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
@@ -93,7 +93,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
                     this.CatalogoDisabled = true;
                     //---------------------------------------------------------------------------------------------------------------
-                    //Mesaje de Error. 
+                    //Mensaje de Error. 
                     const dialogRef = this.dialog.open(ModalPopUpComponent, {
                         width: '450px',
                         data: { TipoMensaje: "Error", Titulo: "Crear Pedido", Mensaje: "No se pueden crear pedidos en este periodo. El catalogo no ha sido habilitado." }
@@ -145,7 +145,7 @@ export class PedidosPrincipalComponent implements OnInit {
                         else {
                             this.NombreDisabled = false;
                             this.Paso1Ok = false;
-                            this.DatosEnvioSeleccionado="";
+                            this.DatosEnvioSeleccionado = "";
 
                             this.firstFormGroup = this._formBuilder.group({
                                 firstCtrl: ['', Validators.required],
@@ -155,7 +155,7 @@ export class PedidosPrincipalComponent implements OnInit {
                                 DatosEnvio: [undefined, [Validators.required]]
                             });
                             //---------------------------------------------------------------------------------------------------------------
-                            //Mesaje de Error. 
+                            //Mensaje de Error. 
                             const dialogRef = this.dialog.open(ModalPopUpComponent, {
                                 width: '450px',
                                 data: { TipoMensaje: "Error", Titulo: "Empresaria", Mensaje: "La empresaria no existe. Por favor verifique." }
@@ -174,7 +174,7 @@ export class PedidosPrincipalComponent implements OnInit {
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
-            //Mesaje de Error.  
+            //Mensaje de Error.  
             const dialogRef = this.dialog.open(ModalPopUpComponent, {
                 width: '450px',
                 data: { TipoMensaje: "Error", Titulo: "Empresaria", Mensaje: "No se pudo validar la empresaria." }
@@ -189,13 +189,13 @@ export class PedidosPrincipalComponent implements OnInit {
     openDatosEnvio(): void {
         const dialogRef = this.dialog.open(DatosEnvioComponent, {
             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-            data: { TipoMensaje: "Error", Titulo: "Datos Envio", Mensaje: "Seleccione el metodo de envio." }
+            data: { Nit: this.firstFormGroup.value.NumeroDocumento, Zona: this.SessionUser.IdZona, EmpresariaLider: this.SessionEmpresaria.Empresaria_Lider, TipoMensaje: "Error", Titulo: "Datos Envio", Mensaje: "Seleccione el metodo de envio." }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            
-            this.DatosEnvioSeleccionado = result; 
-        });      
+
+            this.DatosEnvioSeleccionado = result;
+        });
     }
 
     openAdicionarArticulo(): void {
@@ -205,10 +205,10 @@ export class PedidosPrincipalComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-           
+
             //this.DatosEnvioSeleccionado = result; 
         });
-      
+
     }
 
     openVerDetallePedido(): void {
@@ -218,10 +218,10 @@ export class PedidosPrincipalComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-           
+
             //this.DatosEnvioSeleccionado = result; 
         });
-      
+
     }
 
     openVerResumenPedido(): void {
@@ -231,9 +231,9 @@ export class PedidosPrincipalComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-           
+
             //this.DatosEnvioSeleccionado = result; 
         });
-      
+
     }
 }

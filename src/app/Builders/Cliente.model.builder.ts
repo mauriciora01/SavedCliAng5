@@ -136,6 +136,11 @@ export class ClienteBuilder {
     public TallaCalzado: string
     public TarjetaCD: string
     public NombreEmpresariaCompleto: string
+
+    public PorcentajeIvaFlete: number  
+    public ValorFleteSinIva: number  
+    public ValorFlete: number  
+    public EmpresariaLider: number  
     public Error: E_Error
 
     buildFromObject(x: any): ClienteBuilder {
@@ -273,9 +278,15 @@ export class ClienteBuilder {
         if (x.TallaCalzado != undefined) { this.TallaCalzado = x.TallaCalzado }
         if (x.TarjetaCD != undefined) { this.TarjetaCD = x.TarjetaCD }
         if (x.NombreEmpresariaCompleto != undefined) { this.NombreEmpresariaCompleto = x.NombreEmpresariaCompleto }
+
+        if (x.PorcentajeIvaFlete != undefined) { this.PorcentajeIvaFlete = x.PorcentajeIvaFlete }
+        if (x.ValorFleteSinIva != undefined) { this.ValorFleteSinIva = x.ValorFleteSinIva }
+        if (x.ValorFlete != undefined) { this.ValorFlete = x.ValorFlete }
+        if (x.EmpresariaLider != undefined) { this.EmpresariaLider = x.EmpresariaLider }
+
         if (x.Error != undefined) { this.Error = x.Error }
 
-        return this
+        return this       
     }
     Build(): E_Cliente {
         var obj: E_Cliente = new E_Cliente()
@@ -413,6 +424,12 @@ export class ClienteBuilder {
         obj.TallaCalzado = this.TallaCalzado
         obj.TarjetaCD = this.TarjetaCD
         obj.NombreEmpresariaCompleto = this.NombreEmpresariaCompleto
+
+        obj.PorcentajeIvaFlete = this.PorcentajeIvaFlete
+        obj.ValorFleteSinIva = this.ValorFleteSinIva
+        obj.ValorFlete = this.ValorFlete
+        obj.EmpresariaLider = this.EmpresariaLider
+
         obj.Error = this.Error
 
         return obj
