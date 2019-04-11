@@ -30,6 +30,8 @@ import { E_Parametros } from 'app/Models/E_Parametros';
 import { ParametrosBuilder } from 'app/Builders/Parametros.model.builder';
 import { E_Catalogo } from 'app/Models/E_Catalogo';
 import { CatalogoBuilder } from 'app/Builders/Catalogo.model.builder';
+import { E_Ciudad } from 'app/Models/E_Ciudad';
+import { CiudadBuilder } from 'app/Builders/Ciudad.model.builder';
 
 
 @Injectable()
@@ -144,6 +146,18 @@ export class ParameterService {
             , request, httpOptions).map(this.ExtractCatalogo)
     }
 
+
+    ListarCiudad(obj: E_Ciudad): Observable<E_Ciudad> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "Ciudad/ListarCiudad"
+            , request, httpOptions).map(this.ExtractCiudad)
+    }
+
     //-------------------------------------------------------------------------
     //Extract Data
 
@@ -243,6 +257,13 @@ export class ParameterService {
         }
         return x
     }
+
+    ExtractCiudad(res: Response): E_Ciudad {
+        var x: E_Ciudad = new E_Ciudad()
+        if (res != null) { x = new CiudadBuilder().buildFromObject(res).Build() }
+        return x
+    }
+
 
 
 }

@@ -13,6 +13,7 @@ import { E_SessionUser } from 'app/Models/E_SessionUser';
 import { ClienteService } from 'app/ApiServices/ClienteService';
 import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
 import { ExceptionErrorService } from 'app/ApiServices/ExceptionErrorService';
+import { E_Ciudad } from 'app/Models/E_Ciudad';
 
 
 export interface DialogData {
@@ -168,6 +169,29 @@ export class DatosEnvioComponent implements OnInit {
   SelectedCanton(y) {
 
     if (y.value != undefined && y.value != "-1") {
+
+      var objCiudad: E_Ciudad = new E_Ciudad()
+      objCiudad.CodCiudad = y.value
+
+      this.ParameterService.ListarCiudad(objCiudad)
+      .subscribe((x: E_Ciudad) => {
+        
+        if (x.error == undefined) {
+          //Mensaje de OK
+          this.data.ValorFlete = x.ValorFlete;        
+        }
+        else {
+          //---------------------------------------------------------------------------------------------------------------
+          //Mensaje de Error. 
+
+          throw new ErrorLogExcepcion("DatosEnvioComponent", "SelectedCanton()", "No se pudo cargar el valor del flete. CodCiudad:"+objCiudad.CodCiudad , this.SessionUser.Cedula, this.ExceptionErrorService)
+          //---------------------------------------------------------------------------------------------------------------
+        }
+
+        //Para que ponga por defecto el que trae sin poderlo modificar.
+        //this.ProvinciaSeleccionado = x[0].CodEstado;
+      })
+
 
       var objCanton: E_Canton = new E_Canton()
       objCanton.CodCiudad = y.value.substring(3)

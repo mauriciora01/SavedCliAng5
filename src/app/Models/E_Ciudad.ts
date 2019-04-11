@@ -15,6 +15,7 @@ export class E_Ciudad {
     public IVA: number
     public PedidoMin: number
     public ValorFleteFull: number
+    public CodigoCiudadDespacho: string
     public ZonaxCiudad: E_ZonaxCiudad
     public error: E_Error
     
