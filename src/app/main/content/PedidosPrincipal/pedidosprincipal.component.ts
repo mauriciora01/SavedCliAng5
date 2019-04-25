@@ -16,13 +16,13 @@ import { DetalleArticuloComponent } from '../DetalleArticulo/detallearticulo.com
 import { DetallePedidoComponent } from '../DetallePedido/detallepedido.component';
 import { ResumenPedidoComponent } from '../ResumenPedido/resumenpedido.component';
 
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 @Component({
     selector: 'pedidosprincipal',
     templateUrl: 'pedidosprincipal.component.html',
     styleUrls: ['pedidosprincipal.component.css']
-    
+
 })
 export class PedidosPrincipalComponent implements OnInit {
     isLinear = true;
@@ -74,7 +74,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
     openBottomSheet(): void {
         this.bottomSheet.open(DetallePedidoComponent);
-      }
+    }
 
     ngOnInit() {
         this.firstFormGroup = this._formBuilder.group({
@@ -195,15 +195,21 @@ export class PedidosPrincipalComponent implements OnInit {
     }
 
     openDatosEnvio(): void {
-        const dialogRef = this.dialog.open(DatosEnvioComponent, {
-            panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-            data: { Nit: this.firstFormGroup.value.NumeroDocumento, Zona: this.SessionUser.IdZona, EmpresariaLider: this.SessionEmpresaria.Empresaria_Lider, TipoMensaje: "Error", Titulo: "Datos Envio", Mensaje: "Seleccione el metodo de envio." }
-        });
+        this.DatosEnvioSeleccionado="";
 
-        dialogRef.afterClosed().subscribe(result => {
+        //Si se encuentra la empresaria se abre la ventana, sino no se puede abrir.
+        if (this.NombreEmpresariaCompleto!= undefined && this.NombreEmpresariaCompleto != "") {
+            const dialogRef = this.dialog.open(DatosEnvioComponent, {
+                panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
 
-            this.DatosEnvioSeleccionado = result;
-        });
+                data: { Nit: this.firstFormGroup.value.NumeroDocumento, Zona: this.SessionUser.IdZona, EmpresariaLider: this.SessionEmpresaria.Empresaria_Lider, TipoMensaje: "Error", Titulo: "Datos Envio", Mensaje: "Seleccione el metodo de envio." }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+
+                this.DatosEnvioSeleccionado = result;
+            });
+        }
     }
 
     openAdicionarArticulo(): void {

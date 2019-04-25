@@ -7,9 +7,17 @@
   </mat-toolbar>
 
 
+
+
   <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
 
     <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form" [formGroup]="form">
+
+      <mat-form-field fxFlex="100" *ngIf="visibleMensajeError">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <div style="color: red; font-weight: bold;">DEBE INGRESAR EL DOCUMENTO <br> DE LA EMPRESARIA</div>
+        </div>
+      </mat-form-field>
 
       <mat-form-field fxFlex="100">
         <mat-select placeholder="Despachar A:" formControlName="DespacharA" [(ngModel)]="DespacharASeleccionado"
@@ -23,7 +31,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion" >
+      <mat-form-field fxFlex="100" *ngIf="visibleLocalizacion">
         <mat-select placeholder="Provincia" formControlName="Provincia" [(ngModel)]="ProvinciaSeleccionado"
           (selectionChange)="SelectedProvincia($event)" required>
           <mat-option *ngFor="let Item of ListProvincia" [value]="Item.CodEstado">
@@ -35,7 +43,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion">
+      <mat-form-field fxFlex="100" *ngIf="visibleLocalizacion">
         <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="CantonSeleccionado"
           (selectionChange)="SelectedCanton($event)" required>
           <mat-option *ngFor="let Item of ListCanton" [value]="Item.CodCiudad">
@@ -47,7 +55,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion">
+      <mat-form-field fxFlex="100" *ngIf="visibleLocalizacion">
         <mat-select placeholder="Parroquia" formControlName="Parroquia" [(ngModel)]="ParroquiaSeleccionado"
           (selectionChange)="SelectedParroquia($event)" required>
           <mat-option *ngFor="let Item of ListParroquia" [value]="Item.Codigo">
@@ -71,7 +79,7 @@
 
       </mat-form-field>
 
-      <mat-form-field fxFlex="100">
+      <mat-form-field fxFlex="100" *ngIf="visibleLocalizacion">
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
           <textarea rows="3" matInput placeholder="Dirección" [(ngModel)]="DireccionSeleccionado"
             formControlName="Direccion"></textarea>
@@ -83,8 +91,9 @@
   </div>
 
   <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-button (click)="onClose()" class="mat-accent" aria-label="Close">
-      OK
+    <button mat-button (click)="onClose()" *ngIf="visibleGuardar" [disabled]="form.invalid || SaveInProgress" class="mat-accent"
+      aria-label="Close">
+      GUARDAR
     </button>
   </div>
 

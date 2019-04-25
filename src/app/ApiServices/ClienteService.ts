@@ -107,6 +107,18 @@ export class ClienteService {
         return this.Http.post(this.UrlNow + "Cliente/ValidarTipoEnvioPedido"
             , request, httpOptions).map(this.ExtractCliente)
     }
+
+
+    ActualizarDireccionTelefono(obj: E_Cliente): Observable<E_Cliente> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "Cliente/ActualizarDireccionTelefono"
+            , request, httpOptions).map(this.ExtractCliente)
+    }
  
 
     ExtractCliente(res: Response): E_Cliente {

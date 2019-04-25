@@ -50,11 +50,13 @@ export class DatosEnvioComponent implements OnInit {
   public TelefonoSeleccionado: string = "";
   public DireccionSeleccionado: string = "";
 
-  
+
   public TelefonoComparar: string = "";
   public DireccionComparar: string = "";
 
   public visibleLocalizacion: boolean = false;
+  public visibleMensajeError: boolean = false;
+  public visibleGuardar: boolean = false;
 
   formErrors: any;
   public SessionUser: E_SessionUser = new E_SessionUser()
@@ -69,7 +71,7 @@ export class DatosEnvioComponent implements OnInit {
   public ListParroquia: Array<E_Parroquia> = new Array<E_Parroquia>()
 
   public DespacharASeleccionado: string = "";
-  
+
   constructor(private formBuilder: FormBuilder,
     private ParameterService: ParameterService,
     private UserService: UserService,
@@ -92,57 +94,62 @@ export class DatosEnvioComponent implements OnInit {
 
     this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
 
-    /* if (this.data.TipoMensaje == 'Error') {
-       this.TextColor = 'blue';
-     }
-     else {
-       this.TextColor = 'green';
-     }*/
+    //Si viene un documento de identidad valido.
+    if (this.data.Nit != undefined) {
+
+      this.ParameterService.listarProvincia(this.SessionUser)
+        .subscribe((x: Array<E_Provincia>) => {
+          this.ListProvincia = x
+
+          //Para que ponga por defecto el que trae sin poderlo modificar.
+          //this.ProvinciaSeleccionado = x[0].CodEstado;
+        })
 
 
-    this.ParameterService.listarProvincia(this.SessionUser)
-      .subscribe((x: Array<E_Provincia>) => {
-        this.ListProvincia = x
+      var objCliente: E_Cliente = new E_Cliente()
+      var objClienteResp: E_Cliente = new E_Cliente()
+      objCliente.Nit = this.data.Nit;
+      this.ClienteService.CargarDireccionTelefono(objCliente)
+        .subscribe((x: E_Cliente) => {
+          objClienteResp = x
 
-        //Para que ponga por defecto el que trae sin poderlo modificar.
-        //this.ProvinciaSeleccionado = x[0].CodEstado;
-      })
+          if (x.Error == undefined) {
+            //Mensaje de OK
+            this.TelefonoSeleccionado = x.Telefono1;
+            this.DireccionSeleccionado = x.DireccionPedidos.trim();
 
+            this.TelefonoComparar = this.TelefonoSeleccionado;
+            this.DireccionComparar = this.DireccionSeleccionado;
+          }
+          else {
+            //---------------------------------------------------------------------------------------------------------------
+            //Mensaje de Error. 
 
-    var objCliente: E_Cliente = new E_Cliente()
-    var objClienteResp: E_Cliente = new E_Cliente()
-    objCliente.Nit = this.data.Nit;
-    this.ClienteService.CargarDireccionTelefono(objCliente)
-      .subscribe((x: E_Cliente) => {
-        objClienteResp = x
+            throw new ErrorLogExcepcion("DatosEnvioComponent", "ngOnInit()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
+            //---------------------------------------------------------------------------------------------------------------
+          }
 
-        if (x.Error == undefined) {
-          //Mensaje de OK
-          this.TelefonoSeleccionado = x.Telefono1;
-          this.DireccionSeleccionado = x.DireccionPedidos.trim();
+        })
+    }
+    else {
 
-          this.TelefonoComparar=this.TelefonoSeleccionado;
-          this.DireccionComparar= this.DireccionSeleccionado;
-        }
-        else {
-          //---------------------------------------------------------------------------------------------------------------
-          //Mensaje de Error. 
-
-          throw new ErrorLogExcepcion("DatosEnvioComponent", "ngOnInit()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
-          //---------------------------------------------------------------------------------------------------------------
-        }
-
-      })
-
+      this.visibleMensajeError = true;
+    }
 
 
     this.form = this.formBuilder.group({
       DespacharA: [undefined, [Validators.required]],
-      Provincia: [undefined, [Validators.required]],
+      /*Provincia: [undefined, [Validators.required]],
       Canton: [undefined, [Validators.required]],
       Parroquia: [undefined, [Validators.required]],
-      Telefono: [undefined, [Validators.required]],
       Direccion: [undefined, [Validators.required]],
+      */
+      Provincia: [undefined, undefined],
+      Canton: [undefined, undefined],
+      Parroquia: [undefined, undefined],
+      Direccion: [undefined, undefined],
+      Telefono: [undefined, [Validators.required]],
+
 
     });
 
@@ -174,23 +181,23 @@ export class DatosEnvioComponent implements OnInit {
       objCiudad.CodCiudad = y.value
 
       this.ParameterService.ListarCiudad(objCiudad)
-      .subscribe((x: E_Ciudad) => {
-        
-        if (x.error == undefined) {
-          //Mensaje de OK
-          this.data.ValorFlete = x.ValorFlete;        
-        }
-        else {
-          //---------------------------------------------------------------------------------------------------------------
-          //Mensaje de Error. 
+        .subscribe((x: E_Ciudad) => {
 
-          throw new ErrorLogExcepcion("DatosEnvioComponent", "SelectedCanton()", "No se pudo cargar el valor del flete. CodCiudad:"+objCiudad.CodCiudad , this.SessionUser.Cedula, this.ExceptionErrorService)
-          //---------------------------------------------------------------------------------------------------------------
-        }
+          if (x.error == undefined) {
+            //Mensaje de OK
+            this.data.ValorFlete = x.ValorFlete;
+          }
+          else {
+            //---------------------------------------------------------------------------------------------------------------
+            //Mensaje de Error. 
 
-        //Para que ponga por defecto el que trae sin poderlo modificar.
-        //this.ProvinciaSeleccionado = x[0].CodEstado;
-      })
+            throw new ErrorLogExcepcion("DatosEnvioComponent", "SelectedCanton()", "No se pudo cargar el valor del flete. CodCiudad:" + objCiudad.CodCiudad, this.SessionUser.Cedula, this.ExceptionErrorService)
+            //---------------------------------------------------------------------------------------------------------------
+          }
+
+          //Para que ponga por defecto el que trae sin poderlo modificar.
+          //this.ProvinciaSeleccionado = x[0].CodEstado;
+        })
 
 
       var objCanton: E_Canton = new E_Canton()
@@ -206,8 +213,9 @@ export class DatosEnvioComponent implements OnInit {
 
   SelectedParroquia(y) {
 
-    var depObj = this.ListParroquia.find(x => x.CodigoParroquia == y.value)
+    //var depObj = this.ListParroquia.find(x => x.CodigoParroquia == y.value)
     //*this.ListMunicipiosGroup = this.ListMunicipiosBase.filter(x => x.Id_Departamento == Number(depObj.Codigo))
+    this.visibleGuardar = true;
   }
 
 
@@ -216,19 +224,24 @@ export class DatosEnvioComponent implements OnInit {
     this.DespacharASeleccionado = y.value;
 
     if (y.value == "1") {
-      this.visibleLocalizacion = true;      
+      this.visibleLocalizacion = true;
+      this.visibleGuardar = false;
     }
     else if (y.value == "2") {
       this.visibleLocalizacion = false;
+      this.visibleGuardar = true;
     }
     else if (y.value == "3") {
       this.visibleLocalizacion = false;
+      this.visibleGuardar = true;
     }
     else if (y.value == "4") {
       this.visibleLocalizacion = false;
+      this.visibleGuardar = true;
     }
     else {
       this.visibleLocalizacion = true;
+      this.visibleGuardar = true;
     }
 
 
@@ -245,7 +258,7 @@ export class DatosEnvioComponent implements OnInit {
 
         if (x.Error == undefined) {
           //Mensaje de OK
-          this.data.ValorFlete = x.ValorFlete;        
+          this.data.ValorFlete = x.ValorFlete;
         }
         else {
           //---------------------------------------------------------------------------------------------------------------
@@ -262,11 +275,73 @@ export class DatosEnvioComponent implements OnInit {
   }
 
   onClose(): void {
-    this.dialogRef.close(this.form.value.Direccion);
+    this.GuardarInformacion();
+
+    if (this.DespacharASeleccionado == "1") {
+      this.dialogRef.close(this.form.value.Direccion);
+    }
+    else if (this.DespacharASeleccionado == "2") {
+      this.dialogRef.close("ENVIAR A DIRECTOR");
+    }
+    else if (this.DespacharASeleccionado == "3") {
+      this.dialogRef.close("ENVIAR A LIDER");
+    }
+    else if (this.DespacharASeleccionado == "4") {
+      this.dialogRef.close("ENVIAR A PUNTO DE VENTA");
+    }
+    else {
+      this.dialogRef.close(this.form.value.Direccion);
+    }
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  GuardarInformacion(): void {
+
+    var objCliente: E_Cliente = new E_Cliente()
+    var objClienteResp: E_Cliente = new E_Cliente()
+
+    var DireccionGuardar: string = this.DireccionComparar
+
+    if (this.DireccionComparar != this.form.value.Direccion || this.TelefonoComparar != this.form.value.Telefono) {
+      if (this.form.value.Direccion != null && this.form.value.Telefono != null) {
+        objCliente.GuardarAuditoria = true;
+      }
+    }
+
+    if (this.form.value.Direccion == null || this.form.value.Direccion == undefined) {
+      DireccionGuardar = this.DireccionComparar;
+    }
+    else {
+      DireccionGuardar = this.form.value.Direccion;
+    }
+
+    objCliente.Nit = this.data.Nit;
+    objCliente.Telefono1 = this.form.value.Telefono.trim();
+    objCliente.DireccionPedidos = DireccionGuardar;
+
+    this.ClienteService.ActualizarDireccionTelefono(objCliente)
+      .subscribe((x: E_Cliente) => {
+        objClienteResp = x
+
+        if (x.Error == undefined) {
+          //Mensaje de OK
+          //Se guardo OK.
+        }
+        else {
+          //---------------------------------------------------------------------------------------------------------------
+          //Mensaje de Error. 
+          throw new ErrorLogExcepcion("DatosEnvioComponent", "GuardarInformacion()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
+          //---------------------------------------------------------------------------------------------------------------
+        }
+
+      })
+
+
+
+
   }
 
 }
