@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AppSettings } from '../app.settings';
 import { E_Cliente } from '../Models/E_Cliente';
 import { ClienteBuilder } from '../Builders/Cliente.model.builder';

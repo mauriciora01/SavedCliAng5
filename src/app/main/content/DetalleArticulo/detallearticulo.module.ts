@@ -16,6 +16,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 //import { AdminGuard } from 'app/Guards/AdminGuard';
 import { MatCardModule } from '@angular/material';
 
+//import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+
 const routes: Routes = [
     {
         path: 'detallearticulo',

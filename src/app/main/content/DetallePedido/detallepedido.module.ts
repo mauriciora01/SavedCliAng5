@@ -6,7 +6,7 @@ import { DetallePedidoComponent } from './detallepedido.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatStepperModule, MatDialogModule, MatProgressSpinnerModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatStepperModule, MatDialogModule, MatProgressSpinnerModule, MatToolbarModule, MatBottomSheetModule } from '@angular/material';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
@@ -44,8 +44,8 @@ const routes: Routes = [
         NgxDatatableModule,
         MatCheckboxModule,
         MatToolbarModule,
-        MatCardModule
-
+        MatCardModule,
+        MatBottomSheetModule
     ]
 
 })

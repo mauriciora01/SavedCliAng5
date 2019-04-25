@@ -1,3 +1,4 @@
+import 'global-shim';
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
@@ -41,9 +42,6 @@ import 'classlist.js';  // Run `npm install --save classlist.js`.
 
 /** IE10 and IE11 requires the following for the Reflect API. */
 import 'core-js/es6/reflect';
-
-/** Evergreen browsers require these. **/
-// Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.
 import 'core-js/es7/reflect';
 
 /**
@@ -56,6 +54,7 @@ import 'web-animations-js';  // Run `npm install --save web-animations-js`.
  * Zone JS is required by Angular itself.
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
+
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
@@ -78,3 +77,5 @@ if ( typeof SVGElement.prototype.contains === 'undefined' )
 {
     SVGElement.prototype.contains = HTMLDivElement.prototype.contains;
 }
+
+(window as any).global = window;

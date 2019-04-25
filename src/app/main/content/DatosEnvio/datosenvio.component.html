@@ -13,7 +13,7 @@
 
       <mat-form-field fxFlex="100">
         <mat-select placeholder="Despachar A:" formControlName="DespacharA" [(ngModel)]="DespacharASeleccionado"
-          (change)="SelectedDespacharA($event)" required>
+          (selectionChange)="SelectedDespacharA($event)" required>
           <mat-option *ngFor="let Item of ListDespachar" [value]="Item.IdTipoEnvio">
             {{ Item.Nombre }}
           </mat-option>
@@ -25,7 +25,7 @@
 
       <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion" >
         <mat-select placeholder="Provincia" formControlName="Provincia" [(ngModel)]="ProvinciaSeleccionado"
-          (change)="SelectedProvincia($event)" required>
+          (selectionChange)="SelectedProvincia($event)" required>
           <mat-option *ngFor="let Item of ListProvincia" [value]="Item.CodEstado">
             {{ Item.NombreEstado }}
           </mat-option>
@@ -37,7 +37,7 @@
 
       <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion">
         <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="CantonSeleccionado"
-          (change)="SelectedCanton($event)" required>
+          (selectionChange)="SelectedCanton($event)" required>
           <mat-option *ngFor="let Item of ListCanton" [value]="Item.CodCiudad">
             {{ Item.NombreCiudad }}
           </mat-option>
@@ -49,7 +49,7 @@
 
       <mat-form-field fxFlex="100"  *ngIf="visibleLocalizacion">
         <mat-select placeholder="Parroquia" formControlName="Parroquia" [(ngModel)]="ParroquiaSeleccionado"
-          (change)="SelectedParroquia($event)" required>
+          (selectionChange)="SelectedParroquia($event)" required>
           <mat-option *ngFor="let Item of ListParroquia" [value]="Item.Codigo">
             {{ Item.NombreParroquia }}
           </mat-option>

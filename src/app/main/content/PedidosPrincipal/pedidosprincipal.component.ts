@@ -16,10 +16,13 @@ import { DetalleArticuloComponent } from '../DetalleArticulo/detallearticulo.com
 import { DetallePedidoComponent } from '../DetallePedido/detallepedido.component';
 import { ResumenPedidoComponent } from '../ResumenPedido/resumenpedido.component';
 
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+
 @Component({
     selector: 'pedidosprincipal',
     templateUrl: 'pedidosprincipal.component.html',
     styleUrls: ['pedidosprincipal.component.css']
+    
 })
 export class PedidosPrincipalComponent implements OnInit {
     isLinear = true;
@@ -55,6 +58,7 @@ export class PedidosPrincipalComponent implements OnInit {
         private UserService: UserService,
         private ExceptionErrorService: ExceptionErrorService,
         private ClienteService: ClienteService,
+        private bottomSheet: MatBottomSheet,
         public dialog: MatDialog) {
 
         this.formErrors = {
@@ -67,6 +71,10 @@ export class PedidosPrincipalComponent implements OnInit {
 
         sessionStorage.removeItem("CurrentEmpresaria")
     }
+
+    openBottomSheet(): void {
+        this.bottomSheet.open(DetallePedidoComponent);
+      }
 
     ngOnInit() {
         this.firstFormGroup = this._formBuilder.group({

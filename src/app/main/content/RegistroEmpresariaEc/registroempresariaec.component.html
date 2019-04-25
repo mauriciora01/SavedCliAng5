@@ -35,7 +35,7 @@
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
                     <mat-form-field fxFlex="100">
                         <mat-select placeholder="Regional" formControlName="Regional" [(ngModel)]="RegionalSeleccionado"
-                            (change)="SelectedRegional($event)" required disabled>
+                            (selectionChange)="SelectedRegional($event)" required disabled>
                             <mat-option *ngFor="let Item of ListRegional" [value]="Item.IdRegional">
                                 {{ Item.NombreGerente }}
                             </mat-option>
@@ -47,7 +47,7 @@
 
                     <mat-form-field fxFlex="100">
                         <mat-select placeholder="Director/Zonal" formControlName="DirectorZonal"
-                            [(ngModel)]="DirectorZonalSeleccionado" (change)="SelectedDirectorZonal($event)" required
+                            [(ngModel)]="DirectorZonalSeleccionado" (selectionChange)="SelectedDirectorZonal($event)" required
                             disabled>
                             <mat-option *ngFor="let Item of ListDirectorZonal" [value]="Item.IdVendedor">
                                 {{ Item.Nombre }}
@@ -60,7 +60,7 @@
 
                     <mat-form-field fxFlex="100">
                         <mat-select placeholder="Lider" formControlName="Lider" [(ngModel)]="LiderSeleccionado"
-                            (change)="SelectedLider($event)" required>
+                            (selectionChange)="SelectedLider($event)" required>
                             <mat-option *ngFor="let Item of ListLider" [value]="Item.IdLider">
                                 {{ Item.Nombres }}
                             </mat-option>
@@ -71,7 +71,7 @@
                     </mat-form-field>
                     <mat-form-field fxFlex="100">
                         <mat-select placeholder="Tipo Documento" formControlName="TipoDocumento"
-                            [(ngModel)]="TipoDocumentoSeleccionado" (change)="SelectedTipoDocumento($event)" required>
+                            [(ngModel)]="TipoDocumentoSeleccionado" (selectionChange)="SelectedTipoDocumento($event)" required>
                             <mat-option *ngFor="let Item of ListTipoDocumento" [value]="Item.Id">
                                 {{ Item.Nombre }}
                             </mat-option>
@@ -136,7 +136,7 @@
 
                     <mat-form-field fxFlex="100">
                         <mat-select placeholder="Provincia" formControlName="Provincia"
-                            [(ngModel)]="ProvinciaSeleccionado" (change)="SelectedProvincia($event)" required>
+                            [(ngModel)]="ProvinciaSeleccionado" (selectionChange)="SelectedProvincia($event)" required>
                             <mat-option *ngFor="let Item of ListProvincia" [value]="Item.CodEstado">
                                 {{ Item.NombreEstado }}
                             </mat-option>
@@ -148,7 +148,7 @@
 
                     <mat-form-field fxFlex="100">
                         <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="CantonSeleccionado"
-                            (change)="SelectedCanton($event)" required>
+                            (selectionChange)="SelectedCanton($event)" required>
                             <mat-option *ngFor="let Item of ListCanton" [value]="Item.CodCiudad">
                                 {{ Item.NombreCiudad }}
                             </mat-option>
@@ -160,7 +160,7 @@
 
                     <mat-form-field fxFlex="100">
                         <mat-select placeholder="Parroquia" formControlName="Parroquia"
-                            [(ngModel)]="ParroquiaSeleccionado" (change)="SelectedParroquia($event)" required>
+                            [(ngModel)]="ParroquiaSeleccionado" (selectionChange)="SelectedParroquia($event)" required>
                             <mat-option *ngFor="let Item of ListParroquia" [value]="Item.Codigo">
                                 {{ Item.NombreParroquia }}
                             </mat-option>
