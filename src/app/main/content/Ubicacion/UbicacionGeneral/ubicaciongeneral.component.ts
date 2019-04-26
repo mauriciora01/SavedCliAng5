@@ -1,17 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-//import { ParameterService } from 'app/ApiServices/ParametersServices';
-import { GenerateMask } from 'app/Tools/MaskedLibrary';
-//import { NavigationInfoService } from 'app/ApiServices/NavigationInfoService';
-import { MatDialog } from '@angular/material';
-import { PhotoTool } from 'app/Tools/PhotoTool';
-//import { E_Imagen } from 'app/Models/E_Imagen';
-//import { AdminServices } from 'app/ApiServices/AdminServices';
-import { Router } from '@angular/router';
-import { UserService } from '../../../../ApiServices/UserService';
-//import { E_Departamentos } from 'app/Models/E_Departamentos';
-//import { E_Vehiculo } from 'app/Models/E_Vehiculo';
-//import { E_Municipios } from 'app/Models/E_Municipios';
+declare var google: any;
 
 @Component({
     moduleId: module.id,
@@ -20,97 +9,82 @@ import { UserService } from '../../../../ApiServices/UserService';
     styleUrls: ['ubicaciongeneral.component.scss']
 })
 export class UbicacionGeneralComponent implements OnInit {
-    SucceSave: boolean;
-    dataURL: any;
-    public MaskedNumber: any[]
-    MaskedNumberNoDecimal: any[]
-    MunicipioSeleccionado: any
+
     form: FormGroup;
-    formErrors: any;
-    noFoto: boolean = true
-    DepartamentoSeleccionado: any
 
-    public Nombre: string;
-    public descripcion: string;
-    public checkedActivo;
-
+    texto : string = 'Wenceslau Braz - Cuidado com as cargas';
+    lat: number = -23.8779431;
+    lng: number = -49.8046873;
+    zoom: number = 3;
+    dir = undefined;
+    address= undefined;
     // Horizontal Stepper
     constructor(private formBuilder: FormBuilder,
-        private dialog: MatDialog,
-        private Router: Router,
-        private UserService: UserService
-    ) {
-
-        this.formErrors = {
-            Nombre: {},
-            TipoVehiculo: {},
-            Capacidad: {},
-            Placa: {},
-            Soat: {},
-            Pase: {},
-            Conductor: {},
-            Modelo: {},
-            Color: {},
-            ValorServicio: {},
-            Departamentos: {},
-            Municipios: {}
-        };
+    ) {        
+        if (navigator)
+        {
+        navigator.geolocation.getCurrentPosition( pos => {
+            this.lng = +pos.coords.longitude;
+            this.lat = +pos.coords.latitude;
+          });
+        }
 
     }
 
-    ReturnPage(event: Event) {
-        event.preventDefault();
-        this.Router.navigate(['/maintransportadorcarro'])
-    }
+  
     ngOnInit() {
-        this.MaskedNumber = GenerateMask.numberMask
-        this.MaskedNumberNoDecimal = GenerateMask.Nodecimal
-
+        
         this.form = this.formBuilder.group({
-            Nombre: ['', [Validators.required]],
-            TipoVehiculo: ['', [Validators.required]],
-            Capacidad: ['', [Validators.required]],
-            Placa: ['', [Validators.required]],
-            Soat: ['', [Validators.required]],
-            Pase: ['', [Validators.required]],
-            Conductor: ['', [Validators.required]],
-            Modelo: ['', [Validators.required]],
-            Color: ['', [Validators.required]],
-            ValorServicio: ['', [Validators.required]],
-            Departamentos: [undefined, [Validators.required]],
-            Municipios: [undefined, [Validators.required]]
-        });
-
-        this.form.valueChanges.subscribe(() => {
-            this.onFormValuesChanged();
-        });
-
+            Direccion: [undefined, undefined], 
+          });      
     }
 
-    onFormValuesChanged() {
+    onLocalizate(): void {
+        
+        if (navigator)
+        {
+        navigator.geolocation.getCurrentPosition( pos => {
+            this.lng = +pos.coords.longitude;
+            this.lat = +pos.coords.latitude;
+            this.zoom=16;
 
-        for (const field in this.formErrors) {
-            if (!this.formErrors.hasOwnProperty(field)) {
-                continue;
-            }
+            this.getAddress(this.lat, this.lng);
+          });
 
-            // Clear previous errors
-            this.formErrors[field] = {};
-
-            // Get the control
-            const control = this.form.get(field);
-
-            if (control && control.dirty && !control.valid) {
-                this.formErrors[field] = control.errors;
-            }
         }
     }
 
-    EnviarInfo() {
+    public getDirection() {
+        this.dir = {
+          origin: { lat: 24.799448, lng: 120.979021 },
+          destination: { lat: 24.799524, lng: 120.975017 }
+        }
+      }
+ 
 
-
-    }
-
+      //Obtiene el nombre de la direccion mas cercana
+      getAddress( lat: number, lng: number ) {
+        //console.log('Finding Address');
+        if (navigator.geolocation) {
+          let geocoder = new google.maps.Geocoder();
+          let latlng = new google.maps.LatLng(lat, lng);
+          let request = { latLng: latlng };
+          geocoder.geocode(request, (results, status) => {
+            if (status === google.maps.GeocoderStatus.OK) {
+              let result = results[0];
+              let rsltAdrComponent = result.address_components;
+              let resultLength = rsltAdrComponent.length;
+              if (result != null) {
+                console.log(result);             
+                //this.address = rsltAdrComponent[resultLength - 8].short_name;
+                this.address = result.formatted_address;
+              } else {
+                alert('No hay direccion disponible!');
+              }
+            }
+          });
+      }
+      }
 
 }
 

@@ -43,6 +43,7 @@
     "@swimlane/ngx-dnd": "3.1.0",
     "@types/prismjs": "1.9.0",
     "@uiowa/digit-only": "0.0.5",
+    "agm-direction": "0.7.6",
     "angular-calendar": "0.23.6",
     "angular-in-memory-web-api": "0.5.3",
     "angular-material-bottom-sheet-collapsible": "0.0.6",

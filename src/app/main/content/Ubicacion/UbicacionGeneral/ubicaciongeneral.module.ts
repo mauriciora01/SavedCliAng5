@@ -6,7 +6,8 @@ import { MatButtonModule, MatFormFieldModule,MatCheckboxModule, MatIconModule, M
 import { FuseSharedModule } from '@fuse/shared.module';
 import { TextMaskModule } from 'angular2-text-mask';
 
-
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule} from 'agm-direction'; // agm-direction
 const routes: Routes = [
     {
         path: 'ubicaciongeneral',
@@ -30,6 +31,8 @@ const routes: Routes = [
         MatCheckboxModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        AgmCoreModule,
+        AgmDirectionModule
     ],
     declarations: [
         UbicacionGeneralComponent,

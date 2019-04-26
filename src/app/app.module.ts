@@ -31,6 +31,10 @@ import { ExceptionErrorService } from './ApiServices/ExceptionErrorService';
 //MRG: Agregar modulos de funcionalidad aqui y en .module de cada componente.
 import { CdkTableModule } from '@angular/cdk/table';
 
+//MRG: Google Maps
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule} from 'agm-direction'; // agm-direction
+
 import {
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSortModule, MatTableModule
@@ -109,6 +113,11 @@ const appRoutes: Routes = [
         FuseModule.forRoot(fuseConfig),
         RouterModule.forRoot(appRoutes),
         TranslateModule.forRoot(),
+
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyD_TUVJu7IdBPRsiorEw5NbukTNoUljG80'
+          }),
+          AgmDirectionModule //agm-direction
 
     ],
     providers: [

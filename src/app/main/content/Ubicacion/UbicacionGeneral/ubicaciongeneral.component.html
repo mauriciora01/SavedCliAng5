@@ -1,73 +1,34 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
 
-    <!-- HEADER -->
-    <div class="header mat-accent-bg p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxLayoutAlign="center start">
-            <div class="h1 mt-16">Mi Ubicación</div>
-        </div>
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="column" fxLayoutAlign="center start">
+      <div class="h1 mt-16">Mi Ubicación</div>
     </div>
-    <!-- / HEADER -->
+  </div>
+  <!-- / HEADER -->
 
-    <!-- CONTENT -->
-    <div class="content p-24">
+  <!-- CONTENT -->
+  <div class="mat-white-bg mat-elevation-z4 p-24 mr-24 mb-24" style="width:100%">
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+      <form fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form" [formGroup]="form">
+        <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          <agm-direction *ngIf="dir" [origin]="dir.origin" [destination]="dir.destination"></agm-direction>
+          <agm-circle *ngIf="lat && lng" [latitude]="lat" [longitude]="lng" [radius]="50" [fillColor]="'#F44336'"
+            [fillOpacity]="0.4">
+          </agm-circle>
+        </agm-map>
 
-        <div fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-md="row">
+        <mat-form-field fxFlex="100">
+          <input matInput placeholder="Click En Localizarme" formControlName="Direccion" [ngModel]="address">
+        </mat-form-field>
+    
+        <button class="btn btn-primary btn-lg button-0" (click)="onLocalizate()">Localizarme</button>
+        <!--MRG: DESCOMENTAR PARA OBTENER RUTA-->
+        <!--<button class="btn btn-primary btn-lg button-1" (click)="getDirection()">Get Ruta</button>-->
 
-            <!-- REACTIVE FORM EXAMPLE -->
-
-            <!--  <form class="mat-white-bg mat-elevaton-z4 p-24 mr-24 mb-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto"
-                name="form" [formGroup]="form"> -->
-
-
-            <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                <!--<div class="toolbar px-24 py-8 headerback">
-                    <div class="h2 mb-24">Mi Ubicacion</div>
-                    <div class="icoLike" (click)="ReturnPage($event)">
-                        <i class="material-icons">&#xE166;</i>
-                    </div>
-                </div> -->
-
-                <!-- *********************************************************** -->
-                <div class="col-sm-6">
-                    <form>
-                        <div class="form-group">
-                            <label class="sr-only" for="input-0">Location</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control input-lg input-0" id="input-0" placeholder="&#8220;Localizarme&#8221;"
-                                    value="">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary btn-lg button-0">Localizarme</button>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
-                    <div id="map_canvas" class="map_canvas img-thumbnail"></div>
-                    <!--<div id="map-canvas" style="height: 400px; width: 100%;"></div>-->
-                </div>
-                <!-- ************************************************************************** -->
-            </div>
-
-
-
-            <!-- ************************************************************************** -->
-
-
-
-            <!-- *********************************************************** -->
-
-            <!--<button (click)="EnviarInfo()" mat-raised-button color="accent" class="submit-button" aria-label="CREATE AN ACCOUNT"
-                [disabled]="form.invalid">
-                Enviar Información
-            </button>
-            <div fxLayout="row" *ngIf="SucceSave" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                <div fxFlex="100" style="color:#19611e">Registro Exitoso!</div>
-            </div>-->
-
-            <!-- </form>-->
-
-
-            <!-- / CONTENT -->
-
-        </div>
+      </form>
     </div>
+  </div>
 </div>

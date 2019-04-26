@@ -16,6 +16,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 //import { AdminGuard } from 'app/Guards/AdminGuard';
 import { MatCardModule } from '@angular/material';
 
+//import { FuseWidgetDocsComponent } from '../widget/widget.component';
+
 //import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 const routes: Routes = [
@@ -24,11 +26,17 @@ const routes: Routes = [
         component: DetalleArticuloComponent
 //       , canActivate:[AdminGuard]
     }
+  /*  ,
+    {
+        path     : 'widget',
+        component: FuseWidgetDocsComponent
+    }*/
 ];
 
 @NgModule({
     declarations: [
-        DetalleArticuloComponent
+        DetalleArticuloComponent,
+      //  FuseWidgetDocsComponent
         
     ],
     imports: [

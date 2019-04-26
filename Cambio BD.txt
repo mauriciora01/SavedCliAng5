@@ -2,7 +2,7 @@ usuario y pass pruebas: 0912006103
 
 http://181.188.213.187/GLOD/Login.aspx  
 
-
+API KEY GOOGLE TC GEO: AIzaSyD_TUVJu7IdBPRsiorEw5NbukTNoUljG80
 
 geo: 0914530928 - Zona: 35
 gerente de zona para opcion cedula: 0906374426
@@ -68,6 +68,11 @@ CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTIONERROR
 
 GIT: https://git-scm.com/book/es/v1/Fundamentos-de-Git-Trabajando-con-repositorios-remotos
 Desde git bash here en la carpeta nueva creada
+
+git add .
+git commit -m "comentario commit"
+git push origin master
+
 git init
 git remote add origin https://github.com/mauriciora01/SavedServicesNet.git
 git remote
@@ -76,6 +81,22 @@ git remote -v
 git fetch pb
 git pull origin master
 git config --global user.email "ramosgimauricio@gmail.com"
+
+
+npm install @agm/core --save --> instalar google maps
+https://www.youtube.com/watch?v=-IwTQgKIjCQ --> google maps y angular 7
+https://angular-material-extensions.github.io/google-maps-autocomplete/home  --> autocompletar google maps
+https://stackblitz.com/edit/angular-google-maps-direction
+https://www.npmjs.com/package/agm-direction
+npm install --save @agm/core agm-direction
+yarn add @agm/core agm-direction
+https://medium.freecodecamp.org/how-you-can-replicate-airbnbs-location-area-display-using-geocoding-in-angular-2001794f86a9 --> propiedades de marcacion de zona
+https://mdbootstrap.com/docs/angular/advanced/google-maps/ --> buscador de direcciones
+https://blog.ng-classroom.com/blog/ionic2/google-maps-and-geocoder/ --> explicacion geocoder convierte cordenadas en direcciones
+
+
+
+
 
 
 npm install @angular/core@5.2.8 --save

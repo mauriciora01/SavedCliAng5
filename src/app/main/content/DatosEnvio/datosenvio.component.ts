@@ -72,6 +72,8 @@ export class DatosEnvioComponent implements OnInit {
 
   public DespacharASeleccionado: string = "";
 
+  public ValorFleteFinal: number = 0;
+
   constructor(private formBuilder: FormBuilder,
     private ParameterService: ParameterService,
     private UserService: UserService,
@@ -186,6 +188,7 @@ export class DatosEnvioComponent implements OnInit {
           if (x.error == undefined) {
             //Mensaje de OK
             this.data.ValorFlete = x.ValorFlete;
+            this.ValorFleteFinal = x.ValorFlete;
           }
           else {
             //---------------------------------------------------------------------------------------------------------------
@@ -259,6 +262,7 @@ export class DatosEnvioComponent implements OnInit {
         if (x.Error == undefined) {
           //Mensaje de OK
           this.data.ValorFlete = x.ValorFlete;
+          this.ValorFleteFinal = x.ValorFlete;
         }
         else {
           //---------------------------------------------------------------------------------------------------------------
@@ -278,19 +282,19 @@ export class DatosEnvioComponent implements OnInit {
     this.GuardarInformacion();
 
     if (this.DespacharASeleccionado == "1") {
-      this.dialogRef.close(this.form.value.Direccion);
+      this.dialogRef.close(this.form.value.Direccion + ", $" + this.ValorFleteFinal);
     }
     else if (this.DespacharASeleccionado == "2") {
-      this.dialogRef.close("ENVIAR A DIRECTOR");
+      this.dialogRef.close("ENVIAR A DIRECTOR: $" + this.ValorFleteFinal);
     }
     else if (this.DespacharASeleccionado == "3") {
-      this.dialogRef.close("ENVIAR A LIDER");
+      this.dialogRef.close("ENVIAR A LIDER: $" + this.ValorFleteFinal);
     }
     else if (this.DespacharASeleccionado == "4") {
-      this.dialogRef.close("ENVIAR A PUNTO DE VENTA");
+      this.dialogRef.close("ENVIAR A PUNTO DE VENTA: $" + this.ValorFleteFinal);
     }
     else {
-      this.dialogRef.close(this.form.value.Direccion);
+      this.dialogRef.close(this.form.value.Direccion + ", $" + this.ValorFleteFinal);
     }
   }
 

@@ -1,4 +1,21 @@
-:host {
+agm-map {
+    height: 250px !important;
+    width: 100%;  /* This is really important*/
+  }
+
+  * {
+    font-family: Lato;
+  }
+  
+  a {
+    color: darkblue;
+  }
+
+  p {
+    font-family: Lato;
+  }
+
+  :host {
 
     .content {
  
@@ -28,7 +45,7 @@ form {
 {
     width: 40px;
     height: 40px;
-    background: #2094c8;
+    background: #c84c43;
     font-size: 31px;
     padding-left: 9px;
     border-radius: 22px;
