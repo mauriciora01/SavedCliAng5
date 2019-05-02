@@ -11,6 +11,19 @@ export class E_SessionEmpresaria {
     public Empresaria_Lider: string
     public ExcentoIVA: string
 
+    public IdZona: string
+    public Email: string
+    public Vendedor: string
+    public Clasificacion: string
+    public Telefono1: string
+    public Celular1: string
+    public CodigoRegional: string
+    public Usuario: string
+    public Whatsapp: string
+    public TipoCliente: string
+    public TallaPrendaSuperior: string
+    public TallaPrendaInferior: string
+    public TallaCalzado: string   
     public Error: E_Error
 
     constructor() { }

@@ -49,7 +49,7 @@ export class VendedorBuilder {
     public MostrarTerminosyCondiciones: boolean
     public Director: number
     public Usuario: string
-    public error: E_Error
+    public Error: E_Error
 
     buildFromObject(x: any): VendedorBuilder {
         if (x.CodPais != undefined) { this.CodPais = x.CodPais }
@@ -99,7 +99,7 @@ export class VendedorBuilder {
         if (x.MostrarTerminosyCondiciones != undefined) { this.MostrarTerminosyCondiciones = x.MostrarTerminosyCondiciones }
         if (x.Director != undefined) { this.Director = x.Director }
         if (x.Usuario != undefined) { this.Usuario = x.Usuario }
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
 
         return this
     }
@@ -152,7 +152,7 @@ export class VendedorBuilder {
         obj.MostrarTerminosyCondiciones = this.MostrarTerminosyCondiciones
         obj.Director = this.Director
         obj.Usuario = this.Usuario
-        obj.error = this.error
+        obj.Error = this.Error
 
         return obj
     }

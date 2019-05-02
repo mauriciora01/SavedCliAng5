@@ -13,7 +13,7 @@ export class UsuarioBuilder {
     public Estado: boolean
     public CambiarClave: boolean
     public FechaCreacion: Date
-    public error: E_Error
+    public Error: E_Error
     public Imagen: string
     buildFromObject(x: any): UsuarioBuilder {
         if (x.Id != undefined) { this.Id = x.Id }
@@ -29,7 +29,7 @@ export class UsuarioBuilder {
         if (x.Id_Perfil != undefined) { this.Id_Perfil = x.Id_Perfil }
         if (x.Estado != undefined) { this.Estado = x.Estado }
         if (x.FechaCreacion != undefined) { this.FechaCreacion = x.FechaCreacion }
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         //if (x.imagen != undefined) { this.error = x.imagen }
         if (x.CambiarClave != undefined) { this.CambiarClave = x.CambiarClave }
 
@@ -47,7 +47,7 @@ export class UsuarioBuilder {
         obj.Id_Perfil = this.Id_Perfil
         obj.Estado = this.Estado
         obj.FechaCreacion = this.FechaCreacion
-        obj.error = this.error
+        obj.Error = this.Error
         obj.Imagen = this.Imagen
         obj.CambiarClave = this.CambiarClave
 

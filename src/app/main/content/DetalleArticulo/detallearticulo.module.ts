@@ -19,6 +19,11 @@ import { MatCardModule } from '@angular/material';
 //import { FuseWidgetDocsComponent } from '../widget/widget.component';
 
 //import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+import {MatDividerModule} from '@angular/material/divider';
+
 
 const routes: Routes = [
     {
@@ -26,17 +31,13 @@ const routes: Routes = [
         component: DetalleArticuloComponent
 //       , canActivate:[AdminGuard]
     }
-  /*  ,
-    {
-        path     : 'widget',
-        component: FuseWidgetDocsComponent
-    }*/
+  
 ];
 
 @NgModule({
     declarations: [
         DetalleArticuloComponent,
-      //  FuseWidgetDocsComponent
+      
         
     ],
     imports: [
@@ -55,7 +56,10 @@ const routes: Routes = [
         MatCheckboxModule,
         MatToolbarModule,
         MatCardModule
-
+        ,
+        FuseWidgetModule,
+        MatButtonToggleModule,
+        MatDividerModule
     ]
 
 })

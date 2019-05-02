@@ -8,7 +8,7 @@ export class RegionalBuilder {
     public Codgereg: string
     public NombreGerente: string
     public Usuario: string
-    public error: E_Error
+    public Error: E_Error
     
     buildFromObject(x: any): RegionalBuilder {
         if (x.CodigoRegional != undefined) { this.CodigoRegional = x.CodigoRegional }        
@@ -17,7 +17,7 @@ export class RegionalBuilder {
         if (x.Codgereg != undefined) { this.Codgereg = x.Codgereg }
         if (x.NombreGerente != undefined) { this.NombreGerente = x.NombreGerente }
         if (x.Usuario != undefined) { this.Usuario = x.Usuario }      
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         
         return this
     }
@@ -29,7 +29,7 @@ export class RegionalBuilder {
         obj.Codgereg = this.Codgereg
         obj.NombreGerente = this.NombreGerente
         obj.Usuario = this.Usuario       
-        obj.error = this.error
+        obj.Error = this.Error
      
         return obj
     }

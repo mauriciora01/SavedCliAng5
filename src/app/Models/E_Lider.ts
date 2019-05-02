@@ -9,7 +9,7 @@ export class E_Lider {
     public Zona: string
     public IdVendedor: string
     public Codciudad: string
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

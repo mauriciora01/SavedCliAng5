@@ -8,7 +8,7 @@ export class E_Parametros {
     public Concepto: string
     public Tipo: string
     public Estado: boolean
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

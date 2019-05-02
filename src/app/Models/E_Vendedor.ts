@@ -50,7 +50,7 @@ export class E_Vendedor {
     public MostrarTerminosyCondiciones: boolean
     public Director: number
     public Usuario: string
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

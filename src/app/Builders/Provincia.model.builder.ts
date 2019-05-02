@@ -7,14 +7,14 @@ export class ProvinciaBuilder {
     public NombreEstado: string
     public CodPais: string
     public CodigoEstado: string
-    public error: E_Error
+    public Error: E_Error
     
     buildFromObject(x: any): ProvinciaBuilder {
         if (x.CodEstado != undefined) { this.CodEstado = x.CodEstado }        
         if (x.NombreEstado != undefined) { this.NombreEstado = x.NombreEstado }
         if (x.CodPais != undefined) { this.CodPais = x.CodPais }
         if (x.CodigoEstado != undefined) { this.CodigoEstado = x.CodigoEstado }       
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         
         return this
     }
@@ -24,7 +24,7 @@ export class ProvinciaBuilder {
         obj.NombreEstado = this.NombreEstado
         obj.CodPais = this.CodPais
         obj.CodigoEstado = this.CodigoEstado          
-        obj.error = this.error
+        obj.Error = this.Error
      
         return obj
     }

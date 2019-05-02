@@ -16,7 +16,7 @@ export class CiudadBuilder {
     public ValorFleteFull: number
     public CodigoCiudadDespacho: string
     public ZonaxCiudad: E_ZonaxCiudad
-    public error: E_Error
+    public Error: E_Error
     
     buildFromObject(x: any): CiudadBuilder {
         if (x.CodCiudad != undefined) { this.CodCiudad = x.CodCiudad }        
@@ -32,7 +32,7 @@ export class CiudadBuilder {
         if (x.ValorFleteFull != undefined) { this.ValorFleteFull = x.ValorFleteFull } 
         if (x.CodigoCiudadDespacho != undefined) { this.CodigoCiudadDespacho = x.CodigoCiudadDespacho }         
         if (x.ZonaxCiudad != undefined) { this.ZonaxCiudad = x.ZonaxCiudad }      
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         
         return this
     }
@@ -51,7 +51,7 @@ export class CiudadBuilder {
         obj.ValorFleteFull = this.ValorFleteFull
         obj.CodigoCiudadDespacho = this.CodigoCiudadDespacho        
         obj.ZonaxCiudad = this.ZonaxCiudad
-        obj.error = this.error
+        obj.Error = this.Error
      
         return obj
     }

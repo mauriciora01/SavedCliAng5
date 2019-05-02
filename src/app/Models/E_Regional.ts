@@ -9,7 +9,7 @@ export class E_Regional {
     public Codgereg: string
     public NombreGerente: string
     public Usuario: string
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

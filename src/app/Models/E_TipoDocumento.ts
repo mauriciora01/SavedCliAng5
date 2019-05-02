@@ -6,7 +6,7 @@ export class E_TipoDocumento {
     public Id: string
     public Nombre: string
     public Estado: number
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

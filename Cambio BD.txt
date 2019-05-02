@@ -2,7 +2,7 @@ usuario y pass pruebas: 0912006103
 
 http://181.188.213.187/GLOD/Login.aspx  
 
-API KEY GOOGLE TC GEO: AIzaSyD_TUVJu7IdBPRsiorEw5NbukTNoUljG80
+API KEY GOOGLE TC GEO: 
 
 geo: 0914530928 - Zona: 35
 gerente de zona para opcion cedula: 0906374426
@@ -96,7 +96,7 @@ https://blog.ng-classroom.com/blog/ionic2/google-maps-and-geocoder/ --> explicac
 
 
 
-
+https://therichpost.com/how-to-implement-owl-carousel-slider-in-angular-7 --> carrusel de imagenes
 
 
 npm install @angular/core@5.2.8 --save

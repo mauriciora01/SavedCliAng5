@@ -8,7 +8,7 @@ export class ParametrosBuilder {
     public Concepto: string
     public Tipo: string
     public Estado: boolean
-    public error: E_Error
+    public Error: E_Error
     
     buildFromObject(x: any): ParametrosBuilder {
         if (x.Id != undefined) { this.Id = x.Id }        
@@ -17,7 +17,7 @@ export class ParametrosBuilder {
         if (x.Concepto != undefined) { this.Concepto = x.Concepto }       
         if (x.Tipo != undefined) { this.Tipo = x.Tipo }       
         if (x.Estado != undefined) { this.Estado = x.Estado }              
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         
         return this
     }
@@ -29,7 +29,7 @@ export class ParametrosBuilder {
         obj.Concepto = this.Concepto
         obj.Tipo = this.Tipo
         obj.Estado = this.Estado       
-        obj.error = this.error
+        obj.Error = this.Error
      
         return obj
     }

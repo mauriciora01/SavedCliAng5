@@ -14,7 +14,7 @@ export class E_Parroquia {
     public Mujer: number 
     public Total: number 
     public Estado: boolean
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

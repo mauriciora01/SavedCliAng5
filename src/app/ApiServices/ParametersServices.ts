@@ -32,6 +32,8 @@ import { E_Catalogo } from 'app/Models/E_Catalogo';
 import { CatalogoBuilder } from 'app/Builders/Catalogo.model.builder';
 import { E_Ciudad } from 'app/Models/E_Ciudad';
 import { CiudadBuilder } from 'app/Builders/Ciudad.model.builder';
+import { E_PLU } from 'app/Models/E_PLU';
+import { PLUBuilder } from 'app/Builders/PLU.model.builder';
 
 
 @Injectable()
@@ -44,7 +46,7 @@ export class ParameterService {
 
     //-------------------------------------------------------------------------
     //List Methods
-    
+
     listarRegional(obj: E_SessionUser): Observable<Array<E_Regional>> {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -158,6 +160,18 @@ export class ParameterService {
             , request, httpOptions).map(this.ExtractCiudad)
     }
 
+
+    ListarxCodigoRapido(obj: E_PLU): Observable<E_PLU> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "PLU/ListarxCodigoRapido"
+            , request, httpOptions).map(this.ExtractPLU)
+    }
+
     //-------------------------------------------------------------------------
     //Extract Data
 
@@ -171,7 +185,7 @@ export class ParameterService {
         }
         return x
     }
-    
+
 
     ExtractVendedor(res: any): Array<E_Vendedor> {
         var x: Array<E_Vendedor> = new Array<E_Vendedor>()
@@ -261,6 +275,12 @@ export class ParameterService {
     ExtractCiudad(res: Response): E_Ciudad {
         var x: E_Ciudad = new E_Ciudad()
         if (res != null) { x = new CiudadBuilder().buildFromObject(res).Build() }
+        return x
+    }
+
+    ExtractPLU(res: Response): E_PLU {
+        var x: E_PLU = new E_PLU()
+        if (res != null) { x = new PLUBuilder().buildFromObject(res).Build() }
         return x
     }
 

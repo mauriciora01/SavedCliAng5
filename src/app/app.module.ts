@@ -48,7 +48,6 @@ import { ResumenPedidoModule } from './main/content/ResumenPedido/resumenpedido.
 
 
 
-
 const appRoutes: Routes = [
     /*{
         path      : '**',
@@ -68,11 +67,13 @@ const appRoutes: Routes = [
 
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: 'login' },
+
+   
 ];
 
 @NgModule({
     declarations: [
-        AppComponent,
+        AppComponent
         //MisEmpresariasComponent,
         //MisEmpresariasModule,
 
@@ -115,10 +116,11 @@ const appRoutes: Routes = [
         TranslateModule.forRoot(),
 
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyD_TUVJu7IdBPRsiorEw5NbukTNoUljG80'
-          }),
-          AgmDirectionModule //agm-direction
+            apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
+          }),
+          AgmDirectionModule, //agm-direction
+          
     ],
     providers: [
         UserService,

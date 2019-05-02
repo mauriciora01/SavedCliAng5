@@ -85,8 +85,8 @@ export class UserService {
         var x: E_Usuario = new E_Usuario()
 
         if (res != null) { x = new UsuarioBuilder().buildFromObject(res).Build() }
-        if (x.error != undefined) {
-            if (x.error.Id == 1) {
+        if (x.Error != undefined) {
+            if (x.Error.Id == 1) {
                 sessionStorage.removeItem("CurrentUser")
                 sessionStorage.removeItem("CurrentEmpresaria")
                 return x

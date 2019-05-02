@@ -84,21 +84,41 @@
     <!-- Segundo Paso -->
     <mat-step [stepControl]="secondFormGroup">
 
-      <form [formGroup]="secondFormGroup" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
+      <form [formGroup]="secondFormGroup" class="example-form" fxLayout="column" fxLayoutAlign="start"
+        fxFlex="1 0 auto">
 
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
           <ng-template matStepLabel>Seleccione Articulo</ng-template>
-          <mat-form-field fxFlex="100">
-            <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="90">
-              <input matInput placeholder="Código Rapído" formControlName="CodigoRapido" maxlength="8"  [(ngModel)]="CodigoRapidoSeleccionado">
-            </div>
-            <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
+
+          <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="90">
+            <!--MRG: HABILITAR PARA AUTOCOMPLETE <mat-form-field class="example-full-width">
+                <input type="text" maxlength="8" placeholder="Código Rapído" aria-label="Number" matInput [formControl]="CodigoRapido"
+                  [matAutocomplete]="auto" >
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+             <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
               <button (click)="openAdicionarArticulo()" mat-icon-button color="accent" matTooltip="Adicionar">
                 <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add_circle</mat-icon>
               </button>
             </div>
-          </mat-form-field>
-
+            
+            -->
+            <mat-form-field fxFlex="100">
+              <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="90">
+                <input matInput placeholder="Código Rapído" [formControl]="CodigoRapido" maxlength="8"
+                  [(ngModel)]="CodigoRapidoSeleccionado">
+              </div>
+              <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
+                <button (click)="openAdicionarArticulo()" mat-icon-button color="accent" matTooltip="Adicionar">
+                  <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add_circle</mat-icon>
+                </button>
+              </div>
+            </mat-form-field>
+          </div>
 
           <li>
             <button mat-raised-button (click)="openVerDetallePedido()"> Ver Detalle Pedido</button>

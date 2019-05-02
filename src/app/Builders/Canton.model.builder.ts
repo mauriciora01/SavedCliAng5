@@ -14,7 +14,7 @@ export class CantonBuilder {
     public IVA: number 
     public PedidoMin: number 
     public ValorFleteFull: number 
-    public error: E_Error
+    public Error: E_Error
     
     buildFromObject(x: any): CantonBuilder {
         if (x.CodCiudad != undefined) { this.CodCiudad = x.CodCiudad }        
@@ -28,7 +28,7 @@ export class CantonBuilder {
         if (x.IVA != undefined) { this.IVA = x.IVA }       
         if (x.PedidoMin != undefined) { this.PedidoMin = x.PedidoMin }       
         if (x.ValorFleteFull != undefined) { this.ValorFleteFull = x.ValorFleteFull }       
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         
         return this
     }
@@ -45,7 +45,7 @@ export class CantonBuilder {
         obj.IVA = this.IVA
         obj.PedidoMin = this.PedidoMin
         obj.ValorFleteFull = this.ValorFleteFull
-        obj.error = this.error
+        obj.Error = this.Error
      
         return obj
     }

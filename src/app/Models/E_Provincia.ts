@@ -7,7 +7,7 @@ export class E_Provincia {
     public NombreEstado: string
     public CodPais: string
     public CodigoEstado: string
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

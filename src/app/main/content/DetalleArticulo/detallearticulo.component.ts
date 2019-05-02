@@ -3,11 +3,25 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { E_Cliente } from 'app/Models/E_Cliente';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ParameterService } from 'app/ApiServices/ParametersServices';
+import { E_PLU } from 'app/Models/E_PLU';
+import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
+import { ExceptionErrorService } from 'app/ApiServices/ExceptionErrorService';
+import { E_SessionUser } from 'app/Models/E_SessionUser';
+import { UserService } from 'app/ApiServices/UserService';
+import { E_SessionEmpresaria } from 'app/Models/E_SessionEmpresaria';
 
 export interface DialogData {
+  CodigoRapido: string;
+  NombreProductoCompleto: string;
+  NombreProd:string;
+  Color:string;
+  Talla:string;
+  ValorUnitario:string;
+  NombreImagen:string;
   Titulo: string;
   Mensaje: string;
-  TipoMensaje: string;
+  TipoMensaje: string;             
 }
 
 @Component({
@@ -21,40 +35,23 @@ export class DetalleArticuloComponent implements OnInit {
   TextColor: any
   form: FormGroup;
 
-  public ListDespachar: Array<Object> = [
-    { IdGenero: "MICASA", Nombre: 'MI CASA' },
-    { IdGenero: "LIDER", Nombre: 'LIDER' },
-    { IdGenero: "OTRO", Nombre: 'OTRO' },
-
-  ];
-
-  public ListProvincia: Array<Object> = [
-    { IdGenero: "PROVINCIA1", Nombre: 'PROVINCIA1' },
-    { IdGenero: "PROVINCIA2", Nombre: 'PROVINCIA2' },
-    { IdGenero: "PROVINCIA3", Nombre: 'PROVINCIA3' },
-
-  ];
-
-  public ListCanton: Array<Object> = [
-    { IdGenero: "CANTON1", Nombre: 'CANTON1' },
-    { IdGenero: "CANTON2", Nombre: 'CANTON2' },
-    { IdGenero: "CANTON3", Nombre: 'CANTON3' },
-
-  ];
-
-  public ListParroquia: Array<Object> = [
-    { IdGenero: "PARROQUIA1", Nombre: 'PARROQUIA1' },
-    { IdGenero: "PARROQUIA2", Nombre: 'PARROQUIA2' },
-    { IdGenero: "PARROQUIA3", Nombre: 'PARROQUIA3' },
-
-  ];
-
+  
   public Cantidad: number = 1;
 
+  public SessionUser: E_SessionUser = new E_SessionUser()
 
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DetalleArticuloComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    private ParameterService: ParameterService,
+    private ExceptionErrorService: ExceptionErrorService,
+    private UserService: UserService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
+
+      this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
+
+
+      
+    }
 
 
 

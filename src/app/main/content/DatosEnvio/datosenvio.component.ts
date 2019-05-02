@@ -185,7 +185,7 @@ export class DatosEnvioComponent implements OnInit {
       this.ParameterService.ListarCiudad(objCiudad)
         .subscribe((x: E_Ciudad) => {
 
-          if (x.error == undefined) {
+          if (x.Error == undefined) {
             //Mensaje de OK
             this.data.ValorFlete = x.ValorFlete;
             this.ValorFleteFinal = x.ValorFlete;

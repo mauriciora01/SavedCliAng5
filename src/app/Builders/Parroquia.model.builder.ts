@@ -15,7 +15,7 @@ export class ParroquiaBuilder {
     public Mujer: number 
     public Total: number 
     public Estado: boolean
-    public error: E_Error
+    public Error: E_Error
     
     buildFromObject(x: any): ParroquiaBuilder {
         if (x.Codigo != undefined) { this.Codigo = x.Codigo }        
@@ -29,7 +29,7 @@ export class ParroquiaBuilder {
         if (x.Mujer != undefined) { this.Mujer = x.Mujer }        
         if (x.Total != undefined) { this.Total = x.Total }        
         if (x.Estado != undefined) { this.Estado = x.Estado }        
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         
         return this
     }
@@ -46,7 +46,7 @@ export class ParroquiaBuilder {
         obj.Mujer = this.Mujer
         obj.Total = this.Total
         obj.Estado = this.Estado
-        obj.error = this.error
+        obj.Error = this.Error
      
         return obj
     }

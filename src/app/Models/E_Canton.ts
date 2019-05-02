@@ -14,7 +14,7 @@ export class E_Canton {
     public IVA: number 
     public PedidoMin: number 
     public ValorFleteFull: number 
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

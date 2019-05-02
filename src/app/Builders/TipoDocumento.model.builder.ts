@@ -5,13 +5,13 @@ export class TipoDocumentoBuilder {
     public Id: string
     public Nombre: string
     public Estado: number    
-    public error: E_Error
+    public Error: E_Error
     
     buildFromObject(x: any): TipoDocumentoBuilder {
         if (x.Id != undefined) { this.Id = x.Id }        
         if (x.Nombre != undefined) { this.Nombre = x.Nombre }
         if (x.Estado != undefined) { this.Estado = x.Estado }          
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         
         return this
     }
@@ -20,7 +20,7 @@ export class TipoDocumentoBuilder {
         obj.Id = this.Id
         obj.Nombre = this.Nombre
         obj.Estado = this.Estado      
-        obj.error = this.error
+        obj.Error = this.Error
      
         return obj
     }

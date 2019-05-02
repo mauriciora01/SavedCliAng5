@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ParameterService } from 'app/ApiServices/ParametersServices';
 import { E_SessionUser } from 'app/Models/E_SessionUser';
 import { UserService } from 'app/ApiServices/UserService';
@@ -18,6 +18,17 @@ import { ResumenPedidoComponent } from '../ResumenPedido/resumenpedido.component
 
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { E_PLU } from 'app/Models/E_PLU';
+
+
+export interface State {
+    flag: string;
+    name: string;
+    population: string;
+}
+
 @Component({
     selector: 'pedidosprincipal',
     templateUrl: 'pedidosprincipal.component.html',
@@ -25,7 +36,7 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 })
 export class PedidosPrincipalComponent implements OnInit {
-    isLinear = true;
+    isLinear = false;
     firstFormGroup: FormGroup;
     secondFormGroup: FormGroup;
     thirtyFormGroup: FormGroup;
@@ -33,7 +44,7 @@ export class PedidosPrincipalComponent implements OnInit {
     public CatalogoSeleccionado: string = "";
     public BodegaSeleccionado: string = "";
     public DatosEnvioSeleccionado: string = "";
-    public CodigoRapidoSeleccionado: string = "BL98765";
+    public CodigoRapidoSeleccionado: string = "123468";
 
 
     public ListCatalogo: Array<E_Catalogo> = new Array<E_Catalogo>();
@@ -52,6 +63,9 @@ export class PedidosPrincipalComponent implements OnInit {
         { Codigo: "PKG", Nombre: 'BODEGA PICKING' },
     ];
 
+    CodigoRapido = new FormControl();
+    options: string[] = ['One', 'Two', 'Three'];
+    filteredOptions: Observable<string[]>;
 
     constructor(private _formBuilder: FormBuilder,
         private ParameterService: ParameterService,
@@ -67,7 +81,6 @@ export class PedidosPrincipalComponent implements OnInit {
             NumeroDocumento: {},
             Bodega: {},
         };
-
 
         sessionStorage.removeItem("CurrentEmpresaria")
     }
@@ -85,8 +98,8 @@ export class PedidosPrincipalComponent implements OnInit {
             DatosEnvio: [undefined, [Validators.required]]
         });
         this.secondFormGroup = this._formBuilder.group({
-            CodigoRapido: ['', Validators.required]
-
+            CodigoRapido: ['', Validators.required],
+            CodigoRap: ['', Validators.required]
         });
         this.thirtyFormGroup = this._formBuilder.group({
 
@@ -115,7 +128,18 @@ export class PedidosPrincipalComponent implements OnInit {
                 }
             })
 
+        this.filteredOptions = this.CodigoRapido.valueChanges
+            .pipe(
+                startWith(''),
+                map(value => this._filter(value))
+            );
 
+    }
+
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return this.options.filter(option => option.toLowerCase().includes(filterValue));
     }
 
     SelectedCatalogo(y) {
@@ -195,10 +219,10 @@ export class PedidosPrincipalComponent implements OnInit {
     }
 
     openDatosEnvio(): void {
-        this.DatosEnvioSeleccionado="";
+        this.DatosEnvioSeleccionado = "";
 
         //Si se encuentra la empresaria se abre la ventana, sino no se puede abrir.
-        if (this.NombreEmpresariaCompleto!= undefined && this.NombreEmpresariaCompleto != "") {
+        if (this.NombreEmpresariaCompleto != undefined && this.NombreEmpresariaCompleto != "") {
             const dialogRef = this.dialog.open(DatosEnvioComponent, {
                 panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
 
@@ -213,15 +237,77 @@ export class PedidosPrincipalComponent implements OnInit {
     }
 
     openAdicionarArticulo(): void {
-        const dialogRef = this.dialog.open(DetalleArticuloComponent, {
-            panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-            data: { TipoMensaje: "Error", Titulo: "Detalle Articulo", Mensaje: "Seleccione los detalles del articulo." }
-        });
 
-        dialogRef.afterClosed().subscribe(result => {
+        if (this.CodigoRapido.value != '' && this.CodigoRapido.value != undefined && this.CodigoRapido.value != null) {
 
-            //this.DatosEnvioSeleccionado = result; 
-        });
+
+            var objPLU: E_PLU = new E_PLU()
+            objPLU.CodigoRapido = this.CodigoRapido.value;
+            objPLU.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow();
+
+            this.ParameterService.ListarxCodigoRapido(objPLU)
+                .subscribe((x: E_PLU) => {
+
+                    if (x.Error == undefined) {
+                        //Mensaje de OK
+                        console.log(x)
+
+                        var NombreProductoP = x.NombreProducto + ", " + x.NombreColor + ", " + x.NombreTalla;
+
+                        var rndImg = Math.floor(Math.random() * 11);
+                        var NombreImg= "blusanivi"+rndImg+".PNG";
+
+                        const dialogRef = this.dialog.open(DetalleArticuloComponent, {
+                            panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
+                            data: {
+                                CodigoRapido: this.CodigoRapido.value, NombreProductoCompleto: NombreProductoP,
+                                NombreProd: x.NombreProducto, Color: x.NombreColor, Talla: x.NombreTalla, ValorUnitario: x.PrecioTotalConIVA,
+                                NombreImagen: NombreImg, TipoMensaje: "Error", Titulo: "Detalle Articulo", Mensaje: "Seleccione los detalles del articulo."
+                            }
+                        });
+
+                        dialogRef.afterClosed().subscribe(result => {
+
+                            //this.DatosEnvioSeleccionado = result; 
+                        });
+
+
+                    }
+                    else {
+                        //---------------------------------------------------------------------------------------------------------------
+                        //Mensaje de Error. 
+
+                        const dialogRef = this.dialog.open(ModalPopUpComponent, {
+                            width: '450px',
+                            data: { TipoMensaje: "Error", Titulo: "Buscar Articulo", Mensaje: "No se encontro articulo con el codigo rapido seleccionado. Por favor verifique." }
+                        });
+
+                        //throw new ErrorLogExcepcion("DetalleArticuloComponent", "constructor()", "No se encontro articulo. Codigo Rapido: " + data.CodigoRapido, this.SessionUser.Cedula, this.ExceptionErrorService)
+                        //---------------------------------------------------------------------------------------------------------------
+                    }
+
+                    //Para que ponga por defecto el que trae sin poderlo modificar.
+                    //this.ProvinciaSeleccionado = x[0].CodEstado;
+                })
+
+
+
+
+
+        }
+        else {
+
+            //---------------------------------------------------------------------------------------------------------------
+            //Mensaje de Error. 
+
+            const dialogRef = this.dialog.open(ModalPopUpComponent, {
+                width: '450px',
+                data: { TipoMensaje: "Error", Titulo: "Buscar Articulo", Mensaje: "Debe ingresar un codigo rapido." }
+            });
+
+            //throw new ErrorLogExcepcion("DetalleArticuloComponent", "constructor()", "No se encontro articulo. Codigo Rapido: " + data.CodigoRapido, this.SessionUser.Cedula, this.ExceptionErrorService)
+            //---------------------------------------------------------------------------
+        }
 
     }
 

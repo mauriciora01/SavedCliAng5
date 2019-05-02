@@ -17,7 +17,7 @@ export class E_Ciudad {
     public ValorFleteFull: number
     public CodigoCiudadDespacho: string
     public ZonaxCiudad: E_ZonaxCiudad
-    public error: E_Error
+    public Error: E_Error
     
     constructor() { }
 }

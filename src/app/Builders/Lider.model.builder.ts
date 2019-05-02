@@ -8,7 +8,7 @@ export class LiderBuilder {
     public Zona: string
     public IdVendedor: string
     public Codciudad: string
-    public error: E_Error
+    public Error: E_Error
     
     buildFromObject(x: any): LiderBuilder {
         if (x.IdLider != undefined) { this.IdLider = x.IdLider }        
@@ -17,7 +17,7 @@ export class LiderBuilder {
         if (x.Zona != undefined) { this.Zona = x.Zona }
         if (x.IdVendedor != undefined) { this.IdVendedor = x.IdVendedor }
         if (x.Codciudad != undefined) { this.Codciudad = x.Codciudad }      
-        if (x.error != undefined) { this.error = x.error }
+        if (x.Error != undefined) { this.Error = x.Error }
         
         return this
     }
@@ -29,7 +29,7 @@ export class LiderBuilder {
         obj.Zona = this.Zona
         obj.IdVendedor = this.IdVendedor
         obj.Codciudad = this.Codciudad       
-        obj.error = this.error
+        obj.Error = this.Error
      
         return obj
     }

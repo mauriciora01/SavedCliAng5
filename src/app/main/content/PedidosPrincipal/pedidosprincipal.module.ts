@@ -21,6 +21,9 @@ import { MatPaginatorModule, MatSortModule, MatTableModule } from "@angular/mate
 
 import { DigitOnlyModule } from '@uiowa/digit-only'; //para textbox solo numeros
 
+
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 const routes: Routes = [
     {
         path: 'pedidosprincipal',
@@ -51,7 +54,9 @@ const routes: Routes = [
         CdkTableModule,
 
     
-        DigitOnlyModule
+        DigitOnlyModule,
+       
+    MatAutocompleteModule
 
     ],
     declarations: [
