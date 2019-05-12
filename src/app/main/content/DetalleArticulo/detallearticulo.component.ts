@@ -9,7 +9,10 @@ import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
 import { ExceptionErrorService } from 'app/ApiServices/ExceptionErrorService';
 import { E_SessionUser } from 'app/Models/E_SessionUser';
 import { UserService } from 'app/ApiServices/UserService';
+import { DetallePedidoService } from 'app/ApiServices/DetallePedidoService';
 import { E_SessionEmpresaria } from 'app/Models/E_SessionEmpresaria';
+import { DetallePedidoComponent } from '../DetallePedido/detallepedido.component';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 export interface DialogData {
   CodigoRapido: string;
@@ -19,6 +22,7 @@ export interface DialogData {
   Talla:string;
   ValorUnitario:string;
   NombreImagen:string;
+  PLU: number;
   Titulo: string;
   Mensaje: string;
   TipoMensaje: string;             
@@ -45,9 +49,13 @@ export class DetalleArticuloComponent implements OnInit {
     private ParameterService: ParameterService,
     private ExceptionErrorService: ExceptionErrorService,
     private UserService: UserService,
+    private DetallePedidoService: DetallePedidoService,
+    private bottomSheet: MatBottomSheet,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
 
       this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
+
+     
 
 
       
@@ -74,9 +82,29 @@ export class DetalleArticuloComponent implements OnInit {
 
   }
 
-  onClose(): void {
-    this.dialogRef.close(this.form.value.Direccion);
+  onAdicionarArticulo(): void {
+
+    var DetallePedido: E_PLU = new E_PLU()
+
+    DetallePedido.CodigoRapido = this.data.CodigoRapido;
+    DetallePedido.NombreProducto = this.data.NombreProductoCompleto;
+    DetallePedido.PrecioConIVA= Number(this.data.ValorUnitario);
+    DetallePedido.PorcentajeDescuento = 40;
+    DetallePedido.Cantidad = this.form.value.Cantidad;
+    DetallePedido.PrecioCatalogoTotalConIVA = Number(this.form.value.Cantidad) * Number(this.data.ValorUnitario);
+    DetallePedido.PrecioEmpre = Number(this.data.ValorUnitario);
+    DetallePedido.PrecioPuntos= Number(this.form.value.Cantidad) * Number(this.data.ValorUnitario);
+    DetallePedido.PLU = this.data.PLU;
+
+    this.DetallePedidoService.SetCurrentDetallePedido(DetallePedido);
+
+    this.dialogRef.close();
+    this.openBottomSheet();
   }
+
+  openBottomSheet(): void {
+    this.bottomSheet.open(DetallePedidoComponent);
+}
 
   CalacularResta(): void {
     if ((this.form.value.Cantidad - 1) > 0) {

@@ -23,6 +23,8 @@ export class SessionEmpresariaBuilder {
     public TallaPrendaSuperior: string
     public TallaPrendaInferior: string
     public TallaCalzado: string   
+    public Catalogo: string  
+    public Campana: string  
     public ExcentoIVA: string
 
     public Error: E_Error
@@ -50,6 +52,8 @@ export class SessionEmpresariaBuilder {
         if (x.TallaPrendaSuperior != undefined) { this.TallaPrendaSuperior = x.TallaPrendaSuperior }
         if (x.TallaPrendaInferior != undefined) { this.TallaPrendaInferior = x.TallaPrendaInferior }
         if (x.TallaCalzado != undefined) { this.TallaCalzado = x.TallaCalzado }
+        if (x.Catalogo != undefined) { this.Catalogo = x.Catalogo }
+        if (x.Campana != undefined) { this.Campana = x.Campana }
         if (x.Error != undefined) { this.Error = x.Error }
 
         return this
@@ -78,8 +82,9 @@ export class SessionEmpresariaBuilder {
         obj.TallaPrendaSuperior = this.TallaPrendaSuperior
         obj.TallaPrendaInferior = this.TallaPrendaInferior
         obj.TallaCalzado = this.TallaCalzado
+        obj.Catalogo = this.Catalogo
+        obj.Campana = this.Campana
         obj.Error = this.Error
-
         return obj
     }
 }

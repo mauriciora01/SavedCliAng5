@@ -8,6 +8,18 @@ export interface DialogData {
   Titulo: string;
   Mensaje: string;
   TipoMensaje: string;
+
+  Numero: string;
+  Nit: string;
+  NombreEmpresaria: string;
+  Valor: string;
+  TotalPrecioCatalogo: string;
+  Portal: string;
+  Zona: string;
+  Campana: string;
+  Catalogo: string;
+  FechaCreacion: string;
+
 }
 
 @Component({
@@ -21,34 +33,7 @@ export class ResumenPedidoComponent implements OnInit {
   TextColor: any
   form: FormGroup;
 
-  public ListDespachar: Array<Object> = [
-    { IdGenero: "MICASA", Nombre: 'MI CASA' },
-    { IdGenero: "LIDER", Nombre: 'LIDER' },
-    { IdGenero: "OTRO", Nombre: 'OTRO' },
-
-  ];
-
-  public ListProvincia: Array<Object> = [
-    { IdGenero: "PROVINCIA1", Nombre: 'PROVINCIA1' },
-    { IdGenero: "PROVINCIA2", Nombre: 'PROVINCIA2' },
-    { IdGenero: "PROVINCIA3", Nombre: 'PROVINCIA3' },
-
-  ];
-
-  public ListCanton: Array<Object> = [
-    { IdGenero: "CANTON1", Nombre: 'CANTON1' },
-    { IdGenero: "CANTON2", Nombre: 'CANTON2' },
-    { IdGenero: "CANTON3", Nombre: 'CANTON3' },
-
-  ];
-
-  public ListParroquia: Array<Object> = [
-    { IdGenero: "PARROQUIA1", Nombre: 'PARROQUIA1' },
-    { IdGenero: "PARROQUIA2", Nombre: 'PARROQUIA2' },
-    { IdGenero: "PARROQUIA3", Nombre: 'PARROQUIA3' },
-
-  ];
-
+  
   public Cantidad: number = 1;
 
 

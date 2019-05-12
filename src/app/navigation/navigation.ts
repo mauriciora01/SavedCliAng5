@@ -71,6 +71,14 @@ export const navigationGeneral = [
                         'icon': 'add_shopping_cart',
                         'url': '/pedidosprincipal',
                     },
+                    {
+                        'id': 'mispedidos',
+                        'title': 'Mis Pedidos',
+                        'translate': 'NAV.SAMPLE.TITLE',
+                        'type': 'item',
+                        'icon': 'view_list',
+                        'url': '/mispedidos',
+                    },
                     
                 ]
             },

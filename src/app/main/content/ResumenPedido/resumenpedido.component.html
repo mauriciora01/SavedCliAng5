@@ -22,15 +22,16 @@
           </div>
 
           <div>
-            <p><b>Cantidad Articulos:</b> 40</p>
-            <p><b>Total Pedido:</b> $3.900.000</p>
-            <p><b>Precio Puntos:</b> 600 pts</p>
-            <p><b>Valor Flete:</b> $29.000</p>
-            <p><b>Puntos Disponibles:</b> 1000</p>
-            <p><b>Utilizar Puntos:</b> 300</p>
-            <p><b>Dirección Envío:</b> Cra 12 # 45 - 30 Frente a la casa amarilla, volteando por la 33.</p>
-
-
+            <p><b>Numero:</b>  {{data.Numero}}</p>
+            <p><b>Nit:</b> {{data.Nit}}</p>
+            <p><b>Empresaria:</b> {{data.NombreEmpresaria}}</p>
+            <p><b>P. Emp:</b> ${{data.Valor}}</p>
+            <p><b>P. Cat:</b> ${{data.TotalPrecioCatalogo}}</p>
+            <p><b>Portal:</b> {{data.Portal}}</p>
+            <p><b>Zona:</b> {{data.Zona}}</p>
+            <p><b>Campana:</b> {{data.Campana}}</p>
+            <p><b>Catalogo:</b> {{data.GrupoCatalogo}}</p>
+            <p><b>Fecha:</b> {{data.FechaCreacion}}</p>
 
           </div>
 
@@ -52,7 +53,7 @@
 
   <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
     <button mat-button (click)="onClose()" color="accent" aria-label="Close">
-      PROCESAR PEDIDO
+      CERRAR
     </button>
   </div>
 

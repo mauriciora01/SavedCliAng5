@@ -7,12 +7,13 @@
   </mat-toolbar>
 
 
-  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar >
     <form name="form" [formGroup]="form">
 
       <mat-card-content>
 
-        <fuse-widget class="" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+         <!-- <fuse-widget fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="50" > -->
+        <fuse-widget style="flex-direction: column;box-sizing: border-box;display: flex;flex: 1 1 100%;max-width: 100%;">
           <!-- Front -->
           <div class="fuse-widget-front mat-elevation-z2">
             <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
@@ -28,7 +29,8 @@
             </div>
 
             <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
-              <img class="CenterImageArticulo" src="../../../../assets/imagesNivi/{{data.NombreImagen}}" alt="Articulo">
+              <img class="CenterImageArticulo" src="../../../../assets/imagesAplicacion/{{data.NombreImagen}}"
+                alt="Articulo">
 
             </div>
           </div>
@@ -64,14 +66,14 @@
                 <input matInput placeholder="" formControlName="Cantidad" required [ngModel]="Cantidad" maxlength="2"
                   inputmode="numeric" pattern="[0-9]*" digitOnly (focusout)="CalcularTotales()">
               </mat-form-field>
-    
+
               <div fxFlex="40" align="left">
                 <button (click)="CalcularSuma()" mat-icon-button color="accent">
                   <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add</mat-icon>
                 </button>
               </div>
             </div>
-          
+
           </div>
           <!-- / Back -->
 
@@ -79,17 +81,17 @@
       </mat-card-content>
 
       <mat-card-content>
-        
+
 
         <div align="center">
           <mat-button-toggle-group #group="matButtonToggleGroup">
             <mat-button-toggle value="favorite" matTooltip="Link Message">
-             <mat-icon>favorite</mat-icon> Me Encanta
+              <mat-icon>favorite</mat-icon> Me Encanta
             </mat-button-toggle>
           </mat-button-toggle-group>
         </div>
 
-        
+
       </mat-card-content>
     </form>
 
@@ -104,7 +106,7 @@
 
 
   <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-button (click)="onClose()" color="accent" aria-label="Close">
+    <button mat-button (click)="onAdicionarArticulo()" mat-raised-button color="accent" aria-label="Close">
       ADICIONAR A PEDIDO
     </button>
   </div>

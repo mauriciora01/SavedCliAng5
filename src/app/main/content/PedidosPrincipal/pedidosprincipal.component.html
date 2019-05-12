@@ -4,7 +4,7 @@
   <div class="header mat-accent-bg p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
     <div fxLayout="column" fxLayoutAlign="center start">
       <div class="h1 mt-16">Crear Pedido</div>
-      <button mat-raised-button (click)="openBottomSheet()">Open file</button>
+      <!--<button mat-raised-button (click)="openBottomSheet()">Open file</button>-->
     </div>
 
   </div>
@@ -120,12 +120,13 @@
             </mat-form-field>
           </div>
 
-          <li>
+          <!--<li>
             <button mat-raised-button (click)="openVerDetallePedido()"> Ver Detalle Pedido</button>
-          </li>
+          </li> -->
           <div>
-            <button mat-button matStepperPrevious color="accent">Atras</button>
-            <button mat-button matStepperNext color="accent">Siguiente</button>
+            <button mat-button matStepperPrevious mat-raised-button color="accent">Atras</button>
+            &nbsp;&nbsp;&nbsp;
+            <button mat-button matStepperNext mat-raised-button color="accent">Siguiente</button>
           </div>
         </div>
       </form>
@@ -137,9 +138,15 @@
 
 
         <div>
-          <button mat-button matStepperPrevious color="accent">Atras</button>
-          <button mat-button (click)="openVerResumenPedido()" color="accent">Confirmar Pedido</button>
+          <button mat-button matStepperPrevious mat-raised-button color="accent">Atras</button>
+          &nbsp;&nbsp;&nbsp;
+          <button mat-button matStepperNext (click)="openBottomSheet()" mat-raised-button color="accent">Confirmar
+            Pedido</button>
+
+
         </div>
+
+
       </form>
     </mat-step>
   </mat-vertical-stepper>

@@ -16,6 +16,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 //import { AdminGuard } from 'app/Guards/AdminGuard';
 import { MatCardModule } from '@angular/material';
 
+import { CdkTableModule } from '@angular/cdk/table';
+
+import { MatPaginatorModule, MatSortModule, MatTableModule } from "@angular/material";
+
 const routes: Routes = [
     {
         path: 'detallepedido',
@@ -45,8 +49,17 @@ const routes: Routes = [
         MatCheckboxModule,
         MatToolbarModule,
         MatCardModule,
-        MatBottomSheetModule
+        MatBottomSheetModule,
+
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule,
+        CdkTableModule
+    ],    
+    exports: [
+        DetallePedidoComponent,
     ]
+
 
 })
 export class DetallePedidoModule {

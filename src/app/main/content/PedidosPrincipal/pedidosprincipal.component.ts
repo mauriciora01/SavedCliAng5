@@ -36,7 +36,7 @@ export interface State {
 
 })
 export class PedidosPrincipalComponent implements OnInit {
-    isLinear = false;
+    isLinear = true;
     firstFormGroup: FormGroup;
     secondFormGroup: FormGroup;
     thirtyFormGroup: FormGroup;
@@ -45,7 +45,6 @@ export class PedidosPrincipalComponent implements OnInit {
     public BodegaSeleccionado: string = "";
     public DatosEnvioSeleccionado: string = "";
     public CodigoRapidoSeleccionado: string = "123468";
-
 
     public ListCatalogo: Array<E_Catalogo> = new Array<E_Catalogo>();
     //*public ListBodega: Array<E_Catalogo> = new Array<E_Catalogo>();
@@ -262,7 +261,7 @@ export class PedidosPrincipalComponent implements OnInit {
                             data: {
                                 CodigoRapido: this.CodigoRapido.value, NombreProductoCompleto: NombreProductoP,
                                 NombreProd: x.NombreProducto, Color: x.NombreColor, Talla: x.NombreTalla, ValorUnitario: x.PrecioTotalConIVA,
-                                NombreImagen: NombreImg, TipoMensaje: "Error", Titulo: "Detalle Articulo", Mensaje: "Seleccione los detalles del articulo."
+                                NombreImagen: NombreImg, PLU: x.PLU, TipoMensaje: "Error", Titulo: "Detalle Articulo", Mensaje: "Seleccione los detalles del articulo."
                             }
                         });
 

@@ -24,6 +24,8 @@ export class E_SessionEmpresaria {
     public TallaPrendaSuperior: string
     public TallaPrendaInferior: string
     public TallaCalzado: string   
+    public Catalogo: string  
+    public Campana: string  
     public Error: E_Error
 
     constructor() { }

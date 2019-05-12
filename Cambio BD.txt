@@ -7,7 +7,7 @@ API KEY GOOGLE TC GEO:
 geo: 0914530928 - Zona: 35
 gerente de zona para opcion cedula: 0906374426
 ger:1088009775 - IdVendedor: 7002  - IdZona: 50201 
-
+PEW51075
 fsevents@
 
 - revisar creacion de usuario y clave

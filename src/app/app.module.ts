@@ -46,7 +46,9 @@ import { DetalleArticuloModule } from './main/content/DetalleArticulo/detalleart
 import { DetallePedidoModule } from './main/content/DetallePedido/detallepedido.module';
 import { ResumenPedidoModule } from './main/content/ResumenPedido/resumenpedido.module';
 
-
+import { DetallePedidoService } from './ApiServices/DetallePedidoService';
+import { PedidoService } from './ApiServices/PedidoService';
+import { MisPedidosModule } from './main/content/MisPedidos/mispedidos.module';
 
 const appRoutes: Routes = [
     /*{
@@ -62,7 +64,7 @@ const appRoutes: Routes = [
     { path: 'misempresarias', redirectTo: '/misempresarias', pathMatch: 'full' },
     { path: 'pedidosprincipal', redirectTo: '/pedidosprincipal', pathMatch: 'full' },
     { path: 'modalpopup', redirectTo: '/modalpopup', pathMatch: 'full' },
-
+    { path: 'mispedidos', redirectTo: '/mispedidos', pathMatch: 'full' },
 
 
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -102,7 +104,7 @@ const appRoutes: Routes = [
         PedidosPrincipalModule,
         DetallePedidoModule,
         ResumenPedidoModule,
-
+        MisPedidosModule,
 
         MatInputModule,
         MatTableModule,
@@ -116,7 +118,7 @@ const appRoutes: Routes = [
         TranslateModule.forRoot(),
 
         AgmCoreModule.forRoot({
-            apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX'
+            apiKey: ''
 
           }),
           AgmDirectionModule, //agm-direction
@@ -128,6 +130,8 @@ const appRoutes: Routes = [
         HeaderBuilder,
         ClienteService,
         ExceptionErrorService,
+        DetallePedidoService,
+        PedidoService
 
     ]
     ,
