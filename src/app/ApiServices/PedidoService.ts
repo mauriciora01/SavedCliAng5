@@ -37,6 +37,17 @@ export class PedidoService {
             , request, httpOptions).map(this.ExtractPedidosCliente)
     }
 
+    GuardarReservaEnLinea(obj: Array<E_PedidosDetalleCliente>): Observable<E_PedidosCliente> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "Pedido/ValidarPedidoReserva"
+            , request, httpOptions).map(this.ExtractPedidosCliente)
+    }
+
     PedidosList(obj: E_PedidosCliente): Observable<Array<E_PedidosCliente>> {
         const httpOptions = {
             headers: new HttpHeaders({

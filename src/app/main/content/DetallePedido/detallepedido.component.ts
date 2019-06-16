@@ -20,6 +20,7 @@ import { PLUBuilder } from 'app/Builders/PLU.model.builder';
 import { E_PedidosDetalleCliente } from 'app/Models/E_PedidosDetalleCliente';
 import { PedidosDetalleClienteBuilder } from 'app/Builders/PedidosDetalleCliente.model.builder';
 import { PedidosClienteBuilder } from 'app/Builders/PedidosCliente.model.builder';
+import { ResumenPedidoComponent } from '../ResumenPedido/resumenpedido.component';
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -109,7 +110,10 @@ export class DetallePedidoComponent implements OnInit {
 
 
   public Cantidad: number = 1;
-
+  public PrecioCatalogoTotalConIVA: number = 0;
+  public CantidadArticulos: string = "";
+  public TotalPagar: string = "";
+  public PuntosUsar: number = 0;
 
   constructor(private formBuilder: FormBuilder,
     private UserService: UserService,
@@ -166,15 +170,29 @@ export class DetallePedidoComponent implements OnInit {
     this.bottomSheetRef.dismiss();
   }
 
+
+
   openVerResumenPedido(): void {
-    const dialogRef = this.dialog.open(DetallePedidoComponent, {
+
+    this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow();
+    this.CalcularTotales();
+    const dialogRef = this.dialog.open(ResumenPedidoComponent, {
       panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-      data: { TipoMensaje: "Error", Titulo: "Resumen Pedido", Mensaje: "Resumen del Pedido." }
+      data: {
+        TipoMensaje: "Error", Titulo: "Resumen Pedido", Mensaje: "Resumen del Pedido.",
+        Nit: this.SessionEmpresaria.DocumentoEmpresaria.trim(), NombreEmpresaria: this.SessionEmpresaria.NombreEmpresariaCompleto.trim(),
+        TotalPrecioCatalogo: this.PrecioCatalogoTotalConIVA, CantidadArticulos: this.CantidadArticulos,
+        TotalPagar: this.TotalPagar, TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos
+
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
-      //this.DatosEnvioSeleccionado = result; 
+      if (result != -1 && result != undefined ) {
+        this.PuntosUsar = result;
+        console.log('pts:' + this.PuntosUsar)
+        this.CrearPedido();
+      }
     });
 
   }
@@ -203,6 +221,38 @@ export class DetallePedidoComponent implements OnInit {
     });
   }
 
+  CalcularTotales() {
+
+    //******************************************************** */
+    //Calcula los totales del pedido.
+    var CantidadArticulosSum = 0;
+    var IVA = 0;
+    var Valor = 0;
+    var IVAPrecioCat = 0;
+    var ValorPrecioCat = 0;
+    var objDetallePedidoService: Array<E_PLU> = new Array<E_PLU>()
+    objDetallePedidoService = this.DetallePedidoService.GetCurrentDetallePedido()
+
+    if (objDetallePedidoService != null) {
+      objDetallePedidoService.forEach((element) => {
+        CantidadArticulosSum++;
+        //TODO: OJO arreglar con valores que lleguen bien.
+        IVAPrecioCat = IVA + element.PrecioConIVA;
+        IVA = IVA + element.PrecioConIVA;
+
+        ValorPrecioCat = Valor + element.PrecioCatalogoTotalConIVA;
+        Valor = Valor + element.PrecioCatalogoTotalConIVA;
+
+
+        this.PrecioCatalogoTotalConIVA = Valor;
+        this.CantidadArticulos = CantidadArticulosSum.toString();
+        this.TotalPagar = Valor.toString();
+
+      });
+
+    }
+  }
+
   CrearPedido() {
 
 
@@ -210,6 +260,7 @@ export class DetallePedidoComponent implements OnInit {
 
       //******************************************************** */
       //Calcula los totales del pedido.
+      var CantidadArticulosSum = 0;
       var IVA = 0;
       var Valor = 0;
       var IVAPrecioCat = 0;
@@ -219,13 +270,18 @@ export class DetallePedidoComponent implements OnInit {
 
       if (objDetallePedidoService != null) {
         objDetallePedidoService.forEach((element) => {
-
+          CantidadArticulosSum++;
           //TODO: OJO arreglar con valores que lleguen bien.
           IVAPrecioCat = IVA + element.PrecioConIVA;
           IVA = IVA + element.PrecioConIVA;
 
           ValorPrecioCat = Valor + element.PrecioCatalogoTotalConIVA;
           Valor = Valor + element.PrecioCatalogoTotalConIVA;
+
+
+          this.PrecioCatalogoTotalConIVA = Valor;
+          this.CantidadArticulos = CantidadArticulosSum.toString();
+          this.TotalPagar = Valor.toString();
 
         });
 
@@ -283,7 +339,11 @@ export class DetallePedidoComponent implements OnInit {
                   objPedidoDetalle.Cantidad = element.Cantidad;
                   objPedidoDetalle.IdCodigoCorto = element.CodigoRapido;
                   objPedidoDetalle.CatalogoReal = element.CatalogoReal;
-                  objPedidoDetalle.PedidosClienteInfo= new E_PedidosCliente();
+                  objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente();
+                  x.okTransEncabezadoPedido = true;
+                  x.okTransDetallePedido = true;
+                  x.PuntosUsar = this.PuntosUsar;
+                  x.TotalPuntosPedido = 199;
                   objPedidoDetalle.PedidosClienteInfo = new PedidosClienteBuilder().buildFromObject(x).Build();
                   objPedidoDetalleRequestArray.push(new PedidosDetalleClienteBuilder().buildFromObject(objPedidoDetalle).Build());
 
@@ -297,14 +357,29 @@ export class DetallePedidoComponent implements OnInit {
 
                   if (x.Error == undefined) {
 
-                    //Mensaje de OK
-                    const dialogRef = this.dialog.open(ModalPopUpComponent, {
-                      width: '450px',
-                      data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero }
-                    });
+                    ///[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]][][]
+                    //REALIZAR RESERVA EN LINEA
 
-                    this.bottomSheetRef.dismiss();
-                    this.EliminarArticulos();
+                    this.PedidoService.GuardarReservaEnLinea(objPedidoDetalleRequestArray)
+                      .subscribe((x: E_PedidosCliente) => {
+                        objPedidoResponse = x
+
+                        if (x.Error == undefined) {
+
+
+                          //Mensaje de OK
+                          const dialogRef = this.dialog.open(ModalPopUpComponent, {
+                            width: '450px',
+                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero }
+                          });
+
+                          this.bottomSheetRef.dismiss();
+                          this.EliminarArticulos();
+
+                        }
+                      })
+
+                    ///[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]][][]
                   }
                 })
               ///######################################################################################

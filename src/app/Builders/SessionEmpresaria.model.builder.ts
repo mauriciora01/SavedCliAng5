@@ -26,7 +26,8 @@ export class SessionEmpresariaBuilder {
     public Catalogo: string  
     public Campana: string  
     public ExcentoIVA: string
-
+    public PuntosEmpresaria: number
+    public ValorPuntos: number
     public Error: E_Error
 
     buildFromObject(x: any): SessionEmpresariaBuilder {
@@ -54,8 +55,10 @@ export class SessionEmpresariaBuilder {
         if (x.TallaCalzado != undefined) { this.TallaCalzado = x.TallaCalzado }
         if (x.Catalogo != undefined) { this.Catalogo = x.Catalogo }
         if (x.Campana != undefined) { this.Campana = x.Campana }
+        if (x.PuntosEmpresaria != undefined) { this.PuntosEmpresaria = x.PuntosEmpresaria }
+        if (x.ValorPuntos != undefined) { this.ValorPuntos = x.ValorPuntos }
         if (x.Error != undefined) { this.Error = x.Error }
-
+   
         return this
     }
     Build(): E_SessionEmpresaria {
@@ -84,6 +87,8 @@ export class SessionEmpresariaBuilder {
         obj.TallaCalzado = this.TallaCalzado
         obj.Catalogo = this.Catalogo
         obj.Campana = this.Campana
+        obj.PuntosEmpresaria = this.PuntosEmpresaria
+        obj.ValorPuntos = this.ValorPuntos
         obj.Error = this.Error
         return obj
     }

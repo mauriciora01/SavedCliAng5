@@ -56,9 +56,10 @@
                 formControlName="DatosEnvio" readonly></textarea>
             </div>
             <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
-              <button (click)="openDatosEnvio()" mat-icon-button color="accent" matTooltip="Datos de Envio">
-                <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">library_books</mat-icon>
+              <button (click)="openDatosEnvio()" mat-mini-fab color="accent" matTooltip="Datos de Envio">
+               <!--<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">library_books</mat-icon>--> +
               </button>
+              
             </div>
           </mat-form-field>
 
@@ -113,8 +114,8 @@
                   [(ngModel)]="CodigoRapidoSeleccionado">
               </div>
               <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
-                <button (click)="openAdicionarArticulo()" mat-icon-button color="accent" matTooltip="Adicionar">
-                  <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add_circle</mat-icon>
+                <button (click)="openAdicionarArticulo()" mat-mini-fab color="accent" matTooltip="Adicionar">
+                  <!--<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add_circle</mat-icon>-->+
                 </button>
               </div>
             </mat-form-field>
@@ -126,7 +127,7 @@
           <div>
             <button mat-button matStepperPrevious mat-raised-button color="accent">Atras</button>
             &nbsp;&nbsp;&nbsp;
-            <button mat-button matStepperNext mat-raised-button color="accent">Siguiente</button>
+            <button mat-button matStepperNext mat-raised-button color="accent"  [disabled]="!Paso2Ok">Siguiente</button>
           </div>
         </div>
       </form>
@@ -140,7 +141,7 @@
         <div>
           <button mat-button matStepperPrevious mat-raised-button color="accent">Atras</button>
           &nbsp;&nbsp;&nbsp;
-          <button mat-button matStepperNext (click)="openBottomSheet()" mat-raised-button color="accent">Confirmar
+          <button mat-button matStepperNext (click)="openBottomSheet()" mat-raised-button color="accent" [disabled]="!Paso2Ok">Confirmar
             Pedido</button>
 
 

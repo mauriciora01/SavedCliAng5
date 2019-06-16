@@ -118,8 +118,12 @@ export class PedidosClienteBuilder {
     public DescripcionAnulacion: string;
     public Asistente: string;
     public NombreAnulo: string;
-    public ExcentoIVA: string
-    public CodCiudadCliente: string
+    public ExcentoIVA: string;
+    public CodCiudadCliente: string;
+    public okTransEncabezadoPedido: boolean;
+    public okTransDetallePedido: boolean;
+    public PuntosUsar: number;
+    public TotalPuntosPedido: number;
     public Error: E_Error
 
     buildFromObject(x: any): PedidosClienteBuilder {
@@ -238,7 +242,11 @@ export class PedidosClienteBuilder {
         if (x.Asistente != undefined) { this.Asistente = x.Asistente }
         if (x.NombreAnulo != undefined) { this.NombreAnulo = x.NombreAnulo }
         if (x.ExcentoIVA != undefined) { this.ExcentoIVA = x.ExcentoIVA }  
-        if (x.CodCiudadCliente != undefined) { this.CodCiudadCliente = x.CodCiudadCliente }        
+        if (x.CodCiudadCliente != undefined) { this.CodCiudadCliente = x.CodCiudadCliente }  
+        if (x.okTransEncabezadoPedido != undefined) { this.okTransEncabezadoPedido = x.okTransEncabezadoPedido }    
+        if (x.okTransDetallePedido != undefined) { this.okTransDetallePedido = x.okTransDetallePedido }  
+        if (x.PuntosUsar != undefined) { this.PuntosUsar = x.PuntosUsar }  
+        if (x.TotalPuntosPedido != undefined) { this.TotalPuntosPedido = x.TotalPuntosPedido }      
         if (x.Error != undefined) { this.Error = x.Error }
 
         return this
@@ -361,6 +369,10 @@ export class PedidosClienteBuilder {
         obj.NombreAnulo = this.NombreAnulo
         obj.ExcentoIVA = this.ExcentoIVA   
         obj.CodCiudadCliente = this.CodCiudadCliente 
+        obj.okTransEncabezadoPedido = this.okTransEncabezadoPedido 
+        obj.okTransDetallePedido = this.okTransDetallePedido 
+        obj.PuntosUsar = this.PuntosUsar 
+        obj.TotalPuntosPedido = this.TotalPuntosPedido 
         obj.Error = this.Error
 
         return obj

@@ -16,7 +16,7 @@ fsevents@
 - cuando se elige direccion de entrega despacho hay que guarfar un departamento
 
 
-COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod -aot=false
+COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --build-optimizer=false
 
 PAGINA DE ICONOS Y SVG: https://www.flaticon.com/free-icons/puzzle/7
 
@@ -37,6 +37,9 @@ MSTSC
 52.184.231.33  --> statica
 User: Administrador
 Clave: L1n34d1r3ct4
+
+SQL SERVER PRODUCCION
+Database=Factu55;Server=52.184.231.33;User ID=user_saved;Password=1234567890
 
 URL PRODUCCION:  http://52.184.231.33/saved
 PRUEBA CON POSTMAN o CHROME PRODUCCION: http://52.184.231.33/Application.Enterprise.Services/api/AutenticationUser/Prueba
@@ -60,6 +63,8 @@ PROCEDIMIENTOS
 ALTER PROCEDURE [dbo].PRC_SVDN_SUSUARIOS 
 ALTER PROCEDURE [dbo].[PRC_SVDN_CLIENTE] opcion I-A, opcion S-N
 CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTIONERROR
+
+REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 -->02-04-2019
 
 

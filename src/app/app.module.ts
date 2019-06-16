@@ -118,7 +118,7 @@ const appRoutes: Routes = [
         TranslateModule.forRoot(),
 
         AgmCoreModule.forRoot({
-            apiKey: ''
+            apiKey: 'AIzaSyAoBiD8mi-5U7tWOFueRQ2RCaJbOYqCzf0'
 
           }),
           AgmDirectionModule, //agm-direction

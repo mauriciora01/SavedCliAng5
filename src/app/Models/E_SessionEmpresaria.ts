@@ -26,6 +26,8 @@ export class E_SessionEmpresaria {
     public TallaCalzado: string   
     public Catalogo: string  
     public Campana: string  
+    public PuntosEmpresaria: number
+    public ValorPuntos: number
     public Error: E_Error
 
     constructor() { }

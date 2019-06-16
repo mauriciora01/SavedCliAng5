@@ -119,6 +119,12 @@ export class E_PedidosCliente {
     public NombreAnulo: string;
     public ExcentoIVA: string
     public CodCiudadCliente: string
+
+    public okTransEncabezadoPedido: boolean;
+    public okTransDetallePedido: boolean;
+    public PuntosUsar: number;
+    public TotalPuntosPedido: number;
+
     public Error: E_Error
 
     constructor() { }

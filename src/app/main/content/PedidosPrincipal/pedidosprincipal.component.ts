@@ -53,6 +53,7 @@ export class PedidosPrincipalComponent implements OnInit {
     BodegaDisabled: boolean = false;
     NombreDisabled: boolean = false;
     Paso1Ok: boolean = false;
+    Paso2Ok: boolean = false;
     public NombreEmpresariaCompleto: string;
     public SessionEmpresaria: E_SessionEmpresaria = new E_SessionEmpresaria()
 
@@ -97,8 +98,7 @@ export class PedidosPrincipalComponent implements OnInit {
             DatosEnvio: [undefined, [Validators.required]]
         });
         this.secondFormGroup = this._formBuilder.group({
-            CodigoRapido: ['', Validators.required],
-            CodigoRap: ['', Validators.required]
+           
         });
         this.thirtyFormGroup = this._formBuilder.group({
 
@@ -238,7 +238,7 @@ export class PedidosPrincipalComponent implements OnInit {
     openAdicionarArticulo(): void {
 
         if (this.CodigoRapido.value != '' && this.CodigoRapido.value != undefined && this.CodigoRapido.value != null) {
-
+            this.Paso2Ok=true;
 
             var objPLU: E_PLU = new E_PLU()
             objPLU.CodigoRapido = this.CodigoRapido.value;
@@ -249,7 +249,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
                     if (x.Error == undefined) {
                         //Mensaje de OK
-                        console.log(x)
+                        //console.log(x)
 
                         var NombreProductoP = x.NombreProducto + ", " + x.NombreColor + ", " + x.NombreTalla;
 
@@ -334,5 +334,11 @@ export class PedidosPrincipalComponent implements OnInit {
             //this.DatosEnvioSeleccionado = result; 
         });
 
+    }
+
+
+    changeIdCorto(): void {
+        alert('sdsd')
+        this.Paso2Ok=true;
     }
 }

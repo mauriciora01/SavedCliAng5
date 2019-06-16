@@ -22,23 +22,37 @@
           </div>
 
           <div>
-            <p><b>Numero:</b>  {{data.Numero}}</p>
+            
             <p><b>Nit:</b> {{data.Nit}}</p>
-            <p><b>Empresaria:</b> {{data.NombreEmpresaria}}</p>
-            <p><b>P. Emp:</b> ${{data.Valor}}</p>
-            <p><b>P. Cat:</b> ${{data.TotalPrecioCatalogo}}</p>
-            <p><b>Portal:</b> {{data.Portal}}</p>
-            <p><b>Zona:</b> {{data.Zona}}</p>
-            <p><b>Campana:</b> {{data.Campana}}</p>
-            <p><b>Catalogo:</b> {{data.GrupoCatalogo}}</p>
-            <p><b>Fecha:</b> {{data.FechaCreacion}}</p>
-
+            <p><b>Empresaria:</b> {{data.NombreEmpresaria}}</p>          
+            <p><b>Precio Cat:</b> ${{data.TotalPrecioCatalogo}}</p>
+            <p><b>Cant. Articulos:</b> {{data.CantidadArticulos}}</p>
+            <p><b>Total Pagar:</b> {{data.TotalPagar}}</p>
+            <p><b>Puntos Pedido:</b> {{data.TotalPagar / data.ValorPuntos}}</p>
+            <p><b>Tus Puntos:</b> {{data.TusPuntos}}</p>
+            <div>
+            <p><b><br>Puntos Usar:</b>   &nbsp;&nbsp;  <mat-form-field fxFlex="15">
+              <input matInput placeholder="" formControlName="txt_PuntosUsar" required [ngModel]="txt_PuntosUsar" maxlength="4"
+                inputmode="numeric" pattern="[0-9]*" digitOnly>
+            </mat-form-field></p>
+            </div>
+      
           </div>
 
         </mat-card-content>
 
 
       </mat-card>
+
+      <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+          <!--<button mat-button (click)="onClose()" color="accent" aria-label="Close">
+            CERRAR
+          </button>-->
+          &nbsp;&nbsp;&nbsp;
+          <button mat-button (click)="ConfirmData()" mat-raised-button
+          style="background-color: green; color: white;">Reservar Pedido</button>
+        </div>
+
     </form>
 
     <!--<div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="color: green">
@@ -51,10 +65,6 @@
 
 
 
-  <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-button (click)="onClose()" color="accent" aria-label="Close">
-      CERRAR
-    </button>
-  </div>
+  
 
 </div>
