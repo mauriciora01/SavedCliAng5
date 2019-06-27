@@ -260,6 +260,8 @@ export class DetallePedidoComponent implements OnInit {
 
       //******************************************************** */
       //Calcula los totales del pedido.
+      
+      var TotalPuntosPedidoSum = 0;
       var CantidadArticulosSum = 0;
       var IVA = 0;
       var Valor = 0;
@@ -282,6 +284,8 @@ export class DetallePedidoComponent implements OnInit {
           this.PrecioCatalogoTotalConIVA = Valor;
           this.CantidadArticulos = CantidadArticulosSum.toString();
           this.TotalPagar = Valor.toString();
+
+          TotalPuntosPedidoSum=Valor/this.SessionEmpresaria.ValorPuntos;
 
         });
 
@@ -343,7 +347,7 @@ export class DetallePedidoComponent implements OnInit {
                   x.okTransEncabezadoPedido = true;
                   x.okTransDetallePedido = true;
                   x.PuntosUsar = this.PuntosUsar;
-                  x.TotalPuntosPedido = 199;
+                  x.TotalPuntosPedido = TotalPuntosPedidoSum;
                   objPedidoDetalle.PedidosClienteInfo = new PedidosClienteBuilder().buildFromObject(x).Build();
                   objPedidoDetalleRequestArray.push(new PedidosDetalleClienteBuilder().buildFromObject(objPedidoDetalle).Build());
 
