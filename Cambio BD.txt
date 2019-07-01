@@ -40,6 +40,7 @@ Clave: L1n34d1r3ct4
 
 SQL SERVER PRODUCCION
 Database=Factu55;Server=52.184.231.33;User ID=user_saved;Password=1234567890
+Database=Factu55;Server=NC01TE03CGNP;User ID=sa;Password=Colombia2019+
 
 URL PRODUCCION:  http://52.184.231.33/saved
 PRUEBA CON POSTMAN o CHROME PRODUCCION: http://52.184.231.33/Application.Enterprise.Services/api/AutenticationUser/Prueba
@@ -71,6 +72,10 @@ REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 <add name="conexion" connectionString="Database=Factu55;Server=NC01TE037KZP\MSSQLSERVER2017;User ID=sa;Password=Colombia19+" providerName="System.Data.SqlClient" />
 
 
+Install ANGULAR
+1) https://nodejs.org/en/download/
+2) https://angular.io/guide/setup-local
+
 GIT: https://git-scm.com/book/es/v1/Fundamentos-de-Git-Trabajando-con-repositorios-remotos
 Desde git bash here en la carpeta nueva creada
 
@@ -78,6 +83,9 @@ git add .
 git commit -m "comentario commit"
 git push origin master
 
+----------------------------------------
+SavedServicesNet
+git config --global user.email "ramosgimauricio@gmail.com"
 git init
 git remote add origin https://github.com/mauriciora01/SavedServicesNet.git
 git remote
@@ -87,6 +95,41 @@ git fetch pb
 git pull origin master
 git config --global user.email "ramosgimauricio@gmail.com"
 
+
+----------------------------------------
+SavedCliAng7
+git config --global user.email "ramosgimauricio@gmail.com"
+git init
+git remote add origin https://github.com/mauriciora01/SavedCliAng7.git
+git remote
+git remote add pb https://github.com/mauriciora01/SavedCliAng7.git
+git remote -v
+git fetch pb
+git pull origin master
+git config --global user.email "ramosgimauricio@gmail.com"
+
+
+
+ERROR: Error: Cannot find module 'node-sass'
+npm uninstall node-sass  
+npm install node-sass
+npm install -g node-sass
+
+borrar node_modules
+npm install
+npm rebuild node-sass
+
+
+
+git fetch --all
+
+SavedCliAng7.git
+
+
+git fetch origin
+git checkout -f origin/SavedCliAng7.git
+git checkout SavedCliAng7.git
+git merge origin/SavedCliAng7.git
 
 npm install @agm/core --save --> instalar google maps
 https://www.youtube.com/watch?v=-IwTQgKIjCQ --> google maps y angular 7
