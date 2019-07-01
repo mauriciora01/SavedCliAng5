@@ -85,7 +85,7 @@ git push origin master
 
 ----------------------------------------
 SavedServicesNet
-git config --global user.email "ramosgimauricio@gmail.com"
+git config --global user.email "ramosgimauricio@gmail.com" mauriciora01-mauro12345- mauriciora01@github.com
 git init
 git remote add origin https://github.com/mauriciora01/SavedServicesNet.git
 git remote
