@@ -9,7 +9,7 @@ export class E_SessionEmpresaria {
     public PremioBienvenida: string
     public TipoEnvioCliente: string
     public Empresaria_Lider: string
-    public ExcentoIVA: string
+    public ExcentoIVA: boolean
 
     public IdZona: string
     public Email: string

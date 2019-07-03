@@ -25,7 +25,7 @@ export class SessionEmpresariaBuilder {
     public TallaCalzado: string   
     public Catalogo: string  
     public Campana: string  
-    public ExcentoIVA: string
+    public ExcentoIVA: boolean
     public PuntosEmpresaria: number
     public ValorPuntos: number
     public Error: E_Error

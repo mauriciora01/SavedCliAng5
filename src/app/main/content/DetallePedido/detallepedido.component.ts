@@ -21,6 +21,7 @@ import { E_PedidosDetalleCliente } from 'app/Models/E_PedidosDetalleCliente';
 import { PedidosDetalleClienteBuilder } from 'app/Builders/PedidosDetalleCliente.model.builder';
 import { PedidosClienteBuilder } from 'app/Builders/PedidosCliente.model.builder';
 import { ResumenPedidoComponent } from '../ResumenPedido/resumenpedido.component';
+import { E_Error } from 'app/Models/E_Error';
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -188,7 +189,7 @@ export class DetallePedidoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result != -1 && result != undefined ) {
+      if (result != -1 && result != undefined) {
         this.PuntosUsar = result;
         console.log('pts:' + this.PuntosUsar)
         this.CrearPedido();
@@ -260,7 +261,7 @@ export class DetallePedidoComponent implements OnInit {
 
       //******************************************************** */
       //Calcula los totales del pedido.
-      
+
       var TotalPuntosPedidoSum = 0;
       var CantidadArticulosSum = 0;
       var IVA = 0;
@@ -285,7 +286,7 @@ export class DetallePedidoComponent implements OnInit {
           this.CantidadArticulos = CantidadArticulosSum.toString();
           this.TotalPagar = Valor.toString();
 
-          TotalPuntosPedidoSum=Valor/this.SessionEmpresaria.ValorPuntos;
+          TotalPuntosPedidoSum = Valor / this.SessionEmpresaria.ValorPuntos;
 
         });
 
@@ -329,7 +330,11 @@ export class DetallePedidoComponent implements OnInit {
 
               var objPedidoDetalleRequestArray: Array<E_PedidosDetalleCliente> = new Array<E_PedidosDetalleCliente>()
               var objPedidoDetalle: E_PedidosDetalleCliente = new E_PedidosDetalleCliente()
+
               if (objDetallePedidoService != null) {
+
+
+
                 objDetallePedidoService.forEach((element) => {
 
                   //TODO: OJO arreglar con valores que lleguen bien.
@@ -343,12 +348,35 @@ export class DetallePedidoComponent implements OnInit {
                   objPedidoDetalle.Cantidad = element.Cantidad;
                   objPedidoDetalle.IdCodigoCorto = element.CodigoRapido;
                   objPedidoDetalle.CatalogoReal = element.CatalogoReal;
-                  objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente();
+
+                  //---------------------------------------------------
+                  /* var maxDate = new Date(2000, 11, 31);
+                   x.Fecha= maxDate;
+                   x.FechaAnulacion= maxDate;
+                   x.FechaCierreBorrador= maxDate;
+                   x.FechaCierreReserva= maxDate;
+                   x.FechaCierreReservaReal= maxDate;
+                   x.FechaCreacion= maxDate;
+                   x.FechaIngresoCliente= maxDate;
+                   x.FechaUltimaModificacion= maxDate;
+                   x.UltimaModificacionEmpresaria= maxDate;*/
+                  //---------------------------------------------------
+                  /*var objPedidosCliente: E_PedidosCliente = new E_PedidosCliente()
+                  objPedidosCliente.okTransEncabezadoPedido = true;
+                  objPedidosCliente.okTransDetallePedido = true;
+                  objPedidosCliente.PuntosUsar = this.PuntosUsar;
+                  objPedidosCliente.TotalPuntosPedido = TotalPuntosPedidoSum;
+                  objPedidosCliente.Numero="mraosq23";
+                  objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente()
+                  objPedidoDetalle.PedidosClienteInfo = new PedidosClienteBuilder().buildFromObject(objPedidosCliente).Build();
+*/
+                  objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente()
                   x.okTransEncabezadoPedido = true;
                   x.okTransDetallePedido = true;
                   x.PuntosUsar = this.PuntosUsar;
                   x.TotalPuntosPedido = TotalPuntosPedidoSum;
                   objPedidoDetalle.PedidosClienteInfo = new PedidosClienteBuilder().buildFromObject(x).Build();
+
                   objPedidoDetalleRequestArray.push(new PedidosDetalleClienteBuilder().buildFromObject(objPedidoDetalle).Build());
 
                 });

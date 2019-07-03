@@ -118,7 +118,7 @@ export class PedidosClienteBuilder {
     public DescripcionAnulacion: string;
     public Asistente: string;
     public NombreAnulo: string;
-    public ExcentoIVA: string;
+    public ExcentoIVA: boolean;
     public CodCiudadCliente: string;
     public okTransEncabezadoPedido: boolean;
     public okTransDetallePedido: boolean;

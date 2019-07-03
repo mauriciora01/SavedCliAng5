@@ -52,6 +52,11 @@ export class E_PedidosDetalleCliente {
     public PLUSustituto: number;
     public CodigoRapidoSustituto: string;
     public ProdEstrella: boolean;
+    public SubTotal: number;
+    public SubTotalPrecioCat: number;
+    public IVA: number;
+    public IVAPrecioCat: number;
+    public TotalPrecioCat: number;
     public PedidosClienteInfo: E_PedidosCliente   
     public Error: E_Error
 

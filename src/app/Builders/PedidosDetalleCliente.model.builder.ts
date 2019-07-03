@@ -52,6 +52,11 @@ export class PedidosDetalleClienteBuilder {
     public PLUSustituto: number;
     public CodigoRapidoSustituto: string;
     public ProdEstrella: boolean;
+    public SubTotal: number;
+    public SubTotalPrecioCat: number;
+    public IVA: number;
+    public IVAPrecioCat: number;
+    public TotalPrecioCat: number;
     public PedidosClienteInfo: E_PedidosCliente  
     public Error: E_Error
 
@@ -105,6 +110,11 @@ export class PedidosDetalleClienteBuilder {
         if (x.PLUSustituto != undefined) { this.PLUSustituto = x.PLUSustituto }
         if (x.CodigoRapidoSustituto != undefined) { this.CodigoRapidoSustituto = x.CodigoRapidoSustituto }
         if (x.ProdEstrella != undefined) { this.ProdEstrella = x.ProdEstrella }
+        if (x.SubTotal != undefined) { this.SubTotal = x.SubTotal }
+        if (x.SubTotalPrecioCat != undefined) { this.SubTotalPrecioCat = x.SubTotalPrecioCat }
+        if (x.IVA != undefined) { this.IVA = x.IVA }
+        if (x.IVAPrecioCat != undefined) { this.IVAPrecioCat = x.IVAPrecioCat }
+        if (x.TotalPrecioCat != undefined) { this.TotalPrecioCat = x.TotalPrecioCat }
         if (x.PedidosClienteInfo != undefined) { this.PedidosClienteInfo = x.PedidosClienteInfo }
         if (x.Error != undefined) { this.Error = x.Error }
 
@@ -161,6 +171,11 @@ export class PedidosDetalleClienteBuilder {
         obj.PLUSustituto = this.PLUSustituto
         obj.CodigoRapidoSustituto = this.CodigoRapidoSustituto
         obj.ProdEstrella = this.ProdEstrella
+        obj.SubTotal = this.SubTotal
+        obj.SubTotalPrecioCat = this.SubTotalPrecioCat
+        obj.IVA = this.IVA
+        obj.IVAPrecioCat = this.IVAPrecioCat
+        obj.TotalPrecioCat = this.TotalPrecioCat
         obj.PedidosClienteInfo = this.PedidosClienteInfo
         obj.Error = this.Error
 

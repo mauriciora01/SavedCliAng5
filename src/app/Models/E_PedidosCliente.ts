@@ -3,6 +3,15 @@ import { E_Error } from "./E_Error";
 
 export class E_PedidosCliente {
 
+    //OJO MRG: SI RECIBE UN DECIMAL EN UN INT SE REVIENTA EL ENVIO AL API. LAS PROPIEDADES DEBEN SER DEL TIPO QUE SE ENVIAR DESDE ANGULAR.
+    //OJO MRG: SI RECIBE UN DECIMAL EN UN INT SE REVIENTA EL ENVIO AL API. LAS PROPIEDADES DEBEN SER DEL TIPO QUE SE ENVIAR DESDE ANGULAR.
+    //OJO MRG: SI RECIBE UN DECIMAL EN UN INT SE REVIENTA EL ENVIO AL API. LAS PROPIEDADES DEBEN SER DEL TIPO QUE SE ENVIAR DESDE ANGULAR.
+
+    //OJO MRG: LOS TIPOS DEBEN SER IGUALES EN EL ANGULAR Y EL API SINO SE REVIENTA EL ENVIO AL API.
+    //OJO MRG: LOS TIPOS DEBEN SER IGUALES EN EL ANGULAR Y EL API SINO SE REVIENTA EL ENVIO AL API.
+    //OJO MRG: LOS TIPOS DEBEN SER IGUALES EN EL ANGULAR Y EL API SINO SE REVIENTA EL ENVIO AL API.
+    
+
     public Numero: string
     public Mes: string;
     public Fecha: Date;
@@ -117,8 +126,8 @@ export class E_PedidosCliente {
     public DescripcionAnulacion: string;
     public Asistente: string;
     public NombreAnulo: string;
-    public ExcentoIVA: string
-    public CodCiudadCliente: string
+    public ExcentoIVA: boolean;
+    public CodCiudadCliente: string;
 
     public okTransEncabezadoPedido: boolean;
     public okTransDetallePedido: boolean;

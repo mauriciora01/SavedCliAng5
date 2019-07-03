@@ -32,6 +32,7 @@ export class PedidoService {
                 'Content-Type': 'application/json',
             })
         };
+
         var request = JSON.stringify(obj)
         return this.Http.post(this.UrlNow + "Pedido/GuardarDetallePedido"
             , request, httpOptions).map(this.ExtractPedidosCliente)
