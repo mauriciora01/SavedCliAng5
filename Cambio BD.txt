@@ -25,7 +25,7 @@ recuperar correo: geovanny.bastidas@niviglobal.com
 
 https://azure.microsoft.com/es-es/account/
 User: geobas_22@hotmail.com
-Clave: Geoyana1301
+Clave: Bastigeo0113
 
 13.68.118.81:3389
 AZURE:
