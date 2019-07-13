@@ -29,9 +29,13 @@ export class PLUBuilder {
     public Campana: string
     public IdZona: string
     public Usuario: string
-    public PorcentajeDescuento: number
-    public PrecioEmpre: number
+   
+    public PrecioEmpresaria: number
     public PrecioPuntos: number
+    public Pagopuntos: number
+    public Activo: number
+    public Disponible: boolean
+    public PorcentajeDescuento: number
     public SessionEmpresaria: E_SessionEmpresaria
     public Error: E_Error
     
@@ -62,9 +66,13 @@ export class PLUBuilder {
         if (x.Campana != undefined) { this.Campana = x.Campana }
         if (x.IdZona != undefined) { this.IdZona = x.IdZona }
         if (x.Usuario != undefined) { this.Usuario = x.Usuario }
-        if (x.PorcentajeDescuento != undefined) { this.PorcentajeDescuento = x.PorcentajeDescuento }
-        if (x.PrecioEmpre != undefined) { this.PrecioEmpre = x.PrecioEmpre }
+
+        if (x.PrecioEmpresaria != undefined) { this.PrecioEmpresaria = x.PrecioEmpresaria }
         if (x.PrecioPuntos != undefined) { this.PrecioPuntos = x.PrecioPuntos }
+        if (x.Pagopuntos != undefined) { this.Pagopuntos = x.Pagopuntos }
+        if (x.Activo != undefined) { this.Activo = x.Activo }
+        if (x.Disponible != undefined) { this.Disponible = x.Disponible }
+        if (x.PorcentajeDescuento != undefined) { this.PorcentajeDescuento = x.PorcentajeDescuento }
         if (x.SessionEmpresaria != undefined) { this.SessionEmpresaria = x.SessionEmpresaria }
         if (x.Error != undefined) { this.Error = x.Error }
         
@@ -98,9 +106,13 @@ export class PLUBuilder {
         obj.Campana = this.Campana
         obj.IdZona = this.IdZona
         obj.Usuario = this.Usuario
-        obj.PorcentajeDescuento = this.PorcentajeDescuento
-        obj.PrecioEmpre = this.PrecioEmpre
+
+        obj.PrecioEmpresaria = this.PrecioEmpresaria
         obj.PrecioPuntos = this.PrecioPuntos
+        obj.Pagopuntos = this.Pagopuntos
+        obj.Activo = this.Activo
+        obj.Disponible = this.Disponible  
+        obj.PorcentajeDescuento = this.PorcentajeDescuento  
         obj.SessionEmpresaria = this.SessionEmpresaria
         obj.Error = this.Error
         

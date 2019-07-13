@@ -28,6 +28,9 @@ export class E_SessionEmpresaria {
     public Campana: string  
     public PuntosEmpresaria: number
     public ValorPuntos: number
+    public GrupoDescuento: string    
+    public BodegaEmpresaria: string   
+    public CarpetaImagenes: string    
     public Error: E_Error
 
     constructor() { }

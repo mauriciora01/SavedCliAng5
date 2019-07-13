@@ -98,7 +98,7 @@ export class PedidosPrincipalComponent implements OnInit {
             DatosEnvio: [undefined, [Validators.required]]
         });
         this.secondFormGroup = this._formBuilder.group({
-           
+
         });
         this.thirtyFormGroup = this._formBuilder.group({
 
@@ -238,7 +238,7 @@ export class PedidosPrincipalComponent implements OnInit {
     openAdicionarArticulo(): void {
 
         if (this.CodigoRapido.value != '' && this.CodigoRapido.value != undefined && this.CodigoRapido.value != null) {
-            this.Paso2Ok=true;
+            this.Paso2Ok = true;
 
             var objPLU: E_PLU = new E_PLU()
             objPLU.CodigoRapido = this.CodigoRapido.value;
@@ -250,18 +250,27 @@ export class PedidosPrincipalComponent implements OnInit {
                     if (x.Error == undefined) {
                         //Mensaje de OK
                         //console.log(x)
-
+                        var strDisponible = "NO";
+                        if (x.Disponible == true) {
+                            strDisponible = "SI";
+                        }
                         var NombreProductoP = x.NombreProducto + ", " + x.NombreColor + ", " + x.NombreTalla;
 
                         var rndImg = Math.floor(Math.random() * 11);
-                        var NombreImg= "blusanivi"+rndImg+".PNG";
+                        var NombreImg = "blusanivi" + rndImg + ".PNG";
 
                         const dialogRef = this.dialog.open(DetalleArticuloComponent, {
                             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
                             data: {
+
+
+
                                 CodigoRapido: this.CodigoRapido.value, NombreProductoCompleto: NombreProductoP,
                                 NombreProd: x.NombreProducto, Color: x.NombreColor, Talla: x.NombreTalla, ValorUnitario: x.PrecioTotalConIVA,
-                                NombreImagen: NombreImg, PLU: x.PLU, TipoMensaje: "Error", Titulo: "Detalle Articulo", Mensaje: "Seleccione los detalles del articulo."
+                                NombreImagen: NombreImg, PLU: x.PLU, TipoMensaje: "Error", Titulo: "Detalle Articulo",
+                                Mensaje: "Seleccione los detalles del articulo.", PorcentajeDescuento: x.PorcentajeDescuento,
+                                PrecioPuntos: x.PrecioPuntos, Disponible: strDisponible, PrecioEmpresaria: x.PrecioEmpresaria
+
                             }
                         });
 
@@ -339,6 +348,6 @@ export class PedidosPrincipalComponent implements OnInit {
 
     changeIdCorto(): void {
         alert('sdsd')
-        this.Paso2Ok=true;
+        this.Paso2Ok = true;
     }
 }

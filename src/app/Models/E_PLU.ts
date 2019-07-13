@@ -29,9 +29,13 @@ export class E_PLU {
     public Campana: string
     public IdZona: string
     public Usuario: string
-    public PorcentajeDescuento: number
-    public PrecioEmpre: number
+  
+    public PrecioEmpresaria: number
     public PrecioPuntos: number
+    public Pagopuntos: number
+    public Activo: number
+    public Disponible: boolean
+    public PorcentajeDescuento: number
     public SessionEmpresaria: E_SessionEmpresaria
     public Error: E_Error
     

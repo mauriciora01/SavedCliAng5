@@ -141,6 +141,10 @@ export class ClienteBuilder {
     public ValorFleteSinIva: number  
     public ValorFlete: number  
     public EmpresariaLider: number  
+
+    public Bodega: string
+    public GrupoDescuentoCliente: string
+
     public Error: E_Error
 
     buildFromObject(x: any): ClienteBuilder {
@@ -283,6 +287,9 @@ export class ClienteBuilder {
         if (x.ValorFleteSinIva != undefined) { this.ValorFleteSinIva = x.ValorFleteSinIva }
         if (x.ValorFlete != undefined) { this.ValorFlete = x.ValorFlete }
         if (x.EmpresariaLider != undefined) { this.EmpresariaLider = x.EmpresariaLider }
+
+        if (x.Bodega != undefined) { this.Bodega = x.Bodega }
+        if (x.GrupoDescuentoCliente != undefined) { this.GrupoDescuentoCliente = x.GrupoDescuentoCliente }
 
         if (x.Error != undefined) { this.Error = x.Error }
 
@@ -429,6 +436,9 @@ export class ClienteBuilder {
         obj.ValorFleteSinIva = this.ValorFleteSinIva
         obj.ValorFlete = this.ValorFlete
         obj.EmpresariaLider = this.EmpresariaLider
+
+        obj.Bodega = this.Bodega
+        obj.GrupoDescuentoCliente = this.GrupoDescuentoCliente
 
         obj.Error = this.Error
 

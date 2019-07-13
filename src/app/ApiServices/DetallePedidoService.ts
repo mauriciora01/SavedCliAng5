@@ -70,8 +70,8 @@ export class DetallePedidoService {
                         x.CodigoRapido = ArticuloAdicionar.CodigoRapido;
                         x.NombreProducto = ArticuloAdicionar.NombreProducto;
                         x.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;
-                        x.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
-                        x.PrecioEmpre = ArticuloAdicionar.PrecioEmpre;
+                        //x.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
+                        x.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresaria;
                         x.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
                         x.PLU = ArticuloAdicionar.PLU;
 

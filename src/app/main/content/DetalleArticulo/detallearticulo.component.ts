@@ -25,7 +25,11 @@ export interface DialogData {
   PLU: number;
   Titulo: string;
   Mensaje: string;
-  TipoMensaje: string;             
+  TipoMensaje: string;    
+  PorcentajeDescuento:number;
+  PrecioPuntos:number;
+  Disponible:string;  
+  PrecioEmpresaria:number;       
 }
 
 @Component({
@@ -89,11 +93,11 @@ export class DetalleArticuloComponent implements OnInit {
     DetallePedido.CodigoRapido = this.data.CodigoRapido;
     DetallePedido.NombreProducto = this.data.NombreProductoCompleto;
     DetallePedido.PrecioConIVA= Number(this.data.ValorUnitario);
-    DetallePedido.PorcentajeDescuento = 40;
+    DetallePedido.PorcentajeDescuento = this.data.PorcentajeDescuento;
     DetallePedido.Cantidad = this.form.value.Cantidad;
     DetallePedido.PrecioCatalogoTotalConIVA = Number(this.form.value.Cantidad) * Number(this.data.ValorUnitario);
-    DetallePedido.PrecioEmpre = Number(this.data.ValorUnitario);
-    DetallePedido.PrecioPuntos= Number(this.form.value.Cantidad) * Number(this.data.ValorUnitario);
+    DetallePedido.PrecioEmpresaria = this.data.PrecioEmpresaria;
+    DetallePedido.PrecioPuntos= Number(this.form.value.Cantidad) * Number(this.data.PrecioPuntos);
     DetallePedido.PLU = this.data.PLU;
 
     this.DetallePedidoService.SetCurrentDetallePedido(DetallePedido);
