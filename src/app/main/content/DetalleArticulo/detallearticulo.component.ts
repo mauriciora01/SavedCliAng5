@@ -17,15 +17,20 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 export interface DialogData {
   CodigoRapido: string;
   NombreProductoCompleto: string;
-  NombreProd:string;
-  Color:string;
-  Talla:string;
-  ValorUnitario:string;
-  NombreImagen:string;
+  NombreProd: string;
+  Color: string;
+  Talla: string;
+  ValorUnitario: string;
+  NombreImagen: string;
   PLU: number;
   Titulo: string;
   Mensaje: string;
-  TipoMensaje: string;             
+  TipoMensaje: string;
+  PorcentajeDescuento: number;
+  PrecioPuntos: number;
+  Disponible: string;
+  PrecioEmpresaria: number;
+  CarpetaImagenes: string;
 }
 
 @Component({
@@ -38,8 +43,8 @@ export interface DialogData {
 export class DetalleArticuloComponent implements OnInit {
   TextColor: any
   form: FormGroup;
+  public SessionEmpresaria: E_SessionEmpresaria = new E_SessionEmpresaria()
 
-  
   public Cantidad: number = 1;
 
   public SessionUser: E_SessionUser = new E_SessionUser()
@@ -51,15 +56,17 @@ export class DetalleArticuloComponent implements OnInit {
     private UserService: UserService,
     private DetallePedidoService: DetallePedidoService,
     private bottomSheet: MatBottomSheet,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
-      this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
-
-     
+    this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
 
 
-      
-    }
+    this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow();
+    data.CarpetaImagenes = this.SessionEmpresaria.CarpetaImagenes;
+
+
+
+  }
 
 
 
@@ -88,12 +95,12 @@ export class DetalleArticuloComponent implements OnInit {
 
     DetallePedido.CodigoRapido = this.data.CodigoRapido;
     DetallePedido.NombreProducto = this.data.NombreProductoCompleto;
-    DetallePedido.PrecioConIVA= Number(this.data.ValorUnitario);
-    DetallePedido.PorcentajeDescuento = 40;
+    DetallePedido.PrecioConIVA = Number(this.data.ValorUnitario);
+    DetallePedido.PorcentajeDescuento = this.data.PorcentajeDescuento;
     DetallePedido.Cantidad = this.form.value.Cantidad;
     DetallePedido.PrecioCatalogoTotalConIVA = Number(this.form.value.Cantidad) * Number(this.data.ValorUnitario);
-    DetallePedido.PrecioEmpre = Number(this.data.ValorUnitario);
-    DetallePedido.PrecioPuntos= Number(this.form.value.Cantidad) * Number(this.data.ValorUnitario);
+    DetallePedido.PrecioEmpresaria = this.data.PrecioEmpresaria;
+    DetallePedido.PrecioPuntos = Number(this.form.value.Cantidad) * Number(this.data.PrecioPuntos);
     DetallePedido.PLU = this.data.PLU;
 
     this.DetallePedidoService.SetCurrentDetallePedido(DetallePedido);
@@ -104,7 +111,7 @@ export class DetalleArticuloComponent implements OnInit {
 
   openBottomSheet(): void {
     this.bottomSheet.open(DetallePedidoComponent);
-}
+  }
 
   CalacularResta(): void {
     if ((this.form.value.Cantidad - 1) > 0) {

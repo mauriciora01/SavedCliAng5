@@ -20,6 +20,12 @@ import { CdkTableModule } from '@angular/cdk/table';
 
 import { MatPaginatorModule, MatSortModule, MatTableModule } from "@angular/material";
 
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AgGridModule } from 'ag-grid-angular';
+import { RenderDeleteComponent } from './render-delete/render-delete.component';
+import { FuseContentModule } from '../content.module';
+
 const routes: Routes = [
     {
         path: 'detallepedido',
@@ -30,7 +36,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        DetallePedidoComponent
+        DetallePedidoComponent,RenderDeleteComponent
         
     ],
     imports: [
@@ -50,15 +56,17 @@ const routes: Routes = [
         MatToolbarModule,
         MatCardModule,
         MatBottomSheetModule,
-
+        BrowserModule,
         MatPaginatorModule,
         MatSortModule,
         MatTableModule,
-        CdkTableModule
+        CdkTableModule, AgGridModule.withComponents([])
     ],    
     exports: [
-        DetallePedidoComponent,
-    ]
+        DetallePedidoComponent,RenderDeleteComponent
+    ],entryComponents: [
+        RenderDeleteComponent,
+      ],
 
 
 })

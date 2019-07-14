@@ -39,7 +39,7 @@
 
             <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
 
-                <button mat-menu-item>
+                <button (click)="AbrirInfoUsuario()" mat-menu-item>
                     <mat-icon>account_circle</mat-icon>
                     <span>Mis Datos</span>
                 </button>

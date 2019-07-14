@@ -51,9 +51,12 @@ import { ResumenPedidoModule } from './main/content/ResumenPedido/resumenpedido.
 import { DetallePedidoService } from './ApiServices/DetallePedidoService';
 import { PedidoService } from './ApiServices/PedidoService';
 import { MisPedidosModule } from './main/content/MisPedidos/mispedidos.module';
+<<<<<<< HEAD
 import { pedidosfacturadosModule } from './main/content/pedidosfacturados/pedidosfacturados.module';
-import { PerfilModule } from './main/content/perfil/perfil.module';
 import { micarteraModule } from './main/content/micartera/micartera.module';
+=======
+import { PerfilModule } from './main/content/perfil/perfil.module';
+>>>>>>> 1a964eaaae2282985d9622b1e1cf674a6e60e604
 
 const appRoutes: Routes = [
     /*{
@@ -70,9 +73,12 @@ const appRoutes: Routes = [
     { path: 'pedidosprincipal', redirectTo: '/pedidosprincipal', pathMatch: 'full' },
     { path: 'modalpopup', redirectTo: '/modalpopup', pathMatch: 'full' },
     { path: 'mispedidos', redirectTo: '/mispedidos', pathMatch: 'full' },
+<<<<<<< HEAD
     { path: 'pedidosfacturados', redirectTo: '/pedidosfacturados', pathMatch: 'full' },
-    { path: 'perfil', redirectTo: '/perfil', pathMatch: 'full'},
     { path: 'micartera', redirectTo: '/micartera', pathMatch: 'full' },
+=======
+    { path: 'perfil', redirectTo: '/perfil', pathMatch: 'full'},
+>>>>>>> 1a964eaaae2282985d9622b1e1cf674a6e60e604
 
 
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -114,11 +120,15 @@ const appRoutes: Routes = [
         DetallePedidoModule,
         ResumenPedidoModule,
         MisPedidosModule,
+<<<<<<< HEAD
         pedidosfacturadosModule,
-        PerfilModule,
         detallepfactuModule,
         micarteraModule,
 
+
+=======
+        PerfilModule,
+>>>>>>> 1a964eaaae2282985d9622b1e1cf674a6e60e604
         MatInputModule,
         MatTableModule,
         MatPaginatorModule,

@@ -53,7 +53,7 @@ export class FuseLoginComponent implements OnInit {
             user.Passwordd = btoa("123123")
             this.Loading = true
             this.UserService.Login(user).subscribe((x: E_SessionUser) => {
-                debugger
+                //debugger
                 /*if (x.error != undefined) {
                     if (x.error.Id == 1 || x.error.Id == 2) {
                         this.errorLogin = true
@@ -93,6 +93,8 @@ export class FuseLoginComponent implements OnInit {
         this.loginForm.valueChanges.subscribe(() => {
             this.onLoginFormValuesChanged();
         });
+
+        sessionStorage.removeItem("CurrentDetallePedido");
 
     }
 

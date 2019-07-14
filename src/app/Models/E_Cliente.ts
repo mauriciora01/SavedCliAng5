@@ -140,7 +140,10 @@ export class E_Cliente {
   public PorcentajeIvaFlete: number  
   public ValorFleteSinIva: number  
   public ValorFlete: number  
-  public EmpresariaLider: number  
+  public EmpresariaLider: number 
+  
+  public Bodega: string
+  public GrupoDescuentoCliente: string
   
   public Error: E_Error
   

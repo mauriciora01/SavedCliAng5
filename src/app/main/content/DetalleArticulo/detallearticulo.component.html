@@ -29,7 +29,7 @@
             </div>
 
             <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
-              <img class="CenterImageArticulo" src="../../../../assets/imagesAplicacion/{{data.NombreImagen}}"
+              <img class="CenterImageArticulo" src="{{data.CarpetaImagenes}}{{data.NombreImagen}}"
                 alt="Articulo">
                 <!-- PRODUCCION <img class="CenterImageArticulo" src="../../../../saved/assets/imagesAplicacion/{{data.NombreImagen}}"
                 alt="Articulo">-->
@@ -48,14 +48,15 @@
               <p align="left" class="text-color-negro"><b>DESCRIPCIÓN</b></p>
               <mat-divider></mat-divider>
               <br>
-              <p align="left" class="text-color-azul"><b>Cod Rápido: </b> {{data.CodigoRapido}}</p>
+              <!--<p align="left" class="text-color-azul"><b>Cod Rápido: </b> {{data.CodigoRapido}}</p>-->
               <p align="left" class="text-color-azul"><b>Nombre: </b>{{data.NombreProd}}</p>
-              <p align="left" class="text-color-azul"><b>Color: </b>{{data.Color}}</p>
-              <p align="left" class="text-color-azul"><b>Talla: </b>{{data.Talla}}</p>
+              <p align="left" class="text-color-azul"><b>C : </b>{{data.Color}} - <b>T : </b>{{data.Talla}}</p>
               <p align="left" class="text-color-azul"><b>Valor Unitario: </b>${{data.ValorUnitario}}</p>
+              <p align="left" class="text-color-azul"><b>% Descuento: </b>{{data.PorcentajeDescuento}}%</p>
               <p align="left" class="text-color-azul"><b>Precio * Cantidad: </b>${{data.ValorUnitario*Cantidad}}</p>
-              <p align="left" class="text-color-azul"><b>Precio Puntos: </b>{{(data.ValorUnitario*Cantidad)}}</p>
-              <p align="left" class="text-color-rojo"><b>Disponible: </b>AGOTADO</p>
+              <p align="left" class="text-color-azul"><b>Precio Puntos: </b>{{(data.PrecioPuntos*Cantidad)}}</p>
+              <p align="left" class="text-color-azul"><b>Precio Empresaria: </b>${{(data.PrecioEmpresaria*Cantidad)}}</p>
+              <p align="left" class="text-color-azul"><b>Disponible: </b>{{data.Disponible}}</p>
             </div>
 
             <div>
