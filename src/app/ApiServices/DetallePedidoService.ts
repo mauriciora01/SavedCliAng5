@@ -40,7 +40,8 @@ export class DetallePedidoService {
             if (SessionDetallePedido != null) {
 
                 sessionStorage.removeItem("CurrentDetallePedido")
-                SessionDetallePedido.push(new PLUBuilder().buildFromObject(this.getArticuloxAgrupamiento(res, SessionDetallePedido)).Build())
+                //SessionDetallePedido.push(new PLUBuilder().buildFromObject(this.getArticuloxAgrupamiento(res, SessionDetallePedido)).Build())
+                SessionDetallePedido = this.getArticuloxAgrupamiento(res, SessionDetallePedido)
                 sessionStorage.setItem("CurrentDetallePedido", JSON.stringify(SessionDetallePedido))
 
 
@@ -64,43 +65,24 @@ export class DetallePedidoService {
 
             var count = 0
 
-            var nuevo: E_PLU = new E_PLU()
-            var viejo: E_PLU = new E_PLU()
+            var nuevo: E_PLU = new E_PLU()           
             if (ArticuloAdicionar.CodigoRapido != null && ArticuloAdicionar.CodigoRapido != "") {
                 var objeto =  SessionDetallePedidoGr.find(x => x.CodigoRapido == ArticuloAdicionar.CodigoRapido);
                 if(objeto==null){
                     SessionDetallePedidoGr.push(ArticuloAdicionar);
                 }else{
-                    SessionDetallePedidoGr.forEach((element) => {
-                        debugger;
-                        count = count + 1;
-                        if (ArticuloAdicionar.CodigoRapido == element.CodigoRapido) {
-    
-                            nuevo.Cantidad = element.Cantidad + ArticuloAdicionar.Cantidad;
-                            nuevo.PrecioCatalogoTotalConIVA = nuevo.Cantidad * ArticuloAdicionar.PrecioConIVA;
-    
-                            nuevo.CodigoRapido = ArticuloAdicionar.CodigoRapido;
-                            nuevo.NombreProducto = ArticuloAdicionar.NombreProducto;
-                            nuevo.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;
-                            nuevo.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
-                            nuevo.PrecioEmpre = ArticuloAdicionar.PrecioEmpre;
-                            nuevo.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
-                            nuevo.PLU = ArticuloAdicionar.PLU;
-
-
-                            viejo.Cantidad = element.Cantidad;
-                            viejo.PrecioCatalogoTotalConIVA = element.Cantidad;    
-                            viejo.CodigoRapido = element.CodigoRapido;
-                            viejo.NombreProducto = element.NombreProducto;
-                            viejo.PrecioConIVA = element.PrecioConIVA;
-                            viejo.PorcentajeDescuento = element.PorcentajeDescuento;
-                            viejo.PrecioEmpre = element.PrecioEmpre;
-                            viejo.PrecioPuntos = element.PrecioPuntos;
-                            viejo.PLU = element.PLU;
-                            return false;
-                        }                        
-                    });
-                    SessionDetallePedidoGr.splice(SessionDetallePedidoGr.indexOf(viejo), 1);
+                   
+                    nuevo.Cantidad = objeto.Cantidad + ArticuloAdicionar.Cantidad;
+                    nuevo.PrecioCatalogoTotalConIVA = objeto.Cantidad * ArticuloAdicionar.PrecioConIVA;
+                    nuevo.CodigoRapido = ArticuloAdicionar.CodigoRapido;
+                    nuevo.NombreProducto = ArticuloAdicionar.NombreProducto;
+                    nuevo.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;
+                    nuevo.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
+                    nuevo.PrecioEmpre = ArticuloAdicionar.PrecioEmpre;
+                    nuevo.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
+                    nuevo.PLU = ArticuloAdicionar.PLU;                  
+                          
+                    SessionDetallePedidoGr.splice(SessionDetallePedidoGr.indexOf(objeto), 1);
                     SessionDetallePedidoGr.push(nuevo);
                 }
               

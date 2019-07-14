@@ -94,7 +94,10 @@ export class FuseToolbarComponent
         });
 
     }
-
+AbrirInfoUsuario()
+{
+    this.router.navigate(['/perfil'])
+}
     toggleSidebarOpened(key)
     {
         this.sidebarService.getSidebar(key).toggleOpen();
