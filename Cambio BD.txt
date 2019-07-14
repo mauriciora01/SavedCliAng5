@@ -38,6 +38,16 @@ MSTSC
 User: Administrador
 Clave: L1n34d1r3ct4
 
+CONFIGURAR KDIFF
+
+git config --global --add merge.tool kdiff3
+git config --global --add mergetool.kdiff3.path "C:/Program Files/KDiff3/kdiff3.exe"
+git config --global --add mergetool.kdiff3.trustExitCode false
+
+git config --global --add diff.guitool kdiff3
+git config --global --add difftool.kdiff3.path "C:/Program Files/KDiff3/kdiff3.exe"
+git config --global --add difftool.kdiff3.trustExitCode false
+
 SQL SERVER PRODUCCION
 Database=Factu55;Server=52.184.231.33;User ID=user_saved;Password=1234567890
 Database=Factu55;Server=NC01TE03CGNP;User ID=sa;Password=Colombia2019+
