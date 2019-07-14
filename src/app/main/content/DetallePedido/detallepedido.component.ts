@@ -140,17 +140,18 @@ export class DetallePedidoComponent implements OnInit {
 
 
   columnDefs = [
-    { headerName: 'CodigoRapido', field: 'CodigoRapido' },
-    { headerName: 'NombreProducto', field: 'NombreProducto', sortable: true, filter: true },
-    { headerName: 'Cantidad', field: 'Cantidad' },
-    { headerName: 'PrecioCatalogoTotalConIVA', field: 'PrecioCatalogoTotalConIVA' },
-    { headerName: 'PrecioConIVA', field: 'PrecioConIVA' },
-    { headerName: 'PorcentajeDescuento', field: 'PorcentajeDescuento' },
-    { headerName: 'PrecioPuntos', field: 'PrecioPuntos' },
     {
-      headerName: 'Eliminar', field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
+      headerName: 'Eliminar',width: 80, field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
       cellRendererParams: { action: this.clickAuction }
-    }
+    },
+    { headerName: 'CodigoRapido',width: 110, field: 'CodigoRapido' },
+    { headerName: 'NombreProducto', field: 'NombreProducto', sortable: true, filter: true },
+    { headerName: 'Cantidad',width: 80, field: 'Cantidad' },
+    { headerName: 'PrecioCatalogoTotalConIVA', field: 'PrecioCatalogoTotalConIVA' },
+    { headerName: 'PrecioConIVA',width: 100, field: 'PrecioConIVA' },
+    { headerName: 'PorcentajeDescuento',width: 150, field: 'PorcentajeDescuento' },
+    { headerName: 'PrecioPuntos',width: 100, field: 'PrecioPuntos' }
+    
   ];
 
   rowData: Array<E_PLU> = new Array<E_PLU>();
