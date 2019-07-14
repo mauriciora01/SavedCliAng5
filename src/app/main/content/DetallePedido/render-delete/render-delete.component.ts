@@ -18,13 +18,13 @@ export class RenderDeleteComponent  {
     }
 
     agInit(params): void {    
-        debugger;   
+        //debugger;   
         this.params = params;
         
    }
 
    onClick(): void {
-       debugger;
+       //debugger;
        var component =  this.params.context as DetallePedidoComponent
        var xx: E_PLU = this.params.data;
        var restul = this.DetallePedidoService.EliminarItemPedido(xx);;

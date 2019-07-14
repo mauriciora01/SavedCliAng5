@@ -164,7 +164,7 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
+    //debugger;
     /* if (this.data.TipoMensaje == 'Error') {
        this.TextColor = 'blue';
      }

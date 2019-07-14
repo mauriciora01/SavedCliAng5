@@ -31,7 +31,7 @@ export class DetallePedidoService {
     }
 
     SetCurrentDetallePedido(res: any): Array<E_PLU> {
-        debugger;
+        //debugger;
         var SessionDetallePedido: Array<E_PLU> = new Array<E_PLU>()
 
         SessionDetallePedido = this.GetCurrentDetallePedido();
@@ -59,7 +59,7 @@ export class DetallePedidoService {
     }
 
     getArticuloxAgrupamiento(ArticuloAdicionar: E_PLU, SessionDetallePedidoGr: Array<E_PLU>): Array<E_PLU> {
-        debugger;
+        //debugger;
         if (SessionDetallePedidoGr != null) {
 
             var count = 0
@@ -72,7 +72,7 @@ export class DetallePedidoService {
                     SessionDetallePedidoGr.push(ArticuloAdicionar);
                 }else{
                     SessionDetallePedidoGr.forEach((element) => {
-                        debugger;
+                        //debugger;
                         count = count + 1;
                         if (ArticuloAdicionar.CodigoRapido == element.CodigoRapido) {
     
