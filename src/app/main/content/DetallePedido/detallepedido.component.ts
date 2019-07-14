@@ -120,6 +120,12 @@ export class DetallePedidoComponent implements OnInit {
   public TotalPagar: string = "";
   public PuntosUsar: number = 0;
 
+  private gridApi;
+  private gridColumnApi;
+
+  private columnDefs;
+  private rowData:Array<E_PLU>=new Array<E_PLU>();
+
   constructor(private formBuilder: FormBuilder,
     private UserService: UserService,
     private ClienteService: ClienteService,
@@ -130,7 +136,38 @@ export class DetallePedidoComponent implements OnInit {
     private ExceptionErrorService: ExceptionErrorService,
     private PedidoService: PedidoService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data1: any,
-  ) { }
+  ) {
+    this.columnDefs = [
+      {
+        headerName: 'Eliminar',width: 80, field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
+        cellRendererParams: { action: this.clickAuction }
+      },
+      { headerName: 'CodigoRapido',width: 110, field: 'CodigoRapido' },
+      { headerName: 'NombreProducto', field: 'NombreProducto', sortable: true, filter: true },
+      { headerName: 'Cantidad',width: 80, field: 'Cantidad' },
+      { headerName: 'PrecioCatalogoTotalConIVA', field: 'PrecioCatalogoTotalConIVA' },
+      { headerName: 'PrecioConIVA',width: 100, field: 'PrecioConIVA' },
+      { headerName: 'PorcentajeDescuento',width: 150, field: 'PorcentajeDescuento' },
+      { headerName: 'PrecioPuntos',width: 100, field: 'PrecioPuntos' }
+      
+    ];
+  
+    
+   }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    this.rowData = this.DetallePedidoService.GetCurrentDetallePedido();;
+    /*params.api.sizeColumnsToFit();
+
+    params.api.sizeColumnsToFit();
+    window.addEventListener("resize", function() {
+      setTimeout(function() {
+        params.api.sizeColumnsToFit();
+      });
+    });*/
+  }
 
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
@@ -139,22 +176,7 @@ export class DetallePedidoComponent implements OnInit {
 
 
 
-  columnDefs = [
-    {
-      headerName: 'Eliminar',width: 80, field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
-      cellRendererParams: { action: this.clickAuction }
-    },
-    { headerName: 'CodigoRapido',width: 110, field: 'CodigoRapido' },
-    { headerName: 'NombreProducto', field: 'NombreProducto', sortable: true, filter: true },
-    { headerName: 'Cantidad',width: 80, field: 'Cantidad' },
-    { headerName: 'PrecioCatalogoTotalConIVA', field: 'PrecioCatalogoTotalConIVA' },
-    { headerName: 'PrecioConIVA',width: 100, field: 'PrecioConIVA' },
-    { headerName: 'PorcentajeDescuento',width: 150, field: 'PorcentajeDescuento' },
-    { headerName: 'PrecioPuntos',width: 100, field: 'PrecioPuntos' }
-    
-  ];
-
-  rowData: Array<E_PLU> = new Array<E_PLU>();
+  
 
  
   clickAuction(para) {
