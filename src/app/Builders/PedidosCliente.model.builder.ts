@@ -124,6 +124,8 @@ export class PedidosClienteBuilder {
     public okTransDetallePedido: boolean;
     public PuntosUsar: number;
     public TotalPuntosPedido: number;
+    public Guia: string;
+    public Numerodespacho: string;
     public Error: E_Error
 
     buildFromObject(x: any): PedidosClienteBuilder {
@@ -241,12 +243,14 @@ export class PedidosClienteBuilder {
         if (x.DescripcionAnulacion != undefined) { this.DescripcionAnulacion = x.DescripcionAnulacion }
         if (x.Asistente != undefined) { this.Asistente = x.Asistente }
         if (x.NombreAnulo != undefined) { this.NombreAnulo = x.NombreAnulo }
-        if (x.ExcentoIVA != undefined) { this.ExcentoIVA = x.ExcentoIVA }  
-        if (x.CodCiudadCliente != undefined) { this.CodCiudadCliente = x.CodCiudadCliente }  
-        if (x.okTransEncabezadoPedido != undefined) { this.okTransEncabezadoPedido = x.okTransEncabezadoPedido }    
-        if (x.okTransDetallePedido != undefined) { this.okTransDetallePedido = x.okTransDetallePedido }  
-        if (x.PuntosUsar != undefined) { this.PuntosUsar = x.PuntosUsar }  
-        if (x.TotalPuntosPedido != undefined) { this.TotalPuntosPedido = x.TotalPuntosPedido }      
+        if (x.ExcentoIVA != undefined) { this.ExcentoIVA = x.ExcentoIVA }
+        if (x.CodCiudadCliente != undefined) { this.CodCiudadCliente = x.CodCiudadCliente }
+        if (x.okTransEncabezadoPedido != undefined) { this.okTransEncabezadoPedido = x.okTransEncabezadoPedido }
+        if (x.okTransDetallePedido != undefined) { this.okTransDetallePedido = x.okTransDetallePedido }
+        if (x.PuntosUsar != undefined) { this.PuntosUsar = x.PuntosUsar }
+        if (x.TotalPuntosPedido != undefined) { this.TotalPuntosPedido = x.TotalPuntosPedido }
+        if (x.Guia != undefined) { this.Guia = x.Guia }
+        if (x.Numerodespacho != undefined) { this.Numerodespacho = x.Numerodespacho }
         if (x.Error != undefined) { this.Error = x.Error }
 
         return this
@@ -367,12 +371,14 @@ export class PedidosClienteBuilder {
         obj.DescripcionAnulacion = this.DescripcionAnulacion
         obj.Asistente = this.Asistente
         obj.NombreAnulo = this.NombreAnulo
-        obj.ExcentoIVA = this.ExcentoIVA   
-        obj.CodCiudadCliente = this.CodCiudadCliente 
-        obj.okTransEncabezadoPedido = this.okTransEncabezadoPedido 
-        obj.okTransDetallePedido = this.okTransDetallePedido 
-        obj.PuntosUsar = this.PuntosUsar 
-        obj.TotalPuntosPedido = this.TotalPuntosPedido 
+        obj.ExcentoIVA = this.ExcentoIVA
+        obj.CodCiudadCliente = this.CodCiudadCliente
+        obj.okTransEncabezadoPedido = this.okTransEncabezadoPedido
+        obj.okTransDetallePedido = this.okTransDetallePedido
+        obj.PuntosUsar = this.PuntosUsar
+        obj.TotalPuntosPedido = this.TotalPuntosPedido
+        obj.Numerodespacho = this.Numerodespacho
+        obj.Guia = this.Guia
         obj.Error = this.Error
 
         return obj

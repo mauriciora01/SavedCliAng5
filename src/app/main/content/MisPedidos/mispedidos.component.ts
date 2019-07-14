@@ -5,6 +5,7 @@ import { E_SessionUser } from 'app/Models/E_SessionUser';
 import { UserService } from '../../../ApiServices/UserService';
 import { PedidoService } from 'app/ApiServices/PedidoService';
 import { E_PedidosCliente } from 'app/Models/E_PedidosCliente';
+import { DetallePedidoComponent } from '../DetallePedido/detallepedido.component';
 
 @Component({
     moduleId: module.id,
@@ -33,8 +34,8 @@ export class MisPedidosComponent implements OnInit {
         var objPedidos: E_PedidosCliente = new E_PedidosCliente()
         objPedidos.IdVendedor = this.SessionUser.IdVendedor;
         //MRG: Validar los siguientes datos para enviar segun el usuarios.
-        objPedidos.IdVendedor = "7002";
-        objPedidos.Campana = "0919";
+       objPedidos.IdVendedor = "104";
+        objPedidos.Campana = "0619";
         this.PedidoService.PedidosList(objPedidos)
             .subscribe((x: Array<E_PedidosCliente>) => {
                 this.ListPedidos = x
@@ -47,7 +48,7 @@ export class MisPedidosComponent implements OnInit {
     }
 
     openResumenPedido(row: E_PedidosCliente): void {
-        const dialogRef = this.dialog.open(ResumenPedidoComponent, {
+        const dialogRef = this.dialog.open(DetallePedidoComponent, {
             //width: '550px',
             panelClass: 'knowledgebase-article-dialog',
             data: row

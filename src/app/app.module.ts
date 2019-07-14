@@ -20,6 +20,7 @@ import { HeaderBuilder } from './Tools/HeaderBuilder';
 import { LoginModule } from './main/content/AutenticationComponents/login/login.module';
 import { ParameterService } from './ApiServices/ParametersServices';
 import { ClienteService } from './ApiServices/ClienteService';
+import { CxCService } from './ApiServices/CxCService';
 import { UbicacionGeneralModule } from './main/content/Ubicacion/UbicacionGeneral/ubicaciongeneral.module';
 import { PrincipalModule } from './main/content/Principal/principal.module';
 import { RegistroEmpresariaEcModule } from './main/content/RegistroEmpresariaEc/registroempresariaec.module';
@@ -41,6 +42,7 @@ import {
 } from "@angular/material";
 import { MisEmpresariasComponent } from './main/content/MisEmpresarias/misempresarias.component';
 import { DetalleClienteModule } from './main/content/DetalleCliente/detallecliente.module';
+import { detallepfactuModule } from './main/content/detallepfactu/detallepfactu.module';
 import { PedidosPrincipalModule } from './main/content/PedidosPrincipal/pedidosprincipal.module';
 import { DetalleArticuloModule } from './main/content/DetalleArticulo/detallearticulo.module';
 import { DetallePedidoModule } from './main/content/DetallePedido/detallepedido.module';
@@ -49,13 +51,15 @@ import { ResumenPedidoModule } from './main/content/ResumenPedido/resumenpedido.
 import { DetallePedidoService } from './ApiServices/DetallePedidoService';
 import { PedidoService } from './ApiServices/PedidoService';
 import { MisPedidosModule } from './main/content/MisPedidos/mispedidos.module';
+import { pedidosfacturadosModule } from './main/content/pedidosfacturados/pedidosfacturados.module';
+import { micarteraModule } from './main/content/micartera/micartera.module';
 
 const appRoutes: Routes = [
     /*{
         path      : '**',
         redirectTo: 'sample'
 
-        
+
     }*/
 
     { path: 'principal', redirectTo: '/principal', pathMatch: 'full' },
@@ -65,17 +69,20 @@ const appRoutes: Routes = [
     { path: 'pedidosprincipal', redirectTo: '/pedidosprincipal', pathMatch: 'full' },
     { path: 'modalpopup', redirectTo: '/modalpopup', pathMatch: 'full' },
     { path: 'mispedidos', redirectTo: '/mispedidos', pathMatch: 'full' },
+    { path: 'pedidosfacturados', redirectTo: '/pedidosfacturados', pathMatch: 'full' },
+    { path: 'micartera', redirectTo: '/micartera', pathMatch: 'full' },
 
 
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: 'login' },
 
-   
+
 ];
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        //MispedidosFactuComponent
         //MisEmpresariasComponent,
         //MisEmpresariasModule,
 
@@ -105,6 +112,10 @@ const appRoutes: Routes = [
         DetallePedidoModule,
         ResumenPedidoModule,
         MisPedidosModule,
+        pedidosfacturadosModule,
+        detallepfactuModule,
+        micarteraModule,
+
 
         MatInputModule,
         MatTableModule,
@@ -122,7 +133,7 @@ const appRoutes: Routes = [
 
           }),
           AgmDirectionModule, //agm-direction
-          
+
     ],
     providers: [
         UserService,
@@ -131,7 +142,8 @@ const appRoutes: Routes = [
         ClienteService,
         ExceptionErrorService,
         DetallePedidoService,
-        PedidoService
+        PedidoService,
+        CxCService
 
     ]
     ,
