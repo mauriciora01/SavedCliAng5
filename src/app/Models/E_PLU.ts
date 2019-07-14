@@ -36,6 +36,7 @@ export class E_PLU {
     public Activo: number
     public Disponible: boolean
     public PorcentajeDescuento: number
+    public Imagen: string
     public SessionEmpresaria: E_SessionEmpresaria
     public Error: E_Error
     

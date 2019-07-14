@@ -86,7 +86,7 @@ export class PedidosPrincipalComponent implements OnInit {
     }
 
     openBottomSheet(): void {
-        
+
         this.bottomSheet.open(DetallePedidoComponent);
     }
 
@@ -258,7 +258,13 @@ export class PedidosPrincipalComponent implements OnInit {
                         var NombreProductoP = x.NombreProducto + ", " + x.NombreColor + ", " + x.NombreTalla;
 
                         var rndImg = Math.floor(Math.random() * 11);
-                        var NombreImg = "blusanivi" + rndImg + ".PNG";
+                        //var NombreImg = "blusanivi" + rndImg + ".PNG";
+
+                        var NombreImg = x.Imagen;
+
+                        if (NombreImg == undefined || NombreImg == "" || NombreImg == null) {
+                            NombreImg = "noimagen.png"
+                        }
 
                         const dialogRef = this.dialog.open(DetalleArticuloComponent, {
                             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.

@@ -80,6 +80,8 @@ CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTIONERROR
 REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 -->02-04-2019
 
+[PRC_SVDN_PLU] --> opcion s-'D', agregar campo , Ltrim(rtrim(kar.IMAGEN)) as IMAGEN. Adicional hacer update a la tabla kardex con una imagen por default.
+
 
 <add name="conexion" connectionString="Database=Factu55;Server=NC01TE037KZP\MSSQLSERVER2017;User ID=sa;Password=Colombia19+" providerName="System.Data.SqlClient" />
 
@@ -93,6 +95,13 @@ Desde git bash here en la carpeta nueva creada
 
 git add .
 git commit -m "comentario commit"
+git push origin master
+
+
+git pull origin master
+git mergetool
+git add .
+git commit -m ""
 git push origin master
 
 ----------------------------------------

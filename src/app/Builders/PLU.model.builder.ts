@@ -36,6 +36,7 @@ export class PLUBuilder {
     public Activo: number
     public Disponible: boolean
     public PorcentajeDescuento: number
+    public Imagen: string
     public SessionEmpresaria: E_SessionEmpresaria
     public Error: E_Error
     
@@ -73,6 +74,7 @@ export class PLUBuilder {
         if (x.Activo != undefined) { this.Activo = x.Activo }
         if (x.Disponible != undefined) { this.Disponible = x.Disponible }
         if (x.PorcentajeDescuento != undefined) { this.PorcentajeDescuento = x.PorcentajeDescuento }
+        if (x.Imagen != undefined) { this.Imagen = x.Imagen }
         if (x.SessionEmpresaria != undefined) { this.SessionEmpresaria = x.SessionEmpresaria }
         if (x.Error != undefined) { this.Error = x.Error }
         
@@ -113,6 +115,7 @@ export class PLUBuilder {
         obj.Activo = this.Activo
         obj.Disponible = this.Disponible  
         obj.PorcentajeDescuento = this.PorcentajeDescuento  
+        obj.Imagen = this.Imagen
         obj.SessionEmpresaria = this.SessionEmpresaria
         obj.Error = this.Error
         
