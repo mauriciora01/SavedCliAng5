@@ -4,7 +4,7 @@ http://181.188.213.187/GLOD/Login.aspx
 
 API KEY GOOGLE TC GEO: 
 
-geo: 0914530928 - Zona: 35
+geo: 0914530928 - Zona: 00113
 gerente de zona para opcion cedula: 0906374426
 ger:1088009775 - IdVendedor: 7002  - IdZona: 50201 
 PEW51075
@@ -38,12 +38,24 @@ MSTSC
 User: Administrador
 Clave: L1n34d1r3ct4
 
+CONFIGURAR KDIFF
+
+git config --global --add merge.tool kdiff3
+git config --global --add mergetool.kdiff3.path "C:/Program Files/KDiff3/kdiff3.exe"
+git config --global --add mergetool.kdiff3.trustExitCode false
+
+git config --global --add diff.guitool kdiff3
+git config --global --add difftool.kdiff3.path "C:/Program Files/KDiff3/kdiff3.exe"
+git config --global --add difftool.kdiff3.trustExitCode false
+
 SQL SERVER PRODUCCION
 Database=Factu55;Server=52.184.231.33;User ID=user_saved;Password=1234567890
 Database=Factu55;Server=NC01TE03CGNP;User ID=sa;Password=Colombia2019+
 
 URL PRODUCCION:  http://52.184.231.33/saved
 PRUEBA CON POSTMAN o CHROME PRODUCCION: http://52.184.231.33/Application.Enterprise.Services/api/AutenticationUser/Prueba
+
+URL SVDN PRUEBAS:  http://52.184.231.33/svdn
 
 TABLAS
 
@@ -62,11 +74,13 @@ Create table SVDN_EXCEPTIONERROR
 PROCEDIMIENTOS
 
 ALTER PROCEDURE [dbo].PRC_SVDN_SUSUARIOS 
-ALTER PROCEDURE [dbo].[PRC_SVDN_CLIENTE] opcion I-A, opcion S-N
+ALTER PROCEDURE [dbo].[PRC_SVDN_CLIENTE] opcion I-A, opcion S-N, opcion S-O
 CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTIONERROR
 
 REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 -->02-04-2019
+
+[PRC_SVDN_PLU] --> opcion s-'D', agregar campo , Ltrim(rtrim(kar.IMAGEN)) as IMAGEN. Adicional hacer update a la tabla kardex con una imagen por default.
 
 
 <add name="conexion" connectionString="Database=Factu55;Server=NC01TE037KZP\MSSQLSERVER2017;User ID=sa;Password=Colombia19+" providerName="System.Data.SqlClient" />
@@ -81,6 +95,13 @@ Desde git bash here en la carpeta nueva creada
 
 git add .
 git commit -m "comentario commit"
+git push origin master
+
+
+git pull origin master
+git mergetool
+git add .
+git commit -m ""
 git push origin master
 
 ----------------------------------------

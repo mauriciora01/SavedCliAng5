@@ -28,6 +28,9 @@ export class SessionEmpresariaBuilder {
     public ExcentoIVA: boolean
     public PuntosEmpresaria: number
     public ValorPuntos: number
+    public GrupoDescuento: string  
+    public BodegaEmpresaria: string   
+    public CarpetaImagenes: string 
     public Error: E_Error
 
     buildFromObject(x: any): SessionEmpresariaBuilder {
@@ -57,8 +60,12 @@ export class SessionEmpresariaBuilder {
         if (x.Campana != undefined) { this.Campana = x.Campana }
         if (x.PuntosEmpresaria != undefined) { this.PuntosEmpresaria = x.PuntosEmpresaria }
         if (x.ValorPuntos != undefined) { this.ValorPuntos = x.ValorPuntos }
+        if (x.GrupoDescuento != undefined) { this.GrupoDescuento = x.GrupoDescuento }
+        if (x.BodegaEmpresaria != undefined) { this.BodegaEmpresaria = x.BodegaEmpresaria }
+        if (x.CarpetaImagenes != undefined) { this.CarpetaImagenes = x.CarpetaImagenes }
+        
         if (x.Error != undefined) { this.Error = x.Error }
-   
+       
         return this
     }
     Build(): E_SessionEmpresaria {
@@ -89,7 +96,11 @@ export class SessionEmpresariaBuilder {
         obj.Campana = this.Campana
         obj.PuntosEmpresaria = this.PuntosEmpresaria
         obj.ValorPuntos = this.ValorPuntos
+        obj.GrupoDescuento = this.GrupoDescuento
+        obj.BodegaEmpresaria = this.BodegaEmpresaria
+        obj.CarpetaImagenes = this.CarpetaImagenes
+
         obj.Error = this.Error
         return obj
-    }
+    } 
 }
