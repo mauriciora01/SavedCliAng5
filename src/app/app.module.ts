@@ -49,6 +49,7 @@ import { ResumenPedidoModule } from './main/content/ResumenPedido/resumenpedido.
 import { DetallePedidoService } from './ApiServices/DetallePedidoService';
 import { PedidoService } from './ApiServices/PedidoService';
 import { MisPedidosModule } from './main/content/MisPedidos/mispedidos.module';
+import { PerfilModule } from './main/content/perfil/perfil.module';
 
 const appRoutes: Routes = [
     /*{
@@ -65,6 +66,7 @@ const appRoutes: Routes = [
     { path: 'pedidosprincipal', redirectTo: '/pedidosprincipal', pathMatch: 'full' },
     { path: 'modalpopup', redirectTo: '/modalpopup', pathMatch: 'full' },
     { path: 'mispedidos', redirectTo: '/mispedidos', pathMatch: 'full' },
+    { path: 'perfil', redirectTo: '/perfil', pathMatch: 'full'},
 
 
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -105,7 +107,7 @@ const appRoutes: Routes = [
         DetallePedidoModule,
         ResumenPedidoModule,
         MisPedidosModule,
-
+        PerfilModule,
         MatInputModule,
         MatTableModule,
         MatPaginatorModule,
