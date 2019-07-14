@@ -83,7 +83,7 @@ export class DetallePedidoService {
                             nuevo.NombreProducto = ArticuloAdicionar.NombreProducto;
                             nuevo.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;
                             nuevo.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
-                            nuevo.PrecioEmpre = ArticuloAdicionar.PrecioEmpre;
+                            nuevo.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresaria;
                             nuevo.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
                             nuevo.PLU = ArticuloAdicionar.PLU;
 
@@ -94,7 +94,7 @@ export class DetallePedidoService {
                             viejo.NombreProducto = element.NombreProducto;
                             viejo.PrecioConIVA = element.PrecioConIVA;
                             viejo.PorcentajeDescuento = element.PorcentajeDescuento;
-                            viejo.PrecioEmpre = element.PrecioEmpre;
+                            viejo.PrecioEmpresaria = element.PrecioEmpresaria;
                             viejo.PrecioPuntos = element.PrecioPuntos;
                             viejo.PLU = element.PLU;
                             return false;
