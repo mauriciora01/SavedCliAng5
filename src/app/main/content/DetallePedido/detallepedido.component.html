@@ -8,7 +8,7 @@
   <div>
     
   </div>
-  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+  <!--<div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
 
   <div class="example-container mat-elevation-z8">
       <ag-grid-angular 
@@ -20,19 +20,29 @@
       [context]="this"   >
       </ag-grid-angular>
   </div>
-
+  <ag-grid-angular 
+    
+  </div>-->
+  <div>
+      <ag-grid-angular       
+      style="width: 31em; height: 200px;" 
+      class="ag-theme-balham"
+      [rowData]="rowData" 
+      [columnDefs]="columnDefs" 
+      [context]="this"   >
+      </ag-grid-angular>  
   </div>
+</div>
+ 
 
-  <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-button (click)="onClose()" mat-raised-button color="accent" aria-label="Close">
-      Cerrar
-    </button>
-    &nbsp;&nbsp;&nbsp;
-    <button mat-button (click)="openVerResumenPedido()" mat-raised-button
-      style="background-color: green; color: white;">Enviar Pedido</button>
+<div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+  <button mat-button (click)="onClose()" mat-raised-button color="accent" aria-label="Close">
+    Cerrar
+  </button>
+  &nbsp;&nbsp;&nbsp;
+  <button mat-button (click)="openVerResumenPedido()" mat-raised-button
+    style="background-color: green; color: white;">Enviar Pedido</button>
 
-
-  </div>
 
 </div>
 

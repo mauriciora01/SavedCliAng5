@@ -237,7 +237,7 @@ export class PedidosPrincipalComponent implements OnInit {
     }
 
     openAdicionarArticulo(): void {
-        debugger;
+     
         if (this.CodigoRapido.value != '' && this.CodigoRapido.value != undefined && this.CodigoRapido.value != null) {
             this.Paso2Ok = true;
 
@@ -247,7 +247,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
             this.ParameterService.ListarxCodigoRapido(objPLU)
                 .subscribe((x: E_PLU) => {
-                    debugger;
+                 
                     if (x.Error == undefined) {
                         //Mensaje de OK
                         //console.log(x)
