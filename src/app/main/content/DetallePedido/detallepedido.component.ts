@@ -22,6 +22,8 @@ import { PedidosDetalleClienteBuilder } from 'app/Builders/PedidosDetalleCliente
 import { PedidosClienteBuilder } from 'app/Builders/PedidosCliente.model.builder';
 import { ResumenPedidoComponent } from '../ResumenPedido/resumenpedido.component';
 import { E_Error } from 'app/Models/E_Error';
+import { RenderDeleteComponent } from './render-delete/render-delete.component';
+
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -88,7 +90,8 @@ export class DetallePedidoComponent implements OnInit {
   confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
   // const ELEMENT_DATA_PLU = this.DetallePedidoService.GetCurrentDetallePedido();
   displayedColumns =
-    ['select', 'CodigoRapido', 'NombreProducto', 'Cantidad', 'PrecioCatalogoTotalConIVA', 'PrecioConIVA', 'PorcentajeDescuento', 'PrecioPuntos', 'star'];
+    ['select', 'CodigoRapido', 'NombreProducto', 'Cantidad', 'PrecioCatalogoTotalConIVA',
+      'PrecioConIVA', 'PorcentajeDescuento', 'PrecioPuntos', 'star'];
   //['select', 'name', 'position', 'weight', 'symbol', 'position', 'weight', 'symbol', 'star'];
   //dataSource = ELEMENT_DATA;
   dataSource = this.DetallePedidoService.GetCurrentDetallePedido();;
@@ -100,6 +103,7 @@ export class DetallePedidoComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
 
   public SessionUser: E_SessionUser = new E_SessionUser()
   public SessionEmpresaria: E_SessionEmpresaria = new E_SessionEmpresaria()
@@ -133,15 +137,41 @@ export class DetallePedidoComponent implements OnInit {
     event.preventDefault();
   }
 
-  ngOnInit() {
 
+
+  columnDefs = [
+    { headerName: 'CodigoRapido', field: 'CodigoRapido' },
+    { headerName: 'NombreProducto', field: 'NombreProducto', sortable: true, filter: true },
+    { headerName: 'Cantidad', field: 'Cantidad' },
+    { headerName: 'PrecioCatalogoTotalConIVA', field: 'PrecioCatalogoTotalConIVA' },
+    { headerName: 'PrecioConIVA', field: 'PrecioConIVA' },
+    { headerName: 'PorcentajeDescuento', field: 'PorcentajeDescuento' },
+    { headerName: 'PrecioPuntos', field: 'PrecioPuntos' },
+    {
+      headerName: 'Eliminar', field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
+      cellRendererParams: { action: this.clickAuction }
+    }
+  ];
+
+  rowData: Array<E_PLU> = new Array<E_PLU>();
+
+ 
+  clickAuction(para) {
+  }
+
+  public cargarDatos() {
+    this.rowData = this.DetallePedidoService.GetCurrentDetallePedido();;
+  }
+
+  ngOnInit() {
+    debugger;
     /* if (this.data.TipoMensaje == 'Error') {
        this.TextColor = 'blue';
      }
      else {
        this.TextColor = 'green';
      }*/
-
+    this.rowData = this.DetallePedidoService.GetCurrentDetallePedido();;
     this.form = this.formBuilder.group({
       Cantidad: [undefined, [Validators.required]],
 
@@ -254,6 +284,7 @@ export class DetallePedidoComponent implements OnInit {
     }
   }
 
+  
   CrearPedido() {
 
 

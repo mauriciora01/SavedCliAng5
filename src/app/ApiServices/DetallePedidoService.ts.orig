@@ -67,6 +67,32 @@ export class DetallePedidoService {
             var nuevo: E_PLU = new E_PLU()
             var viejo: E_PLU = new E_PLU()
             if (ArticuloAdicionar.CodigoRapido != null && ArticuloAdicionar.CodigoRapido != "") {
+<<<<<<< HEAD
+                SessionDetallePedidoGr.forEach((element) => {
+                    count = count + 1;
+                    if (ArticuloAdicionar.CodigoRapido == element.CodigoRapido) {
+
+                        x.Cantidad = element.Cantidad + ArticuloAdicionar.Cantidad;
+                        x.PrecioCatalogoTotalConIVA = x.Cantidad * ArticuloAdicionar.PrecioConIVA;
+
+                        x.CodigoRapido = ArticuloAdicionar.CodigoRapido;
+                        x.NombreProducto = ArticuloAdicionar.NombreProducto;
+                        x.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;
+                        //x.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
+                        x.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresaria;
+                        x.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
+                        x.PLU = ArticuloAdicionar.PLU;
+
+                        //SessionDetallePedidoGr.splice(count, 1);
+                        return x
+
+                    }
+                    else {
+
+                        x = ArticuloAdicionar;
+                    }
+                });
+=======
                 var objeto =  SessionDetallePedidoGr.find(x => x.CodigoRapido == ArticuloAdicionar.CodigoRapido);
                 if(objeto==null){
                     SessionDetallePedidoGr.push(ArticuloAdicionar);
@@ -105,6 +131,7 @@ export class DetallePedidoService {
                 }
               
                 return SessionDetallePedidoGr;
+>>>>>>> c75fa6e5813789b65dbd5ce98a80b2782b718564
             }
         }
         return SessionDetallePedidoGr;

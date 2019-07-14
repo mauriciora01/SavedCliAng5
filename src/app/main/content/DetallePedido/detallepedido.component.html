@@ -1,118 +1,27 @@
-<div class="dialog-content">
+<div class="dialog-content" >
 
   <mat-toolbar matDialogTitle class="mat-accent m-0">
     <mat-toolbar-row>
       <span class="title dialog-title">Detalle Pedido</span>
-
     </mat-toolbar-row>
   </mat-toolbar>
   <div>
-    <p align="right"> 
-      <button mat-icon-button color="warn"  (click)="ConfirmDataEliminar()">
-        
-        <mat-icon aria-label="Example icon-button with a delete icon">delete</mat-icon> 
-      </button>
-    </p>
+    
   </div>
   <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
 
-
-    <!--<img class="CenterImageArticulo" src="../../../../assets/imagesAplicacion/detallepedido.PNG" alt="Detalle">-->
-
-
-
-
-
-
-
-    <div class="example-container mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource">
-
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select" sticky>
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-              [indeterminate]="selection.hasValue() && !isAllSelected()">
-            </mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-
-        <!-- CodigoRapido -->
-        <ng-container matColumnDef="CodigoRapido" sticky>
-          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> C. Rápido </th>
-          <td mat-cell *matCellDef="let element" style="padding: 10px;" > {{element.CodigoRapido}} </td>
-        </ng-container>
-
-        <!-- NombreProducto -->
-        <ng-container matColumnDef="NombreProducto">
-          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Producto </th>
-          <td mat-cell *matCellDef="let element" style="padding: 10px;" > {{element.NombreProducto}} </td>
-        </ng-container>
-
-        <!-- Cantidad -->
-        <ng-container matColumnDef="Cantidad">
-          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Cant </th>
-          <td mat-cell *matCellDef="let element" style="padding: 10px;" > {{element.Cantidad}} </td>
-        </ng-container>
-
-        <!-- PrecioCatalogoTotalConIVA  -->
-        <ng-container matColumnDef="PrecioCatalogoTotalConIVA">
-          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> P. Cat </th>
-          <td mat-cell *matCellDef="let element" style="padding: 10px;" > ${{element.PrecioCatalogoTotalConIVA}} </td>
-        </ng-container>
-
-        <!-- PrecioConIVA  -->
-        <ng-container matColumnDef="PrecioConIVA">
-          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> P+IVA </th>
-          <td mat-cell *matCellDef="let element" style="padding: 10px;"> ${{element.PrecioConIVA}} </td>
-        </ng-container>
-
-        <!-- PorcentajeDescuento  -->
-        <ng-container matColumnDef="PorcentajeDescuento">
-          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> % Des </th>
-          <td mat-cell *matCellDef="let element" style="padding: 10px;"> {{element.PorcentajeDescuento}} </td>
-        </ng-container>
-
-        <!-- PrecioPuntos  -->
-        <ng-container matColumnDef="PrecioPuntos">
-          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> P. Pts </th>
-          <td mat-cell *matCellDef="let element" style="padding: 10px;"> {{element.PrecioPuntos}} </td>
-        </ng-container>
-
-        <!-- Star Column -->
-        <ng-container matColumnDef="star" stickyEnd>
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element" style="padding: 10px;">
-            <mat-icon>more_vert</mat-icon>
-          </td>
-        </ng-container>
-
-
-
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div>
-
-
-
-
-
-    <!--<div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100" style="color: green">
-      <br>
-      <b>Costo de Envío:</b> $12.78<br>
-    </div>-->
-
+  <div class="example-container mat-elevation-z8">
+      <ag-grid-angular 
+     
+      style="width: 500px; height: 200px;" 
+      class="ag-theme-balham"
+      [rowData]="rowData" 
+      [columnDefs]="columnDefs" 
+      [context]="this"   >
+      </ag-grid-angular>
   </div>
 
-
-
+  </div>
 
   <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
     <button mat-button (click)="onClose()" mat-raised-button color="accent" aria-label="Close">
@@ -126,3 +35,4 @@
   </div>
 
 </div>
+
