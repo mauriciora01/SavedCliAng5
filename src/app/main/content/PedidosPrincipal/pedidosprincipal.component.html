@@ -38,7 +38,7 @@
 
           <mat-form-field fxFlex="100">
             <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required
-              [ngModel]="NumeroDocumento" maxlength="11" inputmode="numeric" pattern="[0-9]*" digitOnly
+              [ngModel]="NumeroDocumento" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly
               (focusout)="ValidateDocument()">
             <mat-error *ngIf="formErrors.NumeroDocumento.required">
               Numero Documento es requerido
