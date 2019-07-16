@@ -1,0 +1,30 @@
+<div class="dialog-content">
+
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+      <mat-toolbar-row>
+        <span class="title dialog-title">Detalle Pedido Facturado:</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+          
+        <b>Cedula:</b> {{data.Nit}} <br>
+        <b>Empresaria:</b> {{data.NombreEmpresaria}} <br>
+        <b>Factura:</b> {{data.Factura}}<br>
+        <b>Fecha Factura:</b> {{data.Fecha}}<br>
+        <b>Subtotal :</b>$ {{data.Valor}}<br>
+        <b>Iva:</b>$ {{data.IVA}}<br>
+        <b>Total Factura:</b>${{data.Valor+data.IVA}}<br>
+        <b>Numero Despacho:</b> {{data.Numerodespacho}}<br>
+        <b>Fecha Despacho:</b> {{data.Despacho}}<br>
+        <b>Guia:</b> {{data.Guia}}<br>
+     
+    </div>
+  
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button (click)="dialogRef.close()" class="mat-accent" aria-label="Close">
+        CERRAR
+      </button>
+    </div>
+  
+  </div>

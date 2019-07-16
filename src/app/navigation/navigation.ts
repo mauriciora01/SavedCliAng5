@@ -35,8 +35,8 @@ export const navigationGeneral = [
                 'title'    : 'Empresarias',
                 'translate': 'NAV.SAMPLE.TITLE',
                 'type'     : 'collapse',
-                'icon'     : 'local_florist',                
-                'children' : [                    
+                'icon'     : 'local_florist',
+                'children' : [
                     {
                         'id': 'registroempresariaec',
                         'title': 'Crear Nueva Empresaria',
@@ -53,6 +53,7 @@ export const navigationGeneral = [
                         'icon': 'group',
                         'url': '/misempresarias',
                     },
+
                 ]
             },
 
@@ -61,8 +62,8 @@ export const navigationGeneral = [
                 'title'    : 'Pedidos',
                 'translate': 'NAV.SAMPLE.TITLE',
                 'type'     : 'collapse',
-                'icon'     : 'shopping_cart',                
-                'children' : [                    
+                'icon'     : 'shopping_cart',
+                'children' : [
                     {
                         'id': 'pedidosprincipal',
                         'title': 'Crear Nuevo Pedido',
@@ -79,11 +80,33 @@ export const navigationGeneral = [
                         'icon': 'view_list',
                         'url': '/mispedidos',
                     },
-                    
+                    {
+                      'id': 'pedidosfacturados',
+                      'title': 'Pedidos Facturados',
+                      'translate': 'NAV.SAMPLE.TITLE',
+                      'type': 'item',
+                      'icon': 'today',
+                      'url': '/pedidosfacturados',
+                  },
                 ]
             },
-            
-            
+            {
+              'id'       : 'oficinavirtual',
+              'title'    : 'Oficina Virtual',
+              'translate': 'NAV.SAMPLE.TITLE',
+              'type'     : 'collapse',
+              'icon'     : 'timeline',
+              'children' : [
+                  {
+                      'id': 'micartera',
+                      'title': 'Mi Cartera',
+                      'translate': 'NAV.SAMPLE.TITLE',
+                      'type': 'item',
+                      'icon': 'attach_money',
+                      'url': '/micartera',
+                  },
+                ]
+              },
             {
                 'id': 'ubicaciongeneral',
                 'title': 'Ubicación General',
@@ -92,8 +115,8 @@ export const navigationGeneral = [
                 'icon': 'place',
                 'url': '/ubicaciongeneral',
             },
-                     
-            
+
+
             {
                 'id': 'Salir',
                 'title': 'Salir',

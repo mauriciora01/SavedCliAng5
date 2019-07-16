@@ -124,7 +124,7 @@ export class DetallePedidoComponent implements OnInit {
   private gridColumnApi;
 
   private columnDefs;
-  private rowData:Array<E_PLU>=new Array<E_PLU>();
+  private rowData: Array<E_PLU> = new Array<E_PLU>();
 
   constructor(private formBuilder: FormBuilder,
     private UserService: UserService,
@@ -139,21 +139,21 @@ export class DetallePedidoComponent implements OnInit {
   ) {
     this.columnDefs = [
       {
-        headerName: 'Eliminar',width: 80, field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
+        headerName: 'Eliminar', width: 80, field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
         cellRendererParams: { action: this.clickAuction }
       },
-      { headerName: 'CodigoRapido',width: 110, field: 'CodigoRapido' },
+      { headerName: 'CodigoRapido', width: 110, field: 'CodigoRapido' },
       { headerName: 'NombreProducto', field: 'NombreProducto', sortable: true, filter: true },
-      { headerName: 'Cantidad',width: 80, field: 'Cantidad' },
+      { headerName: 'Cantidad', width: 80, field: 'Cantidad' },
       { headerName: 'PrecioCatalogoTotalConIVA', field: 'PrecioCatalogoTotalConIVA' },
-      { headerName: 'PrecioConIVA',width: 100, field: 'PrecioConIVA' },
-      { headerName: 'PorcentajeDescuento',width: 150, field: 'PorcentajeDescuento' },
-      { headerName: 'PrecioPuntos',width: 100, field: 'PrecioPuntos' }
-      
+      { headerName: 'PrecioConIVA', width: 100, field: 'PrecioConIVA' },
+      { headerName: 'PorcentajeDescuento', width: 150, field: 'PorcentajeDescuento' },
+      { headerName: 'PrecioPuntos', width: 100, field: 'PrecioPuntos' }
+
     ];
-  
-    
-   }
+
+
+  }
 
   onGridReady(params) {
     this.gridApi = params.api;
@@ -176,9 +176,9 @@ export class DetallePedidoComponent implements OnInit {
 
 
 
-  
 
- 
+
+
   clickAuction(para) {
   }
 
@@ -187,7 +187,7 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-  
+
     /* if (this.data.TipoMensaje == 'Error') {
        this.TextColor = 'blue';
      }
@@ -307,7 +307,7 @@ export class DetallePedidoComponent implements OnInit {
     }
   }
 
-  
+
   CrearPedido() {
 
 
@@ -424,6 +424,8 @@ export class DetallePedidoComponent implements OnInit {
                   objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente()
                   objPedidoDetalle.PedidosClienteInfo = new PedidosClienteBuilder().buildFromObject(objPedidosCliente).Build();
 */
+                  objPedidoDetalle.PorcentajeDescuento = element.PorcentajeDescuento;
+
                   objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente()
                   x.okTransEncabezadoPedido = true;
                   x.okTransDetallePedido = true;

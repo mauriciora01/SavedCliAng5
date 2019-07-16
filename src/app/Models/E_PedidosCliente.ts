@@ -10,7 +10,7 @@ export class E_PedidosCliente {
     //OJO MRG: LOS TIPOS DEBEN SER IGUALES EN EL ANGULAR Y EL API SINO SE REVIENTA EL ENVIO AL API.
     //OJO MRG: LOS TIPOS DEBEN SER IGUALES EN EL ANGULAR Y EL API SINO SE REVIENTA EL ENVIO AL API.
     //OJO MRG: LOS TIPOS DEBEN SER IGUALES EN EL ANGULAR Y EL API SINO SE REVIENTA EL ENVIO AL API.
-    
+
 
     public Numero: string
     public Mes: string;
@@ -133,6 +133,9 @@ export class E_PedidosCliente {
     public okTransDetallePedido: boolean;
     public PuntosUsar: number;
     public TotalPuntosPedido: number;
+
+    public Guia: string;
+    public Numerodespacho: string;
 
     public Error: E_Error
 

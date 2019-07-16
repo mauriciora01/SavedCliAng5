@@ -11,6 +11,7 @@ import { PedidosDetalleClienteBuilder } from 'app/Builders/PedidosDetalleCliente
 
 @Injectable()
 export class PedidoService {
+    PedidosListFacturados: any;
     constructor(private Http: HttpClient, private HeaderBuilder: HeaderBuilder) { }
     private UrlNow: string = AppSettings.Global().API
     private textarea: HTMLTextAreaElement;
@@ -60,6 +61,17 @@ export class PedidoService {
             , request, httpOptions).map(this.ExtractPedidosList)
     }
 
+    ListxGerenteZonaFacturados(obj: E_PedidosCliente): Observable<Array<E_PedidosCliente>> {
+      const httpOptions = {
+          headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+          })
+      };
+      var request = JSON.stringify(obj)
+      return this.Http.post(this.UrlNow + "Pedido/ListxGerenteZonaFacturados"
+          , request, httpOptions).map(this.ExtractListxGerenteZonaFacturados)
+  }
+
     ExtractPedidosCliente(res: Response): E_PedidosCliente {
         var x: E_PedidosCliente = new E_PedidosCliente()
         if (res != null) { x = new PedidosClienteBuilder().buildFromObject(res).Build() }
@@ -82,4 +94,16 @@ export class PedidoService {
         }
         return x
     }
+    ExtractListxGerenteZonaFacturados(res: any): Array<E_PedidosCliente> {
+      var x: Array<E_PedidosCliente> = new Array<E_PedidosCliente>()
+      if (res != null) {
+          res.forEach((element) => {
+              x.push(new PedidosClienteBuilder().buildFromObject(element).Build())
+          });
+
+      }
+      return x
+
+  }
+
 }
