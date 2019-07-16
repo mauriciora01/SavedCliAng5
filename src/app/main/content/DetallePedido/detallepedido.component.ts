@@ -77,6 +77,8 @@ export interface DialogData {
   Titulo: string;
   Mensaje: string;
   TipoMensaje: string;
+  TipoEnvio : string;
+  CodCiudadDespacho: string;
 }
 
 @Component({
@@ -112,7 +114,7 @@ export class DetallePedidoComponent implements OnInit {
   TextColor: any
   form: FormGroup;
 
-
+  //public data: DialogData[];
 
   public Cantidad: number = 1;
   public PrecioCatalogoTotalConIVA: number = 0;
@@ -135,7 +137,7 @@ export class DetallePedidoComponent implements OnInit {
     public dialog: MatDialog,
     private ExceptionErrorService: ExceptionErrorService,
     private PedidoService: PedidoService,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data1: any,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: DialogData,    
   ) {
     this.columnDefs = [
       {
@@ -364,8 +366,8 @@ export class DetallePedidoComponent implements OnInit {
       objPedidoRequest.Codigo = this.SessionUser.Catalogo.trim();//rcb_catalogo.SelectedValue;
       objPedidoRequest.Zona = this.SessionEmpresaria.IdZona.trim();
       objPedidoRequest.IdLider = this.SessionEmpresaria.Empresaria_Lider.trim();
-      objPedidoRequest.TipoEnvio = 3;
-      objPedidoRequest.CiudadDespacho = "0";
+      objPedidoRequest.TipoEnvio = Number(this.data.TipoEnvio);
+      objPedidoRequest.CiudadDespacho = this.data.CodCiudadDespacho;
       objPedidoRequest.Asistente = this.SessionUser.Asistente;
       objPedidoRequest.ExcentoIVA = this.SessionEmpresaria.ExcentoIVA
       objPedidoRequest.CodCiudadCliente = this.SessionEmpresaria.CodCiudadCliente.trim();

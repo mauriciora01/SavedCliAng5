@@ -39,7 +39,7 @@
           <mat-form-field fxFlex="100">
             <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required
               [ngModel]="NumeroDocumento" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly
-              (focusout)="ValidateDocument()">
+              (focusout)="ValidateDocument()">             
             <mat-error *ngIf="formErrors.NumeroDocumento.required">
               Numero Documento es requerido
             </mat-error>
@@ -47,7 +47,7 @@
 
           <mat-form-field fxFlex="100" *ngIf="NombreDisabled">
             <input matInput placeholder="Nombre Empresaria" [(ngModel)]="NombreEmpresariaCompleto"
-              formControlName="firstCtrl" readonly>
+              formControlName="firstCtrl" readonly>             
           </mat-form-field>
 
           <mat-form-field fxFlex="100">
@@ -66,7 +66,7 @@
           <mat-form-field fxFlex="100">
             <mat-select [disabled]="BodegaDisabled" placeholder="Bodega" formControlName="Bodega"
               [(ngModel)]="BodegaSeleccionado" (selectionChange)="SelectedBodega($event)" required>
-              <mat-option *ngFor="let Item of ListBodega" [value]="Item.Codigo">
+              <mat-option *ngFor="let Item of ListBodega" [value]="Item.Bodega">
                 {{ Item.Nombre }}
               </mat-option>
             </mat-select>

@@ -1,5 +1,6 @@
 import { E_Error } from "../Models/E_Error";
 import { E_SessionEmpresaria } from "../Models/E_SessionEmpresaria";
+import { E_Bodegas } from 'app/Models/E_Bodegas';
 
 export class SessionEmpresariaBuilder {
    
@@ -31,6 +32,7 @@ export class SessionEmpresariaBuilder {
     public GrupoDescuento: string  
     public BodegaEmpresaria: string   
     public CarpetaImagenes: string 
+    public Bodegas: E_Bodegas
     public Error: E_Error
 
     buildFromObject(x: any): SessionEmpresariaBuilder {
@@ -64,6 +66,7 @@ export class SessionEmpresariaBuilder {
         if (x.BodegaEmpresaria != undefined) { this.BodegaEmpresaria = x.BodegaEmpresaria }
         if (x.CarpetaImagenes != undefined) { this.CarpetaImagenes = x.CarpetaImagenes }
         
+        if (x.Bodegas != undefined) { this.Bodegas = x.Bodegas }
         if (x.Error != undefined) { this.Error = x.Error }
        
         return this
@@ -99,7 +102,8 @@ export class SessionEmpresariaBuilder {
         obj.GrupoDescuento = this.GrupoDescuento
         obj.BodegaEmpresaria = this.BodegaEmpresaria
         obj.CarpetaImagenes = this.CarpetaImagenes
-
+        
+        obj.Bodegas = this.Bodegas
         obj.Error = this.Error
         return obj
     } 

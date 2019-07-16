@@ -1,4 +1,5 @@
 import { E_Error } from "./E_Error";
+import { E_Bodegas } from './E_Bodegas';
 
 export class E_SessionEmpresaria {
 
@@ -31,6 +32,7 @@ export class E_SessionEmpresaria {
     public GrupoDescuento: string    
     public BodegaEmpresaria: string   
     public CarpetaImagenes: string    
+    public Bodegas: E_Bodegas
     public Error: E_Error
 
     constructor() { }

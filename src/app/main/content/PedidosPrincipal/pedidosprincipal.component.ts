@@ -21,6 +21,7 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { E_PLU } from 'app/Models/E_PLU';
+import { E_Bodegas } from 'app/Models/E_Bodegas';
 
 
 export interface State {
@@ -44,7 +45,9 @@ export class PedidosPrincipalComponent implements OnInit {
     public CatalogoSeleccionado: string = "";
     public BodegaSeleccionado: string = "";
     public DatosEnvioSeleccionado: string = "";
-    public CodigoRapidoSeleccionado: string = "123468";
+    public CodigoRapidoSeleccionado: string = "54";
+    public TipoEnvioSeleccionado: string = "";
+    public CodCiudadDespacho: string = "";
 
     public ListCatalogo: Array<E_Catalogo> = new Array<E_Catalogo>();
     //*public ListBodega: Array<E_Catalogo> = new Array<E_Catalogo>();
@@ -58,10 +61,12 @@ export class PedidosPrincipalComponent implements OnInit {
     public SessionEmpresaria: E_SessionEmpresaria = new E_SessionEmpresaria()
 
 
-    public ListBodega: Array<Object> = [
+    /*public ListBodega: Array<Object> = [
         { Codigo: "51", Nombre: 'BODEGA 51' },
         { Codigo: "PKG", Nombre: 'BODEGA PICKING' },
-    ];
+    ];*/
+
+    public ListBodega: Array<E_Bodegas> = new Array<E_Bodegas>()
 
     CodigoRapido = new FormControl();
     options: string[] = ['One', 'Two', 'Three'];
@@ -87,7 +92,12 @@ export class PedidosPrincipalComponent implements OnInit {
 
     openBottomSheet(): void {
 
-        this.bottomSheet.open(DetallePedidoComponent);
+        //this.bottomSheet.open(DetallePedidoComponent);
+
+        this.bottomSheet.open(DetallePedidoComponent, {
+            panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
+            data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho }
+        });
     }
 
     ngOnInit() {
@@ -173,11 +183,13 @@ export class PedidosPrincipalComponent implements OnInit {
                             this.Paso1Ok = true;
                             this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow()
                             this.NombreEmpresariaCompleto = this.SessionEmpresaria.NombreEmpresariaCompleto;
+                            this.ListBodega.push( this.SessionEmpresaria.Bodegas);
                         }
                         else {
                             this.NombreDisabled = false;
                             this.Paso1Ok = false;
                             this.DatosEnvioSeleccionado = "";
+                            this.TipoEnvioSeleccionado = "";
 
                             this.firstFormGroup = this._formBuilder.group({
                                 firstCtrl: ['', Validators.required],
@@ -220,6 +232,8 @@ export class PedidosPrincipalComponent implements OnInit {
 
     openDatosEnvio(): void {
         this.DatosEnvioSeleccionado = "";
+        this.TipoEnvioSeleccionado = "";
+        this.CodCiudadDespacho = "";
 
         //Si se encuentra la empresaria se abre la ventana, sino no se puede abrir.
         if (this.NombreEmpresariaCompleto != undefined && this.NombreEmpresariaCompleto != "") {
@@ -229,10 +243,13 @@ export class PedidosPrincipalComponent implements OnInit {
                 data: { Nit: this.firstFormGroup.value.NumeroDocumento, Zona: this.SessionUser.IdZona, EmpresariaLider: this.SessionEmpresaria.Empresaria_Lider, TipoMensaje: "Error", Titulo: "Datos Envio", Mensaje: "Seleccione el metodo de envio." }
             });
 
-            dialogRef.afterClosed().subscribe(result => {
+            dialogRef.afterClosed().subscribe((result) => {
 
-                this.DatosEnvioSeleccionado = result;
+                this.DatosEnvioSeleccionado = result[0].DireccionEnvio;
+                this.TipoEnvioSeleccionado = result[0].IdTipoEnvio;
+                this.CodCiudadDespacho= result[0].CodCiudadDespacho;
             });
+            
         }
     }
 
@@ -276,7 +293,8 @@ export class PedidosPrincipalComponent implements OnInit {
                                 NombreProd: x.NombreProducto, Color: x.NombreColor, Talla: x.NombreTalla, ValorUnitario: x.PrecioTotalConIVA,
                                 NombreImagen: NombreImg, PLU: x.PLU, TipoMensaje: "Error", Titulo: "Detalle Articulo",
                                 Mensaje: "Seleccione los detalles del articulo.", PorcentajeDescuento: x.PorcentajeDescuento,
-                                PrecioPuntos: x.PrecioPuntos, Disponible: strDisponible, PrecioEmpresaria: x.PrecioEmpresaria
+                                PrecioPuntos: x.PrecioPuntos, Disponible: strDisponible, PrecioEmpresaria: x.PrecioEmpresaria,
+                                TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho
 
                             }
                         });
@@ -329,7 +347,7 @@ export class PedidosPrincipalComponent implements OnInit {
     openVerDetallePedido(): void {
         const dialogRef = this.dialog.open(DetallePedidoComponent, {
             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-            data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido." }
+            data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -352,7 +370,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
     }
 
-
+  
     changeIdCorto(): void {
         alert('sdsd')
         this.Paso2Ok = true;

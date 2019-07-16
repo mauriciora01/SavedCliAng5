@@ -31,6 +31,8 @@ export interface DialogData {
   Disponible: string;
   PrecioEmpresaria: number;
   CarpetaImagenes: string;
+  TipoEnvio: string;
+  CodCiudadDespacho: string;
 }
 
 @Component({
@@ -110,7 +112,12 @@ export class DetalleArticuloComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(DetallePedidoComponent);
+    //this.bottomSheet.open(DetallePedidoComponent);
+
+    this.bottomSheet.open(DetallePedidoComponent, {
+      panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
+      data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", TipoEnvio: this.data.TipoEnvio, CodCiudadDespacho: this.data.CodCiudadDespacho }
+    });
   }
 
   CalacularResta(): void {

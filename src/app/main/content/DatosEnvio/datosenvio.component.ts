@@ -26,6 +26,12 @@ export interface DialogData {
   ValorFlete: number;
 }
 
+export interface ReturnsData {
+  IdTipoEnvio: String;
+  DireccionEnvio: String;
+  CodCiudadDespacho: String;
+}
+
 @Component({
 
   selector: 'datosenvio',
@@ -73,6 +79,8 @@ export class DatosEnvioComponent implements OnInit {
   public DespacharASeleccionado: string = "";
 
   public ValorFleteFinal: number = 0;
+
+  public ReturnData: ReturnsData[];
 
   constructor(private formBuilder: FormBuilder,
     private ParameterService: ParameterService,
@@ -177,6 +185,7 @@ export class DatosEnvioComponent implements OnInit {
   //Llama a las parroquias en cascada. Parroquias = CORREGIMIENTOS
   SelectedCanton(y) {
 
+    this.CantonSeleccionado = "";
     if (y.value != undefined && y.value != "-1") {
 
       var objCiudad: E_Ciudad = new E_Ciudad()
@@ -202,6 +211,7 @@ export class DatosEnvioComponent implements OnInit {
           //this.ProvinciaSeleccionado = x[0].CodEstado;
         })
 
+      this.CantonSeleccionado = y.value;
 
       var objCanton: E_Canton = new E_Canton()
       objCanton.CodCiudad = y.value.substring(3)
@@ -282,19 +292,25 @@ export class DatosEnvioComponent implements OnInit {
     this.GuardarInformacion();
 
     if (this.DespacharASeleccionado == "1") {
-      this.dialogRef.close(this.form.value.Direccion + ", $" + this.ValorFleteFinal);
+      this.ReturnData = [{ IdTipoEnvio: "1", DireccionEnvio: this.form.value.Direccion + ", $" + this.ValorFleteFinal, CodCiudadDespacho: this.CantonSeleccionado }]
+      this.dialogRef.close(this.ReturnData);
     }
     else if (this.DespacharASeleccionado == "2") {
-      this.dialogRef.close("ENVIAR A DIRECTOR: $" + this.ValorFleteFinal);
+      this.ReturnData = [{ IdTipoEnvio: "2", DireccionEnvio: "ENVIAR A DIRECTOR: $" + this.ValorFleteFinal, CodCiudadDespacho: "" }]
+      this.dialogRef.close(this.ReturnData);
     }
     else if (this.DespacharASeleccionado == "3") {
-      this.dialogRef.close("ENVIAR A LIDER: $" + this.ValorFleteFinal);
+
+      this.ReturnData = [{ IdTipoEnvio: "3", DireccionEnvio: "ENVIAR A LIDER: $" + this.ValorFleteFinal, CodCiudadDespacho: "" }]
+      this.dialogRef.close(this.ReturnData);
     }
     else if (this.DespacharASeleccionado == "4") {
-      this.dialogRef.close("ENVIAR A PUNTO DE VENTA: $" + this.ValorFleteFinal);
+      this.ReturnData = [{ IdTipoEnvio: "4", DireccionEnvio: "ENVIAR A PUNTO DE VENTA: $" + this.ValorFleteFinal, CodCiudadDespacho: "" }]
+      this.dialogRef.close(this.ReturnData);
     }
     else {
-      this.dialogRef.close(this.form.value.Direccion + ", $" + this.ValorFleteFinal);
+      this.ReturnData = [{ IdTipoEnvio: "1", DireccionEnvio: this.form.value.Direccion + ", $" + this.ValorFleteFinal, CodCiudadDespacho: this.CantonSeleccionado }]
+      this.dialogRef.close(this.ReturnData);
     }
   }
 
