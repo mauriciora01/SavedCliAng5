@@ -23,11 +23,12 @@ export class FuseLoginComponent implements OnInit {
     IsAdmin: boolean
     Loading: boolean;
     errorLogin: boolean;
+    //@ViewChild('juta') juta: ElementRef
     @ViewChild("jojo") jojo: ElementRef
     loginForm: FormGroup;
     loginFormErrors: any;
-    public jey: string;
-
+    public jey: string;  
+    lista:number[]=[];
     constructor(
         private fuseConfig: FuseConfigService,
         private formBuilder: FormBuilder,
@@ -83,6 +84,13 @@ export class FuseLoginComponent implements OnInit {
 
     }
 
+    /*focusin(){
+        debugger;
+        var x = this.juta.nativeElement.value;
+        this.juta.nativeElement.focus()
+        this.juta.nativeElement.value="";
+    }*/
+
     ngOnInit() {
         this.UserService.ClearCurrentCurrentUserNow()
         this.loginForm = this.formBuilder.group({
@@ -122,7 +130,7 @@ export class FuseLoginComponent implements OnInit {
         this.Loading = true
         //*MRG: Llamar a servicios
         this.UserService.Login(user).subscribe((x: E_SessionUser) => {
-            //debugger
+            debugger
             if (x.Error != undefined) {
                 if (x.Error.Id == 1 || x.Error.Id == 2) {
                     this.errorLogin = true

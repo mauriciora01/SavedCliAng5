@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Headers, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs';
 import { AppSettings } from '../app.settings';
 import { E_Usuario } from '../Models/E_Usuario';
@@ -34,7 +34,8 @@ import { E_Ciudad } from 'app/Models/E_Ciudad';
 import { CiudadBuilder } from 'app/Builders/Ciudad.model.builder';
 import { E_PLU } from 'app/Models/E_PLU';
 import { PLUBuilder } from 'app/Builders/PLU.model.builder';
-
+import { ResponseBase } from 'app/Models/ResponseBase';
+import { E_Zona } from 'app/Models/Zona';
 
 @Injectable()
 export class ParameterService {
@@ -135,6 +136,34 @@ export class ParameterService {
         var request = JSON.stringify(obj)
         return this.Http.post(this.UrlNow + "Parametros/ListarParametrosxId"
             , request, httpOptions).map(this.ExtractParametros)
+    }
+
+    //Pueden usar este metodo para no usar BUILDERS porque eso es muy mamon xD att. Juta
+    public RegionxId(id: number): Observable<E_Regional> {
+        debugger;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');     
+        const httpOptions = this.HeaderBuilder.HeadNow()
+        return this.Http.get<E_Regional>(this.UrlNow + '/Regional/RegionalxId?id=' + id
+            , httpOptions).map(x => {  debugger; return x });
+    }
+
+    public ZonaxId(id: string): Observable<E_Zona> {
+        debugger;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');     
+        const httpOptions = this.HeaderBuilder.HeadNow()
+        return this.Http.get<E_Zona>(this.UrlNow + '/Parametros/ZonaxId?id=' + id
+            , httpOptions).map(x => {  debugger; return x });
+    }
+
+    public VendedorxId(id: string): Observable<E_Vendedor> {
+        debugger;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');     
+        const httpOptions = this.HeaderBuilder.HeadNow()
+        return this.Http.get<E_Vendedor>(this.UrlNow + '/Vendedor/VendedorxId?id=' + id
+            , httpOptions).map(x => {  debugger; return x });
     }
 
     listarCatalogo(obj: E_SessionUser): Observable<Array<E_Catalogo>> {
