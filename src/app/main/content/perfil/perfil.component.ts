@@ -3,6 +3,10 @@ import { E_SessionUser } from 'app/Models/E_SessionUser';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { UserService } from 'app/ApiServices/UserService';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ClienteService } from 'app/ApiServices/ClienteService';
+import { E_Cliente } from 'app/Models/E_Cliente';
+import { E_SessionEmpresaria } from 'app/Models/E_SessionEmpresaria';
+import { ParameterService } from 'app/ApiServices/ParametersServices';
 
 @Component({
     moduleId: module.id,
@@ -15,11 +19,13 @@ export class PerfilComponent implements OnInit {
     isLinear = false;
    firstFormGroup: FormGroup;
    secondFormGroup: FormGroup;
-
-
-   numero1:number;
-    constructor(public dialog: MatDialog,       
-        private userService: UserService,private _formBuilder: FormBuilder) {       
+   Empresariadatos:E_SessionEmpresaria;
+   Region:string;
+   Vendedor:string;
+   Zona:string;
+  
+    constructor(public dialog: MatDialog,  public parametrosservice:ParameterService,     
+        private userService: UserService,private _formBuilder: FormBuilder,private clienteservice: ClienteService) {       
 
     }
     
@@ -27,9 +33,39 @@ export class PerfilComponent implements OnInit {
     ngOnInit(){
         debugger;
          this.SessionUser = this.userService.GetCurrentCurrentUserNow()
-         var empre = this.userService.GetCurrentCurrentEmpresariaNow()
+
+         var objClienteResquest: E_Cliente = new E_Cliente()
+         objClienteResquest.Nit = this.SessionUser.Cedula
+
+         var x = this.clienteservice.ValidaExisteEmpresariaNombre(objClienteResquest).subscribe((x: E_SessionEmpresaria) => {
+             debugger
+            if (x.Error == undefined) {             
+                this.Empresariadatos = this.userService.GetCurrentCurrentEmpresariaNow()  
+                this.parametrosservice.RegionxId(+this.SessionUser.IdRegional).subscribe((x) => {
+                    debugger;
+                   this.Region = x.Nombre;
+                });  
+                this.parametrosservice.VendedorxId(this.SessionUser.IdVendedor).subscribe((x) => {
+                    debugger;
+                   this.Vendedor = x.Nombre;
+                }); 
+
+                this.parametrosservice.ZonaxId(this.SessionUser.IdZona).subscribe((x) => {
+                    debugger;
+                   this.Zona = x.Descripcion;
+                }); 
+            }
+        });
+
          this.firstFormGroup = this._formBuilder.group({
-            Cedula: ['', Validators.required]
+            Cedula: ['', Validators.required],
+            Campana: ['', Validators.required],
+            Catalogo: ['', Validators.required],
+            Grupo: ['', Validators.required],
+            Region: ['', Validators.required],
+            Vendedor: ['', Validators.required],
+            Nombre: ['', Validators.required],
+            Zona: ['', Validators.required]
           });
           /*this.secondFormGroup = this._formBuilder.group({
             secondCtrl: ['', Validators.required]

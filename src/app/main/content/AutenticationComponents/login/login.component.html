@@ -53,7 +53,8 @@
             <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN" [disabled]="loginForm.invalid" (click)="loginNow()">
                 INGRESAR
             </button>
-
+           <!-- <input type="text"  #juta>
+<button (click)="focusin()" >focus</button>-->
             <div [ngStyle]="{'display':jey}">
                 <div *ngIf="errorLogin">
                     <span style="color: #d43c31;">No se pudo iniciar sesion, por favor verifique.</span>
