@@ -140,30 +140,30 @@ export class ParameterService {
 
     //Pueden usar este metodo para no usar BUILDERS porque eso es muy mamon xD att. Juta
     public RegionxId(id: number): Observable<E_Regional> {
-        debugger;
+        //debugger;
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');     
         const httpOptions = this.HeaderBuilder.HeadNow()
         return this.Http.get<E_Regional>(this.UrlNow + '/Regional/RegionalxId?id=' + id
-            , httpOptions).map(x => {  debugger; return x });
+            , httpOptions).map(x => {  return x });
     }
 
     public ZonaxId(id: string): Observable<E_Zona> {
-        debugger;
+        //debugger;
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');     
         const httpOptions = this.HeaderBuilder.HeadNow()
         return this.Http.get<E_Zona>(this.UrlNow + '/Parametros/ZonaxId?id=' + id
-            , httpOptions).map(x => {  debugger; return x });
+            , httpOptions).map(x => {  return x });
     }
 
     public VendedorxId(id: string): Observable<E_Vendedor> {
-        debugger;
+        //debugger;
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');     
         const httpOptions = this.HeaderBuilder.HeadNow()
         return this.Http.get<E_Vendedor>(this.UrlNow + '/Vendedor/VendedorxId?id=' + id
-            , httpOptions).map(x => {  debugger; return x });
+            , httpOptions).map(x => {  return x });
     }
 
     listarCatalogo(obj: E_SessionUser): Observable<Array<E_Catalogo>> {

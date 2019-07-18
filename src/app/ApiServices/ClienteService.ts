@@ -78,7 +78,7 @@ export class ClienteService {
 
     //MRG: Carga la empresaria buscada en session con los parametros para hacer pedidos.
     ValidaExisteEmpresariaNombre(obj: E_Cliente): Observable<E_SessionEmpresaria> {
-        debugger
+        //debugger
         const httpOptions = this.HeaderBuilder.HeadNow()
          var request = JSON.stringify(obj)
          return this.Http.post(this.UrlNow + "Cliente/ValidaExisteEmpresariaNombre"
@@ -140,7 +140,7 @@ export class ClienteService {
     }
 
     ExtractDataSessionEmpresariaValid(res: object): E_SessionEmpresaria {
-        debugger;
+        //debugger;
         var x: E_SessionEmpresaria = new E_SessionEmpresaria()
 
         if (res != null) { x = new SessionEmpresariaBuilder().buildFromObject(res).Build() }

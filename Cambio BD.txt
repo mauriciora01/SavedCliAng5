@@ -7,6 +7,10 @@ API KEY GOOGLE TC GEO:
 1709860835 PEW281429
 0604129577001
 
+0931489033   usuario y contraseña Empresaria
+0703744060001 usuario y contraseña Lider
+0923605562001 usuario y contraseña Director
+
 geo: 0914530928 - Zona: 00113
 gerente de zona para opcion cedula: 0906374426
 ger:1088009775 - IdVendedor: 7002  - IdZona: 50201 
@@ -22,6 +26,11 @@ fsevents@
 COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --build-optimizer=false
 
 PAGINA DE ICONOS Y SVG: https://www.flaticon.com/free-icons/puzzle/7
+
+SQL: 181.188.213.187,8899
+usuario: sistemas
+clave: Nivi2020
+BD: Factu19
 
 
 recuperar correo: geovanny.bastidas@niviglobal.com
@@ -70,21 +79,24 @@ TallaPrendaInferior	varchar(50)	Checked
 TallaCalzado	varchar(50)	Checked
 TarjetaCD	varchar(50)	Checked
 
-Create table SVDN_EXCEPTIONERROR
--->02-04-2019
+Create table SVDN_EXCEPTION_ERROR -->02-04-2019
+
+Adicion en la tabla de Parametro = CarpetaImagenesSAVED = 77
 
 
 PROCEDIMIENTOS
 
 ALTER PROCEDURE [dbo].PRC_SVDN_SUSUARIOS 
 ALTER PROCEDURE [dbo].[PRC_SVDN_CLIENTE] opcion I-A, opcion S-N, opcion S-O
-CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTIONERROR
+CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTION_ERROR
 CREATE PROCEDURE [dbo].PRC_SVDN_BODEGA
 
 REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 -->02-04-2019
 
 [PRC_SVDN_PLU] --> opcion s-'D', agregar campo , Ltrim(rtrim(kar.IMAGEN)) as IMAGEN. Adicional hacer update a la tabla kardex con una imagen por default.
+
+PRC_SVDN_CATALOGOS_PLUS--> opcion s-'E'--> cambiar el where a este --> and CATALOGOS_PLUS.catalogo in (select catalogo	from campanas where fechaini < GETDATE() and GETDATE() < fechafin) 
 
 
 <add name="conexion" connectionString="Database=Factu55;Server=NC01TE037KZP\MSSQLSERVER2017;User ID=sa;Password=Colombia19+" providerName="System.Data.SqlClient" />
