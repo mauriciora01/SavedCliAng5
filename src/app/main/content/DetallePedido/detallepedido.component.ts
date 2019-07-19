@@ -77,7 +77,7 @@ export interface DialogData {
   Titulo: string;
   Mensaje: string;
   TipoMensaje: string;
-  TipoEnvio : string;
+  TipoEnvio: string;
   CodCiudadDespacho: string;
 }
 
@@ -118,9 +118,11 @@ export class DetallePedidoComponent implements OnInit {
 
   public Cantidad: number = 1;
   public PrecioCatalogoTotalConIVA: number = 0;
-  public CantidadArticulos: string = "";
-  public TotalPagar: string = "";
+  public CantidadArticulos: number = 0;
+  public TotalPagar: number = 0;
   public PuntosUsar: number = 0;
+  public PrecioEmpresariaTotalConIVA: number = 0;
+  public PrecioPuntosTotal: number = 0;
 
   private gridApi;
   private gridColumnApi;
@@ -137,20 +139,20 @@ export class DetallePedidoComponent implements OnInit {
     public dialog: MatDialog,
     private ExceptionErrorService: ExceptionErrorService,
     private PedidoService: PedidoService,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: DialogData,    
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: DialogData,
   ) {
     this.columnDefs = [
       {
         headerName: 'Eliminar', width: 80, field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
         cellRendererParams: { action: this.clickAuction }
       },
-      { headerName: 'CodigoRapido', width: 110, field: 'CodigoRapido' },
-      { headerName: 'NombreProducto', field: 'NombreProducto', sortable: true, filter: true },
-      { headerName: 'Cantidad', width: 80, field: 'Cantidad' },
-      { headerName: 'PrecioCatalogoTotalConIVA', field: 'PrecioCatalogoTotalConIVA' },
-      { headerName: 'PrecioConIVA', width: 100, field: 'PrecioConIVA' },
-      { headerName: 'PorcentajeDescuento', width: 150, field: 'PorcentajeDescuento' },
-      { headerName: 'PrecioPuntos', width: 100, field: 'PrecioPuntos' }
+      { headerName: 'Cod Rapido', width: 80, field: 'CodigoRapido' },
+      { headerName: 'Nombre', field: 'NombreProducto', sortable: true, filter: true },
+      { headerName: 'Cantidad', width: 60, field: 'Cantidad' },
+      { headerName: 'Prec Emp', width: 80, field: 'PrecioEmpresaria' },
+      { headerName: 'Prec Cat', width: 80, field: 'PrecioConIVA' },
+      { headerName: '% Descuento', width: 80, field: 'PorcentajeDescuento' },
+      { headerName: 'Prec Puntos', width: 90, field: 'PrecioPuntos' }
 
     ];
 
@@ -238,7 +240,8 @@ export class DetallePedidoComponent implements OnInit {
         TipoMensaje: "Error", Titulo: "Resumen Pedido", Mensaje: "Resumen del Pedido.",
         Nit: this.SessionEmpresaria.DocumentoEmpresaria.trim(), NombreEmpresaria: this.SessionEmpresaria.NombreEmpresariaCompleto.trim(),
         TotalPrecioCatalogo: this.PrecioCatalogoTotalConIVA, CantidadArticulos: this.CantidadArticulos,
-        TotalPagar: this.TotalPagar, TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos
+        TotalPagar: this.PrecioEmpresariaTotalConIVA, TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos,
+        PrecioEmpresariaTotal: this.PrecioEmpresariaTotalConIVA, PrecioPuntosTotal: this.PrecioPuntosTotal
 
       }
     });
@@ -288,10 +291,12 @@ export class DetallePedidoComponent implements OnInit {
     var ValorPrecioCat = 0;
     var objDetallePedidoService: Array<E_PLU> = new Array<E_PLU>()
     objDetallePedidoService = this.DetallePedidoService.GetCurrentDetallePedido()
+    var ValorPrecioEmp = 0;
+    var ValorPuntos = 0;
 
     if (objDetallePedidoService != null) {
       objDetallePedidoService.forEach((element) => {
-        CantidadArticulosSum++;
+
         //TODO: OJO arreglar con valores que lleguen bien.
         IVAPrecioCat = IVA + element.PrecioConIVA;
         IVA = IVA + element.PrecioConIVA;
@@ -300,9 +305,17 @@ export class DetallePedidoComponent implements OnInit {
         Valor = Valor + element.PrecioCatalogoTotalConIVA;
 
 
+        ValorPrecioEmp = ValorPrecioEmp + element.PrecioEmpresaria;
+        ValorPuntos = ValorPuntos + element.PrecioPuntos;
+        CantidadArticulosSum = CantidadArticulosSum + element.Cantidad;
+
+        this.PrecioEmpresariaTotalConIVA = ValorPrecioEmp;
+        this.PrecioPuntosTotal = ValorPuntos;
+
+
         this.PrecioCatalogoTotalConIVA = Valor;
-        this.CantidadArticulos = CantidadArticulosSum.toString();
-        this.TotalPagar = Valor.toString();
+        this.CantidadArticulos = CantidadArticulosSum;
+        this.TotalPagar = Valor;
 
       });
 
@@ -339,8 +352,8 @@ export class DetallePedidoComponent implements OnInit {
 
 
           this.PrecioCatalogoTotalConIVA = Valor;
-          this.CantidadArticulos = CantidadArticulosSum.toString();
-          this.TotalPagar = Valor.toString();
+          this.CantidadArticulos = CantidadArticulosSum;
+          this.TotalPagar = Valor;
 
           TotalPuntosPedidoSum = Valor / this.SessionEmpresaria.ValorPuntos;
 

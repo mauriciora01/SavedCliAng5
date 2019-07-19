@@ -73,7 +73,7 @@ export class DetallePedidoService {
                 }else{
                    
                     nuevo.Cantidad = objeto.Cantidad + ArticuloAdicionar.Cantidad;
-                    nuevo.PrecioCatalogoTotalConIVA = objeto.Cantidad * ArticuloAdicionar.PrecioConIVA;
+                    nuevo.PrecioCatalogoTotalConIVA = ArticuloAdicionar.PrecioCatalogoTotalConIVA;
                     nuevo.CodigoRapido = ArticuloAdicionar.CodigoRapido;
                     nuevo.NombreProducto = ArticuloAdicionar.NombreProducto;
                     nuevo.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;

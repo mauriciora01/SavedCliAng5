@@ -22,13 +22,15 @@ export interface DialogData {
 
   Nit: string;
   NombreEmpresaria: string;
-  TotalPrecioCatalogo: string;
-  CantidadArticulos: string;
+  TotalPrecioCatalogo: number;
+  CantidadArticulos: number;
   PuntosPedido: string;
-  TusPuntos: string;
+  TusPuntos: number;
   CuantosPuntosUsaras: string;
-  TotalPagar: string;
+  TotalPagar: number;
   ValorPuntos: number;
+  PrecioEmpresariaTotal: number;
+  PrecioPuntosTotal: number;
 
 }
 
@@ -114,7 +116,43 @@ export class ResumenPedidoComponent implements OnInit {
 
     this.PuntosCerrar = this.form.value.txt_PuntosUsar; //TODO: AQUI DEPURAR POR QUE NO COGE EL VALOR DEL TXT
     this.dialogRef.close(this.PuntosCerrar);
-   
+
+  }
+
+
+  CalcularTotalPagar(): void {
+
+
+    //Mis puntos deben ser siempre >= a los puntos digitados a usar.
+    if (this.data.TusPuntos >= this.form.value.txt_PuntosUsar) {
+
+      var ValorPunto = this.data.PrecioEmpresariaTotal / this.data.PrecioPuntosTotal;
+      var ValorUsar = 0;
+      var TotalPagar = 0;
+
+      //Se valida que si se digitan mas puntos de los necesarios se debe utilizar unicamente los que requiere el pedido.
+      if (this.form.value.txt_PuntosUsar > this.data.PrecioPuntosTotal) {
+        ValorUsar = this.data.PrecioPuntosTotal * ValorPunto;
+      }
+      else {
+        ValorUsar = this.form.value.txt_PuntosUsar * ValorPunto;
+      }
+
+      TotalPagar = (this.data.PrecioEmpresariaTotal - ValorUsar);
+
+      if (TotalPagar >= 0) {
+        this.data.TotalPagar = TotalPagar;
+      }
+      else {
+        this.data.TotalPagar = 0;
+      }
+    }
+    else {
+      this.txt_PuntosUsar = 0;
+      this.data.TotalPagar =this.data.PrecioEmpresariaTotal;
+    }
+
+
   }
 
 }

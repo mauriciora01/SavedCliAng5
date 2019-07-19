@@ -11,6 +11,8 @@ API KEY GOOGLE TC GEO:
 0703744060001 usuario y contraseña Lider
 0923605562001 usuario y contraseña Director
 
+0350233664
+
 geo: 0914530928 - Zona: 00113
 gerente de zona para opcion cedula: 0906374426
 ger:1088009775 - IdVendedor: 7002  - IdZona: 50201 
@@ -21,6 +23,24 @@ fsevents@
 - revisar creacion cuando hay error 
 - falta validar unineg en sesion
 - cuando se elige direccion de entrega despacho hay que guarfar un departamento
+
+PENDIENTES DE MEJORA SAVED
+- Mensaje informativo en calculo de puntos cuando se escriben mas de los requeridos y cuando quiere usar mas de los puntos disponibles
+- bug de seleccion de flete en 0
+- cantidad y precio en session de grid de detalle de pedido cuando se recarga
+- mensaje de cargando pedido cuando se envia
+- revisar formulario de resumen de pedido en mi lista de pedidos. Pendiente + ajuste GEO
+- bodegas, campanas, catalogo, catalogoreal, unineg quemadas en codigo
+- boton de apoyo para buscar empresaria y calcular puntos a usar
+- bug de seleccionar articulo dando click por fuera de la ventana, permite ver el detalle sin asginar.
+- en ventana de despachar a: se debe mostrar solo las opciones que pertenezca al perfil en sesion.
+- en ventana de despachar	cuando se selecciona a casa y se cambia a lider se bloquea el boton guardar.
+- boton de girar imagen para detalle hacerlo mas llamativo
+- grid de detalle pedido y demas componentes poner el signo $ en donde se dinero.
+- redondear todos los numeros a 2 decimales
+- totalizar valores en grid de detalle pedido
+- poner colores rojo/verde a variables (disponible, etc)
+
 
 
 COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --build-optimizer=false
