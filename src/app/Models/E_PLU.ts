@@ -37,6 +37,11 @@ export class E_PLU {
     public Disponible: boolean
     public PorcentajeDescuento: number
     public Imagen: string
+    public ExcentoIVA: boolean    
+    public PrecioEmpresariaSinIVA: number
+    public ValorIVA: number
+    public IVAPrecioEmpresaria: number
+    public PuntosGanados: number
     public SessionEmpresaria: E_SessionEmpresaria
     public Error: E_Error
     

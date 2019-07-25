@@ -57,6 +57,8 @@ export class E_PedidosDetalleCliente {
     public IVA: number;
     public IVAPrecioCat: number;
     public TotalPrecioCat: number;
+    public PuntosGanados: number;
+    public PorcentajeDescuentoPuntos: number;
     public PedidosClienteInfo: E_PedidosCliente   
     public Error: E_Error
 

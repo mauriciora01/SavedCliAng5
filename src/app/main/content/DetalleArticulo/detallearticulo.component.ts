@@ -13,6 +13,7 @@ import { DetallePedidoService } from 'app/ApiServices/DetallePedidoService';
 import { E_SessionEmpresaria } from 'app/Models/E_SessionEmpresaria';
 import { DetallePedidoComponent } from '../DetallePedido/detallepedido.component';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { IfStmt } from '@angular/compiler';
 
 export interface DialogData {
   CodigoRapido: string;
@@ -33,6 +34,13 @@ export interface DialogData {
   CarpetaImagenes: string;
   TipoEnvio: string;
   CodCiudadDespacho: string;
+  PrecioCatalogoSinIVA: number;
+  PrecioEmpresariaSinIVA: number;
+  IVAPrecioEmpresaria: number;
+  IVAPrecioCatalogo: number;
+  PorcentajeIVA: number;
+  ExcentoIVA: boolean;
+  PuntosGanados: number;
 }
 
 @Component({
@@ -95,15 +103,32 @@ export class DetalleArticuloComponent implements OnInit {
 
     var DetallePedido: E_PLU = new E_PLU()
 
+    if (this.data.ExcentoIVA == true) {
+      this.data.IVAPrecioCatalogo = 0;
+      this.data.IVAPrecioEmpresaria = 0;
+    }
+
+    var PrecioCatIVA = (this.data.PrecioCatalogoSinIVA + this.data.IVAPrecioCatalogo);
+    var PrecioEmpre = PrecioCatIVA - (PrecioCatIVA * (this.data.PorcentajeDescuento / 100));
+
     DetallePedido.CodigoRapido = this.data.CodigoRapido;
     DetallePedido.NombreProducto = this.data.NombreProductoCompleto;
-    DetallePedido.PrecioConIVA = Number(this.data.ValorUnitario) * Number(this.form.value.Cantidad);
+    DetallePedido.PrecioConIVA = PrecioCatIVA * Number(this.form.value.Cantidad);
     DetallePedido.PorcentajeDescuento = this.data.PorcentajeDescuento;
     DetallePedido.Cantidad = this.form.value.Cantidad;
-    DetallePedido.PrecioCatalogoTotalConIVA = Number(this.form.value.Cantidad) * Number(this.data.ValorUnitario);
-    DetallePedido.PrecioEmpresaria = this.data.PrecioEmpresaria *Number(this.form.value.Cantidad);
+    DetallePedido.PrecioCatalogoTotalConIVA = Number(this.form.value.Cantidad) * PrecioCatIVA;
+    DetallePedido.PrecioEmpresaria = PrecioEmpre * Number(this.form.value.Cantidad);
     DetallePedido.PrecioPuntos = Number(this.form.value.Cantidad) * Number(this.data.PrecioPuntos);
     DetallePedido.PLU = this.data.PLU;
+
+    DetallePedido.PrecioCatalogoSinIVA = this.data.PrecioCatalogoSinIVA * Number(this.form.value.Cantidad);
+    DetallePedido.PrecioEmpresariaSinIVA = this.data.PrecioEmpresariaSinIVA; // Siempre debe ser * cantidad = 1
+    DetallePedido.IVAPrecioCatalogo = this.data.IVAPrecioCatalogo * Number(this.form.value.Cantidad);
+    DetallePedido.IVAPrecioEmpresaria = this.data.IVAPrecioEmpresaria; // Siempre debe ser * cantidad = 1
+    DetallePedido.PorcentajeIVA = this.data.PorcentajeIVA;
+    DetallePedido.ExcentoIVA = this.data.ExcentoIVA;
+
+    DetallePedido.PuntosGanados = this.data.PuntosGanados - Math.round((this.data.PuntosGanados * (this.data.PorcentajeDescuento / 100)))
 
     this.DetallePedidoService.SetCurrentDetallePedido(DetallePedido);
 

@@ -39,7 +39,7 @@
           <mat-form-field fxFlex="100">
             <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required
               [ngModel]="NumeroDocumento" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly
-              (focusout)="ValidateDocument()">             
+              (focusout)="ValidateDocument()">
             <mat-error *ngIf="formErrors.NumeroDocumento.required">
               Numero Documento es requerido
             </mat-error>
@@ -47,7 +47,7 @@
 
           <mat-form-field fxFlex="100" *ngIf="NombreDisabled">
             <input matInput placeholder="Nombre Empresaria" [(ngModel)]="NombreEmpresariaCompleto"
-              formControlName="firstCtrl" readonly>             
+              formControlName="firstCtrl" readonly>
           </mat-form-field>
 
           <mat-form-field fxFlex="100">
@@ -57,9 +57,10 @@
             </div>
             <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
               <button (click)="openDatosEnvio()" mat-mini-fab color="accent" matTooltip="Datos de Envio">
-               <!--<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">library_books</mat-icon>--> +
+                <!--<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">library_books</mat-icon>-->
+                +
               </button>
-              
+
             </div>
           </mat-form-field>
 
@@ -127,7 +128,7 @@
           <div>
             <button mat-button matStepperPrevious mat-raised-button color="accent">Atras</button>
             &nbsp;&nbsp;&nbsp;
-            <button mat-button matStepperNext mat-raised-button color="accent"  [disabled]="!Paso2Ok">Siguiente</button>
+            <button mat-button matStepperNext mat-raised-button color="accent" [disabled]="!Paso2Ok">Siguiente</button>
           </div>
         </div>
       </form>
@@ -136,12 +137,11 @@
     <mat-step [stepControl]="thirtyFormGroup">
       <form [formGroup]="thirtyFormGroup" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
         <ng-template matStepLabel>Enviar Pedido</ng-template>
-
-
         <div>
           <button mat-button matStepperPrevious mat-raised-button color="accent">Atras</button>
           &nbsp;&nbsp;&nbsp;
-          <button mat-button matStepperNext (click)="openBottomSheet()" mat-raised-button color="accent" [disabled]="!Paso2Ok">Confirmar
+          <button mat-button matStepperNext (click)="openBottomSheet()" mat-raised-button color="accent"
+            [disabled]="!Paso2Ok">Confirmar
             Pedido</button>
 
 

@@ -80,7 +80,16 @@ export class DetallePedidoService {
                     nuevo.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
                     nuevo.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresaria;
                     nuevo.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
-                    nuevo.PLU = ArticuloAdicionar.PLU;                  
+                    nuevo.PLU = ArticuloAdicionar.PLU;   
+                                        
+                    nuevo.PrecioCatalogoSinIVA = ArticuloAdicionar.PrecioCatalogoSinIVA;
+                    nuevo.PrecioEmpresariaSinIVA = ArticuloAdicionar.PrecioEmpresariaSinIVA;
+                    nuevo.IVAPrecioCatalogo = ArticuloAdicionar.IVAPrecioCatalogo;
+                    nuevo.IVAPrecioEmpresaria = ArticuloAdicionar.IVAPrecioEmpresaria;
+                    nuevo.PorcentajeIVA = ArticuloAdicionar.PorcentajeIVA;
+                    nuevo.ExcentoIVA = ArticuloAdicionar.ExcentoIVA;
+
+                    nuevo.PuntosGanados = ArticuloAdicionar.PuntosGanados;
                           
                     SessionDetallePedidoGr.splice(SessionDetallePedidoGr.indexOf(objeto), 1);
                     SessionDetallePedidoGr.push(nuevo);

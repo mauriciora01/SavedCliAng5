@@ -57,6 +57,8 @@ export class PedidosDetalleClienteBuilder {
     public IVA: number;
     public IVAPrecioCat: number;
     public TotalPrecioCat: number;
+    public PuntosGanados: number;
+    public PorcentajeDescuentoPuntos: number;
     public PedidosClienteInfo: E_PedidosCliente  
     public Error: E_Error
 
@@ -115,6 +117,8 @@ export class PedidosDetalleClienteBuilder {
         if (x.IVA != undefined) { this.IVA = x.IVA }
         if (x.IVAPrecioCat != undefined) { this.IVAPrecioCat = x.IVAPrecioCat }
         if (x.TotalPrecioCat != undefined) { this.TotalPrecioCat = x.TotalPrecioCat }
+        if (x.PuntosGanados != undefined) { this.PuntosGanados = x.PuntosGanados }
+        if (x.PorcentajeDescuentoPuntos != undefined) { this.PorcentajeDescuentoPuntos = x.PorcentajeDescuentoPuntos }
         if (x.PedidosClienteInfo != undefined) { this.PedidosClienteInfo = x.PedidosClienteInfo }
         if (x.Error != undefined) { this.Error = x.Error }
 
@@ -176,6 +180,8 @@ export class PedidosDetalleClienteBuilder {
         obj.IVA = this.IVA
         obj.IVAPrecioCat = this.IVAPrecioCat
         obj.TotalPrecioCat = this.TotalPrecioCat
+        obj.PuntosGanados = this.PuntosGanados
+        obj.PorcentajeDescuentoPuntos = this.PorcentajeDescuentoPuntos
         obj.PedidosClienteInfo = this.PedidosClienteInfo
         obj.Error = this.Error
 

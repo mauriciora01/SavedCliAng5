@@ -17,29 +17,32 @@
 
         <mat-card-content>
           <div>
-            <p align="center" style="color: red;"><b>RESUMEN</b></p>
+            <p align="center" style="color: rgba(195, 0, 255, 0.63);"><b>RESUMEN</b></p>
             <!--<p style="text-align: justify;">Elaborado en poliéster, algodón, elastano. SILUETA AJUSTADA.</p>-->
           </div>
 
           <div>
-            
+
             <p><b>Nit:</b> {{data.Nit}}</p>
-            <p> {{data.NombreEmpresaria}}</p>          
+            <p> {{data.NombreEmpresaria}}</p>
             <p><b>Precio Cat:</b> ${{data.TotalPrecioCatalogo}}</p>
             <p><b>Precio Emp:</b> ${{data.PrecioEmpresariaTotal}}</p>
             <p><b>Cant. Articulos:</b> {{data.CantidadArticulos}}</p>
             <p><b>Precio Puntos:</b> {{data.PrecioPuntosTotal}}</p>
             <p><b>Tus Puntos:</b> {{data.TusPuntos}}</p>
             <div>
-            <p><b><br>Puntos Usar:</b>   &nbsp;&nbsp;  <mat-form-field fxFlex="15">
-              <input matInput placeholder="" formControlName="txt_PuntosUsar" required [ngModel]="txt_PuntosUsar" maxlength="5"
-                inputmode="numeric" pattern="[0-9]*" digitOnly (change)="CalcularTotalPagar()" >
-            </mat-form-field></p>
-          
+              <p><b><br>Puntos Usar:</b> &nbsp;&nbsp; <mat-form-field fxFlex="15">
+                  <input matInput placeholder="" formControlName="txt_PuntosUsar" required [ngModel]="txt_PuntosUsar"
+                    maxlength="5" inputmode="numeric" pattern="[0-9]*" digitOnly (change)="CalcularTotalPagar()">
+                </mat-form-field>
+              </p>
+
             </div>
 
             <p><b>Total Pagar:</b> ${{data.TotalPagar}}</p>
-      
+            <p><b>% Pts:</b> {{data.DescuentoPts}}%</p>
+            <p><b>Ganaras:</b> {{PuntosGanadosCalculo}} puntos</p>
+            <p align="center" style="color: red;"><b>{{data.MensajeError}}</b></p>
           </div>
 
         </mat-card-content>
@@ -47,14 +50,15 @@
 
       </mat-card>
 
+      
       <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-          <!--<button mat-button (click)="onClose()" color="accent" aria-label="Close">
+        <!--<button mat-button (click)="onClose()" color="accent" aria-label="Close">
             CERRAR
           </button>-->
-          &nbsp;&nbsp;&nbsp;
-          <button mat-button (click)="ConfirmData()" mat-raised-button
-          style="background-color: green; color: white;">Reservar Pedido</button>
-        </div>
+        &nbsp;&nbsp;&nbsp;
+        <button mat-button (click)="ConfirmData()" mat-raised-button
+          style="background-color: green; color: white;"  [disabled]="form.invalid || SaveInProgress">Reservar Pedido</button>
+      </div>
 
     </form>
 
@@ -68,6 +72,6 @@
 
 
 
-  
+
 
 </div>

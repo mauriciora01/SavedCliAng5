@@ -294,7 +294,10 @@ export class PedidosPrincipalComponent implements OnInit {
                                 NombreImagen: NombreImg, PLU: x.PLU, TipoMensaje: "Error", Titulo: "Detalle Articulo",
                                 Mensaje: "Seleccione los detalles del articulo.", PorcentajeDescuento: x.PorcentajeDescuento,
                                 PrecioPuntos: x.PrecioPuntos, Disponible: strDisponible, PrecioEmpresaria: x.PrecioEmpresaria,
-                                TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho
+                                TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho,
+                                PrecioCatalogoSinIVA: x.PrecioCatalogoSinIVA, PrecioEmpresariaSinIVA: x.PrecioEmpresariaSinIVA, 
+                                IVAPrecioCatalogo: x.IVAPrecioCatalogo, IVAPrecioEmpresaria: x.IVAPrecioEmpresaria, PorcentajeIVA: x.PorcentajeIVA, 
+                                ExcentoIVA: x.ExcentoIVA, PuntosGanados: x.PuntosGanados
 
                             }
                         });

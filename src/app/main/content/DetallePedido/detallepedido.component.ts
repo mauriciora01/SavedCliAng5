@@ -89,6 +89,7 @@ export interface DialogData {
 
 })
 export class DetallePedidoComponent implements OnInit {
+
   confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
   // const ELEMENT_DATA_PLU = this.DetallePedidoService.GetCurrentDetallePedido();
   displayedColumns =
@@ -120,9 +121,14 @@ export class DetallePedidoComponent implements OnInit {
   public PrecioCatalogoTotalConIVA: number = 0;
   public CantidadArticulos: number = 0;
   public TotalPagar: number = 0;
-  public PuntosUsar: number = 0;
+
   public PrecioEmpresariaTotalConIVA: number = 0;
   public PrecioPuntosTotal: number = 0;
+  public PuntosUsar: number = 0; //Lo que retorna del resumen
+  public DescuentoPuntosUsar: number = 0;//Lo que retorna del resumen
+  public TotalPagarUsar: number = 0;//Lo que retorna del resumen
+  public PuntosGanadosUsar: number = 0;//Lo que retorna del resumen
+  public ValorPagarPagoPuntosUsar: number = 0;//Lo que retorna del resumen
 
   private gridApi;
   private gridColumnApi;
@@ -241,15 +247,20 @@ export class DetallePedidoComponent implements OnInit {
         Nit: this.SessionEmpresaria.DocumentoEmpresaria.trim(), NombreEmpresaria: this.SessionEmpresaria.NombreEmpresariaCompleto.trim(),
         TotalPrecioCatalogo: this.PrecioCatalogoTotalConIVA, CantidadArticulos: this.CantidadArticulos,
         TotalPagar: this.PrecioEmpresariaTotalConIVA, TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos,
-        PrecioEmpresariaTotal: this.PrecioEmpresariaTotalConIVA, PrecioPuntosTotal: this.PrecioPuntosTotal
+        PrecioEmpresariaTotal: this.PrecioEmpresariaTotalConIVA, PrecioPuntosTotal: this.PrecioPuntosTotal, DescuentoPts: 0,
+        PuntosGanados: this.PuntosGanadosUsar, ValorPagarPagoPuntos: 0
 
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != -1 && result != undefined) {
-        this.PuntosUsar = result;
-        console.log('pts:' + this.PuntosUsar)
+    dialogRef.afterClosed().subscribe((result) => {
+
+      if (result[0].PuntosUsar >= 0 && result[0].PuntosUsar != undefined) {
+        this.PuntosUsar = result[0].PuntosUsar;
+        this.DescuentoPuntosUsar = result[0].DescuentoPuntos;
+        this.TotalPagarUsar = result[0].TotalPagar;
+        this.PuntosGanadosUsar = result[0].PuntosGanados;
+        this.ValorPagarPagoPuntosUsar = result[0].ValorPagarPagoPuntos;
         this.CrearPedido();
       }
     });
@@ -285,37 +296,31 @@ export class DetallePedidoComponent implements OnInit {
     //******************************************************** */
     //Calcula los totales del pedido.
     var CantidadArticulosSum = 0;
-    var IVA = 0;
     var Valor = 0;
-    var IVAPrecioCat = 0;
     var ValorPrecioCat = 0;
     var objDetallePedidoService: Array<E_PLU> = new Array<E_PLU>()
     objDetallePedidoService = this.DetallePedidoService.GetCurrentDetallePedido()
     var ValorPrecioEmp = 0;
     var ValorPuntos = 0;
+    var PuntosGanadosTotal = 0;
 
     if (objDetallePedidoService != null) {
       objDetallePedidoService.forEach((element) => {
 
-        //TODO: OJO arreglar con valores que lleguen bien.
-        IVAPrecioCat = IVA + element.PrecioConIVA;
-        IVA = IVA + element.PrecioConIVA;
-
-        ValorPrecioCat = Valor + element.PrecioCatalogoTotalConIVA;
-        Valor = Valor + element.PrecioCatalogoTotalConIVA;
-
-
+        ValorPrecioCat = ValorPrecioCat + element.PrecioCatalogoTotalConIVA;
         ValorPrecioEmp = ValorPrecioEmp + element.PrecioEmpresaria;
         ValorPuntos = ValorPuntos + element.PrecioPuntos;
         CantidadArticulosSum = CantidadArticulosSum + element.Cantidad;
 
+        PuntosGanadosTotal = PuntosGanadosTotal + element.PuntosGanados;
+
         this.PrecioEmpresariaTotalConIVA = ValorPrecioEmp;
         this.PrecioPuntosTotal = ValorPuntos;
 
-
-        this.PrecioCatalogoTotalConIVA = Valor;
+        this.PrecioCatalogoTotalConIVA = ValorPrecioCat;
         this.CantidadArticulos = CantidadArticulosSum;
         this.TotalPagar = Valor;
+        this.PuntosGanadosUsar = PuntosGanadosTotal;
 
       });
 
@@ -335,27 +340,27 @@ export class DetallePedidoComponent implements OnInit {
       var CantidadArticulosSum = 0;
       var IVA = 0;
       var Valor = 0;
+
+      var ValorPrecioCatSinIVA = 0;
+      var ValorPrecioEmpSinIVA = 0;
       var IVAPrecioCat = 0;
-      var ValorPrecioCat = 0;
+      var IVAPrecioEmp = 0;
+      var ValorPuntos = 0;
       var objDetallePedidoService: Array<E_PLU> = new Array<E_PLU>()
       objDetallePedidoService = this.DetallePedidoService.GetCurrentDetallePedido()
 
       if (objDetallePedidoService != null) {
         objDetallePedidoService.forEach((element) => {
-          CantidadArticulosSum++;
-          //TODO: OJO arreglar con valores que lleguen bien.
-          IVAPrecioCat = IVA + element.PrecioConIVA;
-          IVA = IVA + element.PrecioConIVA;
 
-          ValorPrecioCat = Valor + element.PrecioCatalogoTotalConIVA;
-          Valor = Valor + element.PrecioCatalogoTotalConIVA;
+          ValorPrecioCatSinIVA = ValorPrecioCatSinIVA + element.PrecioCatalogoSinIVA;
+          IVAPrecioCat = IVAPrecioCat + element.IVAPrecioCatalogo;
+
+          ValorPrecioEmpSinIVA = ValorPrecioEmpSinIVA + element.PrecioEmpresariaSinIVA;
+          IVAPrecioEmp = IVAPrecioEmp + element.IVAPrecioEmpresaria;
 
 
-          this.PrecioCatalogoTotalConIVA = Valor;
-          this.CantidadArticulos = CantidadArticulosSum;
-          this.TotalPagar = Valor;
-
-          TotalPuntosPedidoSum = Valor / this.SessionEmpresaria.ValorPuntos;
+          ValorPuntos = ValorPuntos + element.PrecioPuntos;
+          CantidadArticulosSum = CantidadArticulosSum + element.Cantidad;
 
         });
 
@@ -370,12 +375,12 @@ export class DetallePedidoComponent implements OnInit {
 
       objPedidoRequest.Nit = this.SessionEmpresaria.DocumentoEmpresaria.trim();
       objPedidoRequest.IdVendedor = this.SessionUser.IdVendedor.trim();
-      objPedidoRequest.IVA = IVA; //valor del pedido * iva (16%). Solo para encabezado de pedido.
-      objPedidoRequest.Valor = Valor; //valor total con iva incuido. Solo para encabezado de pedido.
+      objPedidoRequest.IVA = IVAPrecioEmp; //valor del pedido * iva (16%). Solo para encabezado de pedido.
+      objPedidoRequest.Valor = ValorPrecioEmpSinIVA; //valor total con iva incuido. Solo para encabezado de pedido.
       objPedidoRequest.ClaveUsuario = this.SessionUser.ClaveUsuario.trim();
       objPedidoRequest.Campana = this.SessionUser.Campana.trim();
       objPedidoRequest.IVAPrecioCat = IVAPrecioCat; //valor precio catalogo del pedido * iva (16%). Solo para encabezado de pedido.
-      objPedidoRequest.ValorPrecioCat = ValorPrecioCat; //valor precio catalogo total con iva incuido. Solo para encabezado de pedido.
+      objPedidoRequest.ValorPrecioCat = ValorPrecioCatSinIVA; //valor precio catalogo total con iva incuido. Solo para encabezado de pedido.
       objPedidoRequest.Codigo = this.SessionUser.Catalogo.trim();//rcb_catalogo.SelectedValue;
       objPedidoRequest.Zona = this.SessionEmpresaria.IdZona.trim();
       objPedidoRequest.IdLider = this.SessionEmpresaria.Empresaria_Lider.trim();
@@ -406,40 +411,26 @@ export class DetallePedidoComponent implements OnInit {
 
                 objDetallePedidoService.forEach((element) => {
 
-                  //TODO: OJO arreglar con valores que lleguen bien.
-                  IVAPrecioCat = IVA + element.PrecioConIVA;
-                  IVA = IVA + element.PrecioConIVA;
+                  //Si se paga con puntos se debe enviar el valor calculado menos los puntos usados.
+                  if (this.ValorPagarPagoPuntosUsar > 0) {
+                    objPedidoDetalle.Valor = this.ValorPagarPagoPuntosUsar;
+                  }
+                  else {
+                    objPedidoDetalle.Valor = element.PrecioEmpresariaSinIVA;
+                  }
 
-                  ValorPrecioCat = Valor + element.PrecioCatalogoTotalConIVA;
-                  Valor = Valor + element.PrecioCatalogoTotalConIVA;
+                  objPedidoDetalle.TarifaIVA = element.PorcentajeIVA;
+                  objPedidoDetalle.ValorPrecioCatalogo = element.PrecioCatalogoSinIVA;
+                  objPedidoDetalle.IVAPrecioCatalogo = element.IVAPrecioCatalogo;
 
                   objPedidoDetalle.PLU = element.PLU;
                   objPedidoDetalle.Cantidad = element.Cantidad;
                   objPedidoDetalle.IdCodigoCorto = element.CodigoRapido;
                   objPedidoDetalle.CatalogoReal = element.CatalogoReal;
 
-                  //---------------------------------------------------
-                  /* var maxDate = new Date(2000, 11, 31);
-                   x.Fecha= maxDate;
-                   x.FechaAnulacion= maxDate;
-                   x.FechaCierreBorrador= maxDate;
-                   x.FechaCierreReserva= maxDate;
-                   x.FechaCierreReservaReal= maxDate;
-                   x.FechaCreacion= maxDate;
-                   x.FechaIngresoCliente= maxDate;
-                   x.FechaUltimaModificacion= maxDate;
-                   x.UltimaModificacionEmpresaria= maxDate;*/
-                  //---------------------------------------------------
-                  /*var objPedidosCliente: E_PedidosCliente = new E_PedidosCliente()
-                  objPedidosCliente.okTransEncabezadoPedido = true;
-                  objPedidosCliente.okTransDetallePedido = true;
-                  objPedidosCliente.PuntosUsar = this.PuntosUsar;
-                  objPedidosCliente.TotalPuntosPedido = TotalPuntosPedidoSum;
-                  objPedidosCliente.Numero="mraosq23";
-                  objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente()
-                  objPedidoDetalle.PedidosClienteInfo = new PedidosClienteBuilder().buildFromObject(objPedidosCliente).Build();
-*/
                   objPedidoDetalle.PorcentajeDescuento = element.PorcentajeDescuento;
+                  objPedidoDetalle.PorcentajeDescuentoPuntos = this.DescuentoPuntosUsar;
+                  objPedidoDetalle.PuntosGanados = this.PuntosGanadosUsar;
 
                   objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente()
                   x.okTransEncabezadoPedido = true;
@@ -475,7 +466,6 @@ export class DetallePedidoComponent implements OnInit {
                             width: '450px',
                             data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero }
                           });
-
                           this.bottomSheetRef.dismiss();
                           this.EliminarArticulos();
 

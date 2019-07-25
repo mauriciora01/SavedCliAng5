@@ -37,6 +37,11 @@ export class PLUBuilder {
     public Disponible: boolean
     public PorcentajeDescuento: number
     public Imagen: string
+    public ExcentoIVA: boolean   
+    public PrecioEmpresariaSinIVA: number
+    public ValorIVA: number 
+    public IVAPrecioEmpresaria: number
+    public PuntosGanados: number
     public SessionEmpresaria: E_SessionEmpresaria
     public Error: E_Error
     
@@ -75,6 +80,11 @@ export class PLUBuilder {
         if (x.Disponible != undefined) { this.Disponible = x.Disponible }
         if (x.PorcentajeDescuento != undefined) { this.PorcentajeDescuento = x.PorcentajeDescuento }
         if (x.Imagen != undefined) { this.Imagen = x.Imagen }
+        if (x.ExcentoIVA != undefined) { this.ExcentoIVA = x.ExcentoIVA }
+        if (x.PrecioEmpresariaSinIVA != undefined) { this.PrecioEmpresariaSinIVA = x.PrecioEmpresariaSinIVA }
+        if (x.ValorIVA != undefined) { this.ValorIVA = x.ValorIVA }
+        if (x.IVAPrecioEmpresaria != undefined) { this.IVAPrecioEmpresaria = x.IVAPrecioEmpresaria }
+        if (x.PuntosGanados != undefined) { this.PuntosGanados = x.PuntosGanados }
         if (x.SessionEmpresaria != undefined) { this.SessionEmpresaria = x.SessionEmpresaria }
         if (x.Error != undefined) { this.Error = x.Error }
         
@@ -116,6 +126,11 @@ export class PLUBuilder {
         obj.Disponible = this.Disponible  
         obj.PorcentajeDescuento = this.PorcentajeDescuento  
         obj.Imagen = this.Imagen
+        obj.ExcentoIVA = this.ExcentoIVA
+        obj.PrecioEmpresariaSinIVA = this.PrecioEmpresariaSinIVA
+        obj.ValorIVA = this.ValorIVA
+        obj.IVAPrecioEmpresaria = this.IVAPrecioEmpresaria
+        obj.PuntosGanados = this.PuntosGanados
         obj.SessionEmpresaria = this.SessionEmpresaria
         obj.Error = this.Error
         

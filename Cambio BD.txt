@@ -25,6 +25,10 @@ fsevents@
 - cuando se elige direccion de entrega despacho hay que guarfar un departamento
 
 PENDIENTES DE MEJORA SAVED
+- Adcionar a encabezado pedido cantidad de puntos utilziado
+- Arreglar esta bandera para que se ponga en true si hay IVA x ciudad x zona x articulo x cliente. Clase: PluController.cs Metodo: ListarxCodigoRapido()
+- no dejar reservar cuando los puntos son negativos o hay temas de calculos. que sea >= 0
+- Pagar flete con puntos
 - Mensaje informativo en calculo de puntos cuando se escriben mas de los requeridos y cuando quiere usar mas de los puntos disponibles
 - bug de seleccion de flete en 0
 - cantidad y precio en session de grid de detalle de pedido cuando se recarga
@@ -40,6 +44,7 @@ PENDIENTES DE MEJORA SAVED
 - redondear todos los numeros a 2 decimales
 - totalizar valores en grid de detalle pedido
 - poner colores rojo/verde a variables (disponible, etc)
+- modificar el % de iva en las tablas de fletes de 14% a 12%
 
 
 
@@ -111,10 +116,20 @@ ALTER PROCEDURE [dbo].[PRC_SVDN_CLIENTE] opcion I-A, opcion S-N, opcion S-O
 CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTION_ERROR
 CREATE PROCEDURE [dbo].PRC_SVDN_BODEGA
 
+PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_porcentajedctopuntos				numeric(12,2)				= NULL,
+PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_puntosganados					int							= NULL,
+PRC_SVDN_PEDIDOSC2_2000--> Opcion I-A : agregar colmuna en insert de --> puntosganados
+PRC_SVDN_PEDIDOSC2_2000--> Opcion I-A : agregar colmuna en insert de --> porcentajedctopuntos
+
 REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 -->02-04-2019
 
 [PRC_SVDN_PLU] --> opcion s-'D', agregar campo , Ltrim(rtrim(kar.IMAGEN)) as IMAGEN. Adicional hacer update a la tabla kardex con una imagen por default.
+
+
+[PRC_SVDN_PLU] --> opcion s-'D', agregar campo , (select puntos from catalogos_plus where plu=plu.plu
+									and catalogo in (select catalogo from campanas where fechaini < GETDATE() and GETDATE() < fechafin)
+									) as puntos
 
 PRC_SVDN_CATALOGOS_PLUS--> opcion s-'E'--> cambiar el where a este --> and CATALOGOS_PLUS.catalogo in (select catalogo	from campanas where fechaini < GETDATE() and GETDATE() < fechafin) 
 
