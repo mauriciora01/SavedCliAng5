@@ -394,7 +394,11 @@ export enum ParametrosEnum {
 
     /// valor minimo de saldo para empresarias de norte
     /// </summary>
-    saldomin = 36
+    saldomin = 36,
+
+     ///Pedido minimo para puntos
+    /// </summary>
+    PedidoMinimoParaPuntos = 48
 
 }
 

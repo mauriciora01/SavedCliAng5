@@ -23,7 +23,9 @@ import { PedidosClienteBuilder } from 'app/Builders/PedidosCliente.model.builder
 import { ResumenPedidoComponent } from '../ResumenPedido/resumenpedido.component';
 import { E_Error } from 'app/Models/E_Error';
 import { RenderDeleteComponent } from './render-delete/render-delete.component';
-
+import { E_Parametros } from 'app/Models/E_Parametros';
+import { ParametrosEnum } from 'app/Enums/Enumerations';
+import { ParameterService } from 'app/ApiServices/ParametersServices';
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -129,6 +131,8 @@ export class DetallePedidoComponent implements OnInit {
   public TotalPagarUsar: number = 0;//Lo que retorna del resumen
   public PuntosGanadosUsar: number = 0;//Lo que retorna del resumen
   public ValorPagarPagoPuntosUsar: number = 0;//Lo que retorna del resumen
+  public AplicarPuntosGanados: boolean = true;//Lo que retorna del resumen
+  public ValorMinimoParaPuntos: number;
 
   private gridApi;
   private gridColumnApi;
@@ -145,6 +149,7 @@ export class DetallePedidoComponent implements OnInit {
     public dialog: MatDialog,
     private ExceptionErrorService: ExceptionErrorService,
     private PedidoService: PedidoService,
+    private ParameterService: ParameterService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: DialogData,
   ) {
     this.columnDefs = [
@@ -211,6 +216,8 @@ export class DetallePedidoComponent implements OnInit {
 
     });
 
+    this.ConsultarParametroMinimoPuntos();
+
   }
 
   //selection = new SelectionModel<PeriodicElement>(true, []);
@@ -248,7 +255,7 @@ export class DetallePedidoComponent implements OnInit {
         TotalPrecioCatalogo: this.PrecioCatalogoTotalConIVA, CantidadArticulos: this.CantidadArticulos,
         TotalPagar: this.PrecioEmpresariaTotalConIVA, TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos,
         PrecioEmpresariaTotal: this.PrecioEmpresariaTotalConIVA, PrecioPuntosTotal: this.PrecioPuntosTotal, DescuentoPts: 0,
-        PuntosGanados: this.PuntosGanadosUsar, ValorPagarPagoPuntos: 0
+        PuntosGanados: this.PuntosGanadosUsar, ValorPagarPagoPuntos: 0, ValorMinimoParaPuntos: this.ValorMinimoParaPuntos
 
       }
     });
@@ -261,6 +268,7 @@ export class DetallePedidoComponent implements OnInit {
         this.TotalPagarUsar = result[0].TotalPagar;
         this.PuntosGanadosUsar = result[0].PuntosGanados;
         this.ValorPagarPagoPuntosUsar = result[0].ValorPagarPagoPuntos;
+        this.AplicarPuntosGanados = result[0].AplicarPuntosGanados;
         this.CrearPedido();
       }
     });
@@ -413,7 +421,7 @@ export class DetallePedidoComponent implements OnInit {
 
                   //Si se paga con puntos se debe enviar el valor calculado menos los puntos usados.
                   if (this.ValorPagarPagoPuntosUsar > 0) {
-                    objPedidoDetalle.Valor = this.ValorPagarPagoPuntosUsar;
+                    objPedidoDetalle.Valor = element.PrecioEmpresariaSinIVA - (element.PrecioEmpresariaSinIVA * (this.DescuentoPuntosUsar / 100));
                   }
                   else {
                     objPedidoDetalle.Valor = element.PrecioEmpresariaSinIVA;
@@ -430,7 +438,13 @@ export class DetallePedidoComponent implements OnInit {
 
                   objPedidoDetalle.PorcentajeDescuento = element.PorcentajeDescuento;
                   objPedidoDetalle.PorcentajeDescuentoPuntos = this.DescuentoPuntosUsar;
-                  objPedidoDetalle.PuntosGanados = this.PuntosGanadosUsar;
+
+                  if (this.AplicarPuntosGanados) {
+                    objPedidoDetalle.PuntosGanados = Math.round(element.PuntosGanados);
+                  }
+                  else {
+                    objPedidoDetalle.PuntosGanados = 0;
+                  }
 
                   objPedidoDetalle.PedidosClienteInfo = new E_PedidosCliente()
                   x.okTransEncabezadoPedido = true;
@@ -500,6 +514,27 @@ export class DetallePedidoComponent implements OnInit {
     }
 
 
+  }
+
+  //Consulta el valor mimino de la tabla parametros para otorgar puntos ganados.
+  ConsultarParametroMinimoPuntos() {
+
+    var objParametros: E_Parametros = new E_Parametros()
+    objParametros.Id = ParametrosEnum.PedidoMinimoParaPuntos;
+    this.ValorMinimoParaPuntos = 0;
+
+    this.ParameterService.listarParametrosxId(objParametros)
+      .subscribe((x: E_Parametros) => {
+        if (x.Valor != undefined) {
+          var MinimoPuntos = Number(x.Valor);
+          if (MinimoPuntos > 0) {
+            this.ValorMinimoParaPuntos = MinimoPuntos;
+          }
+        }
+        else {
+          this.ValorMinimoParaPuntos = 0;
+        }
+      })
   }
 
 

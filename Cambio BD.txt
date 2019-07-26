@@ -25,6 +25,8 @@ fsevents@
 - cuando se elige direccion de entrega despacho hay que guarfar un departamento
 
 PENDIENTES DE MEJORA SAVED
+- revisar grid precio cat y emp cuando se asignan de una en una los articulso
+- poner hora y fecha en resumen de pedido
 - Adcionar a encabezado pedido cantidad de puntos utilziado
 - Arreglar esta bandera para que se ponga en true si hay IVA x ciudad x zona x articulo x cliente. Clase: PluController.cs Metodo: ListarxCodigoRapido()
 - no dejar reservar cuando los puntos son negativos o hay temas de calculos. que sea >= 0

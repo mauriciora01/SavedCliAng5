@@ -5,6 +5,7 @@ import { E_Cliente } from 'app/Models/E_Cliente';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
 
+
 export interface DialogData {
   Titulo: string;
   Mensaje: string;
@@ -35,6 +36,7 @@ export interface DialogData {
   DescuentoPts: number;
   PuntosGanados: number;
   ValorPagarPagoPuntos: number;
+  ValorMinimoParaPuntos: number;
 }
 
 export interface ReturnsData {
@@ -44,6 +46,7 @@ export interface ReturnsData {
   EnviandoPedido: boolean;
   PuntosGanados: number;
   ValorPagarPagoPuntos: number;
+  AplicarPuntosGanados: boolean;
 }
 
 @Component({
@@ -63,6 +66,7 @@ export class ResumenPedidoComponent implements OnInit {
   public txt_PuntosUsar: number = 0;
   public PuntosCerrar: number = -1;
   public PuntosGanadosCalculo: number = 0;
+  public AplicarPuntosGanados: boolean = true;
 
   public ReturnData: ReturnsData[];
 
@@ -75,6 +79,8 @@ export class ResumenPedidoComponent implements OnInit {
     this.form = this.formBuilder.group({
       txt_PuntosUsar: [undefined, [Validators.required]]
     });
+
+
   }
 
 
@@ -88,7 +94,18 @@ export class ResumenPedidoComponent implements OnInit {
        this.TextColor = 'green';
      }*/
 
-    this.PuntosGanadosCalculo = this.data.PuntosGanados;
+    //-----------------------
+    this.PuntosGanadosCalculo = Math.round(this.data.PuntosGanados);
+
+    //Valor Minimo Para puntos 
+    if (this.data.TotalPrecioCatalogo < this.data.ValorMinimoParaPuntos) {
+      this.PuntosGanadosCalculo = 0;
+      this.AplicarPuntosGanados = false;
+    }
+
+    //-----------------------
+
+
 
     this.form = this.formBuilder.group({
       txt_PuntosUsar: [undefined, [Validators.required]],
@@ -104,6 +121,8 @@ export class ResumenPedidoComponent implements OnInit {
     this.formErrors = {
       txt_PuntosUsar: {}
     };
+
+
 
   }
 
@@ -134,7 +153,8 @@ export class ResumenPedidoComponent implements OnInit {
     this.ReturnData = [{
       PuntosUsar: this.PuntosCerrar, TotalPagar: this.data.TotalPagar,
       DescuentoPuntos: this.data.DescuentoPts, EnviandoPedido: true,
-      PuntosGanados: this.PuntosGanadosCalculo, ValorPagarPagoPuntos: this.data.ValorPagarPagoPuntos
+      PuntosGanados: this.PuntosGanadosCalculo, ValorPagarPagoPuntos: this.data.ValorPagarPagoPuntos,
+      AplicarPuntosGanados: this.AplicarPuntosGanados
     }]
     this.dialogRef.close(this.ReturnData);
 
@@ -194,6 +214,17 @@ export class ResumenPedidoComponent implements OnInit {
     }
 
 
+    //Valor Minimo Para puntos 
+    if (this.data.TotalPrecioCatalogo < this.data.ValorMinimoParaPuntos) {
+      this.PuntosGanadosCalculo = 0;
+      this.AplicarPuntosGanados = false;
+    }
+
+
   }
+
+
+
+
 
 }
