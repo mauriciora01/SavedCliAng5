@@ -130,7 +130,7 @@ export class FuseLoginComponent implements OnInit {
         this.Loading = true
         //*MRG: Llamar a servicios
         this.UserService.Login(user).subscribe((x: E_SessionUser) => {
-            //debugger
+            debugger
             if (x.Error != undefined) {
                 if (x.Error.Id == 1 || x.Error.Id == 2) {
                     this.errorLogin = true
@@ -139,7 +139,12 @@ export class FuseLoginComponent implements OnInit {
                 }
             }
             this.Loading = false
-            this.Router.navigate(["/principal/"])
+            if(x.IdGrupo=="52"){
+                this.Router.navigate(["/pedidosprincipal/"])
+            }else{
+                this.Router.navigate(["/principal/"])    
+            }
+            
             
         })
         //   ;

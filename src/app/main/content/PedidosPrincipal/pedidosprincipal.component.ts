@@ -48,7 +48,7 @@ export class PedidosPrincipalComponent implements OnInit {
     public CodigoRapidoSeleccionado: string = "54";
     public TipoEnvioSeleccionado: string = "";
     public CodCiudadDespacho: string = "";
-
+    NumeroDocumento:string;
     public ListCatalogo: Array<E_Catalogo> = new Array<E_Catalogo>();
     //*public ListBodega: Array<E_Catalogo> = new Array<E_Catalogo>();
     formErrors: any;
@@ -144,6 +144,12 @@ export class PedidosPrincipalComponent implements OnInit {
                 map(value => this._filter(value))
             );
 
+        if(this.SessionUser.IdGrupo=="52"){
+            this.NumeroDocumento= this.SessionUser.Cedula;
+            this.ValidateDocument2();
+        }
+
+
     }
 
     private _filter(value: string): string[] {
@@ -160,11 +166,76 @@ export class PedidosPrincipalComponent implements OnInit {
 
     }
 
+    ValidateDocument2() {
+        try {
+            debugger
+            this.NombreEmpresariaCompleto = "";
+            this.NombreDisabled = false;
 
+                //var okDoc = this.pc_verificar(this.form.value.NumeroDocumento)
+                //console.log('okDoc:' + okDoc)
+                if (true) {
+
+                    var objClienteResquest: E_Cliente = new E_Cliente()
+                    objClienteResquest.Nit = this.NumeroDocumento;
+
+                    this.ClienteService.ValidaExisteEmpresariaNombre(objClienteResquest).subscribe((x: E_SessionEmpresaria) => {
+
+                        if (x.Error == undefined) {
+                            this.NombreDisabled = true;
+                            this.Paso1Ok = true;
+                            this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow()
+                            this.NombreEmpresariaCompleto = this.SessionEmpresaria.NombreEmpresariaCompleto;
+                            this.ListBodega.push( this.SessionEmpresaria.Bodegas);
+                        }
+                        else {
+                            this.NombreDisabled = false;
+                            this.Paso1Ok = false;
+                            this.DatosEnvioSeleccionado = "";
+                            this.TipoEnvioSeleccionado = "";
+
+                            this.firstFormGroup = this._formBuilder.group({
+                                firstCtrl: ['', Validators.required],
+                                Catalogo: [undefined, [Validators.required]],
+                                NumeroDocumento: [undefined, [Validators.required]],
+                                Bodega: [undefined, [Validators.required]],
+                                DatosEnvio: [undefined, [Validators.required]]
+                            });
+                            //---------------------------------------------------------------------------------------------------------------
+                            //Mensaje de Error. 
+                            const dialogRef = this.dialog.open(ModalPopUpComponent, {
+                                width: '450px',
+                                data: { TipoMensaje: "Error", Titulo: "Empresaria", Mensaje: "La empresaria no existe. Por favor verifique." }
+                            });
+
+                            throw new ErrorLogExcepcion("PedidosPrincipalComponent", "ValidateDocument()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
+                            //---------------------------------------------------------------------------------------------------------------
+
+                        }
+
+                    })
+
+                }
+            
+
+        }
+        catch (error) {
+            //---------------------------------------------------------------------------------------------------------------
+            //Mensaje de Error.  
+            const dialogRef = this.dialog.open(ModalPopUpComponent, {
+                width: '450px',
+                data: { TipoMensaje: "Error", Titulo: "Empresaria", Mensaje: "No se pudo validar la empresaria." }
+            });
+
+            throw new ErrorLogExcepcion("PedidosPrincipalComponent", "ValidateDocument()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
+
+            //---------------------------------------------------------------------------------------------------------------
+        }
+    }
     //validar documento con formato de Ecuador correcto.
     ValidateDocument() {
         try {
-
+            debugger
             this.NombreEmpresariaCompleto = "";
             this.NombreDisabled = false;
 

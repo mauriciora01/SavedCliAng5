@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { UserService } from 'app/ApiServices/UserService';
 
 @Component({
     selector   : 'fuse-toolbar',
@@ -11,20 +12,21 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
     styleUrls  : ['./toolbar.component.scss']
 })
 
-export class FuseToolbarComponent
+export class FuseToolbarComponent implements OnInit
 {
+   
     userStatusOptions: any[];
     languages: any;
     selectedLanguage: any;
     showLoadingBar: boolean;
     horizontalNav: boolean;
     noNav: boolean;
-
+    nombreT:string;
     constructor(
         private router: Router,
         private fuseConfig: FuseConfigService,
         private sidebarService: FuseSidebarService,
-        private translate: TranslateService
+        private translate: TranslateService,private UserService: UserService
     )
     {
         this.userStatusOptions = [
@@ -94,6 +96,12 @@ export class FuseToolbarComponent
         });
 
     }
+
+    ngOnInit(): void {
+        this.nombreT = this.UserService.GetCurrentCurrentUserNow().NombreUsuario;
+    }
+
+
 AbrirInfoUsuario()
 {
     this.router.navigate(['/perfil'])

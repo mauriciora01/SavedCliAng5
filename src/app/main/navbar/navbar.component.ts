@@ -5,8 +5,9 @@ import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scr
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 /*import { navigation } from 'app/navigation/navigation';*/
-import { navigation, navigationGeneral } from 'app/navigation/navigation';
+import { navigation, navigationGeneral, navigationGeneralEmpre } from 'app/navigation/navigation';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { UserService } from 'app/ApiServices/UserService';
 
 @Component({
     selector     : 'fuse-navbar',
@@ -42,13 +43,19 @@ export class FuseNavbarComponent implements OnDestroy
 
     constructor(
         private sidebarService: FuseSidebarService,
-        private navigationService: FuseNavigationService
+        private navigationService: FuseNavigationService,
+        private UserService: UserService
     )
     {
-        // Navigation data
-        this.navigation = navigation;
 
-        this.navigation = navigationGeneral
+        
+        this.navigation = navigation;
+        if(this.UserService.GetCurrentCurrentUserNow().IdGrupo=="52"){
+            this.navigation =navigationGeneralEmpre
+        }else{
+            this.navigation = navigationGeneral
+        }
+        
         
 
         // Default layout

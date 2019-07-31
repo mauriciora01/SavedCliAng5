@@ -42,6 +42,7 @@
         class="ag-theme-balham"
         [columnDefs]="columnDefs"
         [rowData]="rowData"
+        [context]="this"   
         (gridReady)="onGridReady($event)"
       ></ag-grid-angular>
     </div>

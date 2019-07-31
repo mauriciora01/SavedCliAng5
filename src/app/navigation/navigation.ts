@@ -129,3 +129,83 @@ export const navigationGeneral = [
     }
 ];
 
+
+
+export const navigationGeneralEmpre = [
+    {
+        'id': 'applications',
+        'title': 'Menu',
+        'translate': 'NAV.APPLICATIONS',
+        'type': 'group',
+        'children': [           
+            {
+                'id'       : 'pedidos',
+                'title'    : 'Pedidos',
+                'translate': 'NAV.SAMPLE.TITLE',
+                'type'     : 'collapse',
+                'icon'     : 'shopping_cart',
+                'children' : [
+                    {
+                        'id': 'pedidosprincipal',
+                        'title': 'Crear Nuevo Pedido',
+                        'translate': 'NAV.SAMPLE.TITLE',
+                        'type': 'item',
+                        'icon': 'add_shopping_cart',
+                        'url': '/pedidosprincipal',
+                    },
+                    {
+                        'id': 'mispedidos',
+                        'title': 'Mis Pedidos',
+                        'translate': 'NAV.SAMPLE.TITLE',
+                        'type': 'item',
+                        'icon': 'view_list',
+                        'url': '/mispedidos',
+                    },
+                    {
+                      'id': 'pedidosfacturados',
+                      'title': 'Pedidos Facturados',
+                      'translate': 'NAV.SAMPLE.TITLE',
+                      'type': 'item',
+                      'icon': 'today',
+                      'url': '/pedidosfacturados',
+                  },
+                ]
+            },
+            {
+              'id'       : 'oficinavirtual',
+              'title'    : 'Oficina Virtual',
+              'translate': 'NAV.SAMPLE.TITLE',
+              'type'     : 'collapse',
+              'icon'     : 'timeline',
+              'children' : [
+                  {
+                      'id': 'micartera',
+                      'title': 'Mi Cartera',
+                      'translate': 'NAV.SAMPLE.TITLE',
+                      'type': 'item',
+                      'icon': 'attach_money',
+                      'url': '/micartera',
+                  },
+                ]
+              },
+            {
+                'id': 'ubicaciongeneral',
+                'title': 'Ubicación General',
+                'translate': 'NAV.SAMPLE.TITLE',
+                'type': 'item',
+                'icon': 'place',
+                'url': '/ubicaciongeneral',
+            },
+
+
+            {
+                'id': 'Salir',
+                'title': 'Salir',
+                'translate': 'NAV.SAMPLE.TITLE',
+                'type': 'item',
+                'icon': 'input',
+                'url': '/login',
+            },
+        ]
+    }
+];
