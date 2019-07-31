@@ -63,8 +63,7 @@ export class ResumenPedidoComponent implements OnInit {
   form: FormGroup;
   formErrors: any;
 
-  public txt_PuntosUsar: number = 0;
-  public PuntosCerrar: number = -1;
+  public txt_PuntosUsar: number = 0;  
   public PuntosGanadosCalculo: number = 0;
   public AplicarPuntosGanados: boolean = true;
 
@@ -85,8 +84,7 @@ export class ResumenPedidoComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    this.PuntosCerrar = 0;
+  ngOnInit() {   
     /* if (this.data.TipoMensaje == 'Error') {
        this.TextColor = 'blue';
      }
@@ -151,7 +149,7 @@ export class ResumenPedidoComponent implements OnInit {
 
   ConfirmData() {
     this.ReturnData = [{
-      PuntosUsar: this.PuntosCerrar, TotalPagar: this.data.TotalPagar,
+      PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar: this.data.TotalPagar,
       DescuentoPuntos: this.data.DescuentoPts, EnviandoPedido: true,
       PuntosGanados: this.PuntosGanadosCalculo, ValorPagarPagoPuntos: this.data.ValorPagarPagoPuntos,
       AplicarPuntosGanados: this.AplicarPuntosGanados
