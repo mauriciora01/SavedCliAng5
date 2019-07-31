@@ -19,6 +19,8 @@ ger:1088009775 - IdVendedor: 7002  - IdZona: 50201
 PEW51075
 fsevents@
 
+- conceptos: 5: - por compra, 16: + reserva, 10: + nivel pedido, 18: + portal saved
+
 - revisar creacion de usuario y clave
 - revisar creacion cuando hay error 
 - falta validar unineg en sesion
@@ -109,6 +111,9 @@ TarjetaCD	varchar(50)	Checked
 Create table SVDN_EXCEPTION_ERROR -->02-04-2019
 
 Adicion en la tabla de Parametro = CarpetaImagenesSAVED = 77
+Adicion en la tabla de Parametro = 78	Puntos Ganados x Portal SAVED	100	int	True	Puntos
+Adicion en la tabla de SVDN_PUNTOS_CONCEPTOS: 18	PortalSaved
+
 
 
 PROCEDIMIENTOS
@@ -122,6 +127,7 @@ PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_porcentajedctopuntos				numeric(1
 PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_puntosganados					int							= NULL,
 PRC_SVDN_PEDIDOSC2_2000--> Opcion I-A : agregar colmuna en insert de --> puntosganados
 PRC_SVDN_PEDIDOSC2_2000--> Opcion I-A : agregar colmuna en insert de --> porcentajedctopuntos
+CREATE PROCEDURE [dbo].[PRC_SVDN_PUNTOS_SAVED]
 
 REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 -->02-04-2019
