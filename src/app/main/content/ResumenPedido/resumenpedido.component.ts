@@ -93,7 +93,7 @@ export class ResumenPedidoComponent implements OnInit {
      }*/
 
     //-----------------------
-    this.PuntosGanadosCalculo = Math.round(this.data.PuntosGanados);
+    this.PuntosGanadosCalculo = Math.floor(this.data.PuntosGanados);
 
     //Valor Minimo Para puntos 
     if (this.data.TotalPrecioCatalogo < this.data.ValorMinimoParaPuntos) {
@@ -187,7 +187,7 @@ export class ResumenPedidoComponent implements OnInit {
 
         //Si se paga el pedido parcial con puntos sumar puntos ganados * % descuento de puntos.
         var PuntosGanadosTemp = 0;
-        PuntosGanadosTemp = Math.round(this.PuntosGanadosCalculo - (this.PuntosGanadosCalculo * (DescuentoPtsTemp / 100)));
+        PuntosGanadosTemp = Math.floor(this.PuntosGanadosCalculo - (this.PuntosGanadosCalculo * (DescuentoPtsTemp / 100)));
         this.PuntosGanadosCalculo = PuntosGanadosTemp;
       }
 

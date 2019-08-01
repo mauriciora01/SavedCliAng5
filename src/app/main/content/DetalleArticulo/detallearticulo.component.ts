@@ -128,7 +128,7 @@ export class DetalleArticuloComponent implements OnInit {
     DetallePedido.PorcentajeIVA = this.data.PorcentajeIVA;
     DetallePedido.ExcentoIVA = this.data.ExcentoIVA;
 
-    DetallePedido.PuntosGanados = (this.data.PuntosGanados - (this.data.PuntosGanados * (this.data.PorcentajeDescuento / 100))) * Number(this.form.value.Cantidad);
+    DetallePedido.PuntosGanados = Math.floor((this.data.PuntosGanados - (this.data.PuntosGanados * (this.data.PorcentajeDescuento / 100))) * Number(this.form.value.Cantidad));
 
     this.DetallePedidoService.SetCurrentDetallePedido(DetallePedido);
 

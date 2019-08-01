@@ -440,7 +440,7 @@ export class DetallePedidoComponent implements OnInit {
                   objPedidoDetalle.PorcentajeDescuentoPuntos = this.DescuentoPuntosUsar;
 
                   if (this.AplicarPuntosGanados) {
-                    objPedidoDetalle.PuntosGanados = Math.round(element.PuntosGanados);
+                    objPedidoDetalle.PuntosGanados = Math.floor(element.PuntosGanados);
                   }
                   else {
                     objPedidoDetalle.PuntosGanados = 0;
