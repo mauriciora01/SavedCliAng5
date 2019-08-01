@@ -98,7 +98,11 @@ export class FuseToolbarComponent implements OnInit
     }
 
     ngOnInit(): void {
-        this.nombreT = this.UserService.GetCurrentCurrentUserNow().NombreUsuario;
+        var x = this.UserService.GetCurrentCurrentUserNow();
+        if(x !=null){
+            this.nombreT = x.NombreUsuario;
+        }
+        
     }
 
 
