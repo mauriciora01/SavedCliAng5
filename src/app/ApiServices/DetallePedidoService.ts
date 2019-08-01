@@ -22,11 +22,17 @@ export class DetallePedidoService {
     }
 
     EliminarItemPedido(item:E_PLU):boolean{
+        debugger
         var retrievedObject = sessionStorage.getItem('CurrentDetallePedido');
-        var x: Array<E_PLU> = JSON.parse(retrievedObject)
-        x.splice(x.indexOf(item), 1);
+        var lis: Array<E_PLU> = JSON.parse(retrievedObject)
+        var lis2=lis.filter(x => x.CodigoRapido !== item.CodigoRapido);
+        /*lis.forEach((element) => {
+            if(element.CodigoRapido==item.CodigoRapido){
+
+            }
+        });      */ 
         this.ClearCurrentDetallePedido();
-        sessionStorage.setItem("CurrentDetallePedido", JSON.stringify(x))
+        sessionStorage.setItem("CurrentDetallePedido", JSON.stringify(lis2))
         return true;
     }
 
@@ -78,7 +84,7 @@ export class DetallePedidoService {
                     nuevo.NombreProducto = ArticuloAdicionar.NombreProducto;
                     nuevo.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;
                     nuevo.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
-                    nuevo.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresaria;
+                    nuevo.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresaria * nuevo.Cantidad;
                     nuevo.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
                     nuevo.PLU = ArticuloAdicionar.PLU;   
                                         
@@ -90,6 +96,10 @@ export class DetallePedidoService {
                     nuevo.ExcentoIVA = ArticuloAdicionar.ExcentoIVA;
 
                     nuevo.PuntosGanados = ArticuloAdicionar.PuntosGanados;
+
+
+
+                    
                           
                     SessionDetallePedidoGr.splice(SessionDetallePedidoGr.indexOf(objeto), 1);
                     SessionDetallePedidoGr.push(nuevo);
