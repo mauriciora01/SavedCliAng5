@@ -31,27 +31,27 @@ export class PerfilComponent implements OnInit {
     
 
     ngOnInit(){
-        //debugger;
+        
          this.SessionUser = this.userService.GetCurrentCurrentUserNow()
 
          var objClienteResquest: E_Cliente = new E_Cliente()
          objClienteResquest.Nit = this.SessionUser.Cedula
 
          var x = this.clienteservice.ValidaExisteEmpresariaNombre(objClienteResquest).subscribe((x: E_SessionEmpresaria) => {
-             //debugger
+             
             if (x.Error == undefined) {             
                 this.Empresariadatos = this.userService.GetCurrentCurrentEmpresariaNow()  
                 this.parametrosservice.RegionxId(+this.SessionUser.IdRegional).subscribe((x) => {
-                    ////debugger;
+                    //
                    this.Region = x.Nombre;
                 });  
                 this.parametrosservice.VendedorxId(this.SessionUser.IdVendedor).subscribe((x) => {
-                    //debugger;
+                    
                    this.Vendedor = x.Nombre;
                 }); 
 
                 this.parametrosservice.ZonaxId(this.SessionUser.IdZona).subscribe((x) => {
-                    //debugger;
+                    
                    this.Zona = x.Descripcion;
                 }); 
             }

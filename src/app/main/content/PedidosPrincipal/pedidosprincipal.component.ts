@@ -144,7 +144,7 @@ export class PedidosPrincipalComponent implements OnInit {
                 map(value => this._filter(value))
             );
 
-        if(this.SessionUser.IdGrupo=="52"){
+        if(this.SessionUser.IdGrupo=="50"){
             this.NumeroDocumento= this.SessionUser.Cedula;
             this.ValidateDocument2();
         }
@@ -168,7 +168,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
     ValidateDocument2() {
         try {
-            debugger
+            
             this.NombreEmpresariaCompleto = "";
             this.NombreDisabled = false;
 
@@ -235,7 +235,7 @@ export class PedidosPrincipalComponent implements OnInit {
     //validar documento con formato de Ecuador correcto.
     ValidateDocument() {
         try {
-            debugger
+            
             this.NombreEmpresariaCompleto = "";
             this.NombreDisabled = false;
 

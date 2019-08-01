@@ -140,7 +140,7 @@ export class ParameterService {
 
     //Pueden usar este metodo para no usar BUILDERS porque eso es muy mamon xD att. Juta
     public RegionxId(id: number): Observable<E_Regional> {
-        //debugger;
+        
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');     
         const httpOptions = this.HeaderBuilder.HeadNow()
@@ -149,7 +149,7 @@ export class ParameterService {
     }
 
     public ZonaxId(id: string): Observable<E_Zona> {
-        //debugger;
+        
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');     
         const httpOptions = this.HeaderBuilder.HeadNow()
@@ -158,7 +158,7 @@ export class ParameterService {
     }
 
     public VendedorxId(id: string): Observable<E_Vendedor> {
-        //debugger;
+        
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');     
         const httpOptions = this.HeaderBuilder.HeadNow()

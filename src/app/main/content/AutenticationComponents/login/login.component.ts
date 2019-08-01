@@ -54,7 +54,7 @@ export class FuseLoginComponent implements OnInit {
             user.Passwordd = btoa("123123")
             this.Loading = true
             this.UserService.Login(user).subscribe((x: E_SessionUser) => {
-                //debugger
+                
                 /*if (x.error != undefined) {
                     if (x.error.Id == 1 || x.error.Id == 2) {
                         this.errorLogin = true
@@ -130,7 +130,7 @@ export class FuseLoginComponent implements OnInit {
         this.Loading = true
         //*MRG: Llamar a servicios
         this.UserService.Login(user).subscribe((x: E_SessionUser) => {
-            debugger
+            
             if (x.Error != undefined) {
                 if (x.Error.Id == 1 || x.Error.Id == 2) {
                     this.errorLogin = true
@@ -139,7 +139,7 @@ export class FuseLoginComponent implements OnInit {
                 }
             }
             this.Loading = false
-            if(x.IdGrupo=="52"){
+            if(x.IdGrupo=="50"){
                 this.Router.navigate(["/pedidosprincipal/"])
             }else{
                 this.Router.navigate(["/principal/"])    

@@ -50,7 +50,7 @@ export class FuseNavbarComponent implements OnDestroy
 
         
         this.navigation = navigation;
-        if(this.UserService.GetCurrentCurrentUserNow().IdGrupo=="52"){
+        if(this.UserService.GetCurrentCurrentUserNow().IdGrupo=="50"){
             this.navigation =navigationGeneralEmpre
         }else{
             this.navigation = navigationGeneral

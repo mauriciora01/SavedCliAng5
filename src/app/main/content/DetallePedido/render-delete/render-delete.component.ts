@@ -24,7 +24,7 @@ export class RenderDeleteComponent  {
    }
 
    onClick(): void {
-     debugger;
+    
        var component =  this.params.context as DetallePedidoComponent
        var xx: E_PLU = this.params.data;
        var restul = this.DetallePedidoService.EliminarItemPedido(xx);;
