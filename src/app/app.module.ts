@@ -55,6 +55,8 @@ import { pedidosfacturadosModule } from './main/content/pedidosfacturados/pedido
 import { PerfilModule } from './main/content/perfil/perfil.module';
 import { micarteraModule } from './main/content/micartera/micartera.module';
 
+import { ModalPopUpPedidoModule } from './main/content/ModalPopUpPedido/modalpopuppedido.module';
+
 const appRoutes: Routes = [
     /*{
         path      : '**',
@@ -73,7 +75,7 @@ const appRoutes: Routes = [
     { path: 'pedidosfacturados', redirectTo: '/pedidosfacturados', pathMatch: 'full' },
     { path: 'perfil', redirectTo: '/perfil', pathMatch: 'full'},
     { path: 'micartera', redirectTo: '/micartera', pathMatch: 'full' },
-
+    { path: 'modalpopuppedido', redirectTo: '/modalpopuppedido', pathMatch: 'full' },
 
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: 'login' },
@@ -118,6 +120,7 @@ const appRoutes: Routes = [
         PerfilModule,
         detallepfactuModule,
         micarteraModule,
+        ModalPopUpPedidoModule,
 
         MatInputModule,
         MatTableModule,

@@ -63,9 +63,11 @@ export class ResumenPedidoComponent implements OnInit {
   form: FormGroup;
   formErrors: any;
 
-  public txt_PuntosUsar: number = 0;  
+  public txt_PuntosUsar: number = 0;
   public PuntosGanadosCalculo: number = 0;
   public AplicarPuntosGanados: boolean = true;
+  public FechaHora: string = "";
+
 
   public ReturnData: ReturnsData[];
 
@@ -84,7 +86,7 @@ export class ResumenPedidoComponent implements OnInit {
 
 
 
-  ngOnInit() {   
+  ngOnInit() {
     /* if (this.data.TipoMensaje == 'Error') {
        this.TextColor = 'blue';
      }
@@ -119,6 +121,15 @@ export class ResumenPedidoComponent implements OnInit {
     this.formErrors = {
       txt_PuntosUsar: {}
     };
+
+    //-----------------------------------------
+    //Fecha Hora
+    var today = new Date();
+    var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + ' ' + time;
+    this.FechaHora = " " + dateTime;
+    //-----------------------------------------
 
 
 
