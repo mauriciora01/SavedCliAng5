@@ -27,8 +27,13 @@ fsevents@
 - cuando se elige direccion de entrega despacho hay que guarfar un departamento
 
 PENDIENTES DE MEJORA SAVED
+- Cuando diga enviar pedido, bloquear boton para que no se envien varias veces
+- bloquear ventana de adicionar articulo cuando se intenta abrir varias veces
+OK - se debe borrar el detalle del pedido cada que se digite la cedula de una empresaria para nuevo pedido. 
+OK - en ok pedido reservado llevar a pagina de home
+OK - revisar flete en punto de venta deberia ser 0
 - revisar grid precio cat y emp cuando se asignan de una en una los articulso
-- poner hora y fecha en resumen de pedido
+OK - poner hora y fecha en resumen de pedido
 - Adcionar a encabezado pedido cantidad de puntos utilziado
 - Arreglar esta bandera para que se ponga en true si hay IVA x ciudad x zona x articulo x cliente. Clase: PluController.cs Metodo: ListarxCodigoRapido()
 - no dejar reservar cuando los puntos son negativos o hay temas de calculos. que sea >= 0
@@ -49,7 +54,7 @@ PENDIENTES DE MEJORA SAVED
 - totalizar valores en grid de detalle pedido
 - poner colores rojo/verde a variables (disponible, etc)
 - modificar el % de iva en las tablas de fletes de 14% a 12%
-
+- limpiar codigo fuente de lo que esta comentado
 
 
 COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --build-optimizer=false
@@ -127,7 +132,7 @@ PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_porcentajedctopuntos				numeric(1
 PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_puntosganados					int							= NULL,
 PRC_SVDN_PEDIDOSC2_2000--> Opcion I-A : agregar colmuna en insert de --> puntosganados
 PRC_SVDN_PEDIDOSC2_2000--> Opcion I-A : agregar colmuna en insert de --> porcentajedctopuntos
-CREATE PROCEDURE [dbo].[PRC_SVDN_PUNTOS_SAVED]
+CREATE PROCEDURE [dbo].[PRC_SVDN_PUNTOS_SAVED] (al final de este archivo ver script sql)
 
 REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 -->02-04-2019
@@ -901,3 +906,311 @@ chunk {runtime} runtime.js, runtime.js.map (runtime) 6.08 kB [entry] [rendered]
 chunk {styles} styles.js, styles.js.map (styles) 5.19 MB [initial] [rendered]
 chunk {vendor} vendor.js, vendor.js.map (vendor) 8.68 MB [initial] [rendered]
 i ｢wdm｣: Compiled successfully.
+
+
+
+USE [Factu19]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PRC_SVDN_PUNTOS_SAVED]    Script Date: 31/07/2019 22:46:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+/*==========================================================================*/
+/*  Archivo:            PRC_SVDN_PUNTOS_SAVED.sql							*/
+/*  Stored procedure:   PRC_SVDN_PUNTOS_SAVED								*/
+/*  Producto:			Sistema de Venta Directa - Niviglobal				*/
+/*  Disenado por:		Mauricio Ramos										*/
+/*  Fecha de escritura:	30/07/2019											*/
+/*==========================================================================*/
+
+CREATE PROCEDURE [dbo].[PRC_SVDN_PUNTOS_SAVED]
+(
+	@i_operation						char(1),
+	@i_option							char(1),		
+	@i_numeropedido						varchar(12)				= NULL,
+	@i_nit								varchar(20)				= NULL,
+	@i_campana							varchar(4)				= NULL,
+	@i_tipo								varchar(2)				= NULL,
+	@i_cantidad							int						= NULL,
+	@i_movimiento						varchar(50)				= NULL,
+	@i_procesado						int						= NULL,
+	@o_err_cod							int						OUTPUT,
+    @o_err_msg							varchar					OUTPUT
+)
+AS
+
+BEGIN
+
+
+	/*================================================================*/
+	/*OPERACIONES DE SELECCION                                        */
+	/*================================================================*/
+	IF @i_operation = 'S'
+	BEGIN
+			/*================================================================*/
+			--Obtiene los puntos efectivos de una empresaria
+			IF @i_option = 'A'
+			BEGIN
+
+				  SELECT (puntoEfec-PuntoRed) as PuntoEfec FROM   SVDN_PUNTOS_TOTAL WHERE nit=@i_nit
+				
+			END
+	END
+
+	/*================================================================*/
+	/*OPERACIONES DE INSERCION                                        */
+	/*================================================================*/ 
+	IF @i_operation = 'I'
+	BEGIN    
+		IF @i_option = 'A'
+		BEGIN				
+		
+				
+				INSERT INTO SVDN_PUNTOS_DETALLADO
+				(       
+					Nit						,
+					Campana					,
+					Documento				,
+					Tipo					,
+					Cantidad				,
+					Fecha					,					
+					Movimiento				,
+					Procesado		
+				) 
+				VALUES
+				( 	
+					@i_nit					,
+					(select campana from campanas where fechaini < GETDATE() and GETDATE() < fechafin),
+					@i_numeropedido			,
+					@i_tipo					,
+					@i_cantidad				,
+					getdate()				,
+					@i_movimiento			,
+					@i_procesado			
+				)
+
+
+				--********************************************************************************************************************
+				-- SIEMPRE ACTUALIZAR PUNTOS TOTAL
+
+				---------------- Si no existe se crea en puntos total --------------------------------------	
+				IF(SELECT COUNT(*) FROM svdn_Puntos_total WHERE nit=@i_nit)=0
+				BEGIN
+
+				INSERT INTO svdn_Puntos_total(nit, puntoped, puntoEfec, puntoRed, total)
+				VALUES (@i_nit, 0, 0, 0, 0 );
+				END
+				-------------------END---------------- --------------------------------------	
+
+
+				UPDATE SVDN_PUNTOS_TOTAL
+
+				SET puntoPed=ISNULL((
+				SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+				WHERE nit=@i_nit
+				AND procesado=0
+				AND tipo='+'),0),
+
+				puntoEfec=ISNULL((
+				SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+				WHERE nit=@i_nit
+				AND procesado=1
+				AND tipo='+'
+				),0), 
+
+				puntoRed=ISNULL((
+				SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+				WHERE nit=@i_nit			
+				AND tipo='-'),0)
+				WHERE nit=@i_nit			
+
+
+				UPDATE SVDN_PUNTOS_TOTAL
+				SET total=PuntoPed+puntoEfec-puntoRed
+				WHERE nit=@i_nit
+
+			--********************************************************************************************************************
+		
+		END
+		
+		IF @i_option = 'B'
+		BEGIN		
+				
+			---------------- Si no existe se crea en puntos total --------------------------------------	
+				IF(SELECT COUNT(*) FROM svdn_Puntos_total WHERE nit=@i_nit)=0
+				BEGIN
+
+				INSERT INTO svdn_Puntos_total(nit, puntoped, puntoEfec, puntoRed, total)
+				VALUES (@i_nit, 0, 0, 0, 0 );
+				END
+				-------------------END---------------- --------------------------------------	
+
+
+				UPDATE SVDN_PUNTOS_TOTAL
+
+				SET puntoPed=ISNULL((
+				SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+				WHERE nit=@i_nit
+				AND procesado=0
+				AND tipo='+'),0),
+
+				puntoEfec=ISNULL((
+				SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+				WHERE nit=@i_nit
+				AND procesado=1
+				AND tipo='+'
+				),0), 
+
+				puntoRed=ISNULL((
+				SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+				WHERE nit=@i_nit			
+				AND tipo='-'),0)
+				WHERE nit=@i_nit			
+
+
+				UPDATE SVDN_PUNTOS_TOTAL
+				SET total=PuntoPed+puntoEfec-puntoRed
+				WHERE nit=@i_nit
+			
+		END
+
+
+		--Inserta los puntos adicionales por otros conceptos
+  
+		IF @i_option = 'C'
+		BEGIN				
+
+			DECLARE @VALOR  NUMERIC(18,2)=0
+			DECLARE @IVA  NUMERIC(18,2)=0
+			DECLARE @TOTAL  NUMERIC(18,2)=0
+			DECLARE @VALORPEDIDOMINIMOEXTRA  NUMERIC(18,2)=0
+			DECLARE @VALORGANADOPEDIDOMINIMOEXTRA  INT =0
+			DECLARE @VALORGANADOPUNTOSSAVED  INT =0
+
+			-----------------------------------------------------------------------------------------------------------------------------
+			-- CONCEPTO 10 = POR NIVEL DE PEDIDO
+
+			--PUNTOS POR PEDIDO EXTRA PUNTOS
+			SET @VALORPEDIDOMINIMOEXTRA = CAST((SELECT monto FROM SVDN_PUNTOS_NIVELES WHERE id=1) AS NUMERIC)
+
+			SET @VALORGANADOPEDIDOMINIMOEXTRA = CAST((SELECT PUNTOS FROM SVDN_PUNTOS_NIVELES WHERE id=1) AS INT)
+
+			--PRECIO FACTURADO = PRECIO EMPRESARIA
+			SET @VALOR= (select sum(valor) from svdn_pedidosc2_2000 where numero=@i_numeropedido and referencia<>'FT0001' )
+			SET @IVA = (select sum(valor*(tarifaiva/100)) from svdn_pedidosc2_2000 where numero=@i_numeropedido and referencia<>'FT0001' ) 
+
+			SET @TOTAL= @VALOR + @IVA
+				
+			-- SI CUMPLE PUNTOS POR NIVEL DE PEDIDO
+			IF(@TOTAL >= @VALORPEDIDOMINIMOEXTRA)
+			BEGIN
+				
+				INSERT INTO SVDN_PUNTOS_DETALLADO
+				(       
+					Nit						,
+					Campana					,
+					Documento				,
+					Tipo					,
+					Cantidad				,
+					Fecha					,					
+					Movimiento				,
+					Procesado		
+				) 
+				VALUES
+				( 	
+					@i_nit					,
+					(select campana from campanas where fechaini < GETDATE() and GETDATE() < fechafin),
+					@i_numeropedido								,
+					'+'											,
+					@VALORGANADOPEDIDOMINIMOEXTRA				,
+					getdate()									,
+					10											, -- POR NIVEL DE PEDIDO
+					0			
+				)
+			END
+
+			-----------------------------------------------------------------------------------------------------------------------------
+			-- CONCEPTO 18 = POR CREACION DE PEDIDO POR SAVED
+
+			SET @VALORGANADOPUNTOSSAVED = CAST((SELECT par_valor FROM SVDN_PARAMETROS WHERE par_id=78) AS INT)
+
+			INSERT INTO SVDN_PUNTOS_DETALLADO
+			(       
+				Nit						,
+				Campana					,
+				Documento				,
+				Tipo					,
+				Cantidad				,
+				Fecha					,					
+				Movimiento				,
+				Procesado		
+			) 
+			VALUES
+			( 	
+				@i_nit					,
+				(select campana from campanas where fechaini < GETDATE() and GETDATE() < fechafin),
+				@i_numeropedido								,
+				'+'											,
+				@VALORGANADOPUNTOSSAVED						,
+				getdate()									,
+				18											, -- POR CREACION DE PEDIDO POR SAVED
+				0			
+			)
+			-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+			--********************************************************************************************************************
+			-- SIEMPRE ACTUALIZAR PUNTOS TOTAL
+
+			---------------- Si no existe se crea en puntos total --------------------------------------	
+			IF(SELECT COUNT(*) FROM svdn_Puntos_total WHERE nit=@i_nit)=0
+			BEGIN
+
+			INSERT INTO svdn_Puntos_total(nit, puntoped, puntoEfec, puntoRed, total)
+			VALUES (@i_nit, 0, 0, 0, 0 );
+			END
+			-------------------END---------------- --------------------------------------	
+
+
+			UPDATE SVDN_PUNTOS_TOTAL
+
+			SET puntoPed=ISNULL((
+			SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+			WHERE nit=@i_nit
+			AND procesado=0
+			AND tipo='+'),0),
+
+			puntoEfec=ISNULL((
+			SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+			WHERE nit=@i_nit
+			AND procesado=1
+			AND tipo='+'
+			),0), 
+
+			puntoRed=ISNULL((
+			SELECT SUM(cantidad) FROM SVDN_PUNTOS_DETALLADO 
+			WHERE nit=@i_nit			
+			AND tipo='-'),0)
+			WHERE nit=@i_nit			
+
+
+			UPDATE SVDN_PUNTOS_TOTAL
+			SET total=PuntoPed+puntoEfec-puntoRed
+			WHERE nit=@i_nit
+
+		--********************************************************************************************************************
+		END
+	END
+	
+END
+
+GO
+
+

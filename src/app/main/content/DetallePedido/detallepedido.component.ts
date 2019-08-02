@@ -26,6 +26,7 @@ import { RenderDeleteComponent } from './render-delete/render-delete.component';
 import { E_Parametros } from 'app/Models/E_Parametros';
 import { ParametrosEnum } from 'app/Enums/Enumerations';
 import { ParameterService } from 'app/ApiServices/ParametersServices';
+import { ModalPopUpPedidoComponent } from '../ModalPopUpPedido/modalpopuppedido.component';
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -476,7 +477,7 @@ export class DetallePedidoComponent implements OnInit {
 
 
                           //Mensaje de OK
-                          const dialogRef = this.dialog.open(ModalPopUpComponent, {
+                          const dialogRef = this.dialog.open(ModalPopUpPedidoComponent, {
                             width: '450px',
                             data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero }
                           });

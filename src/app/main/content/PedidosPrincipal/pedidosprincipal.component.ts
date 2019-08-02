@@ -235,6 +235,9 @@ export class PedidosPrincipalComponent implements OnInit {
     //validar documento con formato de Ecuador correcto.
     ValidateDocument() {
         try {
+
+            //Se borra acumulado de pedido.
+            sessionStorage.removeItem("CurrentDetallePedido");
             
             this.NombreEmpresariaCompleto = "";
             this.NombreDisabled = false;
@@ -255,6 +258,8 @@ export class PedidosPrincipalComponent implements OnInit {
                             this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow()
                             this.NombreEmpresariaCompleto = this.SessionEmpresaria.NombreEmpresariaCompleto;
                             this.ListBodega.push( this.SessionEmpresaria.Bodegas);
+
+                            
                         }
                         else {
                             this.NombreDisabled = false;
