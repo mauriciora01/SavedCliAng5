@@ -31,6 +31,7 @@ export class E_PLU {
     public Usuario: string
   
     public PrecioEmpresaria: number
+    public PrecioEmpresariaCons: number
     public PrecioPuntos: number
     public Pagopuntos: number
     public Activo: number

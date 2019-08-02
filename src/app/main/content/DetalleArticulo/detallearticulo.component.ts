@@ -118,6 +118,7 @@ export class DetalleArticuloComponent implements OnInit {
     DetallePedido.Cantidad = this.form.value.Cantidad;
     DetallePedido.PrecioCatalogoTotalConIVA = Number(this.form.value.Cantidad) * PrecioCatIVA;
     DetallePedido.PrecioEmpresaria = PrecioEmpre * Number(this.form.value.Cantidad);
+    DetallePedido.PrecioEmpresariaCons = PrecioEmpre;
     DetallePedido.PrecioPuntos = Number(this.form.value.Cantidad) * Number(this.data.PrecioPuntos);
     DetallePedido.PLU = this.data.PLU;
 

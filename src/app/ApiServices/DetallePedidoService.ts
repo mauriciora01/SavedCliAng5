@@ -84,7 +84,8 @@ export class DetallePedidoService {
                     nuevo.NombreProducto = ArticuloAdicionar.NombreProducto;
                     nuevo.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;
                     nuevo.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
-                    nuevo.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresaria * nuevo.Cantidad;
+                    nuevo.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresariaCons * nuevo.Cantidad;
+                    nuevo.PrecioEmpresariaCons=ArticuloAdicionar.PrecioEmpresariaCons;
                     nuevo.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
                     nuevo.PLU = ArticuloAdicionar.PLU;   
                                         
