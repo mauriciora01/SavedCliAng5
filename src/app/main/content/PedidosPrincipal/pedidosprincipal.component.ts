@@ -454,4 +454,8 @@ export class PedidosPrincipalComponent implements OnInit {
         alert('sdsd')
         this.Paso2Ok = true;
     }
+
+    buscarDocumento(): void {
+        true;
+    }
 }
