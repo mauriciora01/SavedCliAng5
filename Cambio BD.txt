@@ -50,14 +50,18 @@ OK - poner hora y fecha en resumen de pedido
 - en ventana de despachar	cuando se selecciona a casa y se cambia a lider se bloquea el boton guardar.
 - boton de girar imagen para detalle hacerlo mas llamativo
 - grid de detalle pedido y demas componentes poner el signo $ en donde se dinero.
-- redondear todos los numeros a 2 decimales
+OK - redondear todos los numeros a 2 decimales
 - totalizar valores en grid de detalle pedido
 - poner colores rojo/verde a variables (disponible, etc)
 - modificar el % de iva en las tablas de fletes de 14% a 12%
 - limpiar codigo fuente de lo que esta comentado
 
 
+COMPILAR y PUBLICAR
 COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --build-optimizer=false
+- Permisos a la carpeta de saved
+- agregar .json en iis en filtrado de solicitudes.
+- agregar en tipos mime : .json --> application/json
 
 PAGINA DE ICONOS Y SVG: https://www.flaticon.com/free-icons/puzzle/7
 
@@ -1214,3 +1218,6 @@ END
 GO
 
 
+
+Errores de angular CLI
+https://github.com/angular/angular-cli/issues/4632
