@@ -196,8 +196,8 @@ export class DatosEnvioComponent implements OnInit {
 
           if (x.Error == undefined) {
             //Mensaje de OK
-            this.data.ValorFlete = x.ValorFlete;
-            this.ValorFleteFinal = x.ValorFlete;
+            this.data.ValorFlete = Number(x.ValorFlete.toFixed(2));
+            this.ValorFleteFinal = Number(x.ValorFlete.toFixed(2));
           }
           else {
             //---------------------------------------------------------------------------------------------------------------
@@ -271,8 +271,8 @@ export class DatosEnvioComponent implements OnInit {
 
         if (x.Error == undefined) {
           //Mensaje de OK
-          this.data.ValorFlete = x.ValorFlete;
-          this.ValorFleteFinal = x.ValorFlete;
+          this.data.ValorFlete = Number(x.ValorFlete.toFixed(2));
+          this.ValorFleteFinal = Number(x.ValorFlete.toFixed(2));
         }
         else {
           //---------------------------------------------------------------------------------------------------------------

@@ -160,8 +160,8 @@ export class ResumenPedidoComponent implements OnInit {
 
   ConfirmData() {
     this.ReturnData = [{
-      PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar: this.data.TotalPagar,
-      DescuentoPuntos: this.data.DescuentoPts, EnviandoPedido: true,
+      PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar:  Number(this.data.TotalPagar.toFixed(2)),
+      DescuentoPuntos: Number(this.data.DescuentoPts.toFixed(2)), EnviandoPedido: true,
       PuntosGanados: this.PuntosGanadosCalculo, ValorPagarPagoPuntos: this.data.ValorPagarPagoPuntos,
       AplicarPuntosGanados: this.AplicarPuntosGanados
     }]
@@ -202,22 +202,22 @@ export class ResumenPedidoComponent implements OnInit {
         this.PuntosGanadosCalculo = PuntosGanadosTemp;
       }
 
-      TotalPagar = (this.data.PrecioEmpresariaTotal - ValorUsar);
+      TotalPagar =  Number((this.data.PrecioEmpresariaTotal - ValorUsar).toFixed(2));
 
       if (TotalPagar >= 0) {
-        this.data.TotalPagar = TotalPagar;
-        this.data.ValorPagarPagoPuntos = TotalPagar;
+        this.data.TotalPagar = Number(TotalPagar.toFixed(2));
+        this.data.ValorPagarPagoPuntos =  Number(TotalPagar.toFixed(2));
       }
       else {
         this.data.TotalPagar = 0;
       }
 
-      this.data.DescuentoPts = DescuentoPtsTemp;
+      this.data.DescuentoPts = Number(DescuentoPtsTemp.toFixed(2));
 
     }
     else {
       this.txt_PuntosUsar = 0;
-      this.data.TotalPagar = this.data.PrecioEmpresariaTotal;
+      this.data.TotalPagar =  Number(this.data.PrecioEmpresariaTotal.toFixed(2));
       this.data.DescuentoPts = 0;
       this.data.MensajeError = "PUNTOS INSUFICIENTES";
     }

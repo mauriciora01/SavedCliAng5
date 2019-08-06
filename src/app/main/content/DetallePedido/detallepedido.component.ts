@@ -253,9 +253,9 @@ export class DetallePedidoComponent implements OnInit {
       data: {
         TipoMensaje: "Error", Titulo: "Resumen Pedido", Mensaje: "Resumen del Pedido.",
         Nit: this.SessionEmpresaria.DocumentoEmpresaria.trim(), NombreEmpresaria: this.SessionEmpresaria.NombreEmpresariaCompleto.trim(),
-        TotalPrecioCatalogo: this.PrecioCatalogoTotalConIVA, CantidadArticulos: this.CantidadArticulos,
-        TotalPagar: this.PrecioEmpresariaTotalConIVA, TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos,
-        PrecioEmpresariaTotal: this.PrecioEmpresariaTotalConIVA, PrecioPuntosTotal: this.PrecioPuntosTotal, DescuentoPts: 0,
+        TotalPrecioCatalogo: this.PrecioCatalogoTotalConIVA.toFixed(2), CantidadArticulos: this.CantidadArticulos,
+        TotalPagar: this.PrecioEmpresariaTotalConIVA.toFixed(2), TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos,
+        PrecioEmpresariaTotal: this.PrecioEmpresariaTotalConIVA.toFixed(2), PrecioPuntosTotal: this.PrecioPuntosTotal, DescuentoPts: 0,
         PuntosGanados: this.PuntosGanadosUsar, ValorPagarPagoPuntos: 0, ValorMinimoParaPuntos: this.ValorMinimoParaPuntos
 
       }
