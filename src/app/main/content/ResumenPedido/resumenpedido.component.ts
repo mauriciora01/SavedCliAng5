@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { E_Cliente } from 'app/Models/E_Cliente';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
+import { ModalPopUpPedidoComponent } from '../ModalPopUpPedido/modalpopuppedido.component';
 
 
 export interface DialogData {
@@ -73,7 +74,7 @@ export class ResumenPedidoComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ResumenPedidoComponent>,
-    private Matdialog: MatDialog,
+    private Matdialog: MatDialog, public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
 
@@ -159,6 +160,8 @@ export class ResumenPedidoComponent implements OnInit {
   }
 
   ConfirmData() {
+    debugger
+   
     this.ReturnData = [{
       PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar: this.data.TotalPagar,
       DescuentoPuntos: this.data.DescuentoPts, EnviandoPedido: true,

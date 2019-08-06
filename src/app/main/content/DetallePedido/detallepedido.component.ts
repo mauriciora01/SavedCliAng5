@@ -148,6 +148,7 @@ export class DetallePedidoComponent implements OnInit {
     private bottomSheetRef: MatBottomSheetRef<DetallePedidoComponent>,
     private Matdialog: MatDialog,
     public dialog: MatDialog,
+    public dialog2: MatDialog,
     private ExceptionErrorService: ExceptionErrorService,
     private PedidoService: PedidoService,
     private ParameterService: ParameterService,
@@ -338,8 +339,11 @@ export class DetallePedidoComponent implements OnInit {
 
 
   CrearPedido() {
-
-
+    const dialogRef = this.dialog2.open(ModalPopUpPedidoComponent, {
+      width: '450px',
+      data: { spinerr:true}
+    });
+    this.bottomSheetRef.dismiss();
     try {
 
       //******************************************************** */
@@ -475,11 +479,11 @@ export class DetallePedidoComponent implements OnInit {
 
                         if (x.Error == undefined) {
 
-
+                          this.dialog2.closeAll();
                           //Mensaje de OK
                           const dialogRef = this.dialog.open(ModalPopUpPedidoComponent, {
                             width: '450px',
-                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero }
+                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero ,spinerr:false}
                           });
                           this.bottomSheetRef.dismiss();
                           this.EliminarArticulos();

@@ -13,6 +13,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SpinerComponent } from '../spiner/spiner.component';
 //import { AdminGuard } from 'app/Guards/AdminGuard';
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        ModalPopUpPedidoComponent
+        ModalPopUpPedidoComponent,SpinerComponent
         
     ],
     imports: [
