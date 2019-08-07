@@ -80,7 +80,7 @@ export class FuseNavVerticalCollapseComponent implements OnInit {
         ev.preventDefault();
 
         this.isOpen = _.isNil(this.isOpen) ? false : !this.isOpen;
-        console.log('1:',this.isOpen)
+        //console.log('1:',this.isOpen)
         // Navigation collapse toggled...
         this.navigationService.onItemCollapsed.next(this.item);
         this.navigationService.onItemCollapseToggled.next();
@@ -90,11 +90,11 @@ export class FuseNavVerticalCollapseComponent implements OnInit {
      * Expand the collapsable navigation
      */
     expand() {
-        console.log('2:',this.isOpen)
+        //console.log('2:',this.isOpen)
         if (this.isOpen) {
             return;
         }
-        console.log('3:',this.isOpen)
+        //console.log('3:',this.isOpen)
         this.isOpen = true;
         this.navigationService.onItemCollapseToggled.next();
     }

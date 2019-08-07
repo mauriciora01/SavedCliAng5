@@ -27,7 +27,7 @@ fsevents@
 - cuando se elige direccion de entrega despacho hay que guarfar un departamento
 
 PENDIENTES DE MEJORA SAVED
-- Cuando diga enviar pedido, bloquear boton para que no se envien varias veces
+OK - Cuando diga enviar pedido, bloquear boton para que no se envien varias veces
 - bloquear ventana de adicionar articulo cuando se intenta abrir varias veces
 OK - se debe borrar el detalle del pedido cada que se digite la cedula de una empresaria para nuevo pedido. 
 OK - en ok pedido reservado llevar a pagina de home
