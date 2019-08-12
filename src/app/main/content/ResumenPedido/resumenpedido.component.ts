@@ -160,11 +160,13 @@ export class ResumenPedidoComponent implements OnInit {
   }
 
   ConfirmData() {
-    debugger
+    
+    var TotalPagarRet= Number(this.data.TotalPagar);
+    var DescuentoPtsRet = Number(this.data.DescuentoPts);
    
     this.ReturnData = [{
-      PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar:  Number(this.data.TotalPagar.toFixed(2)),
-      DescuentoPuntos: Number(this.data.DescuentoPts.toFixed(2)), EnviandoPedido: true,
+      PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar:  Number(TotalPagarRet.toFixed(2)),
+      DescuentoPuntos: Number(DescuentoPtsRet.toFixed(2)), EnviandoPedido: true,
       PuntosGanados: this.PuntosGanadosCalculo, ValorPagarPagoPuntos: this.data.ValorPagarPagoPuntos,
       AplicarPuntosGanados: this.AplicarPuntosGanados
     }]

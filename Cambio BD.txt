@@ -27,7 +27,7 @@ fsevents@
 - cuando se elige direccion de entrega despacho hay que guarfar un departamento
 
 PENDIENTES DE MEJORA SAVED
-- Cuando diga enviar pedido, bloquear boton para que no se envien varias veces
+OK - Cuando diga enviar pedido, bloquear boton para que no se envien varias veces
 - bloquear ventana de adicionar articulo cuando se intenta abrir varias veces
 OK - se debe borrar el detalle del pedido cada que se digite la cedula de una empresaria para nuevo pedido. 
 OK - en ok pedido reservado llevar a pagina de home
@@ -62,6 +62,7 @@ COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --
 - Permisos a la carpeta de saved
 - agregar .json en iis en filtrado de solicitudes.
 - agregar en tipos mime : .json --> application/json
+- en AppSettings.json debe quedar con la direccion IP y el puerto por que sino no entra a la app http://181.188.213.187:808/Application.Enterprise.Services/api/
 
 PAGINA DE ICONOS Y SVG: https://www.flaticon.com/free-icons/puzzle/7
 
@@ -1221,3 +1222,9 @@ GO
 
 Errores de angular CLI
 https://github.com/angular/angular-cli/issues/4632
+
+Actualizar angular de 7 a 8
+https://alligator.io/angular/angular-8/
+
+$ ng update @angular/cli @angular/core
+$ ng update @angular/material

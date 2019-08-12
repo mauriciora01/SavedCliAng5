@@ -402,6 +402,7 @@ export class DetallePedidoComponent implements OnInit {
       objPedidoRequest.Asistente = this.SessionUser.Asistente;
       objPedidoRequest.ExcentoIVA = this.SessionEmpresaria.ExcentoIVA
       objPedidoRequest.CodCiudadCliente = this.SessionEmpresaria.CodCiudadCliente.trim();
+      objPedidoRequest.PuntosUsar = this.PuntosUsar;
 
       var objPedidoResponse: E_PedidosCliente = new E_PedidosCliente()
       this.PedidoService.GuardarEncabezadoPedido(objPedidoRequest)

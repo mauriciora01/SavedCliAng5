@@ -35,6 +35,7 @@
                   <input matInput placeholder="" formControlName="txt_PuntosUsar" required [ngModel]="txt_PuntosUsar"
                     maxlength="5" inputmode="numeric" pattern="[0-9]*" digitOnly (change)="CalcularTotalPagar()">
                 </mat-form-field>
+
               </p>
 
             </div>
@@ -50,14 +51,14 @@
 
       </mat-card>
 
-      
+
       <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <!--<button mat-button (click)="onClose()" color="accent" aria-label="Close">
             CERRAR
           </button>-->
         &nbsp;&nbsp;&nbsp;
-        <button mat-button (click)="ConfirmData()" mat-raised-button
-          style="background-color: green; color: white;"  [disabled]="form.invalid || SaveInProgress">Reservar Pedido</button>
+        <button mat-button (click)="ConfirmData()" mat-raised-button style="background-color: green; color: white;"
+          [disabled]="form.invalid || SaveInProgress">Reservar Pedido</button>
       </div>
 
     </form>
