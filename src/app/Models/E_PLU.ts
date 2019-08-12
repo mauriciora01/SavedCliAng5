@@ -22,6 +22,7 @@ export class E_PLU {
     public FechaCreacion: Date
     public PrecioCatalogoSinIVA: number
     public IVAPrecioCatalogo: number
+    public IVAPrecioCatalogoCons: number
     public PrecioCatalogoTotalConIVA: number
     public CatalogoReal: string
     public CodigoRapidoSustituto: string

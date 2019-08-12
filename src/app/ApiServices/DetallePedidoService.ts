@@ -85,13 +85,15 @@ export class DetallePedidoService {
                     nuevo.PrecioConIVA = ArticuloAdicionar.PrecioConIVA;
                     nuevo.PorcentajeDescuento = ArticuloAdicionar.PorcentajeDescuento;
                     nuevo.PrecioEmpresaria = ArticuloAdicionar.PrecioEmpresariaCons * nuevo.Cantidad;
+                    nuevo.PrecioEmpresaria = +nuevo.PrecioEmpresaria.toFixed(2);
                     nuevo.PrecioEmpresariaCons=ArticuloAdicionar.PrecioEmpresariaCons;
                     nuevo.PrecioPuntos = ArticuloAdicionar.PrecioPuntos;
                     nuevo.PLU = ArticuloAdicionar.PLU;   
                                         
                     nuevo.PrecioCatalogoSinIVA = ArticuloAdicionar.PrecioCatalogoSinIVA;
                     nuevo.PrecioEmpresariaSinIVA = ArticuloAdicionar.PrecioEmpresariaSinIVA;
-                    nuevo.IVAPrecioCatalogo = ArticuloAdicionar.IVAPrecioCatalogo;
+                    nuevo.IVAPrecioCatalogo = ArticuloAdicionar.IVAPrecioCatalogoCons * nuevo.Cantidad ;
+                    nuevo.IVAPrecioCatalogoCons = ArticuloAdicionar.IVAPrecioCatalogoCons;
                     nuevo.IVAPrecioEmpresaria = ArticuloAdicionar.IVAPrecioEmpresaria;
                     nuevo.PorcentajeIVA = ArticuloAdicionar.PorcentajeIVA;
                     nuevo.ExcentoIVA = ArticuloAdicionar.ExcentoIVA;

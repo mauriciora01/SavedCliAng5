@@ -125,6 +125,7 @@ export class DetalleArticuloComponent implements OnInit {
     DetallePedido.PrecioCatalogoSinIVA = this.data.PrecioCatalogoSinIVA * Number(this.form.value.Cantidad);
     DetallePedido.PrecioEmpresariaSinIVA = this.data.PrecioEmpresariaSinIVA; // Siempre debe ser * cantidad = 1
     DetallePedido.IVAPrecioCatalogo = this.data.IVAPrecioCatalogo * Number(this.form.value.Cantidad);
+    DetallePedido.IVAPrecioCatalogoCons = this.data.IVAPrecioCatalogo;//jj
     DetallePedido.IVAPrecioEmpresaria = this.data.IVAPrecioEmpresaria; // Siempre debe ser * cantidad = 1
     DetallePedido.PorcentajeIVA = this.data.PorcentajeIVA;
     DetallePedido.ExcentoIVA = this.data.ExcentoIVA;

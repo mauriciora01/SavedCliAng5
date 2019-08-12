@@ -1,5 +1,6 @@
 
 <spiner *ngIf="data.spinerr"></spiner>
+<h1 mat-dialog-title [ngStyle]="{'color': TextColor}">Creando Pedido.</h1>
 <div *ngIf="!data.spinerr">
     <h1 mat-dialog-title [ngStyle]="{'color': TextColor}">{{data.Titulo}}</h1>
   <span layout="row">
