@@ -55,6 +55,9 @@ OK - redondear todos los numeros a 2 decimales
 - poner colores rojo/verde a variables (disponible, etc)
 - modificar el % de iva en las tablas de fletes de 14% a 12%
 - limpiar codigo fuente de lo que esta comentado
+- quitar barra de navegacion del chrome
+- boton salir no funciona
+- mis puntos en opcion de menu de avatar
 
 
 COMPILAR y PUBLICAR
@@ -124,6 +127,7 @@ Adicion en la tabla de Parametro = CarpetaImagenesSAVED = 77
 Adicion en la tabla de Parametro = 78	Puntos Ganados x Portal SAVED	100	int	True	Puntos
 Adicion en la tabla de SVDN_PUNTOS_CONCEPTOS: 18	PortalSaved
 
+adicionar SVDN_PEDIDOSC1_2000--> campo: puntosusados int null
 
 
 PROCEDIMIENTOS
@@ -132,6 +136,9 @@ ALTER PROCEDURE [dbo].PRC_SVDN_SUSUARIOS
 ALTER PROCEDURE [dbo].[PRC_SVDN_CLIENTE] opcion I-A, opcion S-N, opcion S-O
 CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTION_ERROR
 CREATE PROCEDURE [dbo].PRC_SVDN_BODEGA
+
+PRC_SVDN_PEDIDOSC1_2000-->parametro de entrada, @i_puntosusados int	= NULL
+PRC_SVDN_PEDIDOSC1_2000--> opcion I-A, agrerar i_puntosusados insert
 
 PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_porcentajedctopuntos				numeric(12,2)				= NULL,
 PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_puntosganados					int							= NULL,

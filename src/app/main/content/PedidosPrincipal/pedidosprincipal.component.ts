@@ -45,10 +45,10 @@ export class PedidosPrincipalComponent implements OnInit {
     public CatalogoSeleccionado: string = "";
     public BodegaSeleccionado: string = "";
     public DatosEnvioSeleccionado: string = "";
-    public CodigoRapidoSeleccionado: string = "54";
+    public CodigoRapidoSeleccionado: string = "52";
     public TipoEnvioSeleccionado: string = "";
     public CodCiudadDespacho: string = "";
-    NumeroDocumento:string;
+    NumeroDocumento: string;
     public ListCatalogo: Array<E_Catalogo> = new Array<E_Catalogo>();
     //*public ListBodega: Array<E_Catalogo> = new Array<E_Catalogo>();
     formErrors: any;
@@ -60,7 +60,7 @@ export class PedidosPrincipalComponent implements OnInit {
     public NombreEmpresariaCompleto: string;
     public SessionEmpresaria: E_SessionEmpresaria = new E_SessionEmpresaria()
 
-
+    public ValorFleteCobrar: number = 0;
     /*public ListBodega: Array<Object> = [
         { Codigo: "51", Nombre: 'BODEGA 51' },
         { Codigo: "PKG", Nombre: 'BODEGA PICKING' },
@@ -90,13 +90,15 @@ export class PedidosPrincipalComponent implements OnInit {
         sessionStorage.removeItem("CurrentEmpresaria")
     }
 
+    //MRG: POR AQUI SIEMPRE ENTRA SIN NECESIDAD DE ADICIONAR ARTICULO TBN CAMBIAR CODIGO DE DETALLE ARTICULO MISMO METODO openBottomSheet().
     openBottomSheet(): void {
 
+        //alert('openbottonsheet:'+this.ValorFleteCobrar)
         //this.bottomSheet.open(DetallePedidoComponent);
 
         this.bottomSheet.open(DetallePedidoComponent, {
             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-            data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho }
+            data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho, ValorFleteCobrar: this.ValorFleteCobrar }
         });
     }
 
@@ -144,8 +146,8 @@ export class PedidosPrincipalComponent implements OnInit {
                 map(value => this._filter(value))
             );
 
-        if(this.SessionUser.IdGrupo=="50"){
-            this.NumeroDocumento= this.SessionUser.Cedula;
+        if (this.SessionUser.IdGrupo == "50") {
+            this.NumeroDocumento = this.SessionUser.Cedula;
             this.ValidateDocument2();
         }
 
@@ -168,55 +170,55 @@ export class PedidosPrincipalComponent implements OnInit {
 
     ValidateDocument2() {
         try {
-            
+
             this.NombreEmpresariaCompleto = "";
             this.NombreDisabled = false;
 
-                //var okDoc = this.pc_verificar(this.form.value.NumeroDocumento)
-                //console.log('okDoc:' + okDoc)
-                if (true) {
+            //var okDoc = this.pc_verificar(this.form.value.NumeroDocumento)
+            //console.log('okDoc:' + okDoc)
+            if (true) {
 
-                    var objClienteResquest: E_Cliente = new E_Cliente()
-                    objClienteResquest.Nit = this.NumeroDocumento;
+                var objClienteResquest: E_Cliente = new E_Cliente()
+                objClienteResquest.Nit = this.NumeroDocumento;
 
-                    this.ClienteService.ValidaExisteEmpresariaNombre(objClienteResquest).subscribe((x: E_SessionEmpresaria) => {
+                this.ClienteService.ValidaExisteEmpresariaNombre(objClienteResquest).subscribe((x: E_SessionEmpresaria) => {
 
-                        if (x.Error == undefined) {
-                            this.NombreDisabled = true;
-                            this.Paso1Ok = true;
-                            this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow()
-                            this.NombreEmpresariaCompleto = this.SessionEmpresaria.NombreEmpresariaCompleto;
-                            this.ListBodega.push( this.SessionEmpresaria.Bodegas);
-                        }
-                        else {
-                            this.NombreDisabled = false;
-                            this.Paso1Ok = false;
-                            this.DatosEnvioSeleccionado = "";
-                            this.TipoEnvioSeleccionado = "";
+                    if (x.Error == undefined) {
+                        this.NombreDisabled = true;
+                        this.Paso1Ok = true;
+                        this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow()
+                        this.NombreEmpresariaCompleto = this.SessionEmpresaria.NombreEmpresariaCompleto;
+                        this.ListBodega.push(this.SessionEmpresaria.Bodegas);
+                    }
+                    else {
+                        this.NombreDisabled = false;
+                        this.Paso1Ok = false;
+                        this.DatosEnvioSeleccionado = "";
+                        this.TipoEnvioSeleccionado = "";
 
-                            this.firstFormGroup = this._formBuilder.group({
-                                firstCtrl: ['', Validators.required],
-                                Catalogo: [undefined, [Validators.required]],
-                                NumeroDocumento: [undefined, [Validators.required]],
-                                Bodega: [undefined, [Validators.required]],
-                                DatosEnvio: [undefined, [Validators.required]]
-                            });
-                            //---------------------------------------------------------------------------------------------------------------
-                            //Mensaje de Error. 
-                            const dialogRef = this.dialog.open(ModalPopUpComponent, {
-                                width: '450px',
-                                data: { TipoMensaje: "Error", Titulo: "Empresaria", Mensaje: "La empresaria no existe. Por favor verifique." }
-                            });
+                        this.firstFormGroup = this._formBuilder.group({
+                            firstCtrl: ['', Validators.required],
+                            Catalogo: [undefined, [Validators.required]],
+                            NumeroDocumento: [undefined, [Validators.required]],
+                            Bodega: [undefined, [Validators.required]],
+                            DatosEnvio: [undefined, [Validators.required]]
+                        });
+                        //---------------------------------------------------------------------------------------------------------------
+                        //Mensaje de Error. 
+                        const dialogRef = this.dialog.open(ModalPopUpComponent, {
+                            width: '450px',
+                            data: { TipoMensaje: "Error", Titulo: "Empresaria", Mensaje: "La empresaria no existe. Por favor verifique." }
+                        });
 
-                            throw new ErrorLogExcepcion("PedidosPrincipalComponent", "ValidateDocument()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
-                            //---------------------------------------------------------------------------------------------------------------
+                        throw new ErrorLogExcepcion("PedidosPrincipalComponent", "ValidateDocument()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
+                        //---------------------------------------------------------------------------------------------------------------
 
-                        }
+                    }
 
-                    })
+                })
 
-                }
-            
+            }
+
 
         }
         catch (error) {
@@ -238,7 +240,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
             //Se borra acumulado de pedido.
             sessionStorage.removeItem("CurrentDetallePedido");
-            
+
             this.NombreEmpresariaCompleto = "";
             this.NombreDisabled = false;
 
@@ -257,9 +259,9 @@ export class PedidosPrincipalComponent implements OnInit {
                             this.Paso1Ok = true;
                             this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow()
                             this.NombreEmpresariaCompleto = this.SessionEmpresaria.NombreEmpresariaCompleto;
-                            this.ListBodega.push( this.SessionEmpresaria.Bodegas);
+                            this.ListBodega.push(this.SessionEmpresaria.Bodegas);
 
-                            
+
                         }
                         else {
                             this.NombreDisabled = false;
@@ -323,14 +325,15 @@ export class PedidosPrincipalComponent implements OnInit {
 
                 this.DatosEnvioSeleccionado = result[0].DireccionEnvio;
                 this.TipoEnvioSeleccionado = result[0].IdTipoEnvio;
-                this.CodCiudadDespacho= result[0].CodCiudadDespacho;
+                this.CodCiudadDespacho = result[0].CodCiudadDespacho;
+                this.ValorFleteCobrar = result[0].ValorFleteCobrar;
             });
-            
+
         }
     }
 
     openAdicionarArticulo(): void {
-     
+
         if (this.CodigoRapido.value != '' && this.CodigoRapido.value != undefined && this.CodigoRapido.value != null) {
             this.Paso2Ok = true;
 
@@ -340,7 +343,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
             this.ParameterService.ListarxCodigoRapido(objPLU)
                 .subscribe((x: E_PLU) => {
-                 
+
                     if (x.Error == undefined) {
                         //Mensaje de OK
                         //console.log(x)
@@ -371,9 +374,9 @@ export class PedidosPrincipalComponent implements OnInit {
                                 Mensaje: "Seleccione los detalles del articulo.", PorcentajeDescuento: x.PorcentajeDescuento,
                                 PrecioPuntos: x.PrecioPuntos, Disponible: strDisponible, PrecioEmpresaria: x.PrecioEmpresaria,
                                 TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho,
-                                PrecioCatalogoSinIVA: x.PrecioCatalogoSinIVA, PrecioEmpresariaSinIVA: x.PrecioEmpresariaSinIVA, 
-                                IVAPrecioCatalogo: x.IVAPrecioCatalogo, IVAPrecioEmpresaria: x.IVAPrecioEmpresaria, PorcentajeIVA: x.PorcentajeIVA, 
-                                ExcentoIVA: x.ExcentoIVA, PuntosGanados: x.PuntosGanados
+                                PrecioCatalogoSinIVA: x.PrecioCatalogoSinIVA, PrecioEmpresariaSinIVA: x.PrecioEmpresariaSinIVA,
+                                IVAPrecioCatalogo: x.IVAPrecioCatalogo, IVAPrecioEmpresaria: x.IVAPrecioEmpresaria, PorcentajeIVA: x.PorcentajeIVA,
+                                ExcentoIVA: x.ExcentoIVA, PuntosGanados: x.PuntosGanados, ValorFleteCobrar: this.ValorFleteCobrar
 
                             }
                         });
@@ -439,7 +442,7 @@ export class PedidosPrincipalComponent implements OnInit {
     openVerResumenPedido(): void {
         const dialogRef = this.dialog.open(ResumenPedidoComponent, {
             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-            data: { TipoMensaje: "Error", Titulo: "Resumen Pedido", Mensaje: "Resumen del Pedido." }
+            data: { TipoMensaje: "Error", Titulo: "Resumen Pedido", Mensaje: "Resumen del Pedido."  }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -449,7 +452,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
     }
 
-  
+
     changeIdCorto(): void {
         alert('sdsd')
         this.Paso2Ok = true;

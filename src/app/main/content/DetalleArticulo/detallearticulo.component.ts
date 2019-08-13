@@ -41,6 +41,7 @@ export interface DialogData {
   PorcentajeIVA: number;
   ExcentoIVA: boolean;
   PuntosGanados: number;
+  ValorFleteCobrar: number;
 }
 
 @Component({
@@ -138,12 +139,13 @@ export class DetalleArticuloComponent implements OnInit {
     this.openBottomSheet();
   }
 
+  //MRG: POR AQUI SIEMPRE ENTRA PARA ADICIONAR ARTICULO TBN CAMBIAR CODIGO DE PEDIDOS PRINCIPAL MISMO METODO openBottomSheet().
   openBottomSheet(): void {
     //this.bottomSheet.open(DetallePedidoComponent);
 
     this.bottomSheet.open(DetallePedidoComponent, {
       panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-      data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", TipoEnvio: this.data.TipoEnvio, CodCiudadDespacho: this.data.CodCiudadDespacho }
+      data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", TipoEnvio: this.data.TipoEnvio, CodCiudadDespacho: this.data.CodCiudadDespacho, ValorFleteCobrar: this.data.ValorFleteCobrar }
     });
   }
 

@@ -38,6 +38,7 @@ export interface DialogData {
   PuntosGanados: number;
   ValorPagarPagoPuntos: number;
   ValorMinimoParaPuntos: number;
+  ValorFleteCobrar: number;
 }
 
 export interface ReturnsData {
@@ -68,7 +69,7 @@ export class ResumenPedidoComponent implements OnInit {
   public PuntosGanadosCalculo: number = 0;
   public AplicarPuntosGanados: boolean = true;
   public FechaHora: string = "";
-
+  checked: boolean = true;
 
   public ReturnData: ReturnsData[];
 
@@ -160,12 +161,12 @@ export class ResumenPedidoComponent implements OnInit {
   }
 
   ConfirmData() {
-    
-    var TotalPagarRet= Number(this.data.TotalPagar);
+
+    var TotalPagarRet = Number(this.data.TotalPagar);
     var DescuentoPtsRet = Number(this.data.DescuentoPts);
-   
+
     this.ReturnData = [{
-      PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar:  Number(TotalPagarRet.toFixed(2)),
+      PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar: Number(TotalPagarRet.toFixed(2)),
       DescuentoPuntos: Number(DescuentoPtsRet.toFixed(2)), EnviandoPedido: true,
       PuntosGanados: this.PuntosGanadosCalculo, ValorPagarPagoPuntos: this.data.ValorPagarPagoPuntos,
       AplicarPuntosGanados: this.AplicarPuntosGanados
@@ -207,11 +208,11 @@ export class ResumenPedidoComponent implements OnInit {
         this.PuntosGanadosCalculo = PuntosGanadosTemp;
       }
 
-      TotalPagar =  Number((this.data.PrecioEmpresariaTotal - ValorUsar).toFixed(2));
+      TotalPagar = Number((this.data.PrecioEmpresariaTotal - ValorUsar).toFixed(2));
 
       if (TotalPagar >= 0) {
         this.data.TotalPagar = Number(TotalPagar.toFixed(2));
-        this.data.ValorPagarPagoPuntos =  Number(TotalPagar.toFixed(2));
+        this.data.ValorPagarPagoPuntos = Number(TotalPagar.toFixed(2));
       }
       else {
         this.data.TotalPagar = 0;
@@ -222,7 +223,7 @@ export class ResumenPedidoComponent implements OnInit {
     }
     else {
       this.txt_PuntosUsar = 0;
-      this.data.TotalPagar =  Number(this.data.PrecioEmpresariaTotal.toFixed(2));
+      this.data.TotalPagar = Number(this.data.PrecioEmpresariaTotal.toFixed(2));
       this.data.DescuentoPts = 0;
       this.data.MensajeError = "PUNTOS INSUFICIENTES";
     }
@@ -238,7 +239,19 @@ export class ResumenPedidoComponent implements OnInit {
   }
 
 
+  changeValue(value) {
+    this.checked = !value;
+    alert('entro: ' + this.data.ValorFleteCobrar);
 
+    if (!this.checked == true) {
+      this.data.PrecioPuntosTotal = this.data.PrecioPuntosTotal + Math.ceil(this.data.ValorFleteCobrar);
+    }
+    else {
+      this.data.PrecioPuntosTotal = this.data.PrecioPuntosTotal - Math.ceil(this.data.ValorFleteCobrar);
+    }
 
+    this.CalcularTotalPagar();
+
+  }
 
 }

@@ -22,6 +22,13 @@
           </div>
 
           <div>
+            <!-- Checkbox Column -->
+            <td style="color:red">
+              <mat-checkbox value="checked" (click)="changeValue(checked)" color="primary">
+                PAGAR FLETE CON PUNTOS
+              </mat-checkbox>
+              <br />
+            </td>
 
             <p><b>Nit:</b> {{data.Nit}}</p>
             <p> {{data.NombreEmpresaria}}</p>
@@ -30,6 +37,7 @@
             <p><b>Cant. Articulos:</b> {{data.CantidadArticulos}}</p>
             <p><b>Precio Puntos:</b> {{data.PrecioPuntosTotal}}</p>
             <p><b>Tus Puntos:</b> {{data.TusPuntos}}</p>
+
             <div>
               <p><b><br>Puntos Usar:</b> &nbsp;&nbsp; <mat-form-field fxFlex="15">
                   <input matInput placeholder="" formControlName="txt_PuntosUsar" required [ngModel]="txt_PuntosUsar"

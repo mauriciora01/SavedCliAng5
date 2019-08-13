@@ -82,6 +82,7 @@ export interface DialogData {
   TipoMensaje: string;
   TipoEnvio: string;
   CodCiudadDespacho: string;
+  ValorFleteCobrar: number;
 }
 
 @Component({
@@ -257,8 +258,8 @@ export class DetallePedidoComponent implements OnInit {
         TotalPrecioCatalogo: this.PrecioCatalogoTotalConIVA.toFixed(2), CantidadArticulos: this.CantidadArticulos,
         TotalPagar: this.PrecioEmpresariaTotalConIVA.toFixed(2), TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos,
         PrecioEmpresariaTotal: this.PrecioEmpresariaTotalConIVA.toFixed(2), PrecioPuntosTotal: this.PrecioPuntosTotal, DescuentoPts: 0,
-        PuntosGanados: this.PuntosGanadosUsar, ValorPagarPagoPuntos: 0, ValorMinimoParaPuntos: this.ValorMinimoParaPuntos
-
+        PuntosGanados: this.PuntosGanadosUsar, ValorPagarPagoPuntos: 0, ValorMinimoParaPuntos: this.ValorMinimoParaPuntos,
+        ValorFleteCobrar: this.data.ValorFleteCobrar
       }
     });
 

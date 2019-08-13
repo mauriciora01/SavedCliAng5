@@ -34,7 +34,7 @@ export class MisPedidosComponent implements OnInit {
         var objPedidos: E_PedidosCliente = new E_PedidosCliente()
         objPedidos.IdVendedor = this.SessionUser.IdVendedor;
         //MRG: Validar los siguientes datos para enviar segun el usuarios.
-       objPedidos.IdVendedor = "104";
+       objPedidos.IdVendedor = "126";
         objPedidos.Campana = "0619";
         this.PedidoService.PedidosList(objPedidos)
             .subscribe((x: Array<E_PedidosCliente>) => {

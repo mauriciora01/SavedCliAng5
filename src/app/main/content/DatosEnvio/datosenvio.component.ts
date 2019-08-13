@@ -30,6 +30,7 @@ export interface ReturnsData {
   IdTipoEnvio: String;
   DireccionEnvio: String;
   CodCiudadDespacho: String;
+  ValorFleteCobrar: number;
 }
 
 @Component({
@@ -292,24 +293,24 @@ export class DatosEnvioComponent implements OnInit {
     this.GuardarInformacion();
 
     if (this.DespacharASeleccionado == "1") {
-      this.ReturnData = [{ IdTipoEnvio: "1", DireccionEnvio: this.form.value.Direccion + ", $" + this.ValorFleteFinal, CodCiudadDespacho: this.CantonSeleccionado }]
+      this.ReturnData = [{ IdTipoEnvio: "1", DireccionEnvio: this.form.value.Direccion + ", $" + this.ValorFleteFinal, CodCiudadDespacho: this.CantonSeleccionado, ValorFleteCobrar: this.ValorFleteFinal}]
       this.dialogRef.close(this.ReturnData);
     }
     else if (this.DespacharASeleccionado == "2") {
-      this.ReturnData = [{ IdTipoEnvio: "2", DireccionEnvio: "ENVIAR A DIRECTOR: $" + this.ValorFleteFinal, CodCiudadDespacho: "" }]
+      this.ReturnData = [{ IdTipoEnvio: "2", DireccionEnvio: "ENVIAR A DIRECTOR: $" + this.ValorFleteFinal, CodCiudadDespacho: "" , ValorFleteCobrar: this.ValorFleteFinal}]
       this.dialogRef.close(this.ReturnData);
     }
     else if (this.DespacharASeleccionado == "3") {
 
-      this.ReturnData = [{ IdTipoEnvio: "3", DireccionEnvio: "ENVIAR A LIDER: $" + this.ValorFleteFinal, CodCiudadDespacho: "" }]
+      this.ReturnData = [{ IdTipoEnvio: "3", DireccionEnvio: "ENVIAR A LIDER: $" + this.ValorFleteFinal, CodCiudadDespacho: "" , ValorFleteCobrar: this.ValorFleteFinal}]
       this.dialogRef.close(this.ReturnData);
     }
     else if (this.DespacharASeleccionado == "4") {
-      this.ReturnData = [{ IdTipoEnvio: "4", DireccionEnvio: "ENVIAR A PUNTO DE VENTA: $" + this.ValorFleteFinal, CodCiudadDespacho: "" }]
+      this.ReturnData = [{ IdTipoEnvio: "4", DireccionEnvio: "ENVIAR A PUNTO DE VENTA: $" + this.ValorFleteFinal, CodCiudadDespacho: "" , ValorFleteCobrar: this.ValorFleteFinal}]
       this.dialogRef.close(this.ReturnData);
     }
     else {
-      this.ReturnData = [{ IdTipoEnvio: "1", DireccionEnvio: this.form.value.Direccion + ", $" + this.ValorFleteFinal, CodCiudadDespacho: this.CantonSeleccionado }]
+      this.ReturnData = [{ IdTipoEnvio: "1", DireccionEnvio: this.form.value.Direccion + ", $" + this.ValorFleteFinal, CodCiudadDespacho: this.CantonSeleccionado , ValorFleteCobrar: this.ValorFleteFinal}]
       this.dialogRef.close(this.ReturnData);
     }
   }
