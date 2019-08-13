@@ -14,6 +14,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SpinerComponent } from '../spiner/spiner.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { AdminGuard } from 'app/Guards/AdminGuard';
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
         TextMaskModule,
         NgxDatatableModule,
         MatCheckboxModule,
-        MatToolbarModule
+        MatToolbarModule,
+        BrowserAnimationsModule 
 
     ]
 

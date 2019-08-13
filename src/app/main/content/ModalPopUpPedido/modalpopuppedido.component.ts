@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
+import { trigger, state, transition, style, animate } from '@angular/animations';
+import { Observable } from 'rxjs';
 
 export interface DialogData {
   Titulo: string;
@@ -13,17 +15,41 @@ export interface DialogData {
 @Component({
   selector: 'modalpopuppedido',
   templateUrl: 'modalpopuppedido.component.html',
-  styleUrls: ['modalpopuppedido.component.scss']
+  styleUrls: ['modalpopuppedido.component.scss'],
+  animations: [
+    // the fade-in/fade-out animation.
+    trigger('simpleFadeAnimation', [
+ 
+     // the "in" style determines the "resting" state of the element when it is visible.
+     state('show', style({
+       opacity: 1
+     })),
+     state('hide', style({
+       opacity: 0
+     })),
+ 
+     transition('show => hide', animate('1500ms ease-out')),
+     transition('hide => show', animate('1500ms ease-in'))
+   ])
+   ]
 })
 export class ModalPopUpPedidoComponent implements OnInit {
   TextColor: any
+  show=true;
   constructor(
     public dialogRef: MatDialogRef<ModalPopUpPedidoComponent>,
     private Router: Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
-  ngOnInit() {
 
+  get jey(){
+      return this.show ? 'show' : "hide";
+  }
+
+  ngOnInit() {
+    Observable.interval(1500).subscribe((val) => { 
+      this.show = !this.show;
+  });
     if (this.data.TipoMensaje == 'Error') {
       this.data.FechaHora = "";
       this.TextColor = 'red';

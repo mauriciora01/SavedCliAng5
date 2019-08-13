@@ -8,6 +8,8 @@ import { PhotoTool } from 'app/Tools/PhotoTool';
 //import { E_Imagen } from 'app/Models/E_Imagen';
 //import { AdminServices } from 'app/ApiServices/AdminServices';
 import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Observable } from 'rxjs';
 //import { E_Departamentos } from 'app/Models/E_Departamentos';
 //import { E_Vehiculo } from 'app/Models/E_Vehiculo';
 //import { E_Municipios } from 'app/Models/E_Municipios';
@@ -16,7 +18,8 @@ import { Router } from '@angular/router';
     moduleId: module.id,
     selector: 'principal',
     templateUrl: 'principal.component.html',
-    styleUrls: ['principal.component.scss']
+    styleUrls: ['principal.component.scss'],
+    
 })
 export class PrincipalComponent implements OnInit {
     SucceSave: boolean;
@@ -28,7 +31,7 @@ export class PrincipalComponent implements OnInit {
     formErrors: any;
     noFoto: boolean = true
     DepartamentoSeleccionado: any
-
+show=false;
     public Nombre: string;
     public descripcion: string;
     public checkedActivo;
@@ -45,12 +48,15 @@ export class PrincipalComponent implements OnInit {
         };
 
     }
+    
 
+   
     ReturnPage(event: Event) {
         event.preventDefault();
         this.Router.navigate(['/principal'])
     }
     ngOnInit() {
+       
         this.MaskedNumber = GenerateMask.numberMask
         this.MaskedNumberNoDecimal = GenerateMask.Nodecimal
 

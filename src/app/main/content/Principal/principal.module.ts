@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule, MatFormFieldModule,MatCheckboxModule, MatIconModule, MatInputModule, MatSelectModule, MatStepperModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { TextMaskModule } from 'angular2-text-mask';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
         TextMaskModule,
         MatCheckboxModule,
         MatDatepickerModule,
-        MatNativeDateModule,
+        MatNativeDateModule,BrowserAnimationsModule
     ],
     declarations: [
         PrincipalComponent,
