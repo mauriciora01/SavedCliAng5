@@ -1,7 +1,7 @@
 
 <spiner *ngIf="data.spinerr"></spiner>
 
-<div  [@simpleFadeAnimation]="jey">
+<div *ngIf="data.spinerr" [@simpleFadeAnimation]="jey">
   <h1 mat-dialog-title [ngStyle]="{'color': TextColor}">Creando Pedido.</h1>
 </div>
 <div *ngIf="!data.spinerr">
