@@ -134,7 +134,9 @@ export class DetallePedidoComponent implements OnInit {
   public PuntosGanadosUsar: number = 0;//Lo que retorna del resumen
   public ValorPagarPagoPuntosUsar: number = 0;//Lo que retorna del resumen
   public AplicarPuntosGanados: boolean = true;//Lo que retorna del resumen
-  public ValorMinimoParaPuntos: number;
+  public PagarFletePuntos: boolean = false;//Lo que retorna del resumen
+  public ValorMinimoParaPuntos: number = 0;
+  public ValorFletePuntos: number = 0;
 
   private gridApi;
   private gridColumnApi;
@@ -220,6 +222,7 @@ export class DetallePedidoComponent implements OnInit {
     });
 
     this.ConsultarParametroMinimoPuntos();
+    this.ConsultarParametroValorPuntosFlete();
 
   }
 
@@ -259,7 +262,7 @@ export class DetallePedidoComponent implements OnInit {
         TotalPagar: this.PrecioEmpresariaTotalConIVA.toFixed(2), TusPuntos: this.SessionEmpresaria.PuntosEmpresaria, ValorPuntos: this.SessionEmpresaria.ValorPuntos,
         PrecioEmpresariaTotal: this.PrecioEmpresariaTotalConIVA.toFixed(2), PrecioPuntosTotal: this.PrecioPuntosTotal, DescuentoPts: 0,
         PuntosGanados: this.PuntosGanadosUsar, ValorPagarPagoPuntos: 0, ValorMinimoParaPuntos: this.ValorMinimoParaPuntos,
-        ValorFleteCobrar: this.data.ValorFleteCobrar
+        ValorFleteCobrar: this.data.ValorFleteCobrar, ValorFletePuntosCobrar: this.ValorFletePuntos
       }
     });
 
@@ -272,6 +275,7 @@ export class DetallePedidoComponent implements OnInit {
         this.PuntosGanadosUsar = result[0].PuntosGanados;
         this.ValorPagarPagoPuntosUsar = result[0].ValorPagarPagoPuntos;
         this.AplicarPuntosGanados = result[0].AplicarPuntosGanados;
+        this.PagarFletePuntos = result[0].PagarFletePuntos;
         this.CrearPedido();
       }
     });
@@ -342,7 +346,7 @@ export class DetallePedidoComponent implements OnInit {
   CrearPedido() {
     const dialogRef = this.dialog2.open(ModalPopUpPedidoComponent, {
       width: '450px',
-      data: { spinerr:true}
+      data: { spinerr: true }
     });
     this.bottomSheetRef.dismiss();
     try {
@@ -403,7 +407,14 @@ export class DetallePedidoComponent implements OnInit {
       objPedidoRequest.Asistente = this.SessionUser.Asistente;
       objPedidoRequest.ExcentoIVA = this.SessionEmpresaria.ExcentoIVA
       objPedidoRequest.CodCiudadCliente = this.SessionEmpresaria.CodCiudadCliente.trim();
-      objPedidoRequest.PuntosUsar = this.PuntosUsar;
+      objPedidoRequest.PagarFletePuntos = this.PagarFletePuntos;
+
+      if (this.PagarFletePuntos == true) {
+        objPedidoRequest.PuntosUsar = Number(this.PuntosUsar) + Number(this.ValorFletePuntos);
+      }
+      else {
+        objPedidoRequest.PuntosUsar = this.PuntosUsar;
+      }
 
       var objPedidoResponse: E_PedidosCliente = new E_PedidosCliente()
       this.PedidoService.GuardarEncabezadoPedido(objPedidoRequest)
@@ -458,6 +469,7 @@ export class DetallePedidoComponent implements OnInit {
                   x.okTransDetallePedido = true;
                   x.PuntosUsar = this.PuntosUsar;
                   x.TotalPuntosPedido = TotalPuntosPedidoSum;
+                  x.PagarFletePuntos = this.PagarFletePuntos;
                   objPedidoDetalle.PedidosClienteInfo = new PedidosClienteBuilder().buildFromObject(x).Build();
 
                   objPedidoDetalleRequestArray.push(new PedidosDetalleClienteBuilder().buildFromObject(objPedidoDetalle).Build());
@@ -485,7 +497,7 @@ export class DetallePedidoComponent implements OnInit {
                           //Mensaje de OK
                           const dialogRef = this.dialog.open(ModalPopUpPedidoComponent, {
                             width: '450px',
-                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero ,spinerr:false}
+                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero, spinerr: false }
                           });
                           this.bottomSheetRef.dismiss();
                           this.EliminarArticulos();
@@ -543,6 +555,29 @@ export class DetallePedidoComponent implements OnInit {
         }
       })
   }
+
+
+  //Consulta el valor del flete en puntos de la tabla parametros para pagar con puntos.
+  ConsultarParametroValorPuntosFlete() {
+
+    var objParametros: E_Parametros = new E_Parametros()
+    objParametros.Id = ParametrosEnum.ValorFletePuntos;
+    this.ValorFletePuntos = 0;
+
+    this.ParameterService.listarParametrosxId(objParametros)
+      .subscribe((x: E_Parametros) => {
+        if (x.Valor != undefined) {
+          var ValorPuntos = Number(x.Valor);
+          if (ValorPuntos > 0) {
+            this.ValorFletePuntos = ValorPuntos;
+          }
+        }
+        else {
+          this.ValorFletePuntos = 0;
+        }
+      })
+  }
+
 
 
 }

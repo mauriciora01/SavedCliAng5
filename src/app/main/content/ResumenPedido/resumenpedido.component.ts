@@ -39,6 +39,7 @@ export interface DialogData {
   ValorPagarPagoPuntos: number;
   ValorMinimoParaPuntos: number;
   ValorFleteCobrar: number;
+  ValorFletePuntosCobrar: number;
 }
 
 export interface ReturnsData {
@@ -49,6 +50,7 @@ export interface ReturnsData {
   PuntosGanados: number;
   ValorPagarPagoPuntos: number;
   AplicarPuntosGanados: boolean;
+  PagarFletePuntos: boolean;
 }
 
 @Component({
@@ -70,6 +72,9 @@ export class ResumenPedidoComponent implements OnInit {
   public AplicarPuntosGanados: boolean = true;
   public FechaHora: string = "";
   checked: boolean = true;
+
+  public ValorFleteSumar: number = 0;
+  public PagarFletePuntosCheck: boolean = false;
 
   public ReturnData: ReturnsData[];
 
@@ -169,7 +174,7 @@ export class ResumenPedidoComponent implements OnInit {
       PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar: Number(TotalPagarRet.toFixed(2)),
       DescuentoPuntos: Number(DescuentoPtsRet.toFixed(2)), EnviandoPedido: true,
       PuntosGanados: this.PuntosGanadosCalculo, ValorPagarPagoPuntos: this.data.ValorPagarPagoPuntos,
-      AplicarPuntosGanados: this.AplicarPuntosGanados
+      AplicarPuntosGanados: this.AplicarPuntosGanados, PagarFletePuntos: this.PagarFletePuntosCheck
     }]
     this.dialogRef.close(this.ReturnData);
 
@@ -241,13 +246,19 @@ export class ResumenPedidoComponent implements OnInit {
 
   changeValue(value) {
     this.checked = !value;
-    alert('entro: ' + this.data.ValorFleteCobrar);
+    //alert('entro: ' + this.data.ValorFletePuntosCobrar);
 
     if (!this.checked == true) {
-      this.data.PrecioPuntosTotal = this.data.PrecioPuntosTotal + Math.ceil(this.data.ValorFleteCobrar);
+      this.data.PrecioPuntosTotal = this.data.PrecioPuntosTotal + Math.ceil(this.data.ValorFletePuntosCobrar);
+      this.data.TotalPrecioCatalogo = Number((Number(this.data.TotalPrecioCatalogo) + this.data.ValorFleteCobrar).toFixed(2));
+      this.data.PrecioEmpresariaTotal = Number((Number(this.data.PrecioEmpresariaTotal) + this.data.ValorFleteCobrar).toFixed(2));
+      this.PagarFletePuntosCheck = true;
     }
     else {
-      this.data.PrecioPuntosTotal = this.data.PrecioPuntosTotal - Math.ceil(this.data.ValorFleteCobrar);
+      this.data.PrecioPuntosTotal = this.data.PrecioPuntosTotal - Math.ceil(this.data.ValorFletePuntosCobrar);
+      this.data.TotalPrecioCatalogo = Number((Number(this.data.TotalPrecioCatalogo) - this.data.ValorFleteCobrar).toFixed(2));
+      this.data.PrecioEmpresariaTotal = Number((Number(this.data.PrecioEmpresariaTotal) - this.data.ValorFleteCobrar).toFixed(2));
+      this.PagarFletePuntosCheck = false;
     }
 
     this.CalcularTotalPagar();

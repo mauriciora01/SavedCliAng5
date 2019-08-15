@@ -34,14 +34,14 @@ OK - en ok pedido reservado llevar a pagina de home
 OK - revisar flete en punto de venta deberia ser 0
 - revisar grid precio cat y emp cuando se asignan de una en una los articulso
 OK - poner hora y fecha en resumen de pedido
-- Adcionar a encabezado pedido cantidad de puntos utilziado
+OK - Adcionar a encabezado pedido cantidad de puntos utilziado
 - Arreglar esta bandera para que se ponga en true si hay IVA x ciudad x zona x articulo x cliente. Clase: PluController.cs Metodo: ListarxCodigoRapido()
 - no dejar reservar cuando los puntos son negativos o hay temas de calculos. que sea >= 0
 - Pagar flete con puntos
-- Mensaje informativo en calculo de puntos cuando se escriben mas de los requeridos y cuando quiere usar mas de los puntos disponibles
+OK - Mensaje informativo en calculo de puntos cuando se escriben mas de los requeridos y cuando quiere usar mas de los puntos disponibles
 - bug de seleccion de flete en 0
 - cantidad y precio en session de grid de detalle de pedido cuando se recarga
-- mensaje de cargando pedido cuando se envia
+OK - mensaje de cargando pedido cuando se envia
 - revisar formulario de resumen de pedido en mi lista de pedidos. Pendiente + ajuste GEO
 - bodegas, campanas, catalogo, catalogoreal, unineg quemadas en codigo
 - boton de apoyo para buscar empresaria y calcular puntos a usar
@@ -58,6 +58,8 @@ OK - redondear todos los numeros a 2 decimales
 - quitar barra de navegacion del chrome
 - boton salir no funciona
 - mis puntos en opcion de menu de avatar
+- BUG: si me equivoco de cedula y vuelvo a digitarla se mantiene la seleccion de flete y ciudad del usuario con elq ue se equivoco. CORREGIR
+- cuando se selecciona pagar con flete muy rapido no alcanza a traer el valor de la tbl parametros y no los suma en el resumen.
 
 
 COMPILAR y PUBLICAR
@@ -126,6 +128,7 @@ Create table SVDN_EXCEPTION_ERROR -->02-04-2019
 Adicion en la tabla de Parametro = CarpetaImagenesSAVED = 77
 Adicion en la tabla de Parametro = 78	Puntos Ganados x Portal SAVED	100	int	True	Puntos
 Adicion en la tabla de SVDN_PUNTOS_CONCEPTOS: 18	PortalSaved
+Adicion en la tabla de Parametro = 79	Valorw	100	int	True	Puntos
 
 adicionar SVDN_PEDIDOSC1_2000--> campo: puntosusados int null
 

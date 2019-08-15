@@ -126,6 +126,7 @@ export class PedidosClienteBuilder {
     public TotalPuntosPedido: number;
     public Guia: string;
     public Numerodespacho: string;
+    public PagarFletePuntos: boolean;
     public Error: E_Error
 
     buildFromObject(x: any): PedidosClienteBuilder {
@@ -251,6 +252,7 @@ export class PedidosClienteBuilder {
         if (x.TotalPuntosPedido != undefined) { this.TotalPuntosPedido = x.TotalPuntosPedido }
         if (x.Guia != undefined) { this.Guia = x.Guia }
         if (x.Numerodespacho != undefined) { this.Numerodespacho = x.Numerodespacho }
+        if (x.PagarFletePuntos != undefined) { this.PagarFletePuntos = x.PagarFletePuntos }
         if (x.Error != undefined) { this.Error = x.Error }
 
         return this
@@ -377,8 +379,9 @@ export class PedidosClienteBuilder {
         obj.okTransDetallePedido = this.okTransDetallePedido
         obj.PuntosUsar = this.PuntosUsar
         obj.TotalPuntosPedido = this.TotalPuntosPedido
-        obj.Numerodespacho = this.Numerodespacho
         obj.Guia = this.Guia
+        obj.Numerodespacho = this.Numerodespacho
+        obj.PagarFletePuntos = this.PagarFletePuntos
         obj.Error = this.Error
 
         return obj

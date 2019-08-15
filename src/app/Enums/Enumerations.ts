@@ -14,7 +14,7 @@ export enum Perfiles {
     DelegadosEscrutinio = 12,
     TransportadorCarro = 13,
     AltaGerencia = 14,
-    UsuarioSac= 15,
+    UsuarioSac = 15,
     Escrutinio = 16,
 }
 export enum TipoPersona1 {
@@ -396,9 +396,13 @@ export enum ParametrosEnum {
     /// </summary>
     saldomin = 36,
 
-     ///Pedido minimo para puntos
+    ///Pedido minimo para puntos
     /// </summary>
-    PedidoMinimoParaPuntos = 48
+    PedidoMinimoParaPuntos = 48,
+
+    ///Valor Flete en puntos
+    /// </summary>
+    ValorFletePuntos = 79
 
 }
 

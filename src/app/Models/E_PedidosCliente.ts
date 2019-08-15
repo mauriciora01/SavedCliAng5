@@ -136,6 +136,7 @@ export class E_PedidosCliente {
 
     public Guia: string;
     public Numerodespacho: string;
+    public PagarFletePuntos: boolean;
 
     public Error: E_Error
 
