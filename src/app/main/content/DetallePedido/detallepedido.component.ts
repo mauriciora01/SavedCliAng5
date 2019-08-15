@@ -410,7 +410,12 @@ export class DetallePedidoComponent implements OnInit {
       objPedidoRequest.PagarFletePuntos = this.PagarFletePuntos;
 
       if (this.PagarFletePuntos == true) {
-        objPedidoRequest.PuntosUsar = Number(this.PuntosUsar) + Number(this.ValorFletePuntos);
+        if (objPedidoRequest.PuntosUsar == 0 || objPedidoRequest.PuntosUsar==undefined) {
+          objPedidoRequest.PuntosUsar = Number(this.ValorFletePuntos);
+        }
+        else {
+          objPedidoRequest.PuntosUsar = this.PuntosUsar;
+        }
       }
       else {
         objPedidoRequest.PuntosUsar = this.PuntosUsar;
