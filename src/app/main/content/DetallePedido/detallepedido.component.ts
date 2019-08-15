@@ -457,6 +457,11 @@ export class DetallePedidoComponent implements OnInit {
                   objPedidoDetalle.PorcentajeDescuento = element.PorcentajeDescuento;
                   objPedidoDetalle.PorcentajeDescuentoPuntos = this.DescuentoPuntosUsar;
 
+                  //MRG: SOLO SI EL % DE DESCUENTO PUNTOS ES 100% EL VALOR DEL ARTICULO ES 0.
+                  if (objPedidoDetalle.PorcentajeDescuentoPuntos == 100) {
+                    objPedidoDetalle.Valor = 0;
+                  }
+
                   if (this.AplicarPuntosGanados) {
                     objPedidoDetalle.PuntosGanados = Math.floor(element.PuntosGanados);
                   }
