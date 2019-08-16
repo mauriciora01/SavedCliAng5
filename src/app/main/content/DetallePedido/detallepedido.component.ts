@@ -408,18 +408,7 @@ export class DetallePedidoComponent implements OnInit {
       objPedidoRequest.ExcentoIVA = this.SessionEmpresaria.ExcentoIVA
       objPedidoRequest.CodCiudadCliente = this.SessionEmpresaria.CodCiudadCliente.trim();
       objPedidoRequest.PagarFletePuntos = this.PagarFletePuntos;
-
-      if (this.PagarFletePuntos == true) {
-        if (objPedidoRequest.PuntosUsar == 0 || objPedidoRequest.PuntosUsar==undefined) {
-          objPedidoRequest.PuntosUsar = Number(this.ValorFletePuntos);
-        }
-        else {
-          objPedidoRequest.PuntosUsar = this.PuntosUsar;
-        }
-      }
-      else {
-        objPedidoRequest.PuntosUsar = this.PuntosUsar;
-      }
+      objPedidoRequest.PuntosUsar = this.PuntosUsar;
 
       var objPedidoResponse: E_PedidosCliente = new E_PedidosCliente()
       this.PedidoService.GuardarEncabezadoPedido(objPedidoRequest)

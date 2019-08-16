@@ -361,6 +361,9 @@ export class PedidosPrincipalComponent implements OnInit {
                         if (NombreImg == undefined || NombreImg == "" || NombreImg == null) {
                             NombreImg = "noimagen.png"
                         }
+                        else{
+                            NombreImg = x.Imagen.toLowerCase();
+                        }
 
                         const dialogRef = this.dialog.open(DetalleArticuloComponent, {
                             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.

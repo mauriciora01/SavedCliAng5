@@ -60,8 +60,9 @@ OK - redondear todos los numeros a 2 decimales
 - mis puntos en opcion de menu de avatar
 - BUG: si me equivoco de cedula y vuelvo a digitarla se mantiene la seleccion de flete y ciudad del usuario con elq ue se equivoco. CORREGIR
 - cuando se selecciona pagar con flete muy rapido no alcanza a traer el valor de la tbl parametros y no los suma en el resumen.
-- si se selecciona punto de venta en envio, en el resumen no se debe permitir pagar el flete con puntos.
-- cuando se paga flete con puntos no se descuenta de la tabla de puntos. Se debe crear categoria en estructura de puntos.
+OK - si se selecciona punto de venta en envio, en el resumen no se debe permitir pagar el flete con puntos.
+OK - cuando se paga flete con puntos no se descuenta de la tabla de puntos. Se debe crear categoria en estructura de puntos.
+OK - ajustar puntos usados con pagar flete con puntos.
 
 
 COMPILAR y PUBLICAR

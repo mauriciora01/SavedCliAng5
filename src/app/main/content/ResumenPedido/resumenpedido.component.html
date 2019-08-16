@@ -24,7 +24,7 @@
           <div>
             <!-- Checkbox Column -->
             <td style="color:red">
-              <mat-checkbox value="checked" (click)="changeValue(checked)" color="primary">
+              <mat-checkbox  *ngIf="DisableTipoFlete" value="checked" (click)="changeValue(checked)" color="primary">
                 PAGAR FLETE CON PUNTOS
               </mat-checkbox>
               <br />
@@ -47,7 +47,7 @@
               </p>
 
             </div>
-
+            <p><b>Puntos Gastados:</b> {{data.PuntosGastados}}</p>
             <p><b>Total Pagar:</b> ${{data.TotalPagar}}</p>
             <p><b>% Pts:</b> {{data.DescuentoPts}}%</p>
             <p><b>Ganaras:</b> {{PuntosGanadosCalculo}} puntos</p>

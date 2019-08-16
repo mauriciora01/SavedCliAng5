@@ -40,6 +40,7 @@ export interface DialogData {
   ValorMinimoParaPuntos: number;
   ValorFleteCobrar: number;
   ValorFletePuntosCobrar: number;
+  PuntosGastados: number;
 }
 
 export interface ReturnsData {
@@ -75,6 +76,7 @@ export class ResumenPedidoComponent implements OnInit {
 
   public ValorFleteSumar: number = 0;
   public PagarFletePuntosCheck: boolean = false;
+  DisableTipoFlete: boolean = false;
 
   public ReturnData: ReturnsData[];
 
@@ -138,7 +140,12 @@ export class ResumenPedidoComponent implements OnInit {
     this.FechaHora = " " + dateTime;
     //-----------------------------------------
 
+    this.data.PuntosGastados = 0;
 
+    //Oculta la opcion de pagar flete con puntos si el tipo flete seleccionado es punto de venta o 0.
+    if (this.data.ValorFleteCobrar > 0) {
+      this.DisableTipoFlete = true;
+    }
 
   }
 
@@ -171,7 +178,7 @@ export class ResumenPedidoComponent implements OnInit {
     var DescuentoPtsRet = Number(this.data.DescuentoPts);
 
     this.ReturnData = [{
-      PuntosUsar: this.form.value.txt_PuntosUsar, TotalPagar: Number(TotalPagarRet.toFixed(2)),
+      PuntosUsar: this.data.PuntosGastados, TotalPagar: Number(TotalPagarRet.toFixed(2)),
       DescuentoPuntos: Number(DescuentoPtsRet.toFixed(2)), EnviandoPedido: true,
       PuntosGanados: this.PuntosGanadosCalculo, ValorPagarPagoPuntos: this.data.ValorPagarPagoPuntos,
       AplicarPuntosGanados: this.AplicarPuntosGanados, PagarFletePuntos: this.PagarFletePuntosCheck
@@ -240,6 +247,14 @@ export class ResumenPedidoComponent implements OnInit {
       this.AplicarPuntosGanados = false;
     }
 
+    //Calcula el total de puntos gastados + pago de flete con puntos
+    if (!this.checked == true) {
+      this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar) + Number(this.data.ValorFletePuntosCobrar);
+    }
+    else {
+      this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar);
+    }
+
 
   }
 
@@ -249,19 +264,13 @@ export class ResumenPedidoComponent implements OnInit {
     //alert('entro: ' + this.data.ValorFletePuntosCobrar);
 
     if (!this.checked == true) {
-      this.data.PrecioPuntosTotal = this.data.PrecioPuntosTotal + Math.ceil(this.data.ValorFletePuntosCobrar);
-      this.data.TotalPrecioCatalogo = Number((Number(this.data.TotalPrecioCatalogo) + this.data.ValorFleteCobrar).toFixed(2));
-      this.data.PrecioEmpresariaTotal = Number((Number(this.data.PrecioEmpresariaTotal) + this.data.ValorFleteCobrar).toFixed(2));
+         this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar) + Number(this.data.ValorFletePuntosCobrar);
       this.PagarFletePuntosCheck = true;
     }
     else {
-      this.data.PrecioPuntosTotal = this.data.PrecioPuntosTotal - Math.ceil(this.data.ValorFletePuntosCobrar);
-      this.data.TotalPrecioCatalogo = Number((Number(this.data.TotalPrecioCatalogo) - this.data.ValorFleteCobrar).toFixed(2));
-      this.data.PrecioEmpresariaTotal = Number((Number(this.data.PrecioEmpresariaTotal) - this.data.ValorFleteCobrar).toFixed(2));
+      this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar);
       this.PagarFletePuntosCheck = false;
     }
-
-    this.CalcularTotalPagar();
 
   }
 
