@@ -63,6 +63,7 @@ OK - redondear todos los numeros a 2 decimales
 OK - si se selecciona punto de venta en envio, en el resumen no se debe permitir pagar el flete con puntos.
 OK - cuando se paga flete con puntos no se descuenta de la tabla de puntos. Se debe crear categoria en estructura de puntos.
 OK - ajustar puntos usados con pagar flete con puntos.
+- no suma precio puntos cuando se asigna uno a uno
 
 
 COMPILAR y PUBLICAR

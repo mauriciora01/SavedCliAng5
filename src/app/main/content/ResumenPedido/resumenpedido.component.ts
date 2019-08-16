@@ -77,7 +77,7 @@ export class ResumenPedidoComponent implements OnInit {
   public ValorFleteSumar: number = 0;
   public PagarFletePuntosCheck: boolean = false;
   DisableTipoFlete: boolean = false;
-
+  ReservarPedidoBtnOk: boolean = true;;
   public ReturnData: ReturnsData[];
 
   constructor(private formBuilder: FormBuilder,
@@ -192,8 +192,17 @@ export class ResumenPedidoComponent implements OnInit {
 
     this.PuntosGanadosCalculo = this.data.PuntosGanados;
 
-    //Mis puntos deben ser siempre >= a los puntos digitados a usar.
-    if (this.data.TusPuntos >= this.form.value.txt_PuntosUsar) {
+    //Calcula el total de puntos gastados + pago de flete con puntos
+    if (!this.checked == true) {
+      this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar) + Number(this.data.ValorFletePuntosCobrar);
+    }
+    else {
+      this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar);
+    }
+
+    //Mis puntos deben ser siempre >= a los puntos digitados a usar + pago flete con puntos.
+    if (this.data.TusPuntos >= this.data.PuntosGastados) {
+      //if (this.data.TusPuntos >= this.form.value.txt_PuntosUsar) {
       this.data.MensajeError = "";
       var ValorPunto = this.data.PrecioEmpresariaTotal / this.data.PrecioPuntosTotal;
       var ValorUsar = 0;
@@ -201,7 +210,7 @@ export class ResumenPedidoComponent implements OnInit {
       var DescuentoPtsTemp = 0;
 
       //Se valida que si se digitan mas puntos de los necesarios se debe utilizar unicamente los que requiere el pedido.
-      if (this.form.value.txt_PuntosUsar > this.data.PrecioPuntosTotal) {
+      if (this.data.PuntosGastados > this.data.PrecioPuntosTotal) {
         ValorUsar = this.data.PrecioPuntosTotal * ValorPunto;
         this.data.DescuentoPts = 0;
         this.data.MensajeError = "INGRESO MAS PUNTOS DE LOS NECESARIOS";
@@ -209,15 +218,18 @@ export class ResumenPedidoComponent implements OnInit {
 
         //Si se paga el pedido completo con puntos no debe sumar puntos ganados.
         this.data.PuntosGanados = 0;
+        this.ReservarPedidoBtnOk = false; //deshabilita el boton de reserva sino cumple con puntos.
       }
       else {
-        ValorUsar = this.form.value.txt_PuntosUsar * ValorPunto;
-        DescuentoPtsTemp = (this.form.value.txt_PuntosUsar / this.data.PrecioPuntosTotal) * 100;
+        ValorUsar = this.data.PuntosGastados * ValorPunto;
+        DescuentoPtsTemp = (this.data.PuntosGastados / this.data.PrecioPuntosTotal) * 100;
 
         //Si se paga el pedido parcial con puntos sumar puntos ganados * % descuento de puntos.
         var PuntosGanadosTemp = 0;
         PuntosGanadosTemp = Math.floor(this.PuntosGanadosCalculo - (this.PuntosGanadosCalculo * (DescuentoPtsTemp / 100)));
         this.PuntosGanadosCalculo = PuntosGanadosTemp;
+
+        this.ReservarPedidoBtnOk = true;
       }
 
       TotalPagar = Number((this.data.PrecioEmpresariaTotal - ValorUsar).toFixed(2));
@@ -235,9 +247,10 @@ export class ResumenPedidoComponent implements OnInit {
     }
     else {
       this.txt_PuntosUsar = 0;
-      this.data.TotalPagar = Number(this.data.PrecioEmpresariaTotal.toFixed(2));
+      this.data.TotalPagar = Number((this.data.PrecioEmpresariaTotal * 1).toFixed(2));
       this.data.DescuentoPts = 0;
       this.data.MensajeError = "PUNTOS INSUFICIENTES";
+      this.ReservarPedidoBtnOk = false; //deshabilita el boton de reserva sino cumple con puntos.
     }
 
 
@@ -247,13 +260,7 @@ export class ResumenPedidoComponent implements OnInit {
       this.AplicarPuntosGanados = false;
     }
 
-    //Calcula el total de puntos gastados + pago de flete con puntos
-    if (!this.checked == true) {
-      this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar) + Number(this.data.ValorFletePuntosCobrar);
-    }
-    else {
-      this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar);
-    }
+
 
 
   }
@@ -264,12 +271,22 @@ export class ResumenPedidoComponent implements OnInit {
     //alert('entro: ' + this.data.ValorFletePuntosCobrar);
 
     if (!this.checked == true) {
-         this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar) + Number(this.data.ValorFletePuntosCobrar);
+      this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar) + Number(this.data.ValorFletePuntosCobrar);
       this.PagarFletePuntosCheck = true;
     }
     else {
       this.data.PuntosGastados = Number(this.form.value.txt_PuntosUsar);
       this.PagarFletePuntosCheck = false;
+    }
+
+    //Mis puntos deben ser siempre >= a los puntos digitados a usar + pago flete con puntos.
+    if (this.data.TusPuntos >= this.data.PuntosGastados) {
+      this.ReservarPedidoBtnOk = true;
+      this.data.MensajeError = "";
+    }
+    else{
+      this.ReservarPedidoBtnOk = false;
+      this.CalcularTotalPagar();
     }
 
   }
