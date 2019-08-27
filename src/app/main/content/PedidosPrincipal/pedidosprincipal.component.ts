@@ -60,6 +60,8 @@ export class PedidosPrincipalComponent implements OnInit {
     public NombreEmpresariaCompleto: string;
     public SessionEmpresaria: E_SessionEmpresaria = new E_SessionEmpresaria()
 
+    public CampanaSeleccionado: string = "";
+
     public ValorFleteCobrar: number = 0;
     /*public ListBodega: Array<Object> = [
         { Codigo: "51", Nombre: 'BODEGA 51' },
@@ -81,7 +83,7 @@ export class PedidosPrincipalComponent implements OnInit {
         public dialog: MatDialog) {
 
         this.formErrors = {
-
+            Campana : {},
             Catalogo: {},
             NumeroDocumento: {},
             Bodega: {},
@@ -108,7 +110,8 @@ export class PedidosPrincipalComponent implements OnInit {
             Catalogo: [undefined, [Validators.required]],
             NumeroDocumento: [undefined, [Validators.required]],
             Bodega: [undefined, [Validators.required]],
-            DatosEnvio: [undefined, [Validators.required]]
+            DatosEnvio: [undefined, [Validators.required]],
+            Campana: ['', Validators.required]
         });
         this.secondFormGroup = this._formBuilder.group({
 
@@ -150,6 +153,9 @@ export class PedidosPrincipalComponent implements OnInit {
             this.NumeroDocumento = this.SessionUser.Cedula;
             this.ValidateDocument2();
         }
+
+
+        this.CampanaSeleccionado = "CAMPAÑA: "+ this.SessionUser.Campana;
 
 
     }
@@ -201,7 +207,8 @@ export class PedidosPrincipalComponent implements OnInit {
                             Catalogo: [undefined, [Validators.required]],
                             NumeroDocumento: [undefined, [Validators.required]],
                             Bodega: [undefined, [Validators.required]],
-                            DatosEnvio: [undefined, [Validators.required]]
+                            DatosEnvio: [undefined, [Validators.required]],
+                            Campana: ['', Validators.required]
                         });
                         //---------------------------------------------------------------------------------------------------------------
                         //Mensaje de Error. 
@@ -274,7 +281,8 @@ export class PedidosPrincipalComponent implements OnInit {
                                 Catalogo: [undefined, [Validators.required]],
                                 NumeroDocumento: [undefined, [Validators.required]],
                                 Bodega: [undefined, [Validators.required]],
-                                DatosEnvio: [undefined, [Validators.required]]
+                                DatosEnvio: [undefined, [Validators.required]],
+                                Campana: ['', Validators.required]
                             });
                             //---------------------------------------------------------------------------------------------------------------
                             //Mensaje de Error. 

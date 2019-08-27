@@ -24,6 +24,12 @@
 
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
           <ng-template matStepLabel>Información Principal</ng-template>
+
+          <mat-form-field fxFlex="100">
+            <input matInput placeholder="Campaña" [(ngModel)]="CampanaSeleccionado"
+              formControlName="Campana" readonly>
+          </mat-form-field>
+
           <mat-form-field fxFlex="100">
             <mat-select [disabled]="CatalogoDisabled" placeholder="Catalogo" formControlName="Catalogo"
               [(ngModel)]="CatalogoSeleccionado" (selectionChange)="SelectedCatalogo($event)" required>
@@ -35,6 +41,8 @@
               Catalogo es requerido
             </mat-error>
           </mat-form-field>
+
+       
 
           <mat-form-field fxFlex="100">
             <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required

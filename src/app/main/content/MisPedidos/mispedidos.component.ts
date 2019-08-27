@@ -14,7 +14,7 @@ import { DetallePedidoComponent } from '../DetallePedido/detallepedido.component
     styleUrls: ['mispedidos.component.scss']
 })
 export class MisPedidosComponent implements OnInit {
-    displayedColumns = ['Numero', 'Nit','NombreEmpresaria'];
+    displayedColumns = ['Numero', 'Nit', 'NombreEmpresaria'];
     dataSource: MatTableDataSource<E_PedidosCliente>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,7 +25,7 @@ export class MisPedidosComponent implements OnInit {
 
     constructor(public dialog: MatDialog,
         private PedidoService: PedidoService,
-        private UserService: UserService) {       
+        private UserService: UserService) {
 
     }
 
@@ -34,8 +34,8 @@ export class MisPedidosComponent implements OnInit {
         var objPedidos: E_PedidosCliente = new E_PedidosCliente()
         objPedidos.IdVendedor = this.SessionUser.IdVendedor;
         //MRG: Validar los siguientes datos para enviar segun el usuarios.
-       objPedidos.IdVendedor = "126";
-        objPedidos.Campana = "0619";
+
+        objPedidos.Campana = this.SessionUser.Campana;
         this.PedidoService.PedidosList(objPedidos)
             .subscribe((x: Array<E_PedidosCliente>) => {
                 this.ListPedidos = x
@@ -43,7 +43,7 @@ export class MisPedidosComponent implements OnInit {
                 // Assign the data to the data source for the table to render
                 this.dataSource = new MatTableDataSource(this.ListPedidos);
                 this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+                this.dataSource.sort = this.sort;
             })
     }
 
@@ -52,7 +52,7 @@ export class MisPedidosComponent implements OnInit {
             //width: '550px',
             panelClass: 'knowledgebase-article-dialog',
             data: row
-        });       
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             //console.log('The dialog was closed');

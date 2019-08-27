@@ -144,6 +144,8 @@ ALTER PROCEDURE [dbo].[PRC_SVDN_CLIENTE] opcion I-A, opcion S-N, opcion S-O
 CREATE PROCEDURE [dbo].PRC_SVDN_EXCEPTION_ERROR
 CREATE PROCEDURE [dbo].PRC_SVDN_BODEGA
 
+ALTER PROCEDURE [dbo].[PRC_SVDN_CATALOGO] --> IF @i_option = 'C' --> codigo, (RTRIM(LTRIM(nombre)) + ' - ' + RTRIM(LTRIM(codigo))) as nombre,
+
 PRC_SVDN_PEDIDOSC1_2000-->parametro de entrada, @i_puntosusados int	= NULL
 PRC_SVDN_PEDIDOSC1_2000--> opcion I-A, agrerar i_puntosusados insert
 
