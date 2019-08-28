@@ -44,6 +44,7 @@ export class E_PLU {
     public ValorIVA: number
     public IVAPrecioEmpresaria: number
     public PuntosGanados: number
+    public CantidadPedida: number
     public SessionEmpresaria: E_SessionEmpresaria
     public Error: E_Error
     

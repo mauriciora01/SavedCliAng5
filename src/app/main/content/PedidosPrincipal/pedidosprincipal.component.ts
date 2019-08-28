@@ -45,7 +45,7 @@ export class PedidosPrincipalComponent implements OnInit {
     public CatalogoSeleccionado: string = "";
     public BodegaSeleccionado: string = "";
     public DatosEnvioSeleccionado: string = "";
-    public CodigoRapidoSeleccionado: string = "52";
+    public CodigoRapidoSeleccionado: string = "";
     public TipoEnvioSeleccionado: string = "";
     public CodCiudadDespacho: string = "";
     NumeroDocumento: string;
@@ -395,6 +395,7 @@ export class PedidosPrincipalComponent implements OnInit {
                         dialogRef.afterClosed().subscribe(result => {
 
                             //this.DatosEnvioSeleccionado = result; 
+                            this.CodigoRapidoSeleccionado="";
                         });
 
 

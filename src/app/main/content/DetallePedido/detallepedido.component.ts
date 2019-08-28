@@ -27,6 +27,7 @@ import { E_Parametros } from 'app/Models/E_Parametros';
 import { ParametrosEnum } from 'app/Enums/Enumerations';
 import { ParameterService } from 'app/ApiServices/ParametersServices';
 import { ModalPopUpPedidoComponent } from '../ModalPopUpPedido/modalpopuppedido.component';
+import { RenderDisponibleComponent } from './render-disponible/render-disponible.component';
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -162,6 +163,10 @@ export class DetallePedidoComponent implements OnInit {
         headerName: 'Eliminar', width: 80, field: 'Modificar', cellRendererFramework: RenderDeleteComponent,
         cellRendererParams: { action: this.clickAuction }
       },
+      {
+        headerName: 'Disponible', width: 85, field: 'Disponible', cellRendererFramework: RenderDisponibleComponent,
+        cellRendererParams: { action: this.clickAuction }
+      },
       { headerName: 'Cod Rapido', width: 80, field: 'CodigoRapido' },
       { headerName: 'Nombre', field: 'NombreProducto', sortable: true, filter: true },
       { headerName: 'Cantidad', width: 60, field: 'Cantidad' },
@@ -174,6 +179,7 @@ export class DetallePedidoComponent implements OnInit {
 
 
   }
+
 
   onGridReady(params) {
     this.gridApi = params.api;
@@ -322,21 +328,23 @@ export class DetallePedidoComponent implements OnInit {
     if (objDetallePedidoService != null) {
       objDetallePedidoService.forEach((element) => {
 
-        ValorPrecioCat = ValorPrecioCat + element.PrecioCatalogoTotalConIVA;
-        ValorPrecioEmp = ValorPrecioEmp + element.PrecioEmpresaria;
-        ValorPuntos = ValorPuntos + element.PrecioPuntos;
-        CantidadArticulosSum = CantidadArticulosSum + element.Cantidad;
+        if (element.Cantidad > 0) {
 
-        PuntosGanadosTotal = PuntosGanadosTotal + element.PuntosGanados;
+          ValorPrecioCat = ValorPrecioCat + element.PrecioCatalogoTotalConIVA;
+          ValorPrecioEmp = ValorPrecioEmp + element.PrecioEmpresaria;
+          ValorPuntos = ValorPuntos + element.PrecioPuntos;
+          CantidadArticulosSum = CantidadArticulosSum + element.Cantidad;
 
-        this.PrecioEmpresariaTotalConIVA = ValorPrecioEmp;
-        this.PrecioPuntosTotal = ValorPuntos;
+          PuntosGanadosTotal = PuntosGanadosTotal + element.PuntosGanados;
 
-        this.PrecioCatalogoTotalConIVA = ValorPrecioCat;
-        this.CantidadArticulos = CantidadArticulosSum;
-        this.TotalPagar = Valor;
-        this.PuntosGanadosUsar = PuntosGanadosTotal;
+          this.PrecioEmpresariaTotalConIVA = ValorPrecioEmp;
+          this.PrecioPuntosTotal = ValorPuntos;
 
+          this.PrecioCatalogoTotalConIVA = ValorPrecioCat;
+          this.CantidadArticulos = CantidadArticulosSum;
+          this.TotalPagar = Valor;
+          this.PuntosGanadosUsar = PuntosGanadosTotal;
+        }
       });
 
     }
@@ -444,7 +452,7 @@ export class DetallePedidoComponent implements OnInit {
                   objPedidoDetalle.IVAPrecioCatalogo = element.IVAPrecioCatalogo;
 
                   objPedidoDetalle.PLU = element.PLU;
-                  objPedidoDetalle.Cantidad = element.Cantidad;
+                  objPedidoDetalle.Cantidad = element.CantidadPedida;//element.Cantidad;
                   objPedidoDetalle.IdCodigoCorto = element.CodigoRapido;
                   objPedidoDetalle.CatalogoReal = element.CatalogoReal;
 
@@ -496,7 +504,7 @@ export class DetallePedidoComponent implements OnInit {
                           //Mensaje de OK
                           const dialogRef = this.dialog.open(ModalPopUpPedidoComponent, {
                             width: '450px',
-                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero, spinerr: false }
+                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero, spinerr: false, Nit: "Documento: " + objPedidoRequest.Nit, NombreEmpresaria: "Nombre: " + this.SessionEmpresaria.NombreEmpresariaCompleto.toUpperCase() }
                           });
                           this.bottomSheetRef.dismiss();
                           this.EliminarArticulos();

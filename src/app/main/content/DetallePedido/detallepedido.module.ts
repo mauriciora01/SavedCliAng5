@@ -25,6 +25,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AgGridModule } from 'ag-grid-angular';
 import { RenderDeleteComponent } from './render-delete/render-delete.component';
 import { FuseContentModule } from '../content.module';
+import { RenderDisponibleComponent } from './render-disponible/render-disponible.component';
 
 const routes: Routes = [
     {
@@ -36,7 +37,9 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        DetallePedidoComponent,RenderDeleteComponent
+        DetallePedidoComponent,
+        RenderDeleteComponent,
+        RenderDisponibleComponent
         
     ],
     imports: [
@@ -63,9 +66,12 @@ const routes: Routes = [
         CdkTableModule, AgGridModule.withComponents([])
     ],    
     exports: [
-        DetallePedidoComponent,RenderDeleteComponent
+        DetallePedidoComponent,
+        RenderDeleteComponent,
+        RenderDisponibleComponent
     ],entryComponents: [
         RenderDeleteComponent,
+        RenderDisponibleComponent
       ],
 
 

@@ -6,7 +6,7 @@ API KEY GOOGLE TC GEO:
 
 1709860835 PEW281429
 0604129577001
-
+0350233664  usuario y contraseña Empresaria pts
 0931489033   usuario y contraseña Empresaria
 0703744060001 usuario y contraseña Lider
 0923605562001 usuario y contraseña Director
@@ -64,6 +64,16 @@ OK - si se selecciona punto de venta en envio, en el resumen no se debe permitir
 OK - cuando se paga flete con puntos no se descuenta de la tabla de puntos. Se debe crear categoria en estructura de puntos.
 OK - ajustar puntos usados con pagar flete con puntos.
 - no suma precio puntos cuando se asigna uno a uno
+- cuando entre coomo empresaria ajustar consultas de detalle y mis pedidos de empresaria.
+- cuando se guarda pedido como empresaria en nit queda la cedula del lider o director. debe quedar la cedula de la empresaria.
+- organizar el catalogo real cuando se guarda detalle pedido.
+OK - borrar codigo rapido cuando se digita uno segudio del otro
+OK - Adicionar nombre y nit cuando se reserva el pedido.
+OK - Poner disponible en grid de detalle pedido
+OK - Quitar eliminar en detalle de pedido cuando no este disponible el articulo para almacenar la demanda.
+- Si mis puntos da negativo desde que se carga el resumen, se debe ocultar el boton de reservar pedido.
+- cuando selecciono pagar flete puntos no recalcula % pts y puntos gastados, etc
+OK - Se corrige tema de puntos ganados cuando no esta disponible el articulo. para que no gane mas pts de los que son.
 
 
 COMPILAR y PUBLICAR
@@ -74,6 +84,7 @@ COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --
 - en AppSettings.json debe quedar con la direccion IP y el puerto por que sino no entra a la app http://181.188.213.187:808/Application.Enterprise.Services/api/
 
 PAGINA DE ICONOS Y SVG: https://www.flaticon.com/free-icons/puzzle/7
+MAterial ICONS: https://material.io/resources/icons/?icon=thumb_up&style=baseline
 
 SQL: 181.188.213.187,8899
 usuario: sistemas

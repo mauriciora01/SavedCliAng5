@@ -10,6 +10,8 @@ export interface DialogData {
   TipoMensaje: string;
   FechaHora: string;
   spinerr:boolean;
+  Nit: string;
+  NombreEmpresaria: string;
 }
 
 @Component({

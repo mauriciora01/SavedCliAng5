@@ -104,6 +104,15 @@ export class DetalleArticuloComponent implements OnInit {
 
     var DetallePedido: E_PLU = new E_PLU()
 
+    var CantidadDisponible = this.form.value.Cantidad;
+    if (this.data.Disponible == "SI") {
+      DetallePedido.Disponible = true;
+    }
+    else {
+      CantidadDisponible =0;
+      DetallePedido.Disponible = false;
+    }
+
     if (this.data.ExcentoIVA == true) {
       this.data.IVAPrecioCatalogo = 0;
       this.data.IVAPrecioEmpresaria = 0;
@@ -116,7 +125,7 @@ export class DetalleArticuloComponent implements OnInit {
     DetallePedido.NombreProducto = this.data.NombreProductoCompleto;
     DetallePedido.PrecioConIVA = Number((PrecioCatIVA * Number(this.form.value.Cantidad)).toFixed(2));
     DetallePedido.PorcentajeDescuento = this.data.PorcentajeDescuento;
-    DetallePedido.Cantidad = this.form.value.Cantidad;
+    DetallePedido.Cantidad = CantidadDisponible;//*this.form.value.Cantidad;
     DetallePedido.PrecioCatalogoTotalConIVA = Number(this.form.value.Cantidad) * PrecioCatIVA;
     DetallePedido.PrecioEmpresaria = Number((PrecioEmpre * Number(this.form.value.Cantidad)).toFixed(2));
     DetallePedido.PrecioEmpresariaCons = PrecioEmpre;
@@ -132,6 +141,7 @@ export class DetalleArticuloComponent implements OnInit {
     DetallePedido.ExcentoIVA = this.data.ExcentoIVA;
 
     DetallePedido.PuntosGanados = Math.floor((this.data.PuntosGanados - (this.data.PuntosGanados * (this.data.PorcentajeDescuento / 100))) * Number(this.form.value.Cantidad));
+    DetallePedido.CantidadPedida = Number(this.form.value.Cantidad);
 
     this.DetallePedidoService.SetCurrentDetallePedido(DetallePedido);
 

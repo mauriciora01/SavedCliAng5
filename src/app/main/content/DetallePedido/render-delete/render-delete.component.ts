@@ -12,6 +12,7 @@ import { DetallePedidoComponent } from '../detallepedido.component';
 export class RenderDeleteComponent  {
     params;
     resultDialog:any;
+    PermiteEliminar: boolean = true;
     constructor(
         private DetallePedidoService: DetallePedidoService
         ) {
@@ -20,11 +21,17 @@ export class RenderDeleteComponent  {
     agInit(params): void {    
     
         this.params = params;
+
+        if(this.params.data.Disponible==false)
+        {
+            this.PermiteEliminar  = false;           
+        }
+       
         
    }
 
    onClick(): void {
-    debugger
+    
        var component =  this.params.context as DetallePedidoComponent
        var xx: E_PLU = this.params.data;
        var restul = this.DetallePedidoService.EliminarItemPedido(xx);;

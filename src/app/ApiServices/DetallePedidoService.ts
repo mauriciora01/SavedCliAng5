@@ -22,7 +22,7 @@ export class DetallePedidoService {
     }
 
     EliminarItemPedido(item:E_PLU):boolean{
-        debugger
+        
         var retrievedObject = sessionStorage.getItem('CurrentDetallePedido');
         var lis: Array<E_PLU> = JSON.parse(retrievedObject)
         var lis2=lis.filter(x => x.CodigoRapido !== item.CodigoRapido);
@@ -76,8 +76,7 @@ export class DetallePedidoService {
                 var objeto =  SessionDetallePedidoGr.find(x => x.CodigoRapido == ArticuloAdicionar.CodigoRapido);
                 if(objeto==null){
                     SessionDetallePedidoGr.push(ArticuloAdicionar);
-                }else{
-                   
+                }else{                                       
                     nuevo.Cantidad = objeto.Cantidad + ArticuloAdicionar.Cantidad;
                     nuevo.PrecioCatalogoTotalConIVA = ArticuloAdicionar.PrecioCatalogoTotalConIVA;
                     nuevo.CodigoRapido = ArticuloAdicionar.CodigoRapido;
@@ -99,8 +98,8 @@ export class DetallePedidoService {
                     nuevo.ExcentoIVA = ArticuloAdicionar.ExcentoIVA;
 
                     nuevo.PuntosGanados = ArticuloAdicionar.PuntosGanados;
-
-
+                    nuevo.CantidadPedida = objeto.CantidadPedida + ArticuloAdicionar.CantidadPedida;
+                    nuevo.Disponible= ArticuloAdicionar.Disponible;
 
                     
                           

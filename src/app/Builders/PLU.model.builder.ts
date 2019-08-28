@@ -42,6 +42,7 @@ export class PLUBuilder {
     public ValorIVA: number 
     public IVAPrecioEmpresaria: number
     public PuntosGanados: number
+    public CantidadPedida: number
     public SessionEmpresaria: E_SessionEmpresaria
     public Error: E_Error
     
@@ -85,6 +86,7 @@ export class PLUBuilder {
         if (x.ValorIVA != undefined) { this.ValorIVA = x.ValorIVA }
         if (x.IVAPrecioEmpresaria != undefined) { this.IVAPrecioEmpresaria = x.IVAPrecioEmpresaria }
         if (x.PuntosGanados != undefined) { this.PuntosGanados = x.PuntosGanados }
+        if (x.CantidadPedida != undefined) { this.CantidadPedida = x.CantidadPedida }
         if (x.SessionEmpresaria != undefined) { this.SessionEmpresaria = x.SessionEmpresaria }
         if (x.Error != undefined) { this.Error = x.Error }
         
@@ -131,6 +133,7 @@ export class PLUBuilder {
         obj.ValorIVA = this.ValorIVA
         obj.IVAPrecioEmpresaria = this.IVAPrecioEmpresaria
         obj.PuntosGanados = this.PuntosGanados
+        obj.CantidadPedida = this.CantidadPedida
         obj.SessionEmpresaria = this.SessionEmpresaria
         obj.Error = this.Error
         
