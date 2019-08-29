@@ -22,6 +22,8 @@
   </span>
   <div mat-dialog-actions>
     <!--<button mat-button (click)="onNoClick()">No Thanks</button> -->
-    <button mat-button [mat-dialog-close]="data.Mensaje" (click)="onCloseClick()" cdkFocusInitial >Ok</button>
+    <button mat-button [mat-dialog-close]="data.Mensaje" (click)="onCloseClick()" cdkFocusInitial >CERRAR</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-button style="background-color: green; color: white;" (click)="onVerDetalleClick()" cdkFocusInitial >Ver Detalle</button>
   </div>
 </div>

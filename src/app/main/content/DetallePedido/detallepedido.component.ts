@@ -352,6 +352,7 @@ export class DetallePedidoComponent implements OnInit {
 
 
   CrearPedido() {
+    var NumeroPedidoGuardado = "";
     const dialogRef = this.dialog2.open(ModalPopUpPedidoComponent, {
       width: '450px',
       data: { spinerr: true }
@@ -426,7 +427,7 @@ export class DetallePedidoComponent implements OnInit {
           if (x.Error == undefined) {
 
             if (x.Numero != null && x.Numero != "") {
-
+              NumeroPedidoGuardado =  x.Numero;
               ///######################################################################################
               //INSERTA DETALLE DEL PEDIDO
 
@@ -504,7 +505,7 @@ export class DetallePedidoComponent implements OnInit {
                           //Mensaje de OK
                           const dialogRef = this.dialog.open(ModalPopUpPedidoComponent, {
                             width: '450px',
-                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero, spinerr: false, Nit: "Documento: " + objPedidoRequest.Nit, NombreEmpresaria: "Nombre: " + this.SessionEmpresaria.NombreEmpresariaCompleto.toUpperCase() }
+                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero, spinerr: false, Nit: "Documento: " + objPedidoRequest.Nit, NombreEmpresaria: "Nombre: " + this.SessionEmpresaria.NombreEmpresariaCompleto.toUpperCase(), NumeroPedidoReservado: NumeroPedidoGuardado }
                           });
                           this.bottomSheetRef.dismiss();
                           this.EliminarArticulos();

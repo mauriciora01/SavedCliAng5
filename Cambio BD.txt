@@ -76,6 +76,8 @@ OK - Quitar eliminar en detalle de pedido cuando no este disponible el articulo 
 OK - Se corrige tema de puntos ganados cuando no esta disponible el articulo. para que no gane mas pts de los que son.
 
 
+Adicionar nombre y nit cuando se reserva el pedido,  Poner disponible en grid de detalle pedido, borrar codigo rapido cuando se digita uno segudio del otro, Quitar eliminar en detalle de pedido cuando no este disponible, Se corrige tema de puntos ganados cuando no esta disponible el articulo.
+
 COMPILAR y PUBLICAR
 COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --build-optimizer=false
 - Permisos a la carpeta de saved
@@ -165,6 +167,8 @@ PRC_SVDN_PEDIDOSC2_2000-->Agregar parametro @i_puntosganados					int							= NUL
 PRC_SVDN_PEDIDOSC2_2000--> Opcion I-A : agregar colmuna en insert de --> puntosganados
 PRC_SVDN_PEDIDOSC2_2000--> Opcion I-A : agregar colmuna en insert de --> porcentajedctopuntos
 CREATE PROCEDURE [dbo].[PRC_SVDN_PUNTOS_SAVED] (al final de este archivo ver script sql)
+
+ALTER PROCEDURE [dbo].[PRC_SVDN_PEDIDOSC2_2000] --> IF @i_option = 'J' --> adicionar , svdn_ped.porcentajedctopuntos
 
 REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 -->02-04-2019

@@ -62,15 +62,27 @@ export class PedidoService {
     }
 
     ListxGerenteZonaFacturados(obj: E_PedidosCliente): Observable<Array<E_PedidosCliente>> {
-      const httpOptions = {
-          headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-          })
-      };
-      var request = JSON.stringify(obj)
-      return this.Http.post(this.UrlNow + "Pedido/ListxGerenteZonaFacturados"
-          , request, httpOptions).map(this.ExtractListxGerenteZonaFacturados)
-  }
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "Pedido/ListxGerenteZonaFacturados"
+            , request, httpOptions).map(this.ExtractListxGerenteZonaFacturados)
+    }
+
+    ListDetallePedidoReservaGYG(obj: E_PedidosCliente): Observable<Array<E_PedidosDetalleCliente>> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "Pedido/ListDetallePedidoReservaGYG"
+            , request, httpOptions).map(this.ExtractPedidosDetalleList)
+
+    }
 
     ExtractPedidosCliente(res: Response): E_PedidosCliente {
         var x: E_PedidosCliente = new E_PedidosCliente()
@@ -95,15 +107,27 @@ export class PedidoService {
         return x
     }
     ExtractListxGerenteZonaFacturados(res: any): Array<E_PedidosCliente> {
-      var x: Array<E_PedidosCliente> = new Array<E_PedidosCliente>()
-      if (res != null) {
-          res.forEach((element) => {
-              x.push(new PedidosClienteBuilder().buildFromObject(element).Build())
-          });
+        var x: Array<E_PedidosCliente> = new Array<E_PedidosCliente>()
+        if (res != null) {
+            res.forEach((element) => {
+                x.push(new PedidosClienteBuilder().buildFromObject(element).Build())
+            });
 
-      }
-      return x
+        }
+        return x
 
-  }
+    }
+
+
+    ExtractPedidosDetalleList(res: any): Array<E_PedidosDetalleCliente> {
+        var x: Array<E_PedidosDetalleCliente> = new Array<E_PedidosDetalleCliente>()
+        if (res != null) {
+            res.forEach((element) => {
+                x.push(new PedidosDetalleClienteBuilder().buildFromObject(element).Build())
+            });
+
+        }
+        return x
+    }
 
 }

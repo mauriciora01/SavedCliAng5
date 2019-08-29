@@ -56,6 +56,7 @@ import { PerfilModule } from './main/content/perfil/perfil.module';
 import { micarteraModule } from './main/content/micartera/micartera.module';
 
 import { ModalPopUpPedidoModule } from './main/content/ModalPopUpPedido/modalpopuppedido.module';
+import { DetallePedidoReservaModule } from './main/content/DetallePedidoReserva/detallepedidoreserva.module';
 
 const appRoutes: Routes = [
     /*{
@@ -138,6 +139,8 @@ const appRoutes: Routes = [
 
           }),
           AgmDirectionModule, //agm-direction
+
+          DetallePedidoReservaModule
 
     ],
     providers: [
