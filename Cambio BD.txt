@@ -211,9 +211,15 @@ git add .
 git commit -m ""
 git push origin master
 
+github.com
+email: ramosgilmauricio@gmail.com
+user: mauriciora01
+pass: Mr4m0s01
+mauriciora01@github.com
+
 ----------------------------------------
 SavedServicesNet
-git config --global user.email "ramosgimauricio@gmail.com" mauriciora01-mauro12345- mauriciora01@github.com
+git config --global user.email "ramosgilmauricio@gmail.com" mauriciora01-Mr4m0s01- mauriciora01@github.com
 git init
 git remote add origin https://github.com/mauriciora01/SavedServicesNet.git
 git remote
@@ -221,12 +227,12 @@ git remote add pb https://github.com/mauriciora01/SavedServicesNet.git
 git remote -v
 git fetch pb
 git pull origin master
-git config --global user.email "ramosgimauricio@gmail.com"
+git config --global user.email "ramosgilmauricio@gmail.com"
 
 
 ----------------------------------------
 SavedCliAng7
-git config --global user.email "ramosgimauricio@gmail.com"
+git config --global user.email "ramosgilmauricio@gmail.com"
 git init
 git remote add origin https://github.com/mauriciora01/SavedCliAng7.git
 git remote
@@ -234,7 +240,7 @@ git remote add pb https://github.com/mauriciora01/SavedCliAng7.git
 git remote -v
 git fetch pb
 git pull origin master
-git config --global user.email "ramosgimauricio@gmail.com"
+git config --global user.email "ramosgilmauricio@gmail.com"
 
 
 
