@@ -7,7 +7,7 @@ API KEY GOOGLE TC GEO:
 1709860835 PEW281429
 0604129577001
 0350233664  usuario y contraseña Empresaria pts
-0931489033   usuario y contraseña Empresaria
+0931489033   usuario y contraseña Empresaria -- sale err por que no tiene puntos
 0703744060001 usuario y contraseña Lider
 0923605562001 usuario y contraseña Director
 
@@ -74,14 +74,15 @@ OK - Quitar eliminar en detalle de pedido cuando no este disponible el articulo 
 - Si mis puntos da negativo desde que se carga el resumen, se debe ocultar el boton de reservar pedido.
 - cuando selecciono pagar flete puntos no recalcula % pts y puntos gastados, etc
 OK - Se corrige tema de puntos ganados cuando no esta disponible el articulo. para que no gane mas pts de los que son.
-
+- Precio catalogo no esta sumando cuando son mas de 2 articulos y se agregan uno a uno.
+- revisar este pedido por que se fue con flete 0 y elegi enviar a lider y me mostro cobrar 1.71 y no elegi pagar puntos por que estaban en 0: numero='PEW329934', usuario: 1709860835
 
 Adicionar nombre y nit cuando se reserva el pedido,  Poner disponible en grid de detalle pedido, borrar codigo rapido cuando se digita uno segudio del otro, Quitar eliminar en detalle de pedido cuando no este disponible, Se corrige tema de puntos ganados cuando no esta disponible el articulo.
 
 COMPILAR y PUBLICAR
 COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --build-optimizer=false
 - Permisos a la carpeta de saved
-- agregar .json en iis en filtrado de solicitudes.
+- agregar .json en iis en filtrado de solicitudes. web.config en raiz
 - agregar en tipos mime : .json --> application/json
 - en AppSettings.json debe quedar con la direccion IP y el puerto por que sino no entra a la app http://181.188.213.187:808/Application.Enterprise.Services/api/
 
@@ -140,14 +141,17 @@ TallaPrendaInferior	varchar(50)	Checked
 TallaCalzado	varchar(50)	Checked
 TarjetaCD	varchar(50)	Checked
 
+adicionar SVDN_PEDIDOSC1_2000--> campo: puntosusados int null
+
 Create table SVDN_EXCEPTION_ERROR -->02-04-2019
 
 Adicion en la tabla de Parametro = CarpetaImagenesSAVED = 77
 Adicion en la tabla de Parametro = 78	Puntos Ganados x Portal SAVED	100	int	True	Puntos
-Adicion en la tabla de SVDN_PUNTOS_CONCEPTOS: 18	PortalSaved
 Adicion en la tabla de Parametro = 79	Valorw	100	int	True	Puntos
+Adicion en la tabla de SVDN_PUNTOS_CONCEPTOS: 18	PortalSaved
 
-adicionar SVDN_PEDIDOSC1_2000--> campo: puntosusados int null
+
+
 
 
 PROCEDIMIENTOS
@@ -188,7 +192,10 @@ PRC_SVDN_CATALOGOS_PLUS--> opcion s-'E'--> cambiar el where a este --> and CATAL
 
 Install ANGULAR
 1) https://nodejs.org/en/download/
-2) https://angular.io/guide/setup-local
+2) https://git-scm.com/downloads  --> todos los pasos por default
+3) https://angular.io/guide/setup-local
+4) desde el terminal de VSCode : npm install -g @angular/cli
+5) OJO, si error de "node-sass" ejecutar: npm rebuild node-sass
 
 GIT: https://git-scm.com/book/es/v1/Fundamentos-de-Git-Trabajando-con-repositorios-remotos
 Desde git bash here en la carpeta nueva creada
@@ -994,7 +1001,8 @@ BEGIN
 			IF @i_option = 'A'
 			BEGIN
 
-				  SELECT (puntoEfec-PuntoRed) as PuntoEfec FROM   SVDN_PUNTOS_TOTAL WHERE nit=@i_nit
+				 --SELECT (puntoEfec-PuntoRed) as PuntoEfec FROM   SVDN_PUNTOS_TOTAL WHERE nit=@i_nit
+				  SELECT ISNULL((SELECT (puntoEfec-PuntoRed)  FROM   SVDN_PUNTOS_TOTAL WHERE nit=@i_nit),0) as PuntoEfec
 				
 			END
 	END
