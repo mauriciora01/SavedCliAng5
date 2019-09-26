@@ -15,6 +15,9 @@ import { E_SessionEmpresaria } from 'app/Models/E_SessionEmpresaria';
 import { ParameterService } from 'app/ApiServices/ParametersServices';
 import { E_PedidosCliente } from 'app/Models/E_PedidosCliente';
 import { E_PedidosDetalleCliente } from 'app/Models/E_PedidosDetalleCliente';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { Subscription, timer } from 'rxjs';
 
 export interface DialogData {
   Titulo: string;
@@ -110,13 +113,35 @@ export class DetallePedidoReservaComponent implements OnInit {
 
   }
 
+  private suscription: Subscription;
 
   onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
+
+    //MRG: Las dos lineas siguientes realizan la consulta y actualizan el grid por que se queda cargando.
+    this.suscription = Observable.interval(500).subscribe((val) => {
+       this.suscription.unsubscribe();
+      //--------------------------------------
+
+      params.api.setRowData(this.rowData);
+      this.gridApi = params.api;
+      this.gridColumnApi = params.columnApi;
+
+      var objPedidoRequest: E_PedidosCliente = new E_PedidosCliente()
+      objPedidoRequest.Numero = this.data.NumeroPedidoReservado;
+
+      this.PedidoService.ListDetallePedidoReservaGYG(objPedidoRequest).subscribe((DistData) => {
+        var DistDataArray = Object.values(DistData);
+        this.rowData = DistDataArray;
+      })
+
+    });
+
+
     //this.rowData = this.DetallePedidoService.GetCurrentDetallePedido();;
     //this.cargarDatos();
     //this.rowData = this.rowData ;
+
+
   }
 
   openLink(event: MouseEvent): void {
@@ -124,13 +149,6 @@ export class DetallePedidoReservaComponent implements OnInit {
     event.preventDefault();
   }
 
-
-
-
-
-
-  clickAuction(para) {
-  }
 
   ngOnInit() {
 
@@ -142,7 +160,6 @@ export class DetallePedidoReservaComponent implements OnInit {
      }*/
 
 
-
     var objPedidoRequest: E_PedidosCliente = new E_PedidosCliente()
     objPedidoRequest.Numero = this.data.NumeroPedidoReservado;
 
@@ -152,6 +169,7 @@ export class DetallePedidoReservaComponent implements OnInit {
     })
 
 
+
     this.form = this.formBuilder.group({
       Cantidad: [undefined, [Validators.required]],
 
@@ -159,6 +177,8 @@ export class DetallePedidoReservaComponent implements OnInit {
     });
 
 
+    //this.gridApi.setRowData(this.gridApi.rowData)
+    //this.gridApi.setRowData(this.rowData);
   }
 
   //selection = new SelectionModel<PeriodicElement>(true, []);
