@@ -77,7 +77,6 @@ OK - Se corrige tema de puntos ganados cuando no esta disponible el articulo. pa
 - Precio catalogo no esta sumando cuando son mas de 2 articulos y se agregan uno a uno.
 - revisar este pedido por que se fue con flete 0 y elegi enviar a lider y me mostro cobrar 1.71 y no elegi pagar puntos por que estaban en 0: numero='PEW329934', usuario: 1709860835
 
-Adicionar nombre y nit cuando se reserva el pedido,  Poner disponible en grid de detalle pedido, borrar codigo rapido cuando se digita uno segudio del otro, Quitar eliminar en detalle de pedido cuando no este disponible, Se corrige tema de puntos ganados cuando no esta disponible el articulo.
 
 COMPILAR y PUBLICAR
 COMPILAR PARA SERVIDOR AZURE: ng build --base-href /saved/ --prod --aot=false --build-optimizer=false

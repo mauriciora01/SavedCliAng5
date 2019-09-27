@@ -427,7 +427,7 @@ export class DetallePedidoComponent implements OnInit {
           if (x.Error == undefined) {
 
             if (x.Numero != null && x.Numero != "") {
-              NumeroPedidoGuardado =  x.Numero;
+              NumeroPedidoGuardado = x.Numero;
               ///######################################################################################
               //INSERTA DETALLE DEL PEDIDO
 
@@ -501,14 +501,33 @@ export class DetallePedidoComponent implements OnInit {
 
                         if (x.Error == undefined) {
 
-                          this.dialog2.closeAll();
-                          //Mensaje de OK
-                          const dialogRef = this.dialog.open(ModalPopUpPedidoComponent, {
-                            width: '450px',
-                            data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero, spinerr: false, Nit: "Documento: " + objPedidoRequest.Nit, NombreEmpresaria: "Nombre: " + this.SessionEmpresaria.NombreEmpresariaCompleto.toUpperCase(), NumeroPedidoReservado: NumeroPedidoGuardado }
-                          });
-                          this.bottomSheetRef.dismiss();
-                          this.EliminarArticulos();
+                          //..............................................................
+                          //Consulta el saldo a pagar x nit.
+                          var SaldoPagarNit = "";
+                          this.PedidoService.ConsultarSaldoAPagarxNit(objPedidoRequest)
+                            .subscribe((y: E_PedidosCliente) => {
+                              objPedidoResponse = y
+
+                              if (y.Error == undefined) {
+                                if (y.Saldo != -100) {
+                                  SaldoPagarNit = y.Saldo.toString();
+                                }
+                                else {
+                                  SaldoPagarNit = "Por favor Comuniquese con la empresa.";
+                                }
+
+
+                                this.dialog2.closeAll();
+                                //Mensaje de OK
+                                const dialogRef = this.dialog.open(ModalPopUpPedidoComponent, {
+                                  width: '450px',
+                                  data: { TipoMensaje: "Ok", Titulo: "Creación Pedido", Mensaje: "Se almacenó el pedido exitosamente! Numero Pedido: " + x.Numero, spinerr: false, Nit: "Documento: " + objPedidoRequest.Nit, NombreEmpresaria: "Nombre: " + this.SessionEmpresaria.NombreEmpresariaCompleto.toUpperCase(), NumeroPedidoReservado: NumeroPedidoGuardado, SaldoPagar: "Saldo a Pagar: $" + SaldoPagarNit }
+                                });
+                                this.bottomSheetRef.dismiss();
+                                this.EliminarArticulos();
+                              }
+                            })
+                          //..............................................................
 
                         }
                       })

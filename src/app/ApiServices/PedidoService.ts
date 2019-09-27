@@ -84,6 +84,18 @@ export class PedidoService {
 
     }
 
+
+    ConsultarSaldoAPagarxNit(obj: E_PedidosCliente): Observable<E_PedidosCliente> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        var request = JSON.stringify(obj)
+        return this.Http.post(this.UrlNow + "Pedido/ConsultarSaldoAPagarxNit"
+            , request, httpOptions).map(this.ExtractPedidosCliente)
+    }
+
     ExtractPedidosCliente(res: Response): E_PedidosCliente {
         var x: E_PedidosCliente = new E_PedidosCliente()
         if (res != null) { x = new PedidosClienteBuilder().buildFromObject(res).Build() }

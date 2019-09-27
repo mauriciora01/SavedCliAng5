@@ -15,6 +15,7 @@ export interface DialogData {
   Nit: string;
   NombreEmpresaria: string;
   NumeroPedidoReservado: string;
+  SaldoPagar: string;
 }
 
 @Component({

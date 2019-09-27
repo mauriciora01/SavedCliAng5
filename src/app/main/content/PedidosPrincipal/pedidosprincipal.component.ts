@@ -83,7 +83,7 @@ export class PedidosPrincipalComponent implements OnInit {
         public dialog: MatDialog) {
 
         this.formErrors = {
-            Campana : {},
+            Campana: {},
             Catalogo: {},
             NumeroDocumento: {},
             Bodega: {},
@@ -102,6 +102,11 @@ export class PedidosPrincipalComponent implements OnInit {
             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
             data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", TipoEnvio: this.TipoEnvioSeleccionado, CodCiudadDespacho: this.CodCiudadDespacho, ValorFleteCobrar: this.ValorFleteCobrar }
         });
+
+
+        /*this.bottomSheet._openedBottomSheetRef.afterDismissed().subscribe((data) => {
+            alert('Cerro el bottonsheet');
+        })*/
     }
 
     ngOnInit() {
@@ -155,7 +160,7 @@ export class PedidosPrincipalComponent implements OnInit {
         }
 
 
-        this.CampanaSeleccionado = "CAMPAÑA: "+ this.SessionUser.Campana;
+        this.CampanaSeleccionado = "CAMPAÑA: " + this.SessionUser.Campana;
 
 
     }
@@ -369,7 +374,7 @@ export class PedidosPrincipalComponent implements OnInit {
                         if (NombreImg == undefined || NombreImg == "" || NombreImg == null) {
                             NombreImg = "noimagen.png"
                         }
-                        else{
+                        else {
                             NombreImg = x.Imagen.toLowerCase();
                         }
 
@@ -395,7 +400,8 @@ export class PedidosPrincipalComponent implements OnInit {
                         dialogRef.afterClosed().subscribe(result => {
 
                             //this.DatosEnvioSeleccionado = result; 
-                            this.CodigoRapidoSeleccionado="";
+                            this.CodigoRapidoSeleccionado = "";
+                            this.CodigoRapido.setValue("");
                         });
 
 
@@ -454,7 +460,7 @@ export class PedidosPrincipalComponent implements OnInit {
     openVerResumenPedido(): void {
         const dialogRef = this.dialog.open(ResumenPedidoComponent, {
             panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
-            data: { TipoMensaje: "Error", Titulo: "Resumen Pedido", Mensaje: "Resumen del Pedido."  }
+            data: { TipoMensaje: "Error", Titulo: "Resumen Pedido", Mensaje: "Resumen del Pedido." }
         });
 
         dialogRef.afterClosed().subscribe(result => {
