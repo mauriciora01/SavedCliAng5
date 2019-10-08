@@ -76,6 +76,7 @@ OK - Quitar eliminar en detalle de pedido cuando no este disponible el articulo 
 OK - Se corrige tema de puntos ganados cuando no esta disponible el articulo. para que no gane mas pts de los que son.
 - Precio catalogo no esta sumando cuando son mas de 2 articulos y se agregan uno a uno.
 - revisar este pedido por que se fue con flete 0 y elegi enviar a lider y me mostro cobrar 1.71 y no elegi pagar puntos por que estaban en 0: numero='PEW329934', usuario: 1709860835
+OK - Mostrar SALDO A PAGAR luego que se reserva el pedido.
 
 
 COMPILAR y PUBLICAR
@@ -184,6 +185,8 @@ REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 									) as puntos
 
 PRC_SVDN_CATALOGOS_PLUS--> opcion s-'E'--> cambiar el where a este --> and CATALOGOS_PLUS.catalogo in (select catalogo	from campanas where fechaini < GETDATE() and GETDATE() < fechafin) 
+
+SVDN_CLIENTE --> OPCION FINAL --> IF @i_option = 'ED'
 
 
 <add name="conexion" connectionString="Database=Factu55;Server=NC01TE037KZP\MSSQLSERVER2017;User ID=sa;Password=Colombia19+" providerName="System.Data.SqlClient" />
@@ -1272,3 +1275,26 @@ https://alligator.io/angular/angular-8/
 
 $ ng update @angular/cli @angular/core
 $ ng update @angular/material
+
+
+
+SVDN_CLIENTE --> OPCION FINAL --> IF @i_option = 'ED'
+
+/*==========================================================================*/
+			--Lista un cliente especifico de la bd de svdn que corresponda a una zona de vendedor o lider 
+			IF @i_option = 'ED'
+			BEGIN
+
+				
+				SELECT     
+								*, CAST(0 as Bit) as privilegio, '' as CODCIUDADDESPACHO
+				FROM         
+								clientes
+				WHERE
+								nit	=	@i_nit
+				and
+								activo = 1
+				and
+								(LIDER = @i_id_lider OR vendedor = @i_vendedor)
+			END
+			

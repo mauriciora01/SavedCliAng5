@@ -192,6 +192,26 @@ export class PedidosPrincipalComponent implements OnInit {
                 var objClienteResquest: E_Cliente = new E_Cliente()
                 objClienteResquest.Nit = this.NumeroDocumento;
 
+                //..............................................................................
+                //Validacion para que solo se puedan ingresar empresarias de una zona o lider.
+                var UsuarioInicioSesion: E_SessionUser = new E_SessionUser();
+                UsuarioInicioSesion = this.UserService.GetCurrentCurrentUserNow();
+
+                //60 = lider
+                if (UsuarioInicioSesion.IdGrupo == "60") {
+                    objClienteResquest.Lider = UsuarioInicioSesion.IdLider;
+                    objClienteResquest.Vendedor = "";
+                }
+                else if (UsuarioInicioSesion.IdGrupo == "52") {
+                    objClienteResquest.Lider = "";
+                    objClienteResquest.Vendedor = UsuarioInicioSesion.IdVendedor;
+                }
+                else {
+                    objClienteResquest.Vendedor = UsuarioInicioSesion.IdVendedor;
+                }
+
+                //..............................................................................
+
                 this.ClienteService.ValidaExisteEmpresariaNombre(objClienteResquest).subscribe((x: E_SessionEmpresaria) => {
 
                     if (x.Error == undefined) {
@@ -263,6 +283,28 @@ export class PedidosPrincipalComponent implements OnInit {
 
                     var objClienteResquest: E_Cliente = new E_Cliente()
                     objClienteResquest.Nit = this.firstFormGroup.value.NumeroDocumento;
+
+                    //..............................................................................
+                    //Validacion para que solo se puedan ingresar empresarias de una zona o lider.
+                    var UsuarioInicioSesion: E_SessionUser = new E_SessionUser();
+                    UsuarioInicioSesion = this.UserService.GetCurrentCurrentUserNow();
+
+                    //60 = lider
+                    if (UsuarioInicioSesion.IdGrupo == "60") {
+                        objClienteResquest.Lider = UsuarioInicioSesion.IdLider;
+                        objClienteResquest.Vendedor = "";
+                    }
+                    else if (UsuarioInicioSesion.IdGrupo == "52") {
+                        objClienteResquest.Lider = "";
+                        objClienteResquest.Vendedor = UsuarioInicioSesion.IdVendedor;
+                    }
+                    else {
+                        objClienteResquest.Vendedor = UsuarioInicioSesion.IdVendedor;
+                    }
+
+                    //..............................................................................
+
+
 
                     this.ClienteService.ValidaExisteEmpresariaNombre(objClienteResquest).subscribe((x: E_SessionEmpresaria) => {
 
