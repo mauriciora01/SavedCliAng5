@@ -244,6 +244,10 @@ git fetch pb
 git pull origin master
 git config --global user.email "ramosgilmauricio@gmail.com"
 
+En el terminal de VSCODE:
+Copiar carpeta de "node_modules" estable
+ejecutar: npm install
+ejecutar: npm rebuild node-sass
 
 
 ERROR: Error: Cannot find module 'node-sass'
