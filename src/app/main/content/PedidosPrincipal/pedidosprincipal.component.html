@@ -26,11 +26,15 @@
           <ng-template matStepLabel>Información Principal</ng-template>
 
           <mat-form-field fxFlex="100">
-            <input matInput placeholder="Campaña" [(ngModel)]="CampanaSeleccionado"
-              formControlName="Campana" readonly>
+            <input matInput placeholder="Campaña" [(ngModel)]="CampanaSeleccionado" formControlName="Campana" readonly>
           </mat-form-field>
 
           <mat-form-field fxFlex="100">
+            <input matInput placeholder="Catalogo" [(ngModel)]="CatalogoSeleccionado" formControlName="Catalogo"
+              readonly>
+          </mat-form-field>
+
+          <!--<mat-form-field fxFlex="100">
             <mat-select [disabled]="CatalogoDisabled" placeholder="Catalogo" formControlName="Catalogo"
               [(ngModel)]="CatalogoSeleccionado" (selectionChange)="SelectedCatalogo($event)" required>
               <mat-option *ngFor="let Item of ListCatalogo" [value]="Item.Codigo">
@@ -40,14 +44,14 @@
             <mat-error *ngIf="formErrors.Catalogo.required">
               Catalogo es requerido
             </mat-error>
-          </mat-form-field>
+          </mat-form-field>-->
 
-       
+
 
           <mat-form-field fxFlex="100">
             <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required
               [ngModel]="NumeroDocumento" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
-              <!-- (focusout)="ValidateDocument()" >-->
+            <!-- (focusout)="ValidateDocument()" >-->
             <mat-error *ngIf="formErrors.NumeroDocumento.required">
               Numero Documento es requerido
             </mat-error>
@@ -79,8 +83,10 @@
 
             </div>
           </mat-form-field>
-
           <mat-form-field fxFlex="100">
+            <input matInput placeholder="Bodega" [(ngModel)]="BodegaSeleccionado" formControlName="Bodega" readonly>
+          </mat-form-field>
+          <!--<mat-form-field fxFlex="100">
             <mat-select [disabled]="BodegaDisabled" placeholder="Bodega" formControlName="Bodega"
               [(ngModel)]="BodegaSeleccionado" (selectionChange)="SelectedBodega($event)" required>
               <mat-option *ngFor="let Item of ListBodega" [value]="Item.Bodega">
@@ -90,7 +96,9 @@
             <mat-error *ngIf="formErrors.Bodega.required">
               Bodega es requerido
             </mat-error>
-          </mat-form-field>
+          </mat-form-field>-->
+
+
           <div>
             <button mat-button matStepperNext mat-raised-button color="accent"
               [disabled]="firstFormGroup.invalid || SaveInProgress || !Paso1Ok"> Siguiente</button>

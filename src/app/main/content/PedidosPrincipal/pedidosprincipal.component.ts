@@ -146,6 +146,11 @@ export class PedidosPrincipalComponent implements OnInit {
 
                     //---------------------------------------------------------------------------------------------------------------
                 }
+                else {
+                    if (this.ListCatalogo.length > 0) {
+                        this.CatalogoSeleccionado = x[0].Nombre;
+                    }
+                }
             })
 
         this.filteredOptions = this.CodigoRapido.valueChanges
@@ -161,7 +166,6 @@ export class PedidosPrincipalComponent implements OnInit {
 
 
         this.CampanaSeleccionado = "CAMPAÑA: " + this.SessionUser.Campana;
-
 
     }
 
@@ -220,6 +224,10 @@ export class PedidosPrincipalComponent implements OnInit {
                         this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow()
                         this.NombreEmpresariaCompleto = this.SessionEmpresaria.NombreEmpresariaCompleto;
                         this.ListBodega.push(this.SessionEmpresaria.Bodegas);
+                       
+                        if (this.ListBodega.length > 0) {
+                            this.BodegaSeleccionado = this.ListBodega[0].Nombre;
+                        }
                     }
                     else {
                         this.NombreDisabled = false;
@@ -314,7 +322,10 @@ export class PedidosPrincipalComponent implements OnInit {
                             this.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow()
                             this.NombreEmpresariaCompleto = this.SessionEmpresaria.NombreEmpresariaCompleto;
                             this.ListBodega.push(this.SessionEmpresaria.Bodegas);
-
+                            
+                            if (this.ListBodega.length > 0) {
+                                this.BodegaSeleccionado = this.ListBodega[0].Nombre;
+                            }
 
                         }
                         else {
