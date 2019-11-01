@@ -25,6 +25,11 @@ import { UbicacionGeneralModule } from './main/content/Ubicacion/UbicacionGenera
 import { PrincipalModule } from './main/content/Principal/principal.module';
 import { RegistroEmpresariaEcModule } from './main/content/RegistroEmpresariaEc/registroempresariaec.module';
 import { MisEmpresariasModule } from './main/content/MisEmpresarias/misempresarias.module';
+import { MisActivasModule } from './main/content/MisActivas/misactivas.module';
+import { MisPosiblesEgresosModule } from './main/content/MisPosiblesEgresos/misposiblesegresos.module';
+import { MisProspectosModule } from './main/content/MisProspectos/misprospectos.module';
+import { MisInactivasModule } from './main/content/MisInactivas/misinactivas.module';
+import { DetallePedidosModule } from './main/content/DetallePedidos/detallepedidos.module';
 import { ModalPopUpModule } from './main/content/ModalPopUp/modalpopup.module';
 import { DatosEnvioModule } from './main/content/DatosEnvio/datosenvio.module';
 import { ExceptionErrorService } from './ApiServices/ExceptionErrorService';
@@ -41,6 +46,8 @@ import {
     MatSortModule, MatTableModule
 } from "@angular/material";
 import { MisEmpresariasComponent } from './main/content/MisEmpresarias/misempresarias.component';
+import { MisActivasComponent } from './main/content/MisActivas/misactivas.component';
+import { MisProspectosComponent } from './main/content/MisProspectos/misprospectos.component';
 import { DetalleClienteModule } from './main/content/DetalleCliente/detallecliente.module';
 import { detallepfactuModule } from './main/content/detallepfactu/detallepfactu.module';
 import { PedidosPrincipalModule } from './main/content/PedidosPrincipal/pedidosprincipal.module';
@@ -70,6 +77,10 @@ const appRoutes: Routes = [
     { path: 'ubicaciongeneral', redirectTo: '/ubicaciongeneral', pathMatch: 'full' },
     { path: 'registroempresariaec', redirectTo: '/registroempresariaec', pathMatch: 'full' },
     { path: 'misempresarias', redirectTo: '/misempresarias', pathMatch: 'full' },
+    { path: 'misactivas', redirectTo: '/misactivas', pathMatch: 'full' },
+    { path: 'misprospectos', redirectTo: '/misprospectos', pathMatch: 'full' },
+    { path: 'misposiblesegresos', redirectTo: '/misposiblesegresos', pathMatch: 'full' },
+    { path: 'misinactivas', redirectTo: '/misinactivas', pathMatch: 'full' },
     { path: 'pedidosprincipal', redirectTo: '/pedidosprincipal', pathMatch: 'full' },
     { path: 'modalpopup', redirectTo: '/modalpopup', pathMatch: 'full' },
     { path: 'mispedidos', redirectTo: '/mispedidos', pathMatch: 'full' },
@@ -109,12 +120,17 @@ const appRoutes: Routes = [
         PrincipalModule,
         RegistroEmpresariaEcModule,
         MisEmpresariasModule,
+        MisActivasModule,
+        MisProspectosModule,
+        MisPosiblesEgresosModule,
+        MisInactivasModule,
         ModalPopUpModule,
         DatosEnvioModule,
         DetalleArticuloModule,
         DetalleClienteModule,
         PedidosPrincipalModule,
         DetallePedidoModule,
+        DetallePedidosModule,
         ResumenPedidoModule,
         MisPedidosModule,
         pedidosfacturadosModule,

@@ -1,4 +1,4 @@
-usuario y pass pruebas: 0912006103
+﻿usuario y pass pruebas: 0912006103
 
 http://181.188.213.187/GLOD/Login.aspx  
 
@@ -244,10 +244,6 @@ git fetch pb
 git pull origin master
 git config --global user.email "ramosgilmauricio@gmail.com"
 
-En el terminal de VSCODE:
-Copiar carpeta de "node_modules" estable
-ejecutar: npm install
-ejecutar: npm rebuild node-sass
 
 
 ERROR: Error: Cannot find module 'node-sass'
@@ -1301,4 +1297,84 @@ SVDN_CLIENTE --> OPCION FINAL --> IF @i_option = 'ED'
 				and
 								(LIDER = @i_id_lider OR vendedor = @i_vendedor)
 			END
+
+
+
+PRC_SVDN_PEDIDOSC1_2000 Operation='S'
+ @i_option ='RW'
+
+/*==========================================================================*/
+	/* Lista Pedidos x Director y campana sin Facturar  */
+			if @i_option ='RW'
+			BEGIN
+				select     
+						ped.numero, ped.mes, ped.fecha, ped.anulado, ped.espera, ped.despacho, ped.iva, ped.valor, ped.descuento, ped.fechacreacion, ped.claveusuario, ped.zona, 
+						  ped.codigo_numeracion, ped.transmitido, ped.campana, ped.numeroenvio, ped.nofacturado, ped.facturar, ped.codtipo, ped.devol, ped.factura, 
+						  ven.vendedor, ven.nombre, cli.nit, cli.razon_social, ped.orden, ped.procesado, ped.esp_id, ped.ivapreciocatalogo, ped.valorpreciocatalogo, 
+						  ped.codigo, cat.grupocatalogo, '' as descripcion, ped.generapremios, cli.creadopor, CAST(0 as BIT) as generapremios, 0 as anexo, CAST(0 as BIT) as procesado_cliente_historico, CAST(0 as BIT) as reserva, CAST(0 as BIT) as borrador, getdate() as fechacierreborrador
+						
+				from         pedidosc1_2000 as ped inner join
+									  vendedor as ven on ped.vendedor = ven.vendedor inner join
+									  clientes as cli on ped.nit = cli.nit inner join
+									  catalogo as cat on ped.codigo = cat.codigo
+				where
+				
+						ven.vendedor		=	@i_vendedor		and		ped.campana		= @i_campana
+								and ped.anulado		=	0  and ped.esp_id   IN ('15','16')
+				order by fechacreacion desc
+			END
+
+
+PRC_SVDN_PEDIDOSC1_2000 Operation='S'
+ @i_option ='RX'
+
+/*==========================================================================*/	
+
+
+			/* Lista Pedidos x Lider y campana sin Facturar  */
+			if @i_option ='RX'
+			BEGIN
+		select     
+						ped.numero, ped.mes, ped.fecha, ped.anulado, ped.espera, ped.despacho, ped.iva, ped.valor, ped.descuento, ped.fechacreacion, ped.claveusuario, ped.zona, 
+						  ped.codigo_numeracion, ped.transmitido, ped.campana, ped.numeroenvio, ped.nofacturado, ped.facturar, ped.codtipo, ped.devol, ped.factura, 
+						  ven.vendedor, ven.nombre, cli.nit, cli.razon_social, ped.orden, ped.procesado, ped.esp_id, ped.ivapreciocatalogo, ped.valorpreciocatalogo, 
+						  ped.codigo, cat.grupocatalogo, '' as descripcion, ped.generapremios, ped.anexo, ped.reserva
+						
+				from         pedidosc1_2000 as ped inner join
+									  vendedor as ven on ped.vendedor = ven.vendedor inner join
+									  clientes as cli on ped.nit = cli.nit inner join
+									  catalogo as cat on ped.codigo = cat.codigo
+				where
+						ped.idlider			=	@i_idlider		and		ped.campana		= @i_campana
+								and ped.anulado		=	0  and ped.esp_id   IN ('15','16')
+				order by fechacreacion desc
+			END
+
+
+
+
+	--Lista las empresarias de un lider segun Estado
+			IF @i_option = 'EE'
+			BEGIN
+
+				SELECT     cli.FECHAINGRESO, cli.nit, cli.NOMBRE1, cli.NOMBRE2, cli.APELLIDO1, cli.APELLIDO2, cli.FECHANACIMIENTO, cli.direccionresidencia, cli.BARRIO, cli.SEXO, 
+							  cli.direccion, cli.telefonos, cli.TELEFONODOS, cli.celular1, cli.celular2, cli.email, cli.razon_social, cli.ciudad, cli.activo, cli.TIPODOCUMENTO, cli.PAIS, cli.DV, zon.zona,
+							   zon.descripcion, ven.vendedor, ven.nombre, cli.esc_id,  ciu.codciudad, ciu.nombreciudad, dep.codEstado, dep.nombreEstado, pai.codPais, 
+							  pai.nombrePais, cli.ultimamodificacion, 0 AS bar_codbarrio, '' AS bar_nombre, 0 AS ciu_codciudad, '' AS ciu_nombre, 0 AS reg_codregional, '' AS reg_nombre, 
+							  0 AS tid_id, '' AS tid_nombre, CASE WHEN sec_codsector IS NULL THEN 'SIN ASIGNAR' ELSE sec_codsector END AS sec_codsector, esc.esc_nombre ,
+							  cli.codparroquia, nomparroquia, calles, numerocasa, comollegar, referenciafamiliar, telefonoreferenciaf, nombrereferidor,
+							operadorcelular, lider
+				FROM         dimciudad AS ciu INNER JOIN
+							  dimEstado AS dep ON ciu.codestado = dep.codEstado INNER JOIN
+							  dimpais AS pai ON dep.codPais = pai.codPais INNER JOIN
+							  clientes AS cli ON ciu.codciudad = cli.CODCIUDAD INNER JOIN
+							  vendedor AS ven ON cli.vendedor = ven.vendedor INNER JOIN
+							  zonas AS zon ON cli.zona = zon.zona INNER JOIN
+							  SVDN_ESTADOSCLIENTE AS esc ON cli.esc_id = esc.esc_id
+				WHERE     (cli.lider = @i_id_lider)
+					and
+													cli.activo = 1 and cli.esc_id like  @i_codestado
+						ORDER BY esc.esc_orden
+
+			END	
 			

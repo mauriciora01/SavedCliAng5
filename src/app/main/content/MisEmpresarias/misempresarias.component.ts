@@ -14,7 +14,7 @@ import { UserService } from '../../../ApiServices/UserService';
     styleUrls: ['misempresarias.component.scss']
 })
 export class MisEmpresariasComponent implements OnInit {
-    displayedColumns = ['Documento', 'NombreCompleto','Ciudad'];
+    displayedColumns = ['Documento', 'NombreCompleto','Celular1','NombreEstadosCliente'];
     dataSource: MatTableDataSource<E_Cliente>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,8 +35,12 @@ export class MisEmpresariasComponent implements OnInit {
         this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
         var objCliente: E_Cliente = new E_Cliente()
         objCliente.Vendedor = this.SessionUser.IdVendedor;
-        //objCliente.Vendedor="0604129577001"
-        this.ClienteService.ListEmpresariasxGerenteSimple(objCliente)
+        objCliente.Lider = this.SessionUser.IdLider ;
+        objCliente.CodEstado = "'%%'" ;
+        
+
+        if (this.SessionUser.IdGrupo == "52") {
+            this.ClienteService.ListEmpresariasxGerenteSimple(objCliente)
             .subscribe((x: Array<E_Cliente>) => {
                 this.ListClientes = x
 
@@ -45,6 +49,18 @@ export class MisEmpresariasComponent implements OnInit {
                 this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
             })
+        }
+        else if (this.SessionUser.IdGrupo == "60") {
+            this.ClienteService.ListEmpresariasxLider(objCliente)
+            .subscribe((x: Array<E_Cliente>) => {
+                this.ListClientes = x
+
+                // Assign the data to the data source for the table to render
+                this.dataSource = new MatTableDataSource(this.ListClientes);
+                this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+            })
+        }
     }
 
     openDetalleCliente(row: E_Cliente): void {

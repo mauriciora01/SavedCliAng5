@@ -137,13 +137,14 @@ export class ClienteBuilder {
     public TarjetaCD: string
     public NombreEmpresariaCompleto: string
 
-    public PorcentajeIvaFlete: number  
-    public ValorFleteSinIva: number  
-    public ValorFlete: number  
-    public EmpresariaLider: number  
+    public PorcentajeIvaFlete: number
+    public ValorFleteSinIva: number
+    public ValorFlete: number
+    public EmpresariaLider: number
 
     public Bodega: string
     public GrupoDescuentoCliente: string
+    public CodEstado: string
 
     public Error: E_Error
 
@@ -290,10 +291,11 @@ export class ClienteBuilder {
 
         if (x.Bodega != undefined) { this.Bodega = x.Bodega }
         if (x.GrupoDescuentoCliente != undefined) { this.GrupoDescuentoCliente = x.GrupoDescuentoCliente }
+        if (x.CodEstado != undefined) { this.CodEstado = x.CodEstado }
 
         if (x.Error != undefined) { this.Error = x.Error }
 
-        return this       
+        return this
     }
     Build(): E_Cliente {
         var obj: E_Cliente = new E_Cliente()
@@ -439,6 +441,7 @@ export class ClienteBuilder {
 
         obj.Bodega = this.Bodega
         obj.GrupoDescuentoCliente = this.GrupoDescuentoCliente
+        obj.CodEstado = this.CodEstado
 
         obj.Error = this.Error
 
