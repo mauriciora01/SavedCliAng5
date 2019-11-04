@@ -1,7 +1,10 @@
 <mat-sidenav-container>
-
+  
     <div id="fuse-main-content">
-
+        <div class="logogif" *ngIf="showLoadernow">
+            <img width="128" src="assets/images/scrumboard/leon.png" class="leongif">
+            <img width="128" src="assets/images/Spinner.gif" class="spinnergif">
+        </div>
         <!-- TOOLBAR: Above -->
         <ng-container *ngIf="fuseSettings.layout.toolbar === 'above'">
             <fuse-toolbar class="above" [ngClass]="fuseSettings.colorClasses.toolbar"></fuse-toolbar>
@@ -74,4 +77,5 @@
 
 </mat-sidenav-container>
 
-<fuse-theme-options></fuse-theme-options>
+<!-- <fuse-theme-options></fuse-theme-options> -->
+

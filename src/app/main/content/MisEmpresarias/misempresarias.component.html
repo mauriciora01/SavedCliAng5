@@ -1,20 +1,22 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
 
     <!-- HEADER -->
-    <div class="header mat-accent-bg p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxLayoutAlign="center start">
-            <div class="h1 mt-16">Mis Empresarias</div>
-           
+    <div class=" px-24 h-160 mat-white-bg" fxLayout="row" fxLayoutAlign="start center" >
+        <div fxLayout="row" style="width: 100%;justify-content: space-between">
+            <div style="    font-size: 32px;">Empresarias</div>
+            <div style="WIDTH: 100PX;"><button style="WIDTH: 100%;" class="buttonGlod">
+                    NUEVA
+                </button></div>
         </div>
 
     </div>
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content p-24 mat-white-bg">
+    <div class="content px-24 mat-white-bg">
 
 
-       
+
         <div class="example-header">
             <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Escribe una Palabra">
@@ -26,28 +28,38 @@
             <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
                 <!-- ID Column -->
-                <ng-container matColumnDef="Documento">
+                <!-- <ng-container matColumnDef="Documento">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Documento</mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.Nit}}</mat-cell>
-                </ng-container>
+                </ng-container> -->
 
                 <!-- Progress Column -->
+                <ng-container matColumnDef="imagenEmpresaria">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <img src="assets/images/appimages/empresarias.png">
+
+                    </mat-cell>
+                    <!--  -->
+                </ng-container>
+
+
+
                 <ng-container matColumnDef="NombreCompleto">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.NombreEmpresariaCompleto}}</mat-cell>
                 </ng-container>
 
                 <!-- Progress Column -->
-                <ng-container matColumnDef="Ciudad">
+                <!-- <ng-container matColumnDef="Ciudad">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.Ciudad}}</mat-cell>
-                </ng-container>
-               
+                </ng-container> -->
+
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"  class="example-element-row"
-                (click)="openDetalleCliente(row)"
-                >
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+                    (click)="openDetalleCliente(row)">
                 </mat-row>
             </mat-table>
 

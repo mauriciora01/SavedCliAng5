@@ -5,6 +5,7 @@ import { E_Cliente } from 'app/Models/E_Cliente';
 import { ClienteService } from 'app/ApiServices/ClienteService';
 import { E_SessionUser } from 'app/Models/E_SessionUser';
 import { UserService } from '../../../ApiServices/UserService';
+import { CommunicationService } from 'app/ApiServices/CommunicationService';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { UserService } from '../../../ApiServices/UserService';
     styleUrls: ['misempresarias.component.scss']
 })
 export class MisEmpresariasComponent implements OnInit {
-    displayedColumns = ['Documento', 'NombreCompleto','Ciudad'];
+    displayedColumns = ['imagenEmpresaria','NombreCompleto'];
     dataSource: MatTableDataSource<E_Cliente>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,8 +27,9 @@ export class MisEmpresariasComponent implements OnInit {
 
     constructor(public dialog: MatDialog,
         private ClienteService: ClienteService,
-        private UserService: UserService) {
-       
+        private UserService: UserService,
+        private communicationService: CommunicationService) {
+
 
     }
 
@@ -36,6 +38,7 @@ export class MisEmpresariasComponent implements OnInit {
         var objCliente: E_Cliente = new E_Cliente()
         objCliente.Vendedor = this.SessionUser.IdVendedor;
         //objCliente.Vendedor="0604129577001"
+        this.communicationService.showLoader.next(true);
         this.ClienteService.ListEmpresariasxGerenteSimple(objCliente)
             .subscribe((x: Array<E_Cliente>) => {
                 this.ListClientes = x
@@ -43,7 +46,8 @@ export class MisEmpresariasComponent implements OnInit {
                 // Assign the data to the data source for the table to render
                 this.dataSource = new MatTableDataSource(this.ListClientes);
                 this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+                this.dataSource.sort = this.sort;
+                this.communicationService.showLoader.next(false);
             })
     }
 
@@ -53,7 +57,7 @@ export class MisEmpresariasComponent implements OnInit {
             panelClass: 'knowledgebase-article-dialog',
             data: row
         });
-       
+
 
         dialogRef.afterClosed().subscribe(result => {
             //console.log('The dialog was closed');

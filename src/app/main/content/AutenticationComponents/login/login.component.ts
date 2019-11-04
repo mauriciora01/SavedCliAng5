@@ -10,6 +10,7 @@ import { PhotoTool } from 'app/Tools/PhotoTool';
 import { AppSettings } from '../../../../app.settings';
 import { Perfiles } from 'app/Enums/Enumerations';
 import { E_SessionUser } from 'app/Models/E_SessionUser';
+import { CommunicationService } from 'app/ApiServices/CommunicationService';
 //import { AppSettings } from '../../../../models/AppSettings.model';
 
 
@@ -27,12 +28,13 @@ export class FuseLoginComponent implements OnInit {
     @ViewChild("jojo") jojo: ElementRef
     loginForm: FormGroup;
     loginFormErrors: any;
-    public jey: string;  
-    lista:number[]=[];
+    public jey: string;
+    lista: number[] = [];
     constructor(
         private fuseConfig: FuseConfigService,
         private formBuilder: FormBuilder,
-        private Router: Router, private UserService: UserService
+        private Router: Router, private UserService: UserService,
+        private communicationService: CommunicationService,
     ) {
         this.fuseConfig.setConfig({
             layout: {
@@ -54,7 +56,7 @@ export class FuseLoginComponent implements OnInit {
             user.Passwordd = btoa("123123")
             this.Loading = true
             this.UserService.Login(user).subscribe((x: E_SessionUser) => {
-                
+
                 /*if (x.error != undefined) {
                     if (x.error.Id == 1 || x.error.Id == 2) {
                         this.errorLogin = true
@@ -128,9 +130,11 @@ export class FuseLoginComponent implements OnInit {
         user.UserName = this.loginForm.value.usuario
         user.Passwordd = this.loginForm.value.password
         this.Loading = true
+       // this.Router.navigate(["/principal/"])
+        //this.communicationService.showLoader.next(true);
         //*MRG: Llamar a servicios
         this.UserService.Login(user).subscribe((x: E_SessionUser) => {
-            
+
             if (x.Error != undefined) {
                 if (x.Error.Id == 1 || x.Error.Id == 2) {
                     this.errorLogin = true
@@ -139,21 +143,21 @@ export class FuseLoginComponent implements OnInit {
                 }
             }
             this.Loading = false
-            if(x.IdGrupo=="50"){
+            if (x.IdGrupo == "50") {
                 this.Router.navigate(["/pedidosprincipal/"])
-            }else{
-                this.Router.navigate(["/principal/"])    
+            } else {
+                this.Router.navigate(["/principal/"])
             }
-            
-            
+
+
         })
         //   ;
 
         //MRG: Valida un usuario tempooral y redirige.
         //if(user.UserName=="mao@mail.com"&& user.Passwordd=="MTIz")
         //{
-            
-            
+
+
         //}
     }
 }

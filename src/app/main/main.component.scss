@@ -72,4 +72,30 @@ fuse-main {
         margin: 0 auto;
         @include mat-elevation(8);
     }
+   
+}
+.logogif {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 50000;
+    background: #fbfafacc;
+    flex-direction: column;
+    align-self: center;
+    justify-items: center;
+    align-self: end;
+}
+.leongif{
+    width: 64px;
+    height: 58px;
+    top: 125px;
+    align-self: center;
+    position: relative;
+}
+.spinnergif{
+    width: 207px;
+    height: 198px;
+    align-self: center;
 }

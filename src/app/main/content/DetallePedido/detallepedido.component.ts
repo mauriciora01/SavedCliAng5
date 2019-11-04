@@ -139,11 +139,11 @@ export class DetallePedidoComponent implements OnInit {
   public ValorMinimoParaPuntos: number = 0;
   public ValorFletePuntos: number = 0;
 
-  private gridApi;
-  private gridColumnApi;
+  public gridApi;
+  public gridColumnApi;
 
-  private columnDefs;
-  private rowData: Array<E_PLU> = new Array<E_PLU>();
+  public columnDefs;
+  public rowData: Array<E_PLU> = new Array<E_PLU>();
 
   constructor(private formBuilder: FormBuilder,
     private UserService: UserService,

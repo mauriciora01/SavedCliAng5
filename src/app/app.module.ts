@@ -57,6 +57,7 @@ import { micarteraModule } from './main/content/micartera/micartera.module';
 
 import { ModalPopUpPedidoModule } from './main/content/ModalPopUpPedido/modalpopuppedido.module';
 import { DetallePedidoReservaModule } from './main/content/DetallePedidoReserva/detallepedidoreserva.module';
+import { CommunicationService } from './ApiServices/CommunicationService';
 
 const appRoutes: Routes = [
     /*{
@@ -151,7 +152,8 @@ const appRoutes: Routes = [
         ExceptionErrorService,
         DetallePedidoService,
         PedidoService,
-        CxCService
+        CxCService,
+        CommunicationService
 
     ]
     ,

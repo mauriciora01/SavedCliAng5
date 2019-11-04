@@ -17,6 +17,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class FuseThemeOptionsComponent implements OnInit, OnDestroy
 {
+    thumbnail
     @ViewChild('openButton') openButton;
     @ViewChild('panel') panel;
     @ViewChild('overlay') overlay: ElementRef;

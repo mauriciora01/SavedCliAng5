@@ -34,7 +34,7 @@ export interface DialogData {
 
 })
 export class DetallePedidoReservaComponent implements OnInit {
-
+  
   confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
   // const ELEMENT_DATA_PLU = this.DetallePedidoService.GetCurrentDetallePedido();
   displayedColumns =
@@ -79,17 +79,17 @@ export class DetallePedidoReservaComponent implements OnInit {
   public ValorMinimoParaPuntos: number = 0;
   public ValorFletePuntos: number = 0;
 
-  private gridApi;
-  private gridColumnApi;
+  public gridApi;
+  public gridColumnApi;
 
-  private columnDefs;
-  private rowData: Array<E_PedidosDetalleCliente> = new Array<E_PedidosDetalleCliente>();
+  public columnDefs;
+  public rowData: Array<E_PedidosDetalleCliente> = new Array<E_PedidosDetalleCliente>();
 
   constructor(private formBuilder: FormBuilder,
-    private UserService: UserService,
-    private ClienteService: ClienteService,
-    private DetallePedidoService: DetallePedidoService,
-    private bottomSheetRef: MatBottomSheetRef<DetallePedidoReservaComponent>,
+    public UserService: UserService,
+    public ClienteService: ClienteService,
+    public DetallePedidoService: DetallePedidoService,
+    public bottomSheetRef: MatBottomSheetRef<DetallePedidoReservaComponent>,
     public dialog: MatDialog,
     public dialog2: MatDialog,
     private ExceptionErrorService: ExceptionErrorService,

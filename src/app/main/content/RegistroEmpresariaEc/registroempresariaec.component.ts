@@ -42,6 +42,31 @@ import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
     styleUrls: ['registroempresariaec.component.scss']
 })
 export class RegistroEmpresariaEcComponent implements OnInit {
+    NumeroDocumento
+    PrimerNombre
+    PrimerApellido
+    FechaNacimiento
+    Barrio
+    DireccionDomicilio
+    Calles
+    NumeroCasa
+    DireccionEntrega
+    NumeroCelular
+    Whatsapp
+    TelefonoDomicilio
+    OtroTelefono
+    ReferenciaFamiliar
+    TelefonoReferenciaFamiliar
+    ReferidoPor
+    CorreoElectronico
+    DespacharASeleccionado
+    TipoClienteSeleccionado
+    TallaPrendaSuperiorSeleccionado
+    TallaPrendaInferiorSeleccionado
+    TallaCalzadoSeleccionado
+    TipoTarjetaSeleccionado
+    
+    
     confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
     SaveInProgress: boolean;
     SucceSave: boolean;

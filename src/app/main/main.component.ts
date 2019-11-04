@@ -4,16 +4,17 @@ import { Platform } from '@angular/cdk/platform';
 import { Subscription } from 'rxjs/Subscription';
 
 import { FuseConfigService } from '@fuse/services/config.service';
+import { CommunicationService } from 'app/ApiServices/CommunicationService';
 
 @Component({
-    selector     : 'fuse-main',
-    templateUrl  : './main.component.html',
-    styleUrls    : ['./main.component.scss'],
+    selector: 'fuse-main',
+    templateUrl: './main.component.html',
+    styleUrls: ['./main.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FuseMainComponent implements OnDestroy
-{
+export class FuseMainComponent implements OnDestroy {
     onConfigChanged: Subscription;
+    showLoadernow = false;
     fuseSettings: any;
     @HostBinding('attr.fuse-layout-mode') layoutMode;
 
@@ -22,9 +23,10 @@ export class FuseMainComponent implements OnDestroy
         private _elementRef: ElementRef,
         private fuseConfig: FuseConfigService,
         private platform: Platform,
+        private communicationService: CommunicationService,
         @Inject(DOCUMENT) private document: any
-    )
-    {
+    ) {
+       // this.communicationService.showLoader.subscribe(x => this.showLoadernow = x);
         this.onConfigChanged =
             this.fuseConfig.onConfigChanged
                 .subscribe(
@@ -34,24 +36,20 @@ export class FuseMainComponent implements OnDestroy
                     }
                 );
 
-        if ( this.platform.ANDROID || this.platform.IOS )
-        {
+        if (this.platform.ANDROID || this.platform.IOS) {
             this.document.body.className += ' is-mobile';
         }
     }
 
-    ngOnDestroy()
-    {
+    ngOnDestroy() {
         this.onConfigChanged.unsubscribe();
     }
 
-    addClass(className: string)
-    {
+    addClass(className: string) {
         this._renderer.addClass(this._elementRef.nativeElement, className);
     }
 
-    removeClass(className: string)
-    {
+    removeClass(className: string) {
         this._renderer.removeClass(this._elementRef.nativeElement, className);
     }
 }

@@ -21,7 +21,7 @@ export interface DialogData {
   NombreProd: string;
   Color: string;
   Talla: string;
-  ValorUnitario: string;
+  ValorUnitario: number;
   NombreImagen: string;
   PLU: number;
   Titulo: string;
@@ -59,6 +59,7 @@ export class DetalleArticuloComponent implements OnInit {
   public Cantidad: number = 1;
 
   public SessionUser: E_SessionUser = new E_SessionUser()
+  ValorUnitario: number;
 
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DetalleArticuloComponent>,
@@ -82,7 +83,7 @@ export class DetalleArticuloComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.ValorUnitario = this.data.ValorUnitario
     /* if (this.data.TipoMensaje == 'Error') {
        this.TextColor = 'blue';
      }
@@ -99,7 +100,9 @@ export class DetalleArticuloComponent implements OnInit {
 
 
   }
+  CalcularTotales() {
 
+  }
   onAdicionarArticulo(): void {
 
     var DetallePedido: E_PLU = new E_PLU()
@@ -109,7 +112,7 @@ export class DetalleArticuloComponent implements OnInit {
       DetallePedido.Disponible = true;
     }
     else {
-      CantidadDisponible =0;
+      CantidadDisponible = 0;
       DetallePedido.Disponible = false;
     }
 
