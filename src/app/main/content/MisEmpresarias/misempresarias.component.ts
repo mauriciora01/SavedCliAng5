@@ -37,9 +37,13 @@ export class MisEmpresariasComponent implements OnInit {
         this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
         var objCliente: E_Cliente = new E_Cliente()
         objCliente.Vendedor = this.SessionUser.IdVendedor;
-        //objCliente.Vendedor="0604129577001"
+        objCliente.Lider = this.SessionUser.IdLider ;
+        objCliente.CodEstado = "'%%'" ;
         this.communicationService.showLoader.next(true);
-        this.ClienteService.ListEmpresariasxGerenteSimple(objCliente)
+        
+
+        if (this.SessionUser.IdGrupo == "52") {
+            this.ClienteService.ListEmpresariasxGerenteSimple(objCliente)
             .subscribe((x: Array<E_Cliente>) => {
                 this.ListClientes = x
 
@@ -49,6 +53,19 @@ export class MisEmpresariasComponent implements OnInit {
                 this.dataSource.sort = this.sort;
                 this.communicationService.showLoader.next(false);
             })
+        }
+        else if (this.SessionUser.IdGrupo == "60") {
+            this.ClienteService.ListEmpresariasxLider(objCliente)
+            .subscribe((x: Array<E_Cliente>) => {
+                this.ListClientes = x
+
+                // Assign the data to the data source for the table to render
+                this.dataSource = new MatTableDataSource(this.ListClientes);
+                this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.communicationService.showLoader.next(false);
+            })
+        }
     }
 
     openDetalleCliente(row: E_Cliente): void {

@@ -61,6 +61,27 @@ export class PedidoService {
             , request, httpOptions).map(this.ExtractPedidosList)
     }
 
+    PedidosListEmpresarias(obj: E_PedidosCliente): Observable<Array<E_PedidosCliente>> {
+      const httpOptions = {
+          headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+          })
+      };
+      var request = JSON.stringify(obj)
+      return this.Http.post(this.UrlNow + "Pedido/PedidosListEmpresaria"
+          , request, httpOptions).map(this.ExtractPedidosListEmpresarias)
+  }
+  PedidosListLider(obj: E_PedidosCliente): Observable<Array<E_PedidosCliente>> {
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+        })
+    };
+    var request = JSON.stringify(obj)
+    return this.Http.post(this.UrlNow + "Pedido/PedidosListLider"
+        , request, httpOptions).map(this.ExtractPedidosListLider)
+}
+
     ListxGerenteZonaFacturados(obj: E_PedidosCliente): Observable<Array<E_PedidosCliente>> {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -118,6 +139,27 @@ export class PedidoService {
         }
         return x
     }
+
+    ExtractPedidosListEmpresarias(res: any): Array<E_PedidosCliente> {
+      var x: Array<E_PedidosCliente> = new Array<E_PedidosCliente>()
+      if (res != null) {
+          res.forEach((element) => {
+              x.push(new PedidosClienteBuilder().buildFromObject(element).Build())
+          });
+
+      }
+      return x
+  }
+  ExtractPedidosListLider(res: any): Array<E_PedidosCliente> {
+    var x: Array<E_PedidosCliente> = new Array<E_PedidosCliente>()
+    if (res != null) {
+        res.forEach((element) => {
+            x.push(new PedidosClienteBuilder().buildFromObject(element).Build())
+        });
+
+    }
+    return x
+}
     ExtractListxGerenteZonaFacturados(res: any): Array<E_PedidosCliente> {
         var x: Array<E_PedidosCliente> = new Array<E_PedidosCliente>()
         if (res != null) {

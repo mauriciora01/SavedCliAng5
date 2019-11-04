@@ -5,7 +5,8 @@ import { E_SessionUser } from 'app/Models/E_SessionUser';
 import { UserService } from '../../../ApiServices/UserService';
 import { PedidoService } from 'app/ApiServices/PedidoService';
 import { E_PedidosCliente } from 'app/Models/E_PedidosCliente';
-import { DetallePedidoComponent } from '../DetallePedido/detallepedido.component';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { DetallePedidosComponent } from '../DetallePedidos/detallepedidos.component';
 
 @Component({
     moduleId: module.id,
@@ -16,6 +17,7 @@ import { DetallePedidoComponent } from '../DetallePedido/detallepedido.component
 export class MisPedidosComponent implements OnInit {
     displayedColumns = ['Numero', 'Nit', 'NombreEmpresaria'];
     dataSource: MatTableDataSource<E_PedidosCliente>;
+    
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -25,6 +27,7 @@ export class MisPedidosComponent implements OnInit {
 
     constructor(public dialog: MatDialog,
         private PedidoService: PedidoService,
+        private bottomSheet: MatBottomSheet,
         private UserService: UserService) {
 
     }
@@ -33,9 +36,24 @@ export class MisPedidosComponent implements OnInit {
         this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
         var objPedidos: E_PedidosCliente = new E_PedidosCliente()
         objPedidos.IdVendedor = this.SessionUser.IdVendedor;
-        //MRG: Validar los siguientes datos para enviar segun el usuarios.
-
+        objPedidos.Nit = this.SessionUser.Cedula;
         objPedidos.Campana = this.SessionUser.Campana;
+        objPedidos.IdLider = this.SessionUser.IdLider ;
+
+        
+        //MRG: Validar los siguientes datos para enviar segun el usuarios.
+        if (this.SessionUser.IdGrupo == "50") {
+            this.PedidoService.PedidosListEmpresarias(objPedidos)
+            .subscribe((x: Array<E_PedidosCliente>) => {
+                this.ListPedidos = x
+
+                // Assign the data to the data source for the table to render
+                this.dataSource = new MatTableDataSource(this.ListPedidos);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            })
+        }
+        else  if (this.SessionUser.IdGrupo == "52") {
         this.PedidoService.PedidosList(objPedidos)
             .subscribe((x: Array<E_PedidosCliente>) => {
                 this.ListPedidos = x
@@ -45,20 +63,30 @@ export class MisPedidosComponent implements OnInit {
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             })
+        }
+        else  if (this.SessionUser.IdGrupo == "60") {
+            this.PedidoService.PedidosListLider(objPedidos)
+            .subscribe((x: Array<E_PedidosCliente>) => {
+                this.ListPedidos = x
+
+                // Assign the data to the data source for the table to render
+                this.dataSource = new MatTableDataSource(this.ListPedidos);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            })
+        }
     }
 
+    
     openResumenPedido(row: E_PedidosCliente): void {
-        const dialogRef = this.dialog.open(DetallePedidoComponent, {
-            //width: '550px',
-            panelClass: 'knowledgebase-article-dialog',
-            data: row
-        });
+        this.bottomSheet.open(DetallePedidosComponent, {
+            panelClass: 'knowledgebase-article-dialog', //MRG: poner este para el style del popup.
+            data: { TipoMensaje: "Error", Titulo: "Detalle Pedido", Mensaje: "Detalle del Pedido.", NumeroPedidoReservado:  row.Numero }
+          });       
 
-        dialogRef.afterClosed().subscribe(result => {
-            //console.log('The dialog was closed');
-            //this.Mensaje = result; //AQUI RECIBE LOS DATOS DEL POPUP CERRADO. OJO PARA PEDIDO.
-        });
+      
     }
+  
 
     applyFilter(filterValue: string) {
         filterValue = filterValue.trim(); // Remove whitespace

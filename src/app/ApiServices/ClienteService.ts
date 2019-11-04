@@ -63,7 +63,59 @@ export class ClienteService {
         return this.Http.post(this.UrlNow + "Cliente/ListEmpresariasxGerenteSimple"
             , request, httpOptions).map(this.ExtractClienteList)
     }
+    ListEmpresariasxGerentexEstado(obj: E_Cliente): Observable<Array<E_Cliente>> {
+      const httpOptions = {
+          headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+          })
+      };
+      var request = JSON.stringify(obj)
+      return this.Http.post(this.UrlNow + "Cliente/ListEmpresariasxGerentexEstado"
+          , request, httpOptions).map(this.ExtractClienteEstadoList)
+  }
 
+    ListEmpresariasActivasxGerenteSimple(obj: E_Cliente): Observable<Array<E_Cliente>> {
+      const httpOptions = {
+          headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+          })
+      };
+      var request = JSON.stringify(obj)
+      return this.Http.post(this.UrlNow + "Cliente/ListEmpresariasActivasxGerenteSimple"
+          , request, httpOptions).map(this.ExtractClienteActivasList)
+  }
+    ListEmpresariasxLider(obj: E_Cliente): Observable<Array<E_Cliente>> {
+      const httpOptions = {
+          headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+          })
+      };
+      var request = JSON.stringify(obj)
+      return this.Http.post(this.UrlNow + "Cliente/ListEmpresariasxLider"
+          , request, httpOptions).map(this.ExtractClienteLiderList)
+  }
+
+  ListEmpresariasxLiderEstado(obj: E_Cliente): Observable<Array<E_Cliente>> {
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+        })
+    };
+    var request = JSON.stringify(obj)
+    return this.Http.post(this.UrlNow + "Cliente/ListEmpresariasxLiderEstado"
+        , request, httpOptions).map(this.ExtractClienteLiderListEstado)
+}
+
+ListEmpresariasxLiderActivas(obj: E_Cliente): Observable<Array<E_Cliente>> {
+  const httpOptions = {
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+      })
+  };
+  var request = JSON.stringify(obj)
+  return this.Http.post(this.UrlNow + "Cliente/ListEmpresariasxLiderActivas"
+      , request, httpOptions).map(this.ExtractClienteLiderListActivas)
+}
 
     RegistrarEmpresaria(obj: E_Cliente): Observable<E_Cliente> {
         const httpOptions = {
@@ -78,12 +130,12 @@ export class ClienteService {
 
     //MRG: Carga la empresaria buscada en session con los parametros para hacer pedidos.
     ValidaExisteEmpresariaNombre(obj: E_Cliente): Observable<E_SessionEmpresaria> {
-        
+
         const httpOptions = this.HeaderBuilder.HeadNow()
          var request = JSON.stringify(obj)
          return this.Http.post(this.UrlNow + "Cliente/ValidaExisteEmpresariaNombre"
              , request, httpOptions).map(this.ExtractDataSessionEmpresariaValid)
-            
+
      }
 
 
@@ -120,7 +172,7 @@ export class ClienteService {
         return this.Http.post(this.UrlNow + "Cliente/ActualizarDireccionTelefono"
             , request, httpOptions).map(this.ExtractCliente)
     }
- 
+
 
     ExtractCliente(res: Response): E_Cliente {
         var x: E_Cliente = new E_Cliente()
@@ -138,9 +190,60 @@ export class ClienteService {
         }
         return x
     }
+    ExtractClienteEstadoList(res: any): Array<E_Cliente> {
+      var x: Array<E_Cliente> = new Array<E_Cliente>()
+      if (res != null) {
+          res.forEach((element) => {
+              x.push(new ClienteBuilder().buildFromObject(element).Build())
+          });
+
+      }
+      return x
+  }
+
+    ExtractClienteActivasList(res: any): Array<E_Cliente> {
+      var x: Array<E_Cliente> = new Array<E_Cliente>()
+      if (res != null) {
+          res.forEach((element) => {
+              x.push(new ClienteBuilder().buildFromObject(element).Build())
+          });
+
+      }
+      return x
+  }
+    ExtractClienteLiderList(res: any): Array<E_Cliente> {
+      var x: Array<E_Cliente> = new Array<E_Cliente>()
+      if (res != null) {
+          res.forEach((element) => {
+              x.push(new ClienteBuilder().buildFromObject(element).Build())
+          });
+
+      }
+      return x
+  }
+  ExtractClienteLiderListActivas(res: any): Array<E_Cliente> {
+    var x: Array<E_Cliente> = new Array<E_Cliente>()
+    if (res != null) {
+        res.forEach((element) => {
+            x.push(new ClienteBuilder().buildFromObject(element).Build())
+        });
+
+    }
+    return x
+}
+ExtractClienteLiderListEstado(res: any): Array<E_Cliente> {
+  var x: Array<E_Cliente> = new Array<E_Cliente>()
+  if (res != null) {
+      res.forEach((element) => {
+          x.push(new ClienteBuilder().buildFromObject(element).Build())
+      });
+
+  }
+  return x
+}
 
     ExtractDataSessionEmpresariaValid(res: object): E_SessionEmpresaria {
-        
+
         var x: E_SessionEmpresaria = new E_SessionEmpresaria()
 
         if (res != null) { x = new SessionEmpresariaBuilder().buildFromObject(res).Build() }
@@ -151,7 +254,7 @@ export class ClienteService {
             }
         }
         sessionStorage.setItem("CurrentEmpresaria", JSON.stringify(x))
-      
+
         return x
     }
 }

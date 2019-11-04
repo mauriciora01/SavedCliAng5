@@ -53,7 +53,38 @@ export const navigationGeneral = [
                         'icon': 'group',
                         'url': '/misempresarias',
                     },
-
+                    {
+                      'id': 'misprospectos',
+                      'title': 'Mis Prospectos',
+                      'translate': 'NAV.SAMPLE.TITLE',
+                      'type': 'item',
+                      'icon': 'group',
+                      'url': '/misprospectos',
+                  },
+                    {
+                      'id': 'misactivas',
+                      'title': 'Mis Activas',
+                      'translate': 'NAV.SAMPLE.TITLE',
+                      'type': 'item',
+                      'icon': 'group',
+                      'url': '/misactivas',
+                  },
+                  {
+                    'id': 'misposiblesegresos',
+                    'title': 'Mis Posibles Egresos',
+                    'translate': 'NAV.SAMPLE.TITLE',
+                    'type': 'item',
+                    'icon': 'group',
+                    'url': '/misposiblesegresos',
+                },
+                  {
+                    'id': 'misinactivas',
+                    'title': 'Mis Inactivas',
+                    'translate': 'NAV.SAMPLE.TITLE',
+                    'type': 'item',
+                    'icon': 'group',
+                    'url': '/misinactivas',
+                },
                 ]
             },
 
@@ -137,7 +168,7 @@ export const navigationGeneralEmpre = [
         'title': 'Menu',
         'translate': 'NAV.APPLICATIONS',
         'type': 'group',
-        'children': [           
+        'children': [
             {
                 'id'       : 'pedidos',
                 'title'    : 'Pedidos',
