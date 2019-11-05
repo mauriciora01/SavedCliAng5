@@ -99,3 +99,19 @@ fuse-main {
     height: 198px;
     align-self: center;
 }
+.subHeader
+{
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 10px 4px 10px;
+    border-top: solid 0.2px;
+    border-bottom: solid 0.2px;
+    z-index: 1000;
+    .menus{
+        display: flex;
+        >div{
+            margin: 0px 4px 0px 4px;
+        }
+    }
+}

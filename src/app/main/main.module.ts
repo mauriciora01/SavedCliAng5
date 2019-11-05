@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MatSidenavModule, MatTableModule } from '@angular/material';
+import { MatSidenavModule, MatTableModule, MatMenuModule } from '@angular/material';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseNavigationModule, FuseSearchBarModule, FuseShortcutsModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
@@ -32,7 +32,8 @@ import { FuseMainComponent } from './main.component';
         FuseNavbarModule,
         FuseQuickPanelModule,
         FuseToolbarModule,
-        MatTableModule 
+        MatTableModule, 
+        MatMenuModule
     ],
     exports     : [
         FuseMainComponent

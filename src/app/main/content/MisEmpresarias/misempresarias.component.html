@@ -1,9 +1,9 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
 
     <!-- HEADER -->
-    <div class=" px-24 h-160 mat-white-bg" fxLayout="row" fxLayoutAlign="start center" >
+    <div class=" px-24 h-100 mat-white-bg" fxLayout="row" fxLayoutAlign="start center" >
         <div fxLayout="row" style="width: 100%;justify-content: space-between">
-            <div style="    font-size: 32px;">Empresarias</div>
+            <div style="font-size: 32px;">Empresarias</div>
             <div style="WIDTH: 100PX;"><button style="WIDTH: 100%;" class="buttonGlod">
                     NUEVA
                 </button></div>
@@ -23,30 +23,21 @@
             </mat-form-field>
         </div>
 
-        <div class="example-container mat-elevation-z8">
+        <div class="example-container ">
 
-            <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+            <mat-table #tableEmpresaria [dataSource]="dataSource"  class="">
 
-                <!-- ID Column -->
-                <!-- <ng-container matColumnDef="Documento">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Documento</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.Nit}}</mat-cell>
-                </ng-container> -->
 
-                <!-- Progress Column -->
                 <ng-container matColumnDef="imagenEmpresaria">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <img src="assets/images/appimages/empresarias.png">
-
+                        <img class="mr-20" src="assets/images/appimages/empresarias.png">
                     </mat-cell>
-                    <!--  -->
                 </ng-container>
 
 
 
                 <ng-container matColumnDef="NombreCompleto">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                    <!-- <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell> -->
                     <mat-cell *matCellDef="let row"> {{row.NombreEmpresariaCompleto}}</mat-cell>
                 </ng-container>
 
@@ -57,13 +48,13 @@
                 </ng-container> -->
 
 
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+                <mat-header-row></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row" style="cursor: pointer"
                     (click)="openDetalleCliente(row)">
                 </mat-row>
             </mat-table>
 
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
         </div>
     </div>
 </div>

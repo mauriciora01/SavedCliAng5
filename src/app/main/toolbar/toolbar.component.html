@@ -1,4 +1,4 @@
-<mat-toolbar class="p-0 mat-elevation-z1">
+<mat-toolbar class="p-0 ">
 
     <mat-progress-bar *ngIf="showLoadingBar" class="loading-bar" color="accent" mode="indeterminate"></mat-progress-bar>
 
@@ -9,10 +9,10 @@
             <button mat-button class="toggle-button-navbar mat-icon-button"
                     *ngIf="!noNav"
                     (click)="toggleSidebarOpened('navbar')" fxHide.gt-md>
-                <mat-icon>menu</mat-icon>
+                <mat-icon style="color: black;font-weight: bolder;">menu</mat-icon>
             </button>
 
-            <div class="toolbar-separator" fxHide.gt-md></div>
+          
 
             <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNav">
                 <div class="logo ml-16">
