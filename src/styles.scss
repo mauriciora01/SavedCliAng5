@@ -5,6 +5,7 @@
 
 }
 
+
 .loader {
     margin: 100px auto;
     font-size: 25px;
@@ -82,4 +83,16 @@
     height: 44px;
     background:black;
     color: white;
+  }
+  .mat-form-field-wrapper{
+  //  background-color: #f2f2f2;
+  }
+  .mat-form-field-infix{
+  //  background-color: #f2f2f2;
+  }
+
+  mat-form-field.registroEmpresaria{
+    div.mat-form-field-infix{
+      background-color: #f2f2f2;
+    }
   }

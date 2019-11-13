@@ -1,10 +1,10 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
 
     <!-- HEADER -->
-    <div class="header mat-accent-bg p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxLayoutAlign="center start">
-            <div class="h1 mt-16">Empresarias Prospectos</div>
-           
+  
+    <div class=" px-24 h-100 mat-white-bg" fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="row" style="width: 100%;justify-content: space-between">
+            <div style="font-size: 32px;">Empresarias Prospectos</div>
         </div>
 
     </div>
@@ -26,9 +26,10 @@
             <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
                 <!-- ID Column -->
-                <ng-container matColumnDef="Documento">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Documento</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.Nit}}</mat-cell>
+                <ng-container matColumnDef="imagenEmpresaria">
+                    <mat-cell *matCellDef="let row">
+                        <img class="mr-20" src="assets/images/appimages/empresarias.png">
+                    </mat-cell>
                 </ng-container>
 
                 <!-- Progress Column -->
@@ -37,19 +38,10 @@
                     <mat-cell *matCellDef="let row"> {{row.NombreEmpresariaCompleto}}</mat-cell>
                 </ng-container>
 
-                <!-- Progress Column -->
-                <ng-container matColumnDef="Celular1">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Celular</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.Celular1}}</mat-cell>
-                </ng-container>
 
-                <ng-container matColumnDef="NombreEstadosCliente">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Estado Empresaria</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.NombreEstadosCliente}}</mat-cell>
-                </ng-container>
                
 
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        
                 <mat-row *matRowDef="let row; columns: displayedColumns;"  class="example-element-row"
                 (click)="openDetalleCliente(row)"
                 >

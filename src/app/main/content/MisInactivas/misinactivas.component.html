@@ -24,11 +24,11 @@
 
             <mat-table [dataSource]="dataSource" matSort>
 
-                    <ng-container matColumnDef="imagenEmpresaria">
-                            <mat-cell *matCellDef="let row">
-                                <img class="mr-20" src="assets/images/appimages/empresarias.png">
-                            </mat-cell>
-                        </ng-container>
+                <ng-container matColumnDef="imagenEmpresaria">
+                    <mat-cell *matCellDef="let row">
+                        <img class="mr-20" src="assets/images/appimages/empresarias.png">
+                    </mat-cell>
+                </ng-container>
 
                 <!-- Progress Column -->
                 <ng-container matColumnDef="NombreCompleto">
@@ -36,7 +36,7 @@
                     <mat-cell *matCellDef="let row"> {{row.NombreEmpresariaCompleto}}</mat-cell>
                 </ng-container>
 
-              
+
                 <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
                     (click)="openDetalleCliente(row)">
                 </mat-row>

@@ -1,10 +1,10 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
 
     <!-- HEADER -->
-    <div class=" px-24 h-100 mat-white-bg" fxLayout="row" fxLayoutAlign="start center" >
+    <div class=" px-24 h-100 mat-white-bg" fxLayout="row" fxLayoutAlign="start center">
         <div fxLayout="row" style="width: 100%;justify-content: space-between">
             <div style="font-size: 32px;">Empresarias</div>
-            <div style="WIDTH: 100PX;"><button style="WIDTH: 100%;" class="buttonGlod">
+            <div style="WIDTH: 100PX;"><button style="WIDTH: 100%;" class="buttonGlod" (click)="irNuevaEmpresaria()">
                     NUEVA
                 </button></div>
         </div>
@@ -25,7 +25,7 @@
 
         <div class="example-container ">
 
-            <mat-table #tableEmpresaria [dataSource]="dataSource"  class="">
+            <mat-table #tableEmpresaria [dataSource]="dataSource" class="">
 
 
                 <ng-container matColumnDef="imagenEmpresaria">
@@ -49,8 +49,8 @@
 
 
                 <mat-header-row></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row" style="cursor: pointer"
-                    (click)="openDetalleCliente(row)">
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+                    style="cursor: pointer" (click)="openDetalleCliente(row)">
                 </mat-row>
             </mat-table>
 

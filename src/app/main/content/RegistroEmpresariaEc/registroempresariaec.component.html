@@ -1,23 +1,20 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
-
-    <!-- HEADER -->
-    <div class="header mat-accent-bg p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxLayoutAlign="center start">
-            <div class="h1 mt-16">Registro Empresaria</div>
-            <!--<button mat-raised-button (click)="openDialog()">Pick one</button>-->
+    <div class=" px-24 h-100 mat-white-bg" fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="row" style="width: 100%;justify-content: space-between ;text-align: center">
+            <div style="font-size: 32px;width: 100%">Registro Empresaria</div>
         </div>
 
     </div>
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content p-24 mat-white-bg">
+    <div class="content px-24 mat-white-bg">
 
         <div fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-md="row">
 
             <!-- REACTIVE FORM EXAMPLE -->
 
-            <form class="mat-white-bg mat-elevation-z4 p-24 mr-24 mb-24" fxLayout="column" fxLayoutAlign="start"
+            <form class="mat-white-bg  px-24 mr-24 mb-24" fxLayout="column" fxLayoutAlign="start"
                 fxFlex="1 0 auto" name="form" [formGroup]="form">
 
                 <!--<div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
@@ -33,7 +30,7 @@
                 </div> -->
                 <!-- *********************************************************** -->
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Regional" formControlName="Regional" [(ngModel)]="RegionalSeleccionado"
                             (selectionChange)="SelectedRegional($event)" required disabled>
                             <mat-option *ngFor="let Item of ListRegional" [value]="Item.IdRegional">
@@ -45,7 +42,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Director/Zonal" formControlName="DirectorZonal"
                             [(ngModel)]="DirectorZonalSeleccionado" (selectionChange)="SelectedDirectorZonal($event)" required
                             disabled>
@@ -58,7 +55,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Lider" formControlName="Lider" [(ngModel)]="LiderSeleccionado"
                             (selectionChange)="SelectedLider($event)" required>
                             <mat-option *ngFor="let Item of ListLider" [value]="Item.IdLider">
@@ -69,7 +66,7 @@
                             Lider es requerido
                         </mat-error>
                     </mat-form-field>
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Tipo Documento" formControlName="TipoDocumento"
                             [(ngModel)]="TipoDocumentoSeleccionado" (selectionChange)="SelectedTipoDocumento($event)" required>
                             <mat-option *ngFor="let Item of ListTipoDocumento" [value]="Item.Id">
@@ -80,7 +77,7 @@
                             Tipo Documento es requerido
                         </mat-error>
                     </mat-form-field>
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required
                             [ngModel]="NumeroDocumento" maxlength="11" inputmode="numeric" pattern="[0-9]*" digitOnly
                             (focusout)="ValidateDocument()">
@@ -89,7 +86,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Primer Nombre" formControlName="PrimerNombre" required
                             [ngModel]="PrimerNombre">
                         <mat-error *ngIf="formErrors.PrimerNombre.required">
@@ -97,11 +94,11 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Segundo Nombre" formControlName="SegundoNombre">
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Primer Apellido" formControlName="PrimerApellido" required
                             [ngModel]="PrimerApellido">
                         <mat-error *ngIf="formErrors.PrimerApellido.required">
@@ -110,11 +107,11 @@
                     </mat-form-field>
 
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Segundo Apellido" formControlName="SegundoApellido">
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput [matDatepicker]="picker1" formControlName="FechaNacimiento"
                             placeholder="Fecha Nacimiento" [ngModel]="FechaNacimiento" required readonly
                             [min]="minDate" [max]="maxDate" >
@@ -125,7 +122,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Genero" formControlName="Genero" [(ngModel)]="GeneroSeleccionado"
                             required>
                             <mat-option *ngFor="let Item of ListGenero" [value]="Item.IdGenero">
@@ -134,7 +131,7 @@
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Provincia" formControlName="Provincia"
                             [(ngModel)]="ProvinciaSeleccionado" (selectionChange)="SelectedProvincia($event)" required>
                             <mat-option *ngFor="let Item of ListProvincia" [value]="Item.CodEstado">
@@ -146,7 +143,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="CantonSeleccionado"
                             (selectionChange)="SelectedCanton($event)" required>
                             <mat-option *ngFor="let Item of ListCanton" [value]="Item.CodCiudad">
@@ -158,7 +155,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Parroquia" formControlName="Parroquia"
                             [(ngModel)]="ParroquiaSeleccionado" (selectionChange)="SelectedParroquia($event)" required>
                             <mat-option *ngFor="let Item of ListParroquia" [value]="Item.Codigo">
@@ -170,7 +167,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Barrio/Urbanizacion" formControlName="Barrio" required
                             [ngModel]="Barrio">
                         <mat-error *ngIf="formErrors.Barrio.required">
@@ -178,7 +175,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Direccion Domicilio (como llegar)"
                             formControlName="DireccionDomicilio" required [ngModel]="DireccionDomicilio">
                         <mat-error *ngIf="formErrors.DireccionDomicilio.required">
@@ -186,14 +183,14 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Calles" formControlName="Calles" required [ngModel]="Calles">
                         <mat-error *ngIf="formErrors.Calles.required">
                             Calles es requerido
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Numero de Casa" formControlName="NumeroCasa" required
                             [ngModel]="NumeroCasa">
                         <mat-error *ngIf="formErrors.NumeroCasa.required">
@@ -201,7 +198,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Direccion de Entrega (como llegar)"
                             formControlName="DireccionEntrega" required [ngModel]="DireccionEntrega">
                         <mat-error *ngIf="formErrors.DireccionEntrega.required">
@@ -209,7 +206,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Operador Celular" formControlName="OperadorCelular"
                             [(ngModel)]="OperadorCelularSeleccionado" required>
                             <mat-option *ngFor="let Item of ListOperadorCelular" [value]="Item.IdOperador">
@@ -221,14 +218,14 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Numero Celular" formControlName="NumeroCelular" required
                             [ngModel]="NumeroCelular" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
                         <mat-error *ngIf="formErrors.NumeroCelular.required">
                             Numero de Casa es requerido
                         </mat-error>
                     </mat-form-field>
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Whatsapp" formControlName="Whatsapp" required [ngModel]="Whatsapp"
                         maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
                         <mat-error *ngIf="formErrors.Whatsapp.required">
@@ -236,38 +233,38 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Telefono Domicilio" formControlName="TelefonoDomicilio"
                             [ngModel]="TelefonoDomicilio" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly required>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Otro Telefono" formControlName="OtroTelefono"
                             [ngModel]="OtroTelefono" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Referencia Familiar" formControlName="ReferenciaFamiliar"
                             [ngModel]="ReferenciaFamiliar">
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Telefono Referencia Familiar"
                             formControlName="TelefonoReferenciaFamiliar" [ngModel]="TelefonoReferenciaFamiliar"
                             maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Referido Por" formControlName="ReferidoPor" [ngModel]="ReferidoPor"
                         maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Nombre Referido" formControlName="NombreReferido"
                             [readonly]="true">
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <input matInput placeholder="Correo Electronico" formControlName="CorreoElectronico" required
                             [ngModel]="CorreoElectronico">
 
@@ -279,7 +276,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Despachar A" formControlName="DespacharA"
                             [(ngModel)]="DespacharASeleccionado" required>
                             <mat-option *ngFor="let Item of ListDespacharA" [value]="Item.IdDespacharA">
@@ -290,7 +287,7 @@
                             Despachar A es requerido
                         </mat-error>
                     </mat-form-field>
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Tipo Cliente" formControlName="TipoCliente"
                             [(ngModel)]="TipoClienteSeleccionado" required>
                             <mat-option *ngFor="let Item of ListTipoCliente" [value]="Item.IdTipoCliente">
@@ -302,7 +299,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Talla Prenda Superior" formControlName="TallaPrendaSuperior"
                             [(ngModel)]="TallaPrendaSuperiorSeleccionado" required>
                             <mat-option *ngFor="let Item of ListTallaPrendaSuperior"
@@ -315,7 +312,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Talla Prenda Inferior" formControlName="TallaPrendaInferior"
                             [(ngModel)]="TallaPrendaInferiorSeleccionado" required>
                             <mat-option *ngFor="let Item of ListTallaPrendaInferior"
@@ -328,7 +325,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Talla Calzado" formControlName="TallaCalzado"
                             [(ngModel)]="TallaCalzadoSeleccionado" required>
                             <mat-option *ngFor="let Item of ListTallaCalzado" [value]="Item.IdTallaCalzado">
@@ -340,7 +337,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="100">
+                    <mat-form-field class="registroEmpresaria" fxFlex="100">
                         <mat-select placeholder="Tipo Tarjeta" formControlName="TipoTarjeta"
                             [(ngModel)]="TipoTarjetaSeleccionado" required>
                             <mat-option *ngFor="let Item of ListTipoTarjeta" [value]="Item.IdTipoTarjeta">

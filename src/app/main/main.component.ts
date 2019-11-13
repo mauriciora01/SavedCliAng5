@@ -20,12 +20,12 @@ export class FuseMainComponent implements OnDestroy, OnInit {
     fuseSettings: any;
     @HostBinding('attr.fuse-layout-mode') layoutMode;
     empresariasmenu = [
-        { description: 'Crear empresaria', value: 'misinactivas' },
+        { description: 'Crear empresaria', value: 'registroempresariaec' },
         { description: 'Mis empresarias', value: 'misempresarias' },
-        { description: 'Prospectos', value: 'misinactivas' },
+        { description: 'Prospectos', value: 'misprospectos' },
         { description: 'Inactivas', value: 'misinactivas' },
-        { description: 'Activas', value: 'misinactivas' },
-        { description: 'Posibles egresos', value: 'misinactivas' },
+        { description: 'Activas', value: 'misactivas' },
+        { description: 'Posibles egresos', value: 'misposiblesegresos' },
     ];
     constructor(
         private _renderer: Renderer2,

@@ -107,7 +107,11 @@ fuse-main {
     padding: 4px 10px 4px 10px;
     border-top: solid 0.2px;
     border-bottom: solid 0.2px;
-    z-index: 1000;
+    z-index: 2;
+    .home{
+        border-bottom: 4px solid #f5d25e;
+        margin-bottom: -8px;
+    }
     .menus{
         display: flex;
         >div{

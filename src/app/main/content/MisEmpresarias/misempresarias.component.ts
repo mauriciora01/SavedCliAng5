@@ -6,6 +6,8 @@ import { ClienteService } from 'app/ApiServices/ClienteService';
 import { E_SessionUser } from 'app/Models/E_SessionUser';
 import { UserService } from '../../../ApiServices/UserService';
 import { CommunicationService } from 'app/ApiServices/CommunicationService';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -29,7 +31,8 @@ export class MisEmpresariasComponent implements OnInit {
     constructor(public dialog: MatDialog,
         private ClienteService: ClienteService,
         private UserService: UserService,
-        private communicationService: CommunicationService) {
+        private communicationService: CommunicationService,
+        private router: Router) {
 
 
     }
@@ -51,9 +54,9 @@ export class MisEmpresariasComponent implements OnInit {
                     this.dataSource = new MatTableDataSource(this.ListClientes);
                     this.dataSource.paginator = this.paginator;
                     this.dataSource.sort = this.sort;
-           
-                        this.communicationService.showLoader.next(false);
-          
+
+                    this.communicationService.showLoader.next(false);
+
                 })
         }
         else if (this.SessionUser.IdGrupo == "60") {
@@ -65,9 +68,9 @@ export class MisEmpresariasComponent implements OnInit {
                     this.dataSource = new MatTableDataSource(this.ListClientes);
                     this.dataSource.paginator = this.paginator;
                     this.dataSource.sort = this.sort;
-           
-                        this.communicationService.showLoader.next(false);
-            
+
+                    this.communicationService.showLoader.next(false);
+
                 })
         }
     }
@@ -93,5 +96,9 @@ export class MisEmpresariasComponent implements OnInit {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    irNuevaEmpresaria() {
+        this.router.navigate(['/registroempresariaec'])
     }
 }

@@ -1,34 +1,88 @@
 <div class="dialog-content">
 
-  <mat-toolbar matDialogTitle class="mat-accent m-0">
+  <mat-toolbar matDialogTitle class=" m-0" style="background-color: #000000;color:white">
     <mat-toolbar-row>
-      <span class="title dialog-title">Detalle Empresaria:</span>
+      <span class="title dialog-title">Detalle Empresaria</span>
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
-        
-      <b>Documento:</b> {{data.Nit}} <br>
-      <b>Nombre:</b> {{data.NombreEmpresariaCompleto.toLowerCase()}}<br>
-      <b>Estado Empresaria:</b> {{data.NombreEstadosCliente}}<br>
-      <b>Nacimiento:</b> {{data.FechaNacimiento}}<br>
-      <b>Dirección Residencia:</b> {{data.DireccionResidencia.toLowerCase()}}<br>
-      <b>Departamento:</b> {{data.Departamento.toLowerCase()}}<br>
-      <b>Ciudad:</b> {{data.Ciudad.toLowerCase()}}<br>
-      <b>Barrio:</b> {{data.Barrio.toLowerCase()}}<br>
-      <b>DireccionPedidos:</b> {{data.DireccionPedidos.toLowerCase()}}<br>
-      <b>Tel1:</b> {{data.Telefono1}}, <b>Tel2:</b> {{data.Telefono2}}<br>
-      <b>WhatsApp:</b> {{data.Whatsapp}}<br>
-      <b>Email:</b> {{data.Email}}<br>
-      <b>Talla Prenda Superior:</b> {{data.TallaPrendaSuperior}}<br>
-      <b>Talla Prenda Inferior:</b> {{data.TallaPrendaInferior}}<br>
-      <b>Talla Calzado:</b> {{data.TallaCalzado}}<br>
-      <b>Creación:</b> {{data.FechaIngreso}}<br>
-   
+  <div mat-dialog-content class="p-24 m-0 containerData" fusePerfectScrollbar>
+
+    <div>
+      <div><b>Documento</b></div>
+      <div> {{data.Nit}} </div>
+    </div>
+    <div>
+      <div><b>Nombre</b></div>
+      <div> {{data.NombreEmpresariaCompleto.toLowerCase()}} </div>
+    </div>
+    <div>
+      <div><b>Estado Empresaria</b></div>
+      <div> {{data.NombreEstadosCliente}} </div>
+    </div>
+    <div>
+      <div><b>Nacimiento</b></div>
+      <div> {{data.FechaNacimiento}} </div>
+    </div>
+    <div>
+      <div><b>Dirección Residencia</b></div>
+      <div> {{data.DireccionResidencia.toLowerCase()}} </div>
+    </div>
+    <div>
+      <div><b>Departamento</b></div>
+      <div> {{data.Departamento.toLowerCase()}} </div>
+    </div>
+    <div>
+      <div><b>Ciudad</b></div>
+      <div> {{data.Ciudad.toLowerCase()}} </div>
+    </div>
+    <div>
+      <div><b>Barrio</b></div>
+      <div> {{data.Barrio.toLowerCase()}} </div>
+    </div>
+    <div>
+      <div><b>Direccion Pedidos</b></div>
+      <div> {{data.DireccionPedidos.toLowerCase()}} </div>
+    </div>
+    <div>
+      <div><b>Tels</b></div>
+      <div> {{data.Telefono1}} - {{data.Telefono2}} </div>
+    </div>
+    <div>
+      <div><b>WhatsApp</b></div>
+      <div> {{data.WhatsApp}} </div>
+    </div>
+    <div>
+      <div><b>Email</b></div>
+      <div> {{data.Email}} </div>
+    </div>
+    <div>
+      <div><b>Talla Prenda Superior</b></div>
+      <div> {{data.TallaPrendaSuperior}} </div>
+    </div>
+    <div>
+      <div><b>Talla Prenda Inferior</b></div>
+      <div> {{data.TallaPrendaInferior}} </div>
+    </div>
+    <div>
+      <div><b>Talla Calzado</b></div>
+      <div> {{data.TallaCalzado}} </div>
+    </div>
+    <div>
+      <div><b>Creación</b></div>
+      <div> {{data.FechaIngreso | date:'short'}} </div>
+    </div>
+
+
+
+
+ 
+ 
+
   </div>
 
   <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-button (click)="dialogRef.close()" class="mat-accent" aria-label="Close">
+    <button (click)="dialogRef.close()" style="width: 125px;" class="buttonGlod" aria-label="Close">
       CERRAR
     </button>
   </div>

@@ -34,8 +34,8 @@
                 <ng-container *ngIf="fuseSettings.layout.toolbar === 'below'">
                     <fuse-toolbar class="below" [ngClass]="fuseSettings.colorClasses.toolbar"></fuse-toolbar>
                 </ng-container>
-                <div class="subHeader">
-                    <div>
+                <div class="subHeader" *ngIf="fuseSettings.layout.toolbar === 'below'">
+                    <div class="home">
                         HOME
                     </div>
                     <div class="menus">
