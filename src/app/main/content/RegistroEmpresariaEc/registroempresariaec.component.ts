@@ -33,7 +33,7 @@ import 'rxjs/add/observable/throw';
 import { catchError, tap } from 'rxjs/operators';
 import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
 
-
+import * as _ from 'lodash';
 
 @Component({
     moduleId: module.id,
@@ -42,37 +42,37 @@ import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
     styleUrls: ['registroempresariaec.component.scss']
 })
 export class RegistroEmpresariaEcComponent implements OnInit {
-    NumeroDocumento
-    PrimerNombre
-    PrimerApellido
-    FechaNacimiento
-    Barrio
-    DireccionDomicilio
-    Calles
-    NumeroCasa
-    DireccionEntrega
-    NumeroCelular
-    Whatsapp
-    TelefonoDomicilio
-    OtroTelefono
-    ReferenciaFamiliar
-    TelefonoReferenciaFamiliar
-    ReferidoPor
-    CorreoElectronico
-    DespacharASeleccionado
-    TipoClienteSeleccionado
-    TallaPrendaSuperiorSeleccionado
-    TallaPrendaInferiorSeleccionado
-    TallaCalzadoSeleccionado
-    TipoTarjetaSeleccionado
-    
-    
+    NumeroDocumento;
+    PrimerNombre;
+    PrimerApellido;
+    FechaNacimiento;
+    Barrio;
+    DireccionDomicilio;
+    Calles;
+    NumeroCasa;
+    DireccionEntrega;
+    NumeroCelular;
+    Whatsapp;
+    TelefonoDomicilio;
+    OtroTelefono;
+    ReferenciaFamiliar;
+    TelefonoReferenciaFamiliar;
+    ReferidoPor;
+    CorreoElectronico;
+    DespacharASeleccionado;
+    TipoClienteSeleccionado;
+    TallaPrendaSuperiorSeleccionado;
+    TallaPrendaInferiorSeleccionado;
+    TallaCalzadoSeleccionado;
+    TipoTarjetaSeleccionado;
+
+
     confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
     SaveInProgress: boolean;
     SucceSave: boolean;
     dataURL: any;
-    public MaskedNumber: any[]
-    MaskedNumberNoDecimal: any[]
+    public MaskedNumber: any[];
+    MaskedNumberNoDecimal: any[];
     form: FormGroup;
     formErrors: any;
 
@@ -80,28 +80,28 @@ export class RegistroEmpresariaEcComponent implements OnInit {
     maxDate: Date;
 
     public RegionalSeleccionado: string = "";
-    public ListRegional: Array<E_Regional> = new Array<E_Regional>()
+    public ListRegional: Array<E_Regional> = new Array<E_Regional>();
 
     public DirectorZonalSeleccionado: string = "";
-    public ListDirectorZonal: Array<E_Vendedor> = new Array<E_Vendedor>()
+    public ListDirectorZonal: Array<E_Vendedor> = new Array<E_Vendedor>();
 
     public LiderSeleccionado: string = "";
-    public ListLider: Array<E_Lider> = new Array<E_Lider>()
+    public ListLider: Array<E_Lider> = new Array<E_Lider>();
 
     public TipoDocumentoSeleccionado: string = "";
-    public ListTipoDocumento: Array<E_TipoDocumento> = new Array<E_TipoDocumento>()
+    public ListTipoDocumento: Array<E_TipoDocumento> = new Array<E_TipoDocumento>();
 
     public ProvinciaSeleccionado: string = ""; //PROVINCIA = DEPARTAMENTO
-    public ListProvincia: Array<E_Provincia> = new Array<E_Provincia>()
+    public ListProvincia: Array<E_Provincia> = new Array<E_Provincia>();
 
     public CantonSeleccionado: string = ""; //CANTON = MUNICIPIO
-    public ListCanton: Array<E_Canton> = new Array<E_Canton>()
+    public ListCanton: Array<E_Canton> = new Array<E_Canton>();
 
     public ParroquiaSeleccionado: string = ""; //PARROQUIA = CORREGIMIENTO
-    public ListParroquia: Array<E_Parroquia> = new Array<E_Parroquia>()
+    public ListParroquia: Array<E_Parroquia> = new Array<E_Parroquia>();
 
 
-    public objParametrosResponse: E_Parametros = new E_Parametros()
+    public objParametrosResponse: E_Parametros = new E_Parametros();
 
     public ListGenero: Array<Object> = [
         { IdGenero: "F", Nombre: 'FEMENINO' },
@@ -160,12 +160,12 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         { IdTipoTarjeta: "CREDITO", Nombre: 'CREDITO' },
     ];
 
-    public SessionUser: E_SessionUser = new E_SessionUser()
+    public SessionUser: E_SessionUser = new E_SessionUser();
 
     public Nombre: string;
     public descripcion: string;
     public checkedActivo: boolean;
-    EstadoFormulario: boolean
+    EstadoFormulario: boolean;
 
     public PermitirPedidoMinimoxDefecto: string;
     public ValorTPedMinimoxDefecto: number;
@@ -222,7 +222,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
     ReturnPage(event: Event) {
         event.preventDefault();
-        this.Router.navigate(['/mainpageadmin'])
+        this.Router.navigate(['/mainpageadmin']);
     }
 
 
@@ -239,7 +239,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
         //TODO:MRG: Produce un error  at new ErrorLogExcepcion pero guarda en la BD. Corregir
         //TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at Function.invokeGetter (<anonymous>:2:14)
-        throw new ErrorLogExcepcion("PedidosPrincipalComponent", "openDialog()", "Prueba Error", this.SessionUser.Cedula, this.ExceptionErrorService)
+        throw new ErrorLogExcepcion("PedidosPrincipalComponent", "openDialog()", "Prueba Error", this.SessionUser.Cedula, this.ExceptionErrorService);
     }
 
     ngOnInit() {
@@ -247,46 +247,52 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         this.minDate = new Date(1900, 0, 1);
         this.maxDate = new Date(2000, 11, 31);
 
-        this.MaskedNumber = GenerateMask.numberMask
-        this.MaskedNumberNoDecimal = GenerateMask.Nodecimal
-        this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
+        this.MaskedNumber = GenerateMask.numberMask;
+        this.MaskedNumberNoDecimal = GenerateMask.Nodecimal;
+        this.SessionUser = this.UserService.GetCurrentCurrentUserNow();
         this.ParameterService.listarRegional(this.SessionUser)
             .subscribe((x: Array<E_Regional>) => {
-                this.ListRegional = x
-
+                this.ListRegional = x;
+                if (!_.isNil(x) && x.length > 0) {
+                    this.RegionalSeleccionado = x[0].IdRegional;
+                }
                 //Para que ponga por defecto el que trae sin poderlo modificar.
-                this.RegionalSeleccionado = x[0].IdRegional; //Siempre con el ID de la tabla regional.
-            })
+                //Siempre con el ID de la tabla regional.
+            });
 
         this.ParameterService.listarVendedor(this.SessionUser)
             .subscribe((x: Array<E_Vendedor>) => {
-                this.ListDirectorZonal = x
+                this.ListDirectorZonal = x;
 
                 //Para que ponga por defecto el que trae sin poderlo modificar.
-                this.DirectorZonalSeleccionado = x[0].IdVendedor;
-            })
+
+                if (!_.isNil(x) && x.length > 0) {
+                    this.DirectorZonalSeleccionado = x[0].IdVendedor;
+                }
+              
+            });
 
         this.ParameterService.listarLider(this.SessionUser)
             .subscribe((x: Array<E_Lider>) => {
-                this.ListLider = x
-            })
+                this.ListLider = x;
+            });
 
         this.ParameterService.listarTipoDocumento(this.SessionUser)
             .subscribe((x: Array<E_TipoDocumento>) => {
-                this.ListTipoDocumento = x
+                this.ListTipoDocumento = x;
 
                 //Para que ponga por defecto el que trae sin poderlo modificar.
                 this.TipoDocumentoSeleccionado = x[0].Id;
 
-            })
+            });
 
         this.ParameterService.listarProvincia(this.SessionUser)
             .subscribe((x: Array<E_Provincia>) => {
-                this.ListProvincia = x
+                this.ListProvincia = x;
 
                 //Para que ponga por defecto el que trae sin poderlo modificar.
                 //this.ProvinciaSeleccionado = x[0].CodEstado;
-            })
+            });
 
         this.CargarParametrosxDefecto();
 
@@ -362,25 +368,25 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
     SelectedRegional(y) {
 
-        var depObj = this.ListRegional.find(x => x.IdRegional == y.value)
+        var depObj = this.ListRegional.find(x => x.IdRegional == y.value);
         //*this.ListMunicipiosGroup = this.ListMunicipiosBase.filter(x => x.Id_Departamento == Number(depObj.Codigo))
     }
 
     SelectedDirectorZonal(y) {
 
-        var depObj = this.ListDirectorZonal.find(x => x.IdVendedor == y.value)
+        var depObj = this.ListDirectorZonal.find(x => x.IdVendedor == y.value);
         //*this.ListMunicipiosGroup = this.ListMunicipiosBase.filter(x => x.Id_Departamento == Number(depObj.Codigo))
     }
 
     SelectedLider(y) {
 
-        var depObj = this.ListLider.find(x => x.IdLider == y.value)
+        var depObj = this.ListLider.find(x => x.IdLider == y.value);
         //*this.ListMunicipiosGroup = this.ListMunicipiosBase.filter(x => x.Id_Departamento == Number(depObj.Codigo))
     }
 
     SelectedTipoDocumento(y) {
 
-        var depObj = this.ListTipoDocumento.find(x => x.Id == y.value)
+        var depObj = this.ListTipoDocumento.find(x => x.Id == y.value);
         //*this.ListMunicipiosGroup = this.ListMunicipiosBase.filter(x => x.Id_Departamento == Number(depObj.Codigo))
     }
 
@@ -390,13 +396,13 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
         if (y.value != undefined && y.value != "-1") {
 
-            var objProvincia: E_Provincia = new E_Provincia()
-            objProvincia.CodEstado = y.value
+            var objProvincia: E_Provincia = new E_Provincia();
+            objProvincia.CodEstado = y.value;
 
             this.ParameterService.listarCanton(objProvincia)
                 .subscribe((x: Array<E_Canton>) => {
-                    this.ListCanton = x
-                })
+                    this.ListCanton = x;
+                });
         }
     }
 
@@ -406,21 +412,21 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
         if (y.value != undefined && y.value != "-1") {
 
-            var objCanton: E_Canton = new E_Canton()
-            objCanton.CodCiudad = y.value.substring(3)
-            objCanton.CodEstado = this.ProvinciaSeleccionado.substring(1)
+            var objCanton: E_Canton = new E_Canton();
+            objCanton.CodCiudad = y.value.substring(3);
+            objCanton.CodEstado = this.ProvinciaSeleccionado.substring(1);
 
             this.ParameterService.listarParroquia(objCanton)
                 .subscribe((x: Array<E_Parroquia>) => {
-                    this.ListParroquia = x
-                })
+                    this.ListParroquia = x;
+                });
         }
     }
 
 
     SelectedParroquia(y) {
 
-        var depObj = this.ListParroquia.find(x => x.CodigoParroquia == y.value)
+        var depObj = this.ListParroquia.find(x => x.CodigoParroquia == y.value);
         //*this.ListMunicipiosGroup = this.ListMunicipiosBase.filter(x => x.Id_Departamento == Number(depObj.Codigo))
     }
 
@@ -439,7 +445,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         //()()()()()())()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()())()
         //se ingresa el tipo de pedido minimo para el cliente segun la parametrizacion.
 
-        var objParametros: E_Parametros = new E_Parametros()
+        var objParametros: E_Parametros = new E_Parametros();
 
         objParametros.Id = ParametrosEnum.PermitirTPedMinimoxDefecto;
 
@@ -447,7 +453,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
         this.ParameterService.listarParametrosxId(objParametros)
             .subscribe((x: E_Parametros) => {
-                this.objParametrosResponse = x
+                this.objParametrosResponse = x;
                 this.PermitirPedidoMinimoxDefecto = x.Valor;
 
                 if (this.PermitirPedidoMinimoxDefecto == "SI") {
@@ -457,11 +463,11 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                     this.ValorTPedMinimoxDefecto = 0;
                     this.ParameterService.listarParametrosxId(objParametros)
                         .subscribe((x: E_Parametros) => {
-                            this.objParametrosResponse = x
+                            this.objParametrosResponse = x;
                             this.ValorTPedMinimoxDefecto = Number(x.Valor);
-                        })
+                        });
                 }
-            })
+            });
 
 
 
@@ -469,10 +475,10 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
 
     ConfirmData() {
-        this.confirmDialogRef = this.Matdialog.open(FuseConfirmDialogComponent, {})
+        this.confirmDialogRef = this.Matdialog.open(FuseConfirmDialogComponent, {});
         this.confirmDialogRef.componentInstance.confirmMessage = '¿Estas seguro de realizar esta acción?';
         this.confirmDialogRef.afterClosed().subscribe(result => {
-            if (result) { this.EnviarInfo() }
+            if (result) { this.EnviarInfo(); }
             this.confirmDialogRef = null;
         });
 
@@ -480,7 +486,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
 
     EnviarInfo() {
-        var objCliente: E_Cliente = new E_Cliente()
+        var objCliente: E_Cliente = new E_Cliente();
 
         try {
 
@@ -651,8 +657,8 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                 //Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", radalertscript);
             }
             else {
-                this.RegistrarEmpresaria(objCliente)
-                
+                this.RegistrarEmpresaria(objCliente);
+
             }
         }
         catch (error) {
@@ -663,7 +669,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                 data: { TipoMensaje: "Error", Titulo: "Registro Empresaria", Mensaje: "No se pudo guardar la empresaria." }
             });
 
-            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "EnviarInfo()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
+            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "EnviarInfo()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService);
 
             //---------------------------------------------------------------------------------------------------------------
         }
@@ -686,13 +692,13 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                 if (this.ValidaExisteEmpresariaNombre(Nit) != "" && this.ValidaExisteEmpresariaNombre(Nit) != undefined) {
                     //TODO: Mauricio, si la empresaria existe no se debe permitir crear, se debe mostrar
                     //msj de abajo comentado.
-                    var objCliente: E_Cliente = new E_Cliente()
-                    var objClienteResp: E_Cliente = new E_Cliente()
+                    var objCliente: E_Cliente = new E_Cliente();
+                    var objClienteResp: E_Cliente = new E_Cliente();
                     objCliente.Nit = Nit;
                     this.ClienteService.ListEstadoxNit(objCliente)
                         .subscribe((x: E_Cliente) => {
-                            objClienteResp = x
-                        })
+                            objClienteResp = x;
+                        });
 
                     if (objClienteResp != null) {
                         if (objClienteResp.IdEstadosCliente == EstadosClienteEnum.InactivaEcu) {
@@ -718,7 +724,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
             //Mensaje de Error.  
-            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidarInfoEmpresaria()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
+            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidarInfoEmpresaria()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService);
             //---------------------------------------------------------------------------------------------------------------
         }
 
@@ -735,27 +741,27 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
         try {
 
-            var objCliente: E_Cliente = new E_Cliente()
-            var objClienteResponse: E_Cliente = new E_Cliente()
+            var objCliente: E_Cliente = new E_Cliente();
+            var objClienteResponse: E_Cliente = new E_Cliente();
             objCliente.Nit = Nit;
             this.ClienteService.ListClienteSVDNxNit(objCliente)
                 .subscribe((x: E_Cliente) => {
-                    objClienteResponse = x
+                    objClienteResponse = x;
 
                     if (objClienteResponse != undefined) {
-                        nombreempresaria = x.NombreEmpresariaCompleto
+                        nombreempresaria = x.NombreEmpresariaCompleto;
                     }
                     else {
                         nombreempresaria = "";
                     }
-                })
+                });
 
 
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
             //Mensaje de Error.             
-            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidaExisteEmpresariaNombre()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
+            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidaExisteEmpresariaNombre()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService);
             //---------------------------------------------------------------------------------------------------------------
         }
 
@@ -802,7 +808,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
             //Mensaje de Error.             
-            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidarInfoReferidor()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
+            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "ValidarInfoReferidor()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService);
             //---------------------------------------------------------------------------------------------------------------
         }
 
@@ -812,14 +818,14 @@ export class RegistroEmpresariaEcComponent implements OnInit {
     private CrearUsuarioyClave(objCliente: E_Cliente) {
 
         try {
-            var objClienteResponse: E_Cliente = new E_Cliente()
+            var objClienteResponse: E_Cliente = new E_Cliente();
             this.ClienteService.CrearUsuarioyClave(objCliente)
                 .subscribe((x: E_Cliente) => {
-                    objClienteResponse = x
+                    objClienteResponse = x;
 
                     if (x.Error == undefined) {
-                         //Mensaje de OK
-                         const dialogRef = this.dialog.open(ModalPopUpComponent, {
+                        //Mensaje de OK
+                        const dialogRef = this.dialog.open(ModalPopUpComponent, {
                             width: '450px',
                             data: { TipoMensaje: "Ok", Titulo: "Registro Empresaria", Mensaje: "Se registro la empresaria exitosamente!" }
                         });
@@ -834,29 +840,29 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                             data: { TipoMensaje: "Error", Titulo: "Registro Empresaria", Mensaje: "No se pudo crear usuario y clave de la empresaria." }
                         });
 
-                        throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "CrearUsuarioyClave()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
+                        throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "CrearUsuarioyClave()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService);
                         //---------------------------------------------------------------------------------------------------------------
                     }
-                })
+                });
 
         }
         catch (error) {
             //---------------------------------------------------------------------------------------------------------------
             //Mensaje de Error.   
-            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "CrearUsuarioyClave()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
+            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "CrearUsuarioyClave()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService);
             //---------------------------------------------------------------------------------------------------------------
         }
     }
 
     private RegistrarEmpresaria(objCliente: E_Cliente) {
         try {
-            var objClienteResponse: E_Cliente = new E_Cliente()
+            var objClienteResponse: E_Cliente = new E_Cliente();
             this.ClienteService.RegistrarEmpresaria(objCliente)
                 .subscribe((x: E_Cliente) => {
-                    objClienteResponse = x
+                    objClienteResponse = x;
 
                     if (x.Error == undefined) {
-                        this.CrearUsuarioyClave(objCliente)
+                        this.CrearUsuarioyClave(objCliente);
                     }
                     else {
                         //---------------------------------------------------------------------------------------------------------------
@@ -866,11 +872,11 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                             data: { TipoMensaje: "Error", Titulo: "Registro Empresaria", Mensaje: "No se pudo guardar la empresaria. Por favor verifique si ya existe o comuniquese con la empresa." }
                         });
 
-                        throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "RegistrarEmpresaria()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService)
+                        throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "RegistrarEmpresaria()", x.Error.Descripcion, this.SessionUser.Cedula, this.ExceptionErrorService);
                         //---------------------------------------------------------------------------------------------------------------
                     }
 
-                })
+                });
 
         }
         catch (error) {
@@ -881,7 +887,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
                 data: { TipoMensaje: "Error", Titulo: "Registro Empresaria", Mensaje: "No se pudo guardar la empresaria." }
             });
 
-            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "RegistrarEmpresaria()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService)
+            throw new ErrorLogExcepcion("RegistroEmpresariaEcComponent", "RegistrarEmpresaria()", error.message, this.SessionUser.Cedula, this.ExceptionErrorService);
 
             //---------------------------------------------------------------------------------------------------------------
         }
@@ -895,13 +901,13 @@ export class RegistroEmpresariaEcComponent implements OnInit {
     /// <returns></returns>
     public pc_verificar(cedula: string) {
         try {
-            var a: number
-            var c: number
-            var x: number
-            var b: number
-            var d: number
-            var ap: number = 0
-            var at: number = 0
+            var a: number;
+            var c: number;
+            var x: number;
+            var b: number;
+            var d: number;
+            var ap: number = 0;
+            var at: number = 0;
 
             for (a = 0; a < 9; a = a + 2) {
                 b = Number(cedula.substring(a, 1));
@@ -939,11 +945,11 @@ export class RegistroEmpresariaEcComponent implements OnInit {
     }
 
     BorrarDatos() {
-        
+
         this.form.setValue({
-          
+
             Regional: this.RegionalSeleccionado,
-            DirectorZonal: this.DirectorZonalSeleccionado,           
+            DirectorZonal: this.DirectorZonalSeleccionado,
             Lider: this.LiderSeleccionado,
             TipoDocumento: this.TipoDocumentoSeleccionado,
             NumeroDocumento: "",
@@ -977,7 +983,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
             TallaPrendaInferior: -1,
             TallaCalzado: -1,
             TipoTarjeta: -1
-        })
+        });
 
     }
 

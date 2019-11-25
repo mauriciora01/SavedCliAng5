@@ -60,16 +60,19 @@ fuse-navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            height: 85px;
             min-height: 64px;
             padding: 0 16px 0 24px;
             transition: padding 200ms ease;
-            background-color: rgba(255, 255, 255, .05);
+            background-color: #50535a;
+            color: white;
             @include mat-elevation(1);
 
             .logo {
-                display: flex;
-                align-items: center;
+                 >div:first-child {
+                    text-transform: uppercase;
+                    font-weight:bold; 
+                 }
 
                 .logo-icon {
                     width: 38px;
@@ -86,6 +89,8 @@ fuse-navbar {
         }
 
         .navbar-content {
+            background-color: white;
+            color: black;
             flex: 1;
         }
     }

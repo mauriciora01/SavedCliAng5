@@ -16,9 +16,8 @@
     "e2e": "ng e2e",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
     "build:saved": "ng build --base-href /saved/ --prod -aot=false",
-    "build:test":"node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --base-href /TestGlog/",
-    "build:cell":"ng serve --host"
-
+    "build:test": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --base-href /TestGlog/",
+    "build:cell": "ng serve --host"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +44,7 @@
     "@swimlane/ngx-charts": "7.1.1",
     "@swimlane/ngx-datatable": "11.2.0",
     "@swimlane/ngx-dnd": "3.1.0",
+    "@types/lodash": "4.14.149",
     "@types/prismjs": "1.9.0",
     "@uiowa/digit-only": "0.0.5",
     "ag-grid-angular": "21.0.1",

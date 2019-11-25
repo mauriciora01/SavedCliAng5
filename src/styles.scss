@@ -96,3 +96,28 @@
       background-color: #f2f2f2;
     }
   }
+  .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    color: white !important;
+    background-color: #50535a !important;
+    border-color: #337ab7;
+    >mat-icon{
+      color: white !important;
+    }
+}
+.nav .nav-item .nav-link.active {
+  color: white !important;
+  background-color: #50535a !important;
+  >mat-icon{
+    color: white !important;
+  }
+}
+.nav .nav-item .nav-link{
+  padding: 0 15px !important;
+}
+.nav .nav-item {
+  color:black !important;
+  background-color: white !important;
+  >mat-icon{
+    color: black !important;
+  }
+}

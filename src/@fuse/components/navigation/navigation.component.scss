@@ -8,5 +8,13 @@ fuse-navigation {
         margin: 0;
         padding: 0;
         width: 100%;
+        a{
+            border-bottom: solid 2px #f0f0f2;
+            >mat-icon{
+                color:black;
+                font-size: 34px;
+                margin-right: 30px;
+            }
+        }
     }
 }

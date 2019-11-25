@@ -7,6 +7,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { FuseNavbarComponent } from 'app/main/navbar/navbar.component';
 import { FuseNavigationModule } from '@fuse/components';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { FuseNavigationModule } from '@fuse/components';
     ],
     imports     : [
         RouterModule,
+        FlexLayoutModule,
 
         MatButtonModule,
         MatIconModule,

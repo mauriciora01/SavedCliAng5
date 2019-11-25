@@ -4,18 +4,21 @@
 
         <div class="navbar-header">
 
-            <div class="logo">
-                <img class="logo-icon" src="assets/images/logos/fuse.svg">
-                <span class="logo-text">Venta Directa ©</span>
+            <div class="logo" fxLayout="column">
+                <div>
+                    Hola {{NombreCliente}}!
+                </div>
+                <div>Tus ventas a hoy : ${{ValorVentas | number }} </div>
             </div>
+         
 
-            <button mat-button class="toggle-button-navbar mat-icon-button"
-                    (click)="toggleSidebarFolded('navbar')" fxHide.lt-lg>
+            <button mat-button class="toggle-button-navbar mat-icon-button" (click)="toggleSidebarFolded('navbar')"
+                fxHide.lt-lg>
                 <mat-icon>menu</mat-icon>
             </button>
 
-            <button mat-button class="toggle-button-navbar mat-icon-button"
-                    (click)="toggleSidebarOpened('navbar')" fxHide.gt-md>
+            <button mat-button class="toggle-button-navbar mat-icon-button" (click)="toggleSidebarOpened('navbar')"
+                fxHide.gt-md>
                 <mat-icon>arrow_back</mat-icon>
             </button>
 

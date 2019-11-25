@@ -3,6 +3,8 @@ import { FuseNavigationService } from '../../navigation.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { fuseAnimations } from '../../../../animations/index';
 import * as _ from 'lodash';
+import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+
 @Component({
     selector: 'fuse-nav-vertical-collapse',
     templateUrl: './nav-vertical-collapse.component.html',
@@ -15,7 +17,7 @@ export class FuseNavVerticalCollapseComponent implements OnInit {
     @HostBinding('class.open') public isOpen = false;
 
     constructor(
-        private navigationService: FuseNavigationService,
+        private navigationService: FuseNavigationService, private sidebarService: FuseSidebarService,
         private router: Router
     ) {
         // Listen for route changes
@@ -59,7 +61,9 @@ export class FuseNavVerticalCollapseComponent implements OnInit {
                 }
             );
     }
-
+    sidebarAction() {
+        this.sidebarService.getSidebar('navbar').toggleOpen();
+    }
     ngOnInit() {
         // Check if the url can be found in
         // one of the children of this item
