@@ -8,15 +8,342 @@
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content px-24 mat-white-bg">
+    <div class="content mat-white-bg" >
 
-        <div fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-md="row">
+        <div fxLayout="column"  fxLayoutAlign="start start" fxLayout.gt-md="row">
 
             <!-- REACTIVE FORM EXAMPLE -->
 
-            <form class="mat-white-bg  px-24 mr-24 mb-24" fxLayout="column" fxLayoutAlign="start"
-                fxFlex="1 0 auto" name="form" [formGroup]="form">
+            <form class="mat-white-bg   mb-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form"
+                [formGroup]="form">
+                <mat-vertical-stepper (selectionChange)="onStepperSelectionChange($event)">
+                    <mat-step label="Información personal">
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Regional" formControlName="Regional"
+                                [(ngModel)]="RegionalSeleccionado" (selectionChange)="SelectedRegional($event)" required
+                                disabled>
+                                <mat-option *ngFor="let Item of ListRegional" [value]="Item.IdRegional">
+                                    {{ Item.NombreGerente }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.Regional.required">
+                                Regional es requerido
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Director/Zonal" formControlName="DirectorZonal"
+                                [(ngModel)]="DirectorZonalSeleccionado"
+                                (selectionChange)="SelectedDirectorZonal($event)" required disabled>
+                                <mat-option *ngFor="let Item of ListDirectorZonal" [value]="Item.IdVendedor">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.DirectorZonal.required">
+                                Director/Zonal es requerido
+                            </mat-error>
+                        </mat-form-field>
 
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Lider" formControlName="Lider" [(ngModel)]="LiderSeleccionado"
+                                (selectionChange)="SelectedLider($event)" required>
+                                <mat-option *ngFor="let Item of ListLider" [value]="Item.IdLider">
+                                    {{ Item.Nombres }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.Lider.required">
+                                Lider es requerido
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Tipo Documento" formControlName="TipoDocumento"
+                                [(ngModel)]="TipoDocumentoSeleccionado"
+                                (selectionChange)="SelectedTipoDocumento($event)" required>
+                                <mat-option *ngFor="let Item of ListTipoDocumento" [value]="Item.Id">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.TipoDocumento.required">
+                                Tipo Documento es requerido
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required
+                                [ngModel]="NumeroDocumento" maxlength="11" inputmode="numeric" pattern="[0-9]*"
+                                digitOnly (focusout)="ValidateDocument()">
+                            <mat-error *ngIf="formErrors.NumeroDocumento.required">
+                                Numero Documento es requerido
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Primer Nombre" formControlName="PrimerNombre" required
+                                [ngModel]="PrimerNombre">
+                            <mat-error *ngIf="formErrors.PrimerNombre.required">
+                                Primer Nombre es requerido
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Segundo Nombre" formControlName="SegundoNombre">
+                        </mat-form-field>
+
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Primer Apellido" formControlName="PrimerApellido" required
+                                [ngModel]="PrimerApellido">
+                            <mat-error *ngIf="formErrors.PrimerApellido.required">
+                                Primer Apellido es requerido
+                            </mat-error>
+                        </mat-form-field>
+
+
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Segundo Apellido" formControlName="SegundoApellido">
+                        </mat-form-field>
+
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput [matDatepicker]="picker1" formControlName="FechaNacimiento"
+                                placeholder="Fecha Nacimiento" [ngModel]="FechaNacimiento" required readonly
+                                [min]="minDate" [max]="maxDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-error *ngIf="formErrors.FechaNacimiento.required">
+                                Fecha Nacimiento es requerido
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Genero" formControlName="Genero" [(ngModel)]="GeneroSeleccionado"
+                                required>
+                                <mat-option *ngFor="let Item of ListGenero" [value]="Item.IdGenero">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-step>
+                    <mat-step label="Información Domicilio">
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Provincia" formControlName="Provincia"
+                                [(ngModel)]="ProvinciaSeleccionado" (selectionChange)="SelectedProvincia($event)" required>
+                                <mat-option *ngFor="let Item of ListProvincia" [value]="Item.CodEstado">
+                                    {{ Item.NombreEstado }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.Provincia.required">
+                                Provincia es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="CantonSeleccionado"
+                                (selectionChange)="SelectedCanton($event)" required>
+                                <mat-option *ngFor="let Item of ListCanton" [value]="Item.CodCiudad">
+                                    {{ Item.NombreCiudad }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.Canton.required">
+                                Canton es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Parroquia" formControlName="Parroquia"
+                                [(ngModel)]="ParroquiaSeleccionado" (selectionChange)="SelectedParroquia($event)" required>
+                                <mat-option *ngFor="let Item of ListParroquia" [value]="Item.Codigo">
+                                    {{ Item.NombreParroquia }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.Parroquia.required">
+                                Parroquia es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Barrio/Urbanizacion" formControlName="Barrio" required
+                                [ngModel]="Barrio">
+                            <mat-error *ngIf="formErrors.Barrio.required">
+                                Barrio es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Direccion Domicilio (como llegar)"
+                                formControlName="DireccionDomicilio" required [ngModel]="DireccionDomicilio">
+                            <mat-error *ngIf="formErrors.DireccionDomicilio.required">
+                                Direccion Domicilio es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Calles" formControlName="Calles" required [ngModel]="Calles">
+                            <mat-error *ngIf="formErrors.Calles.required">
+                                Calles es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Numero de Casa" formControlName="NumeroCasa" required
+                                [ngModel]="NumeroCasa">
+                            <mat-error *ngIf="formErrors.NumeroCasa.required">
+                                Numero de Casa es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Direccion de Entrega (como llegar)"
+                                formControlName="DireccionEntrega" required [ngModel]="DireccionEntrega">
+                            <mat-error *ngIf="formErrors.DireccionEntrega.required">
+                                Direccion de Entrega es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-step>
+                    <mat-step label="Información Contacto">
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Operador Celular" formControlName="OperadorCelular"
+                                [(ngModel)]="OperadorCelularSeleccionado" required>
+                                <mat-option *ngFor="let Item of ListOperadorCelular" [value]="Item.IdOperador">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.OperadorCelular.required">
+                                Operador Celular es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Numero Celular" formControlName="NumeroCelular" required
+                                [ngModel]="NumeroCelular" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
+                            <mat-error *ngIf="formErrors.NumeroCelular.required">
+                                Numero de Casa es requerido
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Whatsapp" formControlName="Whatsapp" required [ngModel]="Whatsapp"
+                                maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
+                            <mat-error *ngIf="formErrors.Whatsapp.required">
+                                Whatsapp es requerido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Telefono Domicilio" formControlName="TelefonoDomicilio"
+                                [ngModel]="TelefonoDomicilio" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly
+                                required>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Otro Telefono" formControlName="OtroTelefono"
+                                [ngModel]="OtroTelefono" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Referencia Familiar" formControlName="ReferenciaFamiliar"
+                                [ngModel]="ReferenciaFamiliar">
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Telefono Referencia Familiar"
+                                formControlName="TelefonoReferenciaFamiliar" [ngModel]="TelefonoReferenciaFamiliar"
+                                maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
+                        </mat-form-field>
+                    </mat-step>
+                    <mat-step label="Información Referido">
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Referido Por" formControlName="ReferidoPor" [ngModel]="ReferidoPor"
+                                maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Nombre Referido" formControlName="NombreReferido"
+                                [readonly]="true">
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <input matInput placeholder="Correo Electronico" formControlName="CorreoElectronico" required
+                                [ngModel]="CorreoElectronico">
+    
+                            <mat-error *ngIf="formErrors.CorreoElectronico.required">
+                                Correo Electronico es requerido
+                            </mat-error>
+                            <mat-error *ngIf="!formErrors.CorreoElectronico.required && formErrors.CorreoElectronico.email">
+                                Por favor ingrese un correo electronico valido
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Despachar A" formControlName="DespacharA"
+                                [(ngModel)]="DespacharASeleccionado" required>
+                                <mat-option *ngFor="let Item of ListDespacharA" [value]="Item.IdDespacharA">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.DespacharA.required">
+                                Despachar A es requerido
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Tipo Cliente" formControlName="TipoCliente"
+                                [(ngModel)]="TipoClienteSeleccionado" required>
+                                <mat-option *ngFor="let Item of ListTipoCliente" [value]="Item.IdTipoCliente">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.TipoCliente.required">
+                                Tipo Cliente es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-step>
+                    <mat-step label="Mis Medidas">
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Talla Prenda Superior" formControlName="TallaPrendaSuperior"
+                                [(ngModel)]="TallaPrendaSuperiorSeleccionado" required>
+                                <mat-option *ngFor="let Item of ListTallaPrendaSuperior"
+                                    [value]="Item.IdTallaPrendaSuperior">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.TallaPrendaSuperior.required">
+                                Talla Prenda Superior es requerido.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Talla Prenda Inferior" formControlName="TallaPrendaInferior"
+                                [(ngModel)]="TallaPrendaInferiorSeleccionado" required>
+                                <mat-option *ngFor="let Item of ListTallaPrendaInferior"
+                                    [value]="Item.IdTallaPrendaInferior">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.TallaPrendaInferior.required">
+                                Talla Prenda Inferior es requerido.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Talla Calzado" formControlName="TallaCalzado"
+                                [(ngModel)]="TallaCalzadoSeleccionado" required>
+                                <mat-option *ngFor="let Item of ListTallaCalzado" [value]="Item.IdTallaCalzado">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.TallaCalzado.required">
+                                Talla Calzado es requerido.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field class="registroEmpresaria" fxFlex="100">
+                            <mat-select placeholder="Tipo Tarjeta" formControlName="TipoTarjeta"
+                                [(ngModel)]="TipoTarjetaSeleccionado" required>
+                                <mat-option *ngFor="let Item of ListTipoTarjeta" [value]="Item.IdTipoTarjeta">
+                                    {{ Item.Nombre }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.TipoTarjeta.required">
+                                Tipo Tarjeta es requerido.
+                            </mat-error>
+                        </mat-form-field>
+                      </mat-step>
+                </mat-vertical-stepper>
                 <!--<div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
                     <div class="toolbar px-24 py-8 headerback">
                         <div class="h2 mb-24">Complete los Datos:</div>
@@ -30,324 +357,17 @@
                 </div> -->
                 <!-- *********************************************************** -->
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Regional" formControlName="Regional" [(ngModel)]="RegionalSeleccionado"
-                            (selectionChange)="SelectedRegional($event)" required disabled>
-                            <mat-option *ngFor="let Item of ListRegional" [value]="Item.IdRegional">
-                                {{ Item.NombreGerente }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.Regional.required">
-                            Regional es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Director/Zonal" formControlName="DirectorZonal"
-                            [(ngModel)]="DirectorZonalSeleccionado" (selectionChange)="SelectedDirectorZonal($event)" required
-                            disabled>
-                            <mat-option *ngFor="let Item of ListDirectorZonal" [value]="Item.IdVendedor">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.DirectorZonal.required">
-                            Director/Zonal es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Lider" formControlName="Lider" [(ngModel)]="LiderSeleccionado"
-                            (selectionChange)="SelectedLider($event)" required>
-                            <mat-option *ngFor="let Item of ListLider" [value]="Item.IdLider">
-                                {{ Item.Nombres }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.Lider.required">
-                            Lider es requerido
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Tipo Documento" formControlName="TipoDocumento"
-                            [(ngModel)]="TipoDocumentoSeleccionado" (selectionChange)="SelectedTipoDocumento($event)" required>
-                            <mat-option *ngFor="let Item of ListTipoDocumento" [value]="Item.Id">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.TipoDocumento.required">
-                            Tipo Documento es requerido
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required
-                            [ngModel]="NumeroDocumento" maxlength="11" inputmode="numeric" pattern="[0-9]*" digitOnly
-                            (focusout)="ValidateDocument()">
-                        <mat-error *ngIf="formErrors.NumeroDocumento.required">
-                            Numero Documento es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Primer Nombre" formControlName="PrimerNombre" required
-                            [ngModel]="PrimerNombre">
-                        <mat-error *ngIf="formErrors.PrimerNombre.required">
-                            Primer Nombre es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Segundo Nombre" formControlName="SegundoNombre">
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Primer Apellido" formControlName="PrimerApellido" required
-                            [ngModel]="PrimerApellido">
-                        <mat-error *ngIf="formErrors.PrimerApellido.required">
-                            Primer Apellido es requerido
-                        </mat-error>
-                    </mat-form-field>
 
 
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Segundo Apellido" formControlName="SegundoApellido">
-                    </mat-form-field>
 
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput [matDatepicker]="picker1" formControlName="FechaNacimiento"
-                            placeholder="Fecha Nacimiento" [ngModel]="FechaNacimiento" required readonly
-                            [min]="minDate" [max]="maxDate" >
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                        <mat-error *ngIf="formErrors.FechaNacimiento.required">
-                            Fecha Nacimiento es requerido
-                        </mat-error>
-                    </mat-form-field>
 
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Genero" formControlName="Genero" [(ngModel)]="GeneroSeleccionado"
-                            required>
-                            <mat-option *ngFor="let Item of ListGenero" [value]="Item.IdGenero">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                  
 
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Provincia" formControlName="Provincia"
-                            [(ngModel)]="ProvinciaSeleccionado" (selectionChange)="SelectedProvincia($event)" required>
-                            <mat-option *ngFor="let Item of ListProvincia" [value]="Item.CodEstado">
-                                {{ Item.NombreEstado }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.Provincia.required">
-                            Provincia es requerido
-                        </mat-error>
-                    </mat-form-field>
+                    
 
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Canton" formControlName="Canton" [(ngModel)]="CantonSeleccionado"
-                            (selectionChange)="SelectedCanton($event)" required>
-                            <mat-option *ngFor="let Item of ListCanton" [value]="Item.CodCiudad">
-                                {{ Item.NombreCiudad }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.Canton.required">
-                            Canton es requerido
-                        </mat-error>
-                    </mat-form-field>
+                    
 
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Parroquia" formControlName="Parroquia"
-                            [(ngModel)]="ParroquiaSeleccionado" (selectionChange)="SelectedParroquia($event)" required>
-                            <mat-option *ngFor="let Item of ListParroquia" [value]="Item.Codigo">
-                                {{ Item.NombreParroquia }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.Parroquia.required">
-                            Parroquia es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Barrio/Urbanizacion" formControlName="Barrio" required
-                            [ngModel]="Barrio">
-                        <mat-error *ngIf="formErrors.Barrio.required">
-                            Barrio es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Direccion Domicilio (como llegar)"
-                            formControlName="DireccionDomicilio" required [ngModel]="DireccionDomicilio">
-                        <mat-error *ngIf="formErrors.DireccionDomicilio.required">
-                            Direccion Domicilio es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Calles" formControlName="Calles" required [ngModel]="Calles">
-                        <mat-error *ngIf="formErrors.Calles.required">
-                            Calles es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Numero de Casa" formControlName="NumeroCasa" required
-                            [ngModel]="NumeroCasa">
-                        <mat-error *ngIf="formErrors.NumeroCasa.required">
-                            Numero de Casa es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Direccion de Entrega (como llegar)"
-                            formControlName="DireccionEntrega" required [ngModel]="DireccionEntrega">
-                        <mat-error *ngIf="formErrors.DireccionEntrega.required">
-                            Direccion de Entrega es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Operador Celular" formControlName="OperadorCelular"
-                            [(ngModel)]="OperadorCelularSeleccionado" required>
-                            <mat-option *ngFor="let Item of ListOperadorCelular" [value]="Item.IdOperador">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.OperadorCelular.required">
-                            Operador Celular es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Numero Celular" formControlName="NumeroCelular" required
-                            [ngModel]="NumeroCelular" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
-                        <mat-error *ngIf="formErrors.NumeroCelular.required">
-                            Numero de Casa es requerido
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Whatsapp" formControlName="Whatsapp" required [ngModel]="Whatsapp"
-                        maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
-                        <mat-error *ngIf="formErrors.Whatsapp.required">
-                            Whatsapp es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Telefono Domicilio" formControlName="TelefonoDomicilio"
-                            [ngModel]="TelefonoDomicilio" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly required>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Otro Telefono" formControlName="OtroTelefono"
-                            [ngModel]="OtroTelefono" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Referencia Familiar" formControlName="ReferenciaFamiliar"
-                            [ngModel]="ReferenciaFamiliar">
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Telefono Referencia Familiar"
-                            formControlName="TelefonoReferenciaFamiliar" [ngModel]="TelefonoReferenciaFamiliar"
-                            maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Referido Por" formControlName="ReferidoPor" [ngModel]="ReferidoPor"
-                        maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Nombre Referido" formControlName="NombreReferido"
-                            [readonly]="true">
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <input matInput placeholder="Correo Electronico" formControlName="CorreoElectronico" required
-                            [ngModel]="CorreoElectronico">
-
-                        <mat-error *ngIf="formErrors.CorreoElectronico.required">
-                            Correo Electronico es requerido
-                        </mat-error>
-                        <mat-error *ngIf="!formErrors.CorreoElectronico.required && formErrors.CorreoElectronico.email">
-                            Por favor ingrese un correo electronico valido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Despachar A" formControlName="DespacharA"
-                            [(ngModel)]="DespacharASeleccionado" required>
-                            <mat-option *ngFor="let Item of ListDespacharA" [value]="Item.IdDespacharA">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.DespacharA.required">
-                            Despachar A es requerido
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Tipo Cliente" formControlName="TipoCliente"
-                            [(ngModel)]="TipoClienteSeleccionado" required>
-                            <mat-option *ngFor="let Item of ListTipoCliente" [value]="Item.IdTipoCliente">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.TipoCliente.required">
-                            Tipo Cliente es requerido
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Talla Prenda Superior" formControlName="TallaPrendaSuperior"
-                            [(ngModel)]="TallaPrendaSuperiorSeleccionado" required>
-                            <mat-option *ngFor="let Item of ListTallaPrendaSuperior"
-                                [value]="Item.IdTallaPrendaSuperior">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.TallaPrendaSuperior.required">
-                            Talla Prenda Superior es requerido.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Talla Prenda Inferior" formControlName="TallaPrendaInferior"
-                            [(ngModel)]="TallaPrendaInferiorSeleccionado" required>
-                            <mat-option *ngFor="let Item of ListTallaPrendaInferior"
-                                [value]="Item.IdTallaPrendaInferior">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.TallaPrendaInferior.required">
-                            Talla Prenda Inferior es requerido.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Talla Calzado" formControlName="TallaCalzado"
-                            [(ngModel)]="TallaCalzadoSeleccionado" required>
-                            <mat-option *ngFor="let Item of ListTallaCalzado" [value]="Item.IdTallaCalzado">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.TallaCalzado.required">
-                            Talla Calzado es requerido.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="registroEmpresaria" fxFlex="100">
-                        <mat-select placeholder="Tipo Tarjeta" formControlName="TipoTarjeta"
-                            [(ngModel)]="TipoTarjetaSeleccionado" required>
-                            <mat-option *ngFor="let Item of ListTipoTarjeta" [value]="Item.IdTipoTarjeta">
-                                {{ Item.Nombre }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formErrors.TipoTarjeta.required">
-                            Tipo Tarjeta es requerido.
-                        </mat-error>
-                    </mat-form-field>
+                  
 
                 </div>
                 <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">

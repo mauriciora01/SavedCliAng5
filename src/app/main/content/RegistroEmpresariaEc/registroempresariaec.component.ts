@@ -986,5 +986,9 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         });
 
     }
-
+    public onStepperSelectionChange(evant: any) {
+        var elmnt = document.getElementById("forms");
+        elmnt.scrollTop = 100 + (evant.selectedIndex + 1) * 50;
+    }
+        
 }
