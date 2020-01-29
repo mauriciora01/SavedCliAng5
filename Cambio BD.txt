@@ -186,7 +186,7 @@ REVISAR SP_INVENTACION OPCION S-->G por que no esta en mi BD factu55
 
 PRC_SVDN_CATALOGOS_PLUS--> opcion s-'E'--> cambiar el where a este --> and CATALOGOS_PLUS.catalogo in (select catalogo	from campanas where fechaini < GETDATE() and GETDATE() < fechafin) 
 
-SVDN_CLIENTE --> OPCION FINAL --> IF @i_option = 'ED'
+SVDN_CLIENTE --> OPCION FINAL --> IF @i_option = 'ED' NOTA: MIRAR AL FINAL DE ESTE ARCHIVO. CAMBIAR 'ED' por 'EE' por que Geo ya creo 'ED' en produccion y se solapan
 
 
 <add name="conexion" connectionString="Database=Factu55;Server=NC01TE037KZP\MSSQLSERVER2017;User ID=sa;Password=Colombia19+" providerName="System.Data.SqlClient" />
