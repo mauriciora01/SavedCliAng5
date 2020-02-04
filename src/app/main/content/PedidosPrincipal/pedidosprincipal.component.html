@@ -1,173 +1,42 @@
-<div id="forms" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
-
-  <!-- HEADER -->
-  <div class="header mat-accent-bg p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
-    <div fxLayout="column" fxLayoutAlign="center start">
-      <div class="h1 mt-16">Crear Pedido</div>
-      <!--<button mat-raised-button (click)="openBottomSheet()">Open file</button>-->
+<div _ngcontent-xhr-c118="" class="page-layout simple fullwidth">
+  <div _ngcontent-xhr-c118="" class="content p-24">
+    <div class="menuPedido">
+      <button class="seleccionPaso" (click)="showEmpresaria = !showEmpresarias">DATOS DE TU EMPRESARIA</button>
+      <button class="seleccionPaso">PRODUCTOS</button>
+      <button class="seleccionPaso">DATOS DE ENVIO</button>
+      <button class="seleccionPaso">PROCESAR PAGO</button>
+    </div>
+    <button class="registrar">REGISTRAR
+    </button>
+  </div>
+  <!--  -->
+  <div [style.display]="showEmpresaria ? 'block':'none'"
+    [ngClass]="{'efectoEmpresariasOn' : showEmpresaria , 'efectoEmpresariasOff' : !showEmpresaria}"
+    class="empresariasSeleccion">
+    <div class="search-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Escribe una Palabra">
+      </mat-form-field>
+      <mat-icon>close</mat-icon>
     </div>
 
+    <div>
+      <mat-table #tableEmpresaria [dataSource]="dataSource" class="">
+        <ng-container matColumnDef="imagenEmpresaria">
+          <mat-cell *matCellDef="let row">
+            <img class="mr-20" src="assets/images/appimages/empresarias.png">
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="NombreCompleto">
+          <mat-cell *matCellDef="let row"> {{row.NombreEmpresariaCompleto}}</mat-cell>
+        </ng-container>
+        <mat-header-row></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row" style="cursor: pointer"
+          (click)="openDetalleCliente(row)">
+        </mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    </div>
   </div>
-  <!-- / HEADER -->
-
-  <!-- CUERPO -->
-  <!-- ***********************************************************************-->
-  <!--<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-      </button>-->
-
-  <mat-vertical-stepper [linear]="isLinear" #stepper>
-    <!-- ***********************************************************************-->
-    <!-- Primer Paso -->
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
-
-        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-          <ng-template matStepLabel>Información Principal</ng-template>
-
-          <mat-form-field fxFlex="100">
-            <input matInput placeholder="Campaña" [(ngModel)]="CampanaSeleccionado"
-              formControlName="Campana" readonly>
-          </mat-form-field>
-
-          <mat-form-field fxFlex="100">
-            <mat-select [disabled]="CatalogoDisabled" placeholder="Catalogo" formControlName="Catalogo"
-              [(ngModel)]="CatalogoSeleccionado" (selectionChange)="SelectedCatalogo($event)" required>
-              <mat-option *ngFor="let Item of ListCatalogo" [value]="Item.Codigo">
-                {{ Item.Nombre }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="formErrors.Catalogo.required">
-              Catalogo es requerido
-            </mat-error>
-          </mat-form-field>
-
-       
-
-          <mat-form-field fxFlex="100">
-            <input matInput placeholder="Numero Documento" formControlName="NumeroDocumento" required
-              [ngModel]="NumeroDocumento" maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly>
-              <!-- (focusout)="ValidateDocument()" >-->
-            <mat-error *ngIf="formErrors.NumeroDocumento.required">
-              Numero Documento es requerido
-            </mat-error>
-
-            <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
-              <button (click)="ValidateDocument()" mat-mini-fab color="accent" matTooltip="Buscar">
-                <!--<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">library_books</mat-icon>-->
-                +
-              </button>
-
-            </div>
-          </mat-form-field>
-
-          <mat-form-field fxFlex="100" *ngIf="NombreDisabled">
-            <input matInput placeholder="Nombre Empresaria" [(ngModel)]="NombreEmpresariaCompleto"
-              formControlName="firstCtrl" readonly>
-          </mat-form-field>
-
-          <mat-form-field fxFlex="100">
-            <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="90">
-              <textarea rows="2" matInput placeholder="Datos de Envio" [(ngModel)]="DatosEnvioSeleccionado"
-                formControlName="DatosEnvio" readonly></textarea>
-            </div>
-            <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
-              <button (click)="openDatosEnvio()" mat-mini-fab color="accent" matTooltip="Datos de Envio">
-                <!--<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">library_books</mat-icon>-->
-                +
-              </button>
-
-            </div>
-          </mat-form-field>
-
-          <mat-form-field fxFlex="100">
-            <mat-select [disabled]="BodegaDisabled" placeholder="Bodega" formControlName="Bodega"
-              [(ngModel)]="BodegaSeleccionado" (selectionChange)="SelectedBodega($event)" required>
-              <mat-option *ngFor="let Item of ListBodega" [value]="Item.Bodega">
-                {{ Item.Nombre }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="formErrors.Bodega.required">
-              Bodega es requerido
-            </mat-error>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperNext mat-raised-button color="accent"
-              [disabled]="firstFormGroup.invalid || !Paso1Ok"> Siguiente</button>
-          </div>
-        </div>
-      </form>
-    </mat-step>
-    <!-- ***********************************************************************-->
-    <!-- Segundo Paso -->
-    <mat-step [stepControl]="secondFormGroup">
-
-      <form [formGroup]="secondFormGroup" class="example-form" fxLayout="column" fxLayoutAlign="start"
-        fxFlex="1 0 auto">
-
-        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-          <ng-template matStepLabel>Seleccione Articulo</ng-template>
-
-          <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="90">
-            <!--MRG: HABILITAR PARA AUTOCOMPLETE <mat-form-field class="example-full-width">
-                <input type="text" maxlength="8" placeholder="Código Rapído" aria-label="Number" matInput [formControl]="CodigoRapido"
-                  [matAutocomplete]="auto" >
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{option}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-             <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
-              <button (click)="openAdicionarArticulo()" mat-icon-button color="accent" matTooltip="Adicionar">
-                <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add_circle</mat-icon>
-              </button>
-            </div>
-            
-            -->
-            <mat-form-field fxFlex="100">
-              <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="90">
-                <input matInput placeholder="Código Rapído" [formControl]="CodigoRapido" maxlength="8"
-                  [(ngModel)]="CodigoRapidoSeleccionado">
-              </div>
-              <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="10">
-                <button (click)="openAdicionarArticulo()" mat-mini-fab color="accent" matTooltip="Adicionar">
-                  <!--<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add_circle</mat-icon>-->+
-                </button>
-              </div>
-            </mat-form-field>
-          </div>
-
-          <!--<li>
-            <button mat-raised-button (click)="openVerDetallePedido()"> Ver Detalle Pedido</button>
-          </li> -->
-          <div>
-            <button mat-button matStepperPrevious mat-raised-button color="accent">Atras</button>
-            &nbsp;&nbsp;&nbsp;
-            <button mat-button matStepperNext mat-raised-button color="accent" [disabled]="!Paso2Ok">Siguiente</button>
-          </div>
-        </div>
-      </form>
-    </mat-step>
-    <!-- <mat-step> -->
-    <mat-step [stepControl]="thirtyFormGroup">
-      <form [formGroup]="thirtyFormGroup" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
-        <ng-template matStepLabel>Enviar Pedido</ng-template>
-        <div>
-          <button mat-button matStepperPrevious mat-raised-button color="accent">Atras</button>
-          &nbsp;&nbsp;&nbsp;
-          <button mat-button matStepperNext (click)="openBottomSheet()" mat-raised-button color="accent"
-            [disabled]="!Paso2Ok">Confirmar
-            Pedido</button>
-
-
-        </div>
-
-
-      </form>
-    </mat-step>
-  </mat-vertical-stepper>
-
-  <!-- ***********************************************************************-->
-  <!-- /CUERPO -->
 </div>

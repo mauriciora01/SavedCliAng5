@@ -27,6 +27,13 @@ export class FuseMainComponent implements OnDestroy, OnInit {
         { description: 'Activas', value: 'misactivas' },
         { description: 'Posibles egresos', value: 'misposiblesegresos' },
     ];
+    pedidosmenu = [
+        { description: 'Nuevo Pedido', value: 'registroempresariaec' },
+        { description: 'Por Facturar', value: 'misempresarias' },
+        { description: 'Facturados', value: 'misprospectos' },
+        { description: 'Borrador', value: 'misinactivas' },
+        { description: 'Anulados', value: 'misactivas' },
+    ];
     constructor(
         private _renderer: Renderer2,
         private _elementRef: ElementRef,

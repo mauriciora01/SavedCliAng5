@@ -119,3 +119,20 @@ fuse-main {
         }
     }
 }
+
+:host-context(.mat-menu-content){
+    
+        width: 180px;
+    
+}
+
+
+button.mat-menu-item {
+    width: 100%;
+    border-bottom: solid 0.3px;
+}
+
+.mat-menu-content:not(:empty) {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}

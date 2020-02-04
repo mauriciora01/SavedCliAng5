@@ -49,7 +49,17 @@
 
 
                         </div>
-                        <div>PEDIDOS</div>
+                        <div>
+                            <button mat-button [matMenuTriggerFor]="pedido">PEDIDOS</button>
+                            <mat-menu #pedido="matMenu">
+                                <button *ngFor="let menu of pedidosmenu" (click)="empresariasNavigate(menu.value)"
+                                    mat-menu-item>{{menu.description}}</button>
+
+                            </mat-menu>
+
+
+                        </div>
+
                     </div>
                 </div>
                 <!-- / TOOLBAR: Below -->

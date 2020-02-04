@@ -17,7 +17,7 @@
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
     "build:saved": "ng build --base-href /saved/ --prod -aot=false",
     "build:test": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --base-href /TestGlog/",
-    "build:cell": "ng serve --host"
+    "build:cell": "ng serve --host 192.168.0.17 --port 3000 --disable-host-check --open"
   },
   "private": true,
   "dependencies": {

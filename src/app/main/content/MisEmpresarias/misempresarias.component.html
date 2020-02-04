@@ -24,30 +24,15 @@
         </div>
 
         <div class="example-container ">
-
             <mat-table #tableEmpresaria [dataSource]="dataSource" class="">
-
-
                 <ng-container matColumnDef="imagenEmpresaria">
                     <mat-cell *matCellDef="let row">
                         <img class="mr-20" src="assets/images/appimages/empresarias.png">
                     </mat-cell>
                 </ng-container>
-
-
-
                 <ng-container matColumnDef="NombreCompleto">
-                    <!-- <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell> -->
                     <mat-cell *matCellDef="let row"> {{row.NombreEmpresariaCompleto}}</mat-cell>
                 </ng-container>
-
-                <!-- Progress Column -->
-                <!-- <ng-container matColumnDef="Ciudad">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.Ciudad}}</mat-cell>
-                </ng-container> -->
-
-
                 <mat-header-row></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
                     style="cursor: pointer" (click)="openDetalleCliente(row)">

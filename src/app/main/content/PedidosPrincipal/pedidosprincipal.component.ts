@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ParameterService } from 'app/ApiServices/ParametersServices';
 import { E_SessionUser } from 'app/Models/E_SessionUser';
@@ -6,7 +6,7 @@ import { UserService } from 'app/ApiServices/UserService';
 import { E_Catalogo } from 'app/Models/E_Catalogo';
 import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
 import { ExceptionErrorService } from 'app/ApiServices/ExceptionErrorService';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort, MatTable } from '@angular/material';
 import { ModalPopUpComponent } from '../ModalPopUp/modalpopup.component';
 import { E_Cliente } from 'app/Models/E_Cliente';
 import { ClienteService } from 'app/ApiServices/ClienteService';
@@ -22,6 +22,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { E_PLU } from 'app/Models/E_PLU';
 import { E_Bodegas } from 'app/Models/E_Bodegas';
+import { CommunicationService } from 'app/ApiServices/CommunicationService';
 
 
 export interface State {
@@ -33,7 +34,7 @@ export interface State {
 @Component({
     selector: 'pedidosprincipal',
     templateUrl: 'pedidosprincipal.component.html',
-    styleUrls: ['pedidosprincipal.component.css']
+    styleUrls: ['pedidosprincipal.component.scss']
 
 })
 export class PedidosPrincipalComponent implements OnInit {
@@ -69,18 +70,24 @@ export class PedidosPrincipalComponent implements OnInit {
     ];*/
 
     public ListBodega: Array<E_Bodegas> = new Array<E_Bodegas>()
-
     CodigoRapido = new FormControl();
     options: string[] = ['One', 'Two', 'Three'];
     filteredOptions: Observable<string[]>;
-
+    ListClientes: E_Cliente[]; 
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild('tableEmpresaria') tableEmpresaria: MatTable<E_Cliente>;
+    displayedColumns = ['imagenEmpresaria', 'NombreCompleto'];
+    dataSource: MatTableDataSource<E_Cliente>;
+    showEmpresaria: boolean;
     constructor(private _formBuilder: FormBuilder,
         private ParameterService: ParameterService,
         private UserService: UserService,
         private ExceptionErrorService: ExceptionErrorService,
         private ClienteService: ClienteService,
         private bottomSheet: MatBottomSheet,
-        public dialog: MatDialog) {
+        public dialog: MatDialog,
+        private communicationService: CommunicationService) {
 
         this.formErrors = {
             Campana: {},
@@ -108,6 +115,7 @@ export class PedidosPrincipalComponent implements OnInit {
             alert('Cerro el bottonsheet');
         })*/
     }
+
 
     ngOnInit() {
         this.firstFormGroup = this._formBuilder.group({
@@ -161,7 +169,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
 
         this.CampanaSeleccionado = "CAMPAÑA: " + this.SessionUser.Campana;
-
+        this.GetEmployers()
 
     }
 
@@ -178,6 +186,8 @@ export class PedidosPrincipalComponent implements OnInit {
     SelectedBodega(y) {
 
     }
+
+    
 
     ValidateDocument2() {
         try {
@@ -521,4 +531,56 @@ export class PedidosPrincipalComponent implements OnInit {
     buscarDocumento(): void {
         true;
     }
+
+    openDetalleCliente(row: E_Cliente): void {
+   this.showEmpresaria = false
+    }
+
+    applyFilter(filterValue: string) {
+        filterValue = filterValue.trim(); // Remove whitespace
+        filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+        this.dataSource.filter = filterValue;
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
+
+    GetEmployers() {
+        this.SessionUser = this.UserService.GetCurrentCurrentUserNow()
+        var objCliente: E_Cliente = new E_Cliente()
+        objCliente.Vendedor = this.SessionUser.IdVendedor;
+        objCliente.Lider = this.SessionUser.IdLider;
+        objCliente.CodEstado = "'%%'";
+        this.communicationService.showLoader.next(true);
+
+        if (this.SessionUser.IdGrupo == "52") {
+            this.ClienteService.ListEmpresariasxGerenteSimple(objCliente)
+                .subscribe((x: Array<E_Cliente>) => {
+                    this.ListClientes = x
+
+                    // Assign the data to the data source for the table to render
+                    this.dataSource = new MatTableDataSource(this.ListClientes);
+                    this.dataSource.paginator = this.paginator;
+                    this.dataSource.sort = this.sort;
+
+                    this.communicationService.showLoader.next(false);
+
+                })
+        }
+        else if (this.SessionUser.IdGrupo == "60") {
+            this.ClienteService.ListEmpresariasxLider(objCliente)
+                .subscribe((x: Array<E_Cliente>) => {
+                    this.ListClientes = x
+
+                    // Assign the data to the data source for the table to render
+                    this.dataSource = new MatTableDataSource(this.ListClientes);
+                    this.dataSource.paginator = this.paginator;
+                    this.dataSource.sort = this.sort;
+
+                    this.communicationService.showLoader.next(false);
+
+                })
+        }
+    }
+
 }
