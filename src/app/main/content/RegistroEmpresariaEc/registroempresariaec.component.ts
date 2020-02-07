@@ -32,8 +32,9 @@ import { ExceptionErrorService } from 'app/ApiServices/ExceptionErrorService';
 import 'rxjs/add/observable/throw';
 import { catchError, tap } from 'rxjs/operators';
 import { ErrorLogExcepcion } from 'app/Models/ErrorLogExcepcion';
-
 import * as _ from 'lodash';
+import { forkJoin } from 'rxjs';
+import { CommunicationService } from 'app/ApiServices/CommunicationService';
 
 @Component({
     moduleId: module.id,
@@ -65,8 +66,6 @@ export class RegistroEmpresariaEcComponent implements OnInit {
     TallaPrendaInferiorSeleccionado;
     TallaCalzadoSeleccionado;
     TipoTarjetaSeleccionado;
-
-
     confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
     SaveInProgress: boolean;
     SucceSave: boolean;
@@ -178,7 +177,8 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         private UserService: UserService,
         private ClienteService: ClienteService,
         public dialog: MatDialog,
-        private ExceptionErrorService: ExceptionErrorService
+        private ExceptionErrorService: ExceptionErrorService,
+        private CommunicationService: CommunicationService
     ) {
 
         this.formErrors = {
@@ -250,50 +250,22 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         this.MaskedNumber = GenerateMask.numberMask;
         this.MaskedNumberNoDecimal = GenerateMask.Nodecimal;
         this.SessionUser = this.UserService.GetCurrentCurrentUserNow();
-        this.ParameterService.listarRegional(this.SessionUser)
-            .subscribe((x: Array<E_Regional>) => {
-                this.ListRegional = x;
-                if (!_.isNil(x) && x.length > 0) {
-                    this.RegionalSeleccionado = x[0].IdRegional;
-                }
-                //Para que ponga por defecto el que trae sin poderlo modificar.
-                //Siempre con el ID de la tabla regional.
-            });
 
-        this.ParameterService.listarVendedor(this.SessionUser)
-            .subscribe((x: Array<E_Vendedor>) => {
-                this.ListDirectorZonal = x;
-
-                //Para que ponga por defecto el que trae sin poderlo modificar.
-
-                if (!_.isNil(x) && x.length > 0) {
-                    this.DirectorZonalSeleccionado = x[0].IdVendedor;
-                }
-              
-            });
-
-        this.ParameterService.listarLider(this.SessionUser)
-            .subscribe((x: Array<E_Lider>) => {
-                this.ListLider = x;
-            });
-
-        this.ParameterService.listarTipoDocumento(this.SessionUser)
-            .subscribe((x: Array<E_TipoDocumento>) => {
-                this.ListTipoDocumento = x;
-
-                //Para que ponga por defecto el que trae sin poderlo modificar.
-                this.TipoDocumentoSeleccionado = x[0].Id;
-
-            });
-
-        this.ParameterService.listarProvincia(this.SessionUser)
-            .subscribe((x: Array<E_Provincia>) => {
-                this.ListProvincia = x;
-
-                //Para que ponga por defecto el que trae sin poderlo modificar.
-                //this.ProvinciaSeleccionado = x[0].CodEstado;
-            });
-
+        const chainSubcriptions = []
+        chainSubcriptions.push(this.ParameterService.listarRegional(this.SessionUser))
+        chainSubcriptions.push(this.ParameterService.listarVendedor(this.SessionUser))
+        chainSubcriptions.push(this.ParameterService.listarLider(this.SessionUser))
+        chainSubcriptions.push(this.ParameterService.listarTipoDocumento(this.SessionUser))
+        chainSubcriptions.push(this.ParameterService.listarProvincia(this.SessionUser))
+        this.CommunicationService.showLoader.next(true)
+        forkJoin(chainSubcriptions).subscribe((response: [Array<E_Regional>, Array<E_Vendedor>, Array<E_Lider>, Array<E_TipoDocumento>, Array<E_Provincia>]) => {
+            this.SetRegional(response[0]);
+            this.setVendedores(response[1]);
+            this.SetLider(response[2]);
+            this.SetTipoDoc(response[3]);
+            this.setProvincia(response[4]);
+            this.CommunicationService.showLoader.next(false)
+        })
         this.CargarParametrosxDefecto();
 
         //
@@ -302,7 +274,7 @@ export class RegistroEmpresariaEcComponent implements OnInit {
 
         this.form = this.formBuilder.group({
             Regional: [undefined, [Validators.required]],
-            DirectorZonal: [undefined, [Validators.required]],
+            DirectorZonal: [undefined, []],
             Lider: [undefined, [Validators.required]],
             TipoDocumento: [undefined, [Validators.required]],
             NumeroDocumento: [undefined, [Validators.required]],
@@ -344,6 +316,38 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         });
 
 
+    }
+
+    private setProvincia(x: E_Provincia[]) {
+        this.ListProvincia = x;
+    }
+
+    private SetTipoDoc(x: E_TipoDocumento[]) {
+        this.ListTipoDocumento = x;
+        //Para que ponga por defecto el que trae sin poderlo modificar.
+        this.TipoDocumentoSeleccionado = x[0].Id;
+    }
+
+    private SetLider(x: E_Lider[]) {
+        this.ListLider = x;
+    }
+
+    private setVendedores(x: E_Vendedor[]) {
+        this.ListDirectorZonal = x;
+        console.log(x);
+        //Para que ponga por defecto el que trae sin poderlo modificar.
+        if (!_.isNil(x) && x.length > 0) {
+            this.DirectorZonalSeleccionado = x[0].IdVendedor;
+        }
+    }
+
+    private SetRegional(x: E_Regional[]) {
+        this.ListRegional = x;
+        if (!_.isNil(x) && x.length > 0) {
+            this.RegionalSeleccionado = x[0].IdRegional;
+        }
+        //Para que ponga por defecto el que trae sin poderlo modificar.
+        //Siempre con el ID de la tabla regional.
     }
 
     onFormValuesChanged() {
@@ -990,5 +994,5 @@ export class RegistroEmpresariaEcComponent implements OnInit {
         var elmnt = document.getElementById("forms");
         elmnt.scrollTop = 100 + (evant.selectedIndex + 1) * 50;
     }
-        
+
 }

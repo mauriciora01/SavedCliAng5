@@ -71,7 +71,7 @@ export class E_Cliente {
   public NombreCiudad2: string
   public CodigoRegional: number
   public NombreRegional: string
-  public NumeroPedido : string
+  public NumeroPedido: string
   public Usuario: string
   public GuardarAuditoria: boolean
   public IdDistribuidor: number
@@ -130,7 +130,7 @@ export class E_Cliente {
   public TiempoContacto: string
 
   public Whatsapp: string
-  public TipoCliente : string
+  public TipoCliente: string
   public TallaPrendaSuperior: string
   public TallaPrendaInferior: string
   public TallaCalzado: string
@@ -147,6 +147,7 @@ export class E_Cliente {
   public CodEstado: string
 
   public Error: E_Error
+  public NombreCompleto: string;
 
   constructor() { }
 }

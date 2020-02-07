@@ -28,7 +28,7 @@ export class FuseMainComponent implements OnDestroy, OnInit {
         { description: 'Posibles egresos', value: 'misposiblesegresos' },
     ];
     pedidosmenu = [
-        { description: 'Nuevo Pedido', value: 'registroempresariaec' },
+        { description: 'Nuevo Pedido', value: 'pedidosprincipal' },
         { description: 'Por Facturar', value: 'misempresarias' },
         { description: 'Facturados', value: 'misprospectos' },
         { description: 'Borrador', value: 'misinactivas' },

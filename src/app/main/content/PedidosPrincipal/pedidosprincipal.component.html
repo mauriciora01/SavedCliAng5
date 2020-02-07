@@ -1,7 +1,10 @@
 <div _ngcontent-xhr-c118="" class="page-layout simple fullwidth">
   <div _ngcontent-xhr-c118="" class="content p-24">
     <div class="menuPedido">
-      <button class="seleccionPaso" (click)="showEmpresaria = !showEmpresarias">DATOS DE TU EMPRESARIA</button>
+      <button class="seleccionPaso" (click)="showEmpresaria = !showEmpresarias"> 
+        {{ SelectedEmpresaria != null ?
+         SelectedEmpresaria?.Nombre1 + ' ' + SelectedEmpresaria?.Apellido1
+         + ' • ' + SelectedEmpresaria?.Nit : 'DATOS DE TU EMPRESARIA' }}</button>
       <button class="seleccionPaso">PRODUCTOS</button>
       <button class="seleccionPaso">DATOS DE ENVIO</button>
       <button class="seleccionPaso">PROCESAR PAGO</button>
@@ -17,7 +20,7 @@
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Escribe una Palabra">
       </mat-form-field>
-      <mat-icon>close</mat-icon>
+      <mat-icon class="iconClose" (click)="closeSelectEmpresaria()">close</mat-icon>
     </div>
 
     <div>

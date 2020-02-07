@@ -33,7 +33,7 @@
                         <mat-form-field class="registroEmpresaria" fxFlex="100">
                             <mat-select placeholder="Director/Zonal" formControlName="DirectorZonal"
                                 [(ngModel)]="DirectorZonalSeleccionado"
-                                (selectionChange)="SelectedDirectorZonal($event)" required disabled>
+                                (selectionChange)="SelectedDirectorZonal($event)"  disabled>
                                 <mat-option *ngFor="let Item of ListDirectorZonal" [value]="Item.IdVendedor">
                                     {{ Item.Nombre }}
                                 </mat-option>

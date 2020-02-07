@@ -73,13 +73,14 @@ export class PedidosPrincipalComponent implements OnInit {
     CodigoRapido = new FormControl();
     options: string[] = ['One', 'Two', 'Three'];
     filteredOptions: Observable<string[]>;
-    ListClientes: E_Cliente[]; 
+    ListClientes: E_Cliente[];
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild('tableEmpresaria') tableEmpresaria: MatTable<E_Cliente>;
     displayedColumns = ['imagenEmpresaria', 'NombreCompleto'];
     dataSource: MatTableDataSource<E_Cliente>;
     showEmpresaria: boolean;
+    SelectedEmpresaria: E_Cliente;
     constructor(private _formBuilder: FormBuilder,
         private ParameterService: ParameterService,
         private UserService: UserService,
@@ -187,7 +188,7 @@ export class PedidosPrincipalComponent implements OnInit {
 
     }
 
-    
+
 
     ValidateDocument2() {
         try {
@@ -533,9 +534,13 @@ export class PedidosPrincipalComponent implements OnInit {
     }
 
     openDetalleCliente(row: E_Cliente): void {
-   this.showEmpresaria = false
+        this.SelectedEmpresaria = row
+        this.showEmpresaria = false
     }
-
+    closeSelectEmpresaria() {
+        this.SelectedEmpresaria = null
+        this.showEmpresaria = false
+    }
     applyFilter(filterValue: string) {
         filterValue = filterValue.trim(); // Remove whitespace
         filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
