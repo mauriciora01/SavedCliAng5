@@ -79,11 +79,11 @@ export class DetallePedidosComponent implements OnInit {
   public ValorMinimoParaPuntos: number = 0;
   public ValorFletePuntos: number = 0;
 
-  private gridApi;
-  private gridColumnApi;
+  public gridApi;
+  public gridColumnApi;
 
-  private columnDefs;
-  private rowData: Array<E_PedidosDetalleCliente> = new Array<E_PedidosDetalleCliente>();
+  public columnDefs;
+  public rowData: Array<E_PedidosDetalleCliente> = new Array<E_PedidosDetalleCliente>();
 
   constructor(private formBuilder: FormBuilder,
     private UserService: UserService,

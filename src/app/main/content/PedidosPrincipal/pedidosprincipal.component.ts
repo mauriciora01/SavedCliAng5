@@ -33,7 +33,7 @@ export interface State {
 
 @Component({
     selector: 'pedidosprincipal',
-    templateUrl: 'pedidosprincipal.component.html',
+    templateUrl: 'pedidosprincipal1.component.html',
     styleUrls: ['pedidosprincipal.component.scss']
 
 })
@@ -408,7 +408,7 @@ export class PedidosPrincipalComponent implements OnInit {
             objPLU.SessionEmpresaria = this.UserService.GetCurrentCurrentEmpresariaNow();
 
             this.ParameterService.ListarxCodigoRapido(objPLU)
-                .subscribe((x: E_PLU) => {
+                .subscribe((x: E_PLU) => { 
 
                     if (x.Error == undefined) {
                         //Mensaje de OK
