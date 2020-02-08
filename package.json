@@ -106,7 +106,7 @@
     "tslint": "5.16.0",
     "typescript": "3.1.6",
     "webpack": "4.30.0",
-    "webpack-bundle-analyzer": "2.11.1"
+    "webpack-bundle-analyzer": "3.3.2"
   },
   "optionalDependencies": {
     "fsevents": "*"
