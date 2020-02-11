@@ -18,7 +18,6 @@ import { CommunicationService } from 'app/ApiServices/CommunicationService';
     selector: 'fuse-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    animations: fuseAnimations
 })
 export class FuseLoginComponent implements OnInit {
     IsAdmin: boolean

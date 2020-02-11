@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { FuseContentComponent } from 'app/main/content/content.component';
+import { PlatformModule } from '@angular/cdk/platform';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { FuseContentComponent } from 'app/main/content/content.component';
     ],
     imports     : [
         RouterModule,
-
+        PlatformModule,
         FuseSharedModule,
     ],
     exports: [

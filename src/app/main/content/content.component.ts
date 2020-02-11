@@ -4,15 +4,15 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
-
 import { fuseAnimations } from '@fuse/animations/index';
 import { FuseConfigService } from '@fuse/services/config.service';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
     selector   : 'fuse-content',
     templateUrl: './content.component.html',
     styleUrls  : ['./content.component.scss'],
-    animations : fuseAnimations
+   // animations : fuseAnimations
 })
 export class FuseContentComponent implements OnDestroy
 {
@@ -28,33 +28,38 @@ export class FuseContentComponent implements OnDestroy
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private fuseConfig: FuseConfigService
+        private fuseConfig: FuseConfigService,
+        public platform: Platform
     )
     {
-        this.router.events
-            .filter((event) => event instanceof NavigationEnd)
-            .map(() => this.activatedRoute)
-            .subscribe((event) => {
-                switch ( this.fuseSettings.routerAnimation )
-                {
-                    case 'fadeIn':
-                        this.routeAnimationFade = !this.routeAnimationFade;
-                        break;
-                    case 'slideUp':
-                        this.routeAnimationUp = !this.routeAnimationUp;
-                        break;
-                    case 'slideDown':
-                        this.routeAnimationDown = !this.routeAnimationDown;
-                        break;
-                    case 'slideRight':
-                        this.routeAnimationRight = !this.routeAnimationRight;
-                        break;
-                    case 'slideLeft':
-                        this.routeAnimationLeft = !this.routeAnimationLeft;
-                        break;
-                }
-            });
+    // if(!platform.IOS && !platform.SAFARI)
+    // {
+    //     this.router.events
+    //     .filter((event) => event instanceof NavigationEnd)
+    //     .map(() => this.activatedRoute)
+    //     .subscribe((event) => {
+    //         switch ( this.fuseSettings.routerAnimation )
+    //         {
+    //             case 'fadeIn':
+    //                 this.routeAnimationFade = !this.routeAnimationFade;
+    //                 break;
+    //             case 'slideUp':
+    //                 this.routeAnimationUp = !this.routeAnimationUp;
+    //                 break;
+    //             case 'slideDown':
+    //                 this.routeAnimationDown = !this.routeAnimationDown;
+    //                 break;
+    //             case 'slideRight':
+    //                 this.routeAnimationRight = !this.routeAnimationRight;
+    //                 break;
+    //             case 'slideLeft':
+    //                 this.routeAnimationLeft = !this.routeAnimationLeft;
+    //                 break;
+    //         }
+    //     });
 
+    // }
+        
         this.onConfigChanged =
             this.fuseConfig.onConfigChanged
                 .subscribe(
